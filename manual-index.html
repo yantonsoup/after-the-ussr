@@ -6,8 +6,6 @@
 	<title>Scrollama Demo: Sticky JS</title>
 	<meta name="description" content="Scrollama Demo: Sticky JS">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-    crossorigin="anonymous">
 	<style>
 		/* default / demo page */
 
@@ -143,19 +141,17 @@
 </head>
 
 <body>
-		<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">hi</nav> -->
-
 	<section id="intro">
 		<p class="intro__overline">
 			<a href="https://github.com/russellgoldenberg/scrollama">scrollama.js</a>
 		</p>
-		<h1 class="intro__hed">Soviet Immigration</h1>
+		<h1 class="intro__hed">Demo: Sticky Graphic Position</h1>
 		<p class="intro__dek">
 			Start scrolling to see how it works.
 		</p>
 	</section>
 	<section id="scroll">
-		<div class="scroll__graphic sticky" style="width: 794px; height: 709px; top: 254px;">
+		<div class="scroll__graphic sticky" style="width: 794px; height: 709px; top: 354px;">
 			<p>2</p>
 		</div>
 		<div class="scroll__text">
@@ -175,10 +171,10 @@
 	</section>
 	<section id="outro"></section>
 	<div class="debug"></div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/stickyfill/2.1.0/stickyfill.min.js"></script>
-	<script src='https://unpkg.com/intersection-observer@0.5.0/intersection-observer.js'></script>
-	<script src='https://unpkg.com/scrollama'></script>
+	<script src="./Scrollama Demo_ Sticky JS_files/d3.v4.min.js"></script>
+	<script src="./Scrollama Demo_ Sticky JS_files/stickyfill.min.js"></script>
+	<script src="./Scrollama Demo_ Sticky JS_files/intersection-observer.js"></script>
+	<script src="./Scrollama Demo_ Sticky JS_files/scrollama.min.js"></script>
 	<script>
 		// using d3 for convenience
 		var container = d3.select('#scroll');
@@ -216,7 +212,6 @@
 
 		// scrollama event handlers
 		function handleStepEnter(response) {
-			console.warn('handleStepEnter', {response})
 			// response = { element, direction, index }
 
 			// add color to current step only
@@ -257,7 +252,7 @@
 				text: '.scroll__text',
 				step: '.scroll__text .step',
 				debug: true,
-				offset: 0.2,
+				offset: 0.33,
 			})
 				.onStepEnter(handleStepEnter)
 				.onContainerEnter(handleContainerEnter)
