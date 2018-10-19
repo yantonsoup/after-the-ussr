@@ -29,13 +29,13 @@
 	</section>
 	<section id="scroll">
 		<div class="scroll__graphic sticky" style="width: 794px; height: 709px; top: 254px;">
-			<p>2</p>
+			<p>0</p>
 		</div>
 		<div class="scroll__text">
 			<div class="step" data-step="1" data-scrollama-index="0" style="height: 1063px;">
 				<p>STEP 1</p>
 			</div>
-			<div class="step is-active" data-step="2" data-scrollama-index="1" style="height: 1063px;">
+			<div class="step" data-step="2" data-scrollama-index="1" style="height: 1063px;">
 				<p>STEP 2</p>
 			</div>
 			<div class="step" data-step="3" data-scrollama-index="2" style="height: 1063px;">
@@ -53,6 +53,9 @@
 	<script src='https://unpkg.com/intersection-observer@0.5.0/intersection-observer.js'></script>
 	<script src='https://unpkg.com/scrollama'></script>
 	<script>
+		window.onbeforeunload = function () {
+  		window.scrollTo(0, 0);
+		}
 		// using d3 for convenience
 		var container = d3.select('#scroll');
 		var graphic = container.select('.scroll__graphic');
@@ -90,6 +93,8 @@
 		// scrollama event handlers
 		function handleStepEnter(response) {
 			console.warn('handleStepEnter', {response})
+			console.warn('handleStepEnter step index: response.index', response.index)
+
 			// response = { element, direction, index }
 
 			// add color to current step only
@@ -102,8 +107,7 @@
 		}
 
 		function handleContainerEnter(response) {
-			d3.select('.intro__paragraph').classed('hide', true)
-			console.warn('')
+			// d3.select('.intro__paragraph').classed('hide', true)
 			console.warn({handleContainerEnter})
 			// response = { direction }
 		}
@@ -135,7 +139,7 @@
 				text: '.scroll__text',
 				step: '.scroll__text .step',
 				debug: true,
-				offset: 0.2,
+				offset: 0.5,
 			})
 				.onStepEnter(handleStepEnter)
 				.onContainerEnter(handleContainerEnter)
@@ -147,7 +151,7 @@
 
 		// kick things off
 		init();
-	</script><div id="scrollama__debug-offset--iuq1539056065372" class="scrollama__debug-offset" style="position: fixed; left: 0px; width: 100%; height: 0px; border-top: 2px dashed black; z-index: 9999; top: 467.94px;"><p style="font-size: 12px; font-family: monospace; color: black; margin: 0px; padding: 6px;">".step" trigger: 0.33</p></div>
+	// </script>
 
 
 </body></html>
