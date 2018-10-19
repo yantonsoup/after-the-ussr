@@ -56,7 +56,7 @@
   
 
   .header-container {
-    height: 90vh;
+    height: 700px;
     border-bottom: 3px solid red;
   }
 
@@ -81,8 +81,22 @@
     margin: 0 auto;
   }
 
+  .intro-scroll-tip {
+    font-size: 1.4rem;
+    margin: 2rem auto;
+  }
+
   .intro__paragraph {
-    margin: 0.5rem 1rem;
+    margin: 0.5rem 2rem;
+  }
+
+  #triangle-down {
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 100px solid red;
   }
 
   /* demo */
@@ -98,6 +112,7 @@
   /* scrollama */
 
   #scroll {
+    /* top: -5rem; */
     position: relative;
     border-top: 2px dashed #000;
     border-bottom: 2px dashed #000;
@@ -113,7 +128,6 @@
 
     position: sticky;
     float: right;
-    top: 0;
     right: 2rem;
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
