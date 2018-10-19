@@ -39,17 +39,19 @@
     position: fixed;
     z-index: 99;
     max-width: 40rem;
-    margin: 1rem auto;
+    margin: 0 auto;
     text-align: center;
   }
 
   .intro__overline {
+    background-color: #fefbee;
+    padding: 0.5rem 0;
     font-size: 1.4rem;
   }
 
   .intro__hed {
     font-size: 1.4rem;
-    margin: 1.5rem auto;
+    margin: 1.0rem auto;
     text-transform: uppercase;
     font-weight: 900;
     letter-spacing: 0.05em;
@@ -61,7 +63,7 @@
   }
 
   .intro__paragraph {
-    margin: 2rem;
+    margin: 1rem 2rem;
   }
 
   /* demo */
@@ -78,7 +80,7 @@
 
   #scroll {
     position: relative;
-    top: 500px;
+    top: 440px;
     border-top: 2px dashed #000;
     border-bottom: 2px dashed #000;
   }
@@ -101,6 +103,9 @@
     background-color: #ddd;
     border: 1px solid #000;
     z-index: 50;
+  }
+
+  .sticky_break {
   }
 
   .scroll__graphic p {
