@@ -36,18 +36,32 @@
   }
 
   #intro {
-    position: fixed;
+    position: relative;
     z-index: 99;
     max-width: 40rem;
     margin: 0 auto;
     text-align: center;
   }
 
-  .intro__overline {
-    background-color: #fefbee;
-    
+  .header {
+    background-color: lightgray;
     padding: 0.5rem 0;
     font-size: 1.4rem;
+    position: sticky;
+    top: 1rem;
+  }
+  
+
+  .header-container {
+    margin: 1rem;
+    height: 90vh;
+    border-bottom: 3px solid red;
+  }
+
+  .intro-content {
+    z-index: -3;
+    position: sticky;
+    top: 5rem;
   }
 
   .intro__hed {
@@ -81,7 +95,7 @@
 
   #scroll {
     position: relative;
-    top: 440px;
+    top: 2rem;
     border-top: 2px dashed #000;
     border-bottom: 2px dashed #000;
   }
