@@ -125,7 +125,7 @@
   .scroll__graphic {
     position: -webkit-sticky;
     /* margin-top: 320px; */
-
+    opacity: 0.1;
     position: sticky;
     float: right;
     right: 2rem;
@@ -134,7 +134,7 @@
     transform: translate3d(0, 0, 0);
     background-color: #ddd;
     border: 1px solid #000;
-    z-index: 50;
+    z-index: -1;
   }
 
   .sticky_break {
