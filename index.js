@@ -4,7 +4,7 @@ window.onbeforeunload = function() {
 
 window.onload = function() {
   // using d3 for convenience
-  var container = d3.select("#scroll");
+  var container = d3.select(".scroll");
   var graphic = container.select(".scroll__graphic");
   var text = container.select(".scroll__text");
   var step = text.selectAll(".step");
@@ -35,32 +35,7 @@ window.onload = function() {
     // 3. tell scrollama to update new element dimensions
     scroller.resize();
   }
-  var graphicMargin = 16 * 4;
-  var mapWidth = container.node().offsetWidth - graphicMargin;
-  var mapHeight = Math.floor(window.innerHeight / 2.4);
 
-    var width = 400,
-      height = 200;
-
-    var svg = d3.select(".scroll__graphic").append("svg")
-      .attr("width", mapWidth)
-      .attr("height", mapHeight);
-
-       console.warn('svg', svg)
-    
-    
-    d3.json("world.json", function (error, world) {
-      console.warn('loaded world', world)
-      if (error) return console.error(error);
-      var projection = d3.geo.mercator()
-      // .scale(500)
-      .translate([mapWidth / 2, mapHeight / 2]);
-
-      var pathGenerator = d3.geo.path().projection(projection);
-      svg.append("path")
-        .datum(world)
-        .attr("d", pathGenerator);
-    });
 
 
   // scrollama event handlers
@@ -108,7 +83,7 @@ window.onload = function() {
     // 3. bind scrollama event handlers (this can be chained like below)
     scroller
       .setup({
-        container: "#scroll",
+        container: ".scroll",
         graphic: ".scroll__graphic",
         text: ".scroll__text",
         step: ".scroll__text .step",

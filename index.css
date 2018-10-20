@@ -111,7 +111,7 @@
 
   /* scrollama */
 
-  #scroll {
+  .scroll {
     /* top: -5rem; */
     position: relative;
     border-top: 2px dashed #000;
@@ -125,7 +125,7 @@
   .scroll__graphic {
     position: -webkit-sticky;
     /* margin-top: 320px; */
-    opacity: 0.1;
+    opacity: 1;
     position: sticky;
     float: right;
     right: 2rem;
