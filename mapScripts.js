@@ -41,26 +41,14 @@ var maxZoom;
 
 var projection = d3
   .geoMercator()
-  .scale(70)
-  .center([50, 15]) // set centre to further North
+  .scale(110)
+  .center([100, 45]) // set centre to further North
   .translate([mapWidth / 2, mapHeight / 2]);
 
   // .scale([w / (2 * Math.PI)]) // scale to fit group width
   // .translate([w / 2, h / 2]); // ensure centred in group
 
 var path = d3.geoPath().projection(projection);
-
-// apply zoom to countriesGroup
-// function zoomed() {
-//   t = d3.event.transform;
-//   countriesGroup.attr(
-//     "transform",
-//     "translate(" + [t.x, t.y] + ")scale(" + t.k + ")"
-//   );
-// }
-
-// Define map zoom behaviour
-// var zoom = d3.zoom().on("zoom", zoomed);
 
 function getTextBox(selection) {
   selection.each(function(d) {
@@ -74,8 +62,6 @@ var svg = d3
   // set to the same size as the "map-holder" div
   .attr("width", $(".scroll__graphic").width())
   .attr("height", $(".scroll__graphic").height())
-  // add zoom functionality
-  // .call(zoom);
 
 // get map data
 d3.json("world.json", function(json) {
