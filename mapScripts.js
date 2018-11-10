@@ -1,53 +1,54 @@
-// DEFINE VARIABLES
-// Define size of map group
-// Full world map is 2:1 ratio
-// Using 12:5 because we will crop top and bottom of map
-
 var container = d3.select(".scroll__graphic");
 var containerSize = container.node().getBoundingClientRect()
-var mapWidth = containerSize.width
-var mapHeight = containerSize.height
+var width = containerSize.width
+var height = containerSize.height
 
-w = mapWidth;
-h = mapHeight;
-// variables for catching min and max zoom factors
-var minZoom;
-var maxZoom;
 
-var projection = d3
-  .geoMercator()
-  .scale(110)
-  .center([100, 45]) // set centre to further North
-  .translate([mapWidth / 2, mapHeight / 2]);
+// var zoom = d3.behavior.zoom()
+//     .size([width, height])
+//     .on("zoom", zoomed);
+
+// var simplify = d3.geo.transform({
+//   point: function(x, y, z) {
+//     if (z < visibleArea) return;
+//     x = x * scale + translate[0];
+//     y = y * scale + translate[1];
+//     if (x >= -10 && x <= width + 10 && y >= -10 && y <= height + 10 || z >= invisibleArea) this.stream.point(x, y);
+//   }
+// });
+  
+var projection = d3.geo.mercator()
+  .scale(80)
+  .center([0, 45]) // set centre to further North
+  .translate([width / 2, height / 2]);
+  // .translate([0, 0])
+  // .scale(4000);
+
 
 // .scale([w / (2 * Math.PI)]) // scale to fit group width
 // .translate([w / 2, h / 2]); // ensure centred in group
 
-var path = d3.geoPath().projection(projection);
+var path = d3.geo.path().projection(projection);
 
-function getTextBox(selection) {
-  selection.each(function(d) {
-    d.bbox = this.getBBox();
-  });
-}
+
 
 var svg = d3
   .select(".scroll__graphic")
   .append("svg")
   // set to the same size as the "map-holder" div
-  .attr("width", mapWidth)
-  .attr("height", mapHeight);
+  .attr("width", width)
+  .attr("height", height);
 
 // get map data
-d3.json("soviet.json", function(json) {
+d3.json("world.json", function(json) {
   var countriesGroup = svg.append("g").attr("id", "map");
   // add a background rectangle
   countriesGroup
     .append("rect")
     .attr("x", 0)
     .attr("y", 0)
-    .attr("width", w)
-    .attr("height", h);
+    .attr("width", width)
+    .attr("height", height);
 
   countriesGroup
     .selectAll("path")
