@@ -23,6 +23,7 @@ function handleResize() {
   var graphicMargin = 16 * 4;
   var textWidth = text.node().offsetWidth;
   var graphicWidth = container.node().offsetWidth - graphicMargin;
+  console.warn('container.node', container.node())
   var graphicHeight = Math.floor(window.innerHeight / 2.4);
   var graphicMarginTop = Math.floor(window.innerHeight / 30);
 
