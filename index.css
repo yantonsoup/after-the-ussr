@@ -249,7 +249,7 @@
     fill: #2A2C39;   /* map background colour */
     fill-opacity: 0;
   }
-  .country{
+  .country, .soviet-country{
     fill: #d0d0d0;   /* country colour */
     stroke: #2A2C39; /* country border colour */
     stroke-width: 1; /* country border width */

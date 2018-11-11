@@ -18,6 +18,7 @@ var width = containerSize.width
 var height = containerSize.height
 var centered
 
+var sovietCountryIsoCodes = [ 'ARM', 'AZE', 'BLR', 'EST', 'GEO', 'KAZ', 'KGZ', 'LVA', 'LTU', 'MDA', 'RUS', 'TJK', 'TKM', 'UKR', 'UZB']
 var rotate = -20,        // so that [-60, 0] becomes initial center of projection
 maxlat = 83;
 
@@ -78,10 +79,19 @@ d3.json("world.json", function(json) {
     .attr("d", path)
     .attr("id", function(d, i) {
       // console.warn('d', d)
-      return "country" + d.properties.iso_a3;
+      return "country" + d.properties.ISO_A3;
     })
-    .attr("class", "country")
+    .attr('class', function(d, i){
+      if (sovietCountryIsoCodes.includes(d.properties.ISO_A3)) {
+        console.warn('SOVIET COUNTRY >>>', d.properties.ISO_A3)
+        return "country soviet-country"
+      } else {
+        return "country non-soviet-country"
+      }
+    })
     .on("click", clicked);
+
+  // console.warn(countriesGroup.selectAll('.soviet-country'))
 
   // on window resize
   $(window).resize(function() {
@@ -93,26 +103,34 @@ d3.json("world.json", function(json) {
 
 
 function clicked(d) {
-  var x, y, k;
+  // var x= -230; 
+  // var y = -130; 
+  // var scale = 2;
 
-  if (d && centered !== d) {
-    var centroid = path.centroid(d);
-    x = centroid[0];
-    y = centroid[1];
-    k = 4;
-    centered = d;
-  } else {
-    x = width / 2;
-    y = height / 2;
-    k = 1;
-    centered = null;
-  }
+  // // if (d && centered !== d) {
+  // //   var centroid = path.centroid(d);
+  // //   x = centroid[0];
+  // //   y = centroid[1];
+  // //   k = 4;
+  // //   centered = d;
+  // // } else {
+  // //   x = width / 2;
+  // //   y = height / 2;
+  // //   k = 1;
+  // //   centered = null;
+  // // }
 
-  countriesGroup.selectAll("path")
-      .classed("active", centered && function(d) { return d === centered; });
+  // console.warn('clicked x', x)
+  // console.warn('clicked y', y)
+  // // console.warn('clicked k', k)
 
-  countriesGroup.transition()
-      .duration(750)
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-      .style("stroke-width", 1.5 / k + "px");
+  // // countriesGroup.selectAll("path")
+  // //     .classed("active", centered && function(d) { return d === centered; });
+  // countriesGroup.selectAll('.soviet-country').transition().duration(750).style('fill', 'pink')
+  // countriesGroup.selectAll('.country').transition().duration(750).style('opacity', '0.5')
+
+  // countriesGroup.transition()
+  //     .duration(750)
+  //     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + x + "," + y + ")")
+  //     .style("stroke-width", 1 / scale + "px");
 }

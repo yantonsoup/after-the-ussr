@@ -24,8 +24,8 @@ function handleResize() {
   var textWidth = text.node().offsetWidth;
   var graphicWidth = container.node().offsetWidth - graphicMargin;
   console.warn('container.node', container.node())
-  var graphicHeight = Math.floor(window.innerHeight / 2.4);
-  var graphicMarginTop = Math.floor(window.innerHeight / 30);
+  var graphicHeight = Math.floor(window.innerHeight / 2.4)
+  var graphicMarginTop = graphicMargin / 2
 
   graphic
     .style("width", graphicWidth + "px")
@@ -36,10 +36,29 @@ function handleResize() {
   scroller.resize();
 }
 
+function firstAnimation () {
+  var x= -230; 
+  var y = -130; 
+  var scale = 2;
+  
+  d3.select("#map")
+  .transition()
+  .duration(750)
+  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + x + "," + y + ")")
+  .style("stroke-width", 1 / scale + "px");
+
+  d3.selectAll('.soviet-country').transition().duration(750).style('fill', 'pink')
+  d3.selectAll('.non-soviet-country').transition().duration(750).style('opacity', '0.5')
+
+}
 // scrollama event handlers
 function handleStepEnter(response) {
   console.warn("handleStepEnter", { response });
   console.warn("handleStepEnter step index: response.index", response.index);
+  if (response.index === 0) {
+    console.warn('FIRST STEP!')
+    firstAnimation()
+  }
   // response = { element, direction, index }
   // add color to current step only
   step.classed("is-active", function(d, i) {
@@ -90,8 +109,8 @@ function init() {
     .onContainerEnter(handleContainerEnter)
     .onContainerExit(handleContainerExit);
 
-  // setup resize event
-  window.addEventListener("resize", handleResize);
+  // setup resize event -> this is causing issues in mobile when the mobile headers resize
+  // window.addEventListener("resize", handleResize);
 }
 
 // kick things off
