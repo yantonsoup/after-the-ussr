@@ -82,6 +82,7 @@ d3.json("world.json", function(json) {
       return "country" + d.properties.ISO_A3;
     })
     .attr('class', function(d, i){
+      console.warn('d.properties', d.properties)
       if (sovietCountryIsoCodes.includes(d.properties.ISO_A3)) {
         console.warn('SOVIET COUNTRY >>>', d.properties.ISO_A3)
         return "country soviet-country"
@@ -94,11 +95,11 @@ d3.json("world.json", function(json) {
   // console.warn(countriesGroup.selectAll('.soviet-country'))
 
   // on window resize
-  $(window).resize(function() {
-    svg
-      .attr("width", $("#scroll__graphic").width())
-      .attr("height", $("scroll__graphic").height());
-  });
+  // $(window).resize(function() {
+  //   svg
+  //     .attr("width", $("#scroll__graphic").width())
+  //     .attr("height", $("scroll__graphic").height());
+  // });
 });
 
 

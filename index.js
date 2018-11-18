@@ -45,12 +45,32 @@ function firstAnimation () {
   .transition()
   .duration(750)
   .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + x + "," + y + ")")
-  .style("stroke-width", 1 / scale + "px");
+  .attr("stroke-width", 0.1 + "px");
 
   d3.selectAll('.soviet-country').transition().duration(750).style('fill', 'pink')
   d3.selectAll('.non-soviet-country').transition().duration(750).style('opacity', '0.5')
 
 }
+
+function secondAnimation () {
+  var colors = ["#feedde","#fdbe85","#fd8d3c","#e6550d","#a63603","#feedde","#fdbe85","#fd8d3c","#e6550d","#a63603","#feedde","#fdbe85","#fd8d3c","#e6550d","#a63603"];
+
+  d3.selectAll('.soviet-country')
+  .transition()
+  .style( "fill", function(d, i){
+      console.warn('i', i)
+      return  colors[i]
+  });   
+}
+
+function thirdAnimation () {
+  var x= -230; 
+  var y = -130; 
+  var scale = 2;
+
+
+}
+
 // scrollama event handlers
 function handleStepEnter(response) {
   console.warn("handleStepEnter", { response });
@@ -58,6 +78,16 @@ function handleStepEnter(response) {
   if (response.index === 0) {
     console.warn('FIRST STEP!')
     firstAnimation()
+  }
+
+  if (response.index === 1) {
+    console.warn('SECOND STEP!')
+    secondAnimation()
+  }
+
+  if (response.index === 2) {
+    console.warn('THIRD STEP!')
+    thirdAnimation()
   }
   // response = { element, direction, index }
   // add color to current step only
