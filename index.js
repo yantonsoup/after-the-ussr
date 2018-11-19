@@ -11,41 +11,38 @@ var step = text.selectAll(".step");
 // initialize the scrollama
 var scroller = scrollama();
 
+var stepHeight = Math.floor(window.innerHeight * 0.75);
+step.style("height", stepHeight + "px");
+
+// 2. update width/height of graphic element
+var bodyWidth = d3.select("body").node().offsetWidth;
+
+var graphicMargin = 16 * 4;
+var textWidth = text.node().offsetWidth;
+var graphicWidth = container.node().offsetWidth - graphicMargin;
+console.warn('container.node', container.node())
+var graphicHeight = Math.floor(window.innerHeight / 2.4)
+var graphicMarginTop = graphicMargin / 2
+
+graphic
+  .style("width", graphicWidth + "px")
+  .style("height", graphicHeight + "px")
+  .style("top", graphicMarginTop + "px");
 // generic window resize listener event
-function handleResize() {
-  // 1. update height of step elements
-  var stepHeight = Math.floor(window.innerHeight * 0.75);
-  step.style("height", stepHeight + "px");
 
-  // 2. update width/height of graphic element
-  var bodyWidth = d3.select("body").node().offsetWidth;
-
-  var graphicMargin = 16 * 4;
-  var textWidth = text.node().offsetWidth;
-  var graphicWidth = container.node().offsetWidth - graphicMargin;
-  console.warn('container.node', container.node())
-  var graphicHeight = Math.floor(window.innerHeight / 2.4)
-  var graphicMarginTop = graphicMargin / 2
-
-  graphic
-    .style("width", graphicWidth + "px")
-    .style("height", graphicHeight + "px")
-    .style("top", graphicMarginTop + "px");
-
-  // 3. tell scrollama to update new element dimensions
-  scroller.resize();
-}
 
 function firstAnimation () {
   var x= -230; 
   var y = -130; 
   var scale = 2;
-  
+  console.warn('scroll container size', graphic.node().getBoundingClientRect())
+  console.warn('width', width)
+  console.warn('height', height)
   d3.select("#map")
   .transition()
   .duration(750)
   .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + x + "," + y + ")")
-  .style("stroke-width", 0.01 + "%");
+  // .style("stroke-width", 0.01 + "%");
 
   d3.selectAll('.soviet-country').transition().duration(750).style('fill', 'pink')
   d3.selectAll('.non-soviet-country').transition().duration(750).style('opacity', '0.5')
@@ -58,7 +55,7 @@ function secondAnimation () {
   d3.selectAll('.soviet-country')
   .transition()
   .style( "fill", function(d, i){
-      console.warn('i', i)
+      // console.warn('i', i)
       return  colors[i]
   });   
 }
@@ -128,7 +125,7 @@ function init() {
   setupStickyfill();
 
   // 1. force a resize on load to ensure proper dimensions are sent to scrollama
-  handleResize();
+  // handleResize();
 
   // 2. setup the scroller passing options
   // this will also initialize trigger observations

@@ -12,10 +12,10 @@
 //     if (x >= -10 && x <= width + 10 && y >= -10 && y <= height + 10 || z >= invisibleArea) this.stream.point(x, y);
 //   }
 // });
-var container = d3.select(".scroll__graphic");
-var containerSize = container.node().getBoundingClientRect()
-var width = containerSize.width
-var height = containerSize.height
+var graphicContainer = d3.select(".scroll__graphic");
+var graphicContainerSize = graphicContainer.node().getBoundingClientRect()
+var width = graphicContainerSize.width
+var height = graphicContainerSize.height
 var centered
 
 var sovietCountryIsoCodes = [ 'ARM', 'AZE', 'BLR', 'EST', 'GEO', 'KAZ', 'KGZ', 'LVA', 'LTU', 'MDA', 'RUS', 'TJK', 'TKM', 'UKR', 'UZB']
@@ -82,9 +82,9 @@ d3.json("world.json", function(json) {
       return "country" + d.properties.ISO_A3;
     })
     .attr('class', function(d, i){
-      console.warn('d.properties', d.properties)
+      // console.warn('d.properties', d.properties)
       if (sovietCountryIsoCodes.includes(d.properties.ISO_A3)) {
-        console.warn('SOVIET COUNTRY >>>', d.properties.ISO_A3)
+        // console.warn('SOVIET COUNTRY >>>', d.properties.ISO_A3)
         return "country soviet-country"
       } else {
         return "country non-soviet-country"
