@@ -53,24 +53,19 @@ function firstAnimation () {
 
   d3.select("#map")
   .transition()
-  .duration(750)
+  .duration(500)
   .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + translateX + "," + translateY + ")")
-  
-  // d3.selectAll(".country")
-  //   .transition()
-  //   .duration(750)
-  //   .style("stroke-width", 1 + "px");
   
   d3.selectAll('.soviet-country')
     .transition()
-    .duration(750)
-    .style('fill', 'pink')
+    .duration(100)
+    .style('fill', '#a63603')
     .style("stroke-width", 0.5 + "px");
 
 
   d3.selectAll('.non-soviet-country')
     .transition()
-    .duration(750)
+    .duration(100)
     .style('opacity', '0.5')
     .style("stroke-width", 0.25 + "px");
 
@@ -80,7 +75,7 @@ function secondAnimation () {
 
   d3.selectAll('.soviet-country')
   .transition()
-  .duration(750)
+  .duration(500)
   .style( "fill", function(d, i){
       // console.warn('i', i)
       return  colors[i]
@@ -95,17 +90,17 @@ function thirdAnimation () {
 
   d3.select("#map")
   .transition()
-  .duration(750)
+  .duration(500)
   .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + translateX+ "," + translateY + ")")
 
   d3.selectAll('.non-soviet-country')
     .transition()
-    .duration(750)
-    .style("stroke-width", 0.2 + "px");
+    .duration(500)
+    .style("stroke-width", 0.175 + "px");
 
   d3.selectAll('.soviet-country')
     .transition()
-    .duration(750)
+    .duration(500)
     .style("stroke-width", 0.25 + "px");
 }
 

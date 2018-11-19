@@ -90,6 +90,6 @@ d3.json("world.json", function(json) {
         return "country non-soviet-country"
       }
     })
-    .style("stroke-width", 0.75 + "px");
+    .style("stroke-width", 0.5 + "px");
 });
 
