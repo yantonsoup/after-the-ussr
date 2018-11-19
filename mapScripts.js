@@ -53,8 +53,7 @@ console.warn('s', s)
 var scaleExtent = [s, 10*s];
 console.warn('scaleExtent', scaleExtent)
 
-projection
-  .scale(scaleExtent[0]);
+projection.scale(scaleExtent[0]);
 // .scale([w / (2 * Math.PI)]) // scale to fit group width
 // .translate([w / 2, h / 2]); // ensure centred in group
 
@@ -65,14 +64,14 @@ var svg = d3
   .append("svg")
   // set to the same size as the "map-holder" div
   .attr("width", width)
-  .attr("height", height);
+  .attr("height", height)
 
-var countriesGroup = svg.append("g").attr("id", "map");
+
+var map = svg.append("g").attr("id", "map");
 
 // get map data
 d3.json("world.json", function(json) {
-
-  countriesGroup
+  map
     .selectAll("path")
     .data(json.features)
     .enter()
@@ -91,5 +90,6 @@ d3.json("world.json", function(json) {
         return "country non-soviet-country"
       }
     })
+    .style("stroke-width", 0.75 + "px");
 });
 

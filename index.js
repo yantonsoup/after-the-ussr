@@ -17,8 +17,11 @@ var textWidth = text.node().offsetWidth;
 
 var graphicMargin = 16 * 4; // 64px
 var graphicWidth = container.node().offsetWidth - graphicMargin;
-var graphicHeight = Math.floor(window.innerHeight / 2.4)
-var graphicMarginTop = graphicMargin / 2
+var graphicHeight = Math.floor(window.innerHeight / 2.4);
+var graphicMarginTop = graphicMargin / 2;
+
+var colors = ["#feedde","#fdbe85","#fd8d3c","#e6550d","#a63603","#feedde","#fdbe85","#fd8d3c","#e6550d","#feedde","#fdbe85","#fd8d3c","#e6550d","#a63603"];
+
 
 console.warn({graphicWidth})
 console.warn({graphicHeight})
@@ -52,18 +55,32 @@ function firstAnimation () {
   .transition()
   .duration(750)
   .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + translateX + "," + translateY + ")")
-  // .style("stroke-width", 0.01 + "%");
+  
+  // d3.selectAll(".country")
+  //   .transition()
+  //   .duration(750)
+  //   .style("stroke-width", 1 + "px");
+  
+  d3.selectAll('.soviet-country')
+    .transition()
+    .duration(750)
+    .style('fill', 'pink')
+    .style("stroke-width", 0.5 + "px");
 
-  d3.selectAll('.soviet-country').transition().duration(750).style('fill', 'pink')
-  d3.selectAll('.non-soviet-country').transition().duration(750).style('opacity', '0.5')
+
+  d3.selectAll('.non-soviet-country')
+    .transition()
+    .duration(750)
+    .style('opacity', '0.5')
+    .style("stroke-width", 0.25 + "px");
 
 }
 
 function secondAnimation () {
-  var colors = ["#feedde","#fdbe85","#fd8d3c","#e6550d","#a63603","#feedde","#fdbe85","#fd8d3c","#e6550d","#feedde","#fdbe85","#fd8d3c","#e6550d","#a63603"];
 
   d3.selectAll('.soviet-country')
   .transition()
+  .duration(750)
   .style( "fill", function(d, i){
       // console.warn('i', i)
       return  colors[i]
@@ -71,18 +88,25 @@ function secondAnimation () {
 }
 
 function thirdAnimation () {
-  var x = -190; 
-  var y = -100; 
   var scale = 4;
+
+  var translateX = -(Math.floor(graphicWidth * 0.6))
+  var translateY = -(Math.floor(graphicHeight * 0.3))
 
   d3.select("#map")
   .transition()
   .duration(750)
-  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + width / 2 + "," + height / 2 + ")")
-  .style("stroke-width",  5 + "px");
+  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + translateX+ "," + translateY + ")")
 
-  d3.selectAll('.non-soviet-country').transition().duration(750).style('opacity', '0')
+  d3.selectAll('.non-soviet-country')
+    .transition()
+    .duration(750)
+    .style("stroke-width", 0.2 + "px");
 
+  d3.selectAll('.soviet-country')
+    .transition()
+    .duration(750)
+    .style("stroke-width", 0.25 + "px");
 }
 
 // scrollama event handlers
