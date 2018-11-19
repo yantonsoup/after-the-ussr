@@ -8,40 +8,51 @@ var graphic = container.select(".scroll__graphic");
 var text = container.select(".scroll__text");
 var step = text.selectAll(".step");
 
-// initialize the scrollama
-var scroller = scrollama();
 
 var stepHeight = Math.floor(window.innerHeight * 0.75);
 step.style("height", stepHeight + "px");
 
-// 2. update width/height of graphic element
 var bodyWidth = d3.select("body").node().offsetWidth;
-
-var graphicMargin = 16 * 4;
 var textWidth = text.node().offsetWidth;
+
+var graphicMargin = 16 * 4; // 64px
 var graphicWidth = container.node().offsetWidth - graphicMargin;
-console.warn('container.node', container.node())
 var graphicHeight = Math.floor(window.innerHeight / 2.4)
 var graphicMarginTop = graphicMargin / 2
+
+console.warn({graphicWidth})
+console.warn({graphicHeight})
 
 graphic
   .style("width", graphicWidth + "px")
   .style("height", graphicHeight + "px")
   .style("top", graphicMarginTop + "px");
-// generic window resize listener event
 
+  // initialize the scrollama
+var scroller = scrollama();
 
 function firstAnimation () {
   var x= -230; 
   var y = -130; 
   var scale = 2;
+
   console.warn('scroll container size', graphic.node().getBoundingClientRect())
   console.warn('width', width)
+  console.warn('graphicWidth', graphicWidth)
+  console.warn('graphicWidth x .6', Math.floor(graphicWidth * 0.66))
   console.warn('height', height)
+  console.warn('graphicHeight', graphicHeight)
+
+  var translateX = -(Math.floor(graphicWidth * 0.75))
+  var translateY = -(Math.floor(graphicHeight * 0.4))
+
+  console.warn('translateX', translateX)
+  console.warn({translateY})
+
   d3.select("#map")
   .transition()
   .duration(750)
-  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + x + "," + y + ")")
+  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + translateX + "," + translateY + ")")
   // .style("stroke-width", 0.01 + "%");
 
   d3.selectAll('.soviet-country').transition().duration(750).style('fill', 'pink')
