@@ -92,7 +92,5 @@ d3.json("world.json", function(json) {
     })
     .style("stroke-width", 0.5 + "px");
     
-
-
 });
 

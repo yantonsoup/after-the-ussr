@@ -146,6 +146,8 @@ function fourthAnimation() {
   console.warn("path", path);
   console.warn({ svg });
 
+  console.warn('path.bounds()', path.bounds())
+
   d3.select('svg')
   .selectAll("text")
   .data(worldGeoJson.features)
@@ -156,13 +158,12 @@ function fourthAnimation() {
       console.warn("hi adding text");
       console.warn('path.centroid(d', path.centroid(d))
       d3.select(this)
-        .attr("transform", function(d) {
-          return "translate(" + path.centroid(d) + ")";
-        })
-        // .attr("dx", "-3em")
-        // .attr("dy", "-0.5em")
-        .attr("fill", "black")
-        .style("text-anchor", "end")
+      .attr("x", function(d) {
+        return path.centroid(d)[0];
+      })
+      .attr("y", function(d) {
+        return path.centroid(d)[1];
+      })
         .text(function(d) {
           return d.properties.ADMIN;
         });
