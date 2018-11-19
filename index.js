@@ -32,22 +32,21 @@ graphic
 var scroller = scrollama();
 
 function firstAnimation () {
-  var x= -230; 
-  var y = -130; 
   var scale = 2;
 
   console.warn('scroll container size', graphic.node().getBoundingClientRect())
-  console.warn('width', width)
-  console.warn('graphicWidth', graphicWidth)
-  console.warn('graphicWidth x .6', Math.floor(graphicWidth * 0.66))
-  console.warn('height', height)
-  console.warn('graphicHeight', graphicHeight)
 
   var translateX = -(Math.floor(graphicWidth * 0.75))
   var translateY = -(Math.floor(graphicHeight * 0.4))
 
-  console.warn('translateX', translateX)
+  console.warn({scale})
+  console.warn({width})
+  console.warn({height})
+  console.warn({translateX})
   console.warn({translateY})
+
+  console.warn("FIRST translate(" + width / 2 + "," + height / 2 + ")");
+  console.warn("SECOND translate(" + translateX  + "," + translateY + ")")
 
   d3.select("#map")
   .transition()
@@ -79,8 +78,8 @@ function thirdAnimation () {
   d3.select("#map")
   .transition()
   .duration(750)
-  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + x + "," + y + ")")
-  .style("stroke-width", 0.01 + "%");
+  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + width / 2 + "," + height / 2 + ")")
+  .style("stroke-width",  5 + "px");
 
   d3.selectAll('.non-soviet-country').transition().duration(750).style('opacity', '0')
 

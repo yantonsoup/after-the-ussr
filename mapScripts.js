@@ -44,11 +44,14 @@ function mercatorBounds(projection, maxlat) {
 
 // set up the scale extent and initial scale for the projection
 var b = mercatorBounds(projection, maxlat)
-  console.warn('b, mercurator bound', mercatorBounds)
-  var  s = width/(b[1][0]-b[0][0])
-  console.warn('s', s)
-  var scaleExtent = [s, 10*s];
-  console.warn('scaleExtent', scaleExtent)
+
+console.warn('b, mercurator bound', b)
+  
+var  s = width/(b[1][0]-b[0][0])
+console.warn('s', s)
+
+var scaleExtent = [s, 10*s];
+console.warn('scaleExtent', scaleExtent)
 
 projection
   .scale(scaleExtent[0]);
@@ -63,8 +66,6 @@ var svg = d3
   // set to the same size as the "map-holder" div
   .attr("width", width)
   .attr("height", height);
-
-
 
 var countriesGroup = svg.append("g").attr("id", "map");
 
@@ -90,48 +91,5 @@ d3.json("world.json", function(json) {
         return "country non-soviet-country"
       }
     })
-    .on("click", clicked);
-
-  // console.warn(countriesGroup.selectAll('.soviet-country'))
-
-  // on window resize
-  // $(window).resize(function() {
-  //   svg
-  //     .attr("width", $("#scroll__graphic").width())
-  //     .attr("height", $("scroll__graphic").height());
-  // });
 });
 
-
-function clicked(d) {
-  // var x= -230; 
-  // var y = -130; 
-  // var scale = 2;
-
-  // // if (d && centered !== d) {
-  // //   var centroid = path.centroid(d);
-  // //   x = centroid[0];
-  // //   y = centroid[1];
-  // //   k = 4;
-  // //   centered = d;
-  // // } else {
-  // //   x = width / 2;
-  // //   y = height / 2;
-  // //   k = 1;
-  // //   centered = null;
-  // // }
-
-  // console.warn('clicked x', x)
-  // console.warn('clicked y', y)
-  // // console.warn('clicked k', k)
-
-  // // countriesGroup.selectAll("path")
-  // //     .classed("active", centered && function(d) { return d === centered; });
-  // countriesGroup.selectAll('.soviet-country').transition().duration(750).style('fill', 'pink')
-  // countriesGroup.selectAll('.country').transition().duration(750).style('opacity', '0.5')
-
-  // countriesGroup.transition()
-  //     .duration(750)
-  //     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + scale + ")translate(" + x + "," + y + ")")
-  //     .style("stroke-width", 1 / scale + "px");
-}
