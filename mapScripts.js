@@ -22,7 +22,7 @@ var sovietCountryIsoCodes = [ 'ARM', 'AZE', 'BLR', 'EST', 'GEO', 'KAZ', 'KGZ', '
 var rotate = -20,        // so that [-60, 0] becomes initial center of projection
 maxlat = 83;
 
-function mercatorBounds(projection, maxlat) {
+var mercatorBounds = function (projection, maxlat) {
   var yaw = projection.rotate()[0],
       xymax = projection([-yaw+180-1e-6,-maxlat]),
       xymin = projection([-yaw-180+1e-6, maxlat]);
@@ -43,7 +43,8 @@ var projection = d3.geo.mercator()
 // find the top left and bottom right of current projection
 // set up the scale extent and initial scale for the projection
 var b = mercatorBounds(projection, maxlat)
-console.warn('b, mercurator bound', b)
+console.warn('mercatorBounds', mercatorBounds(projection, maxlat))
+
 var  s = width/(b[1][0]-b[0][0])
 var scaleExtent = [s, 10*s];
 
@@ -78,19 +79,18 @@ d3.json("world.json", function(json) {
     .enter()
     .append("path")
     .attr("d", path)
+    .style("stroke-width", 0.5 + "px")
+    .attr("class", "country")
     .attr("id", function(d, i) {
       return "country" + d.properties.ISO_A3;
     })
     .attr('class', function(datapoint, i){
-      // console.warn('d.properties', d.properties)
       if (sovietCountryIsoCodes.includes(datapoint.properties.ISO_A3)) {
-        //  console.warn('soviet datapoint', datapoint)
         return "country soviet-country"
       } else {
         return "country non-soviet-country"
       }
     })
-    .style("stroke-width", 0.5 + "px");
     
 });
 

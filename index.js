@@ -146,7 +146,7 @@ function fourthAnimation() {
   console.warn("path", path);
   console.warn({ svg });
 
-  console.warn('path.bounds()', path.bounds())
+  console.warn('path.bounds()', mercatorBounds(projection, maxlat))
 
   d3.select('svg')
   .selectAll("text")
@@ -155,8 +155,7 @@ function fourthAnimation() {
   .append("text")
   .each(function(d) {
     if (sovietCountryIsoCodes.includes(d.properties.ISO_A3)) {
-      console.warn("hi adding text");
-      console.warn('path.centroid(d', path.centroid(d))
+      console.warn('datapoint of soviet', d)
       d3.select(this)
       .attr("x", function(d) {
         return path.centroid(d)[0];
