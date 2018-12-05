@@ -2,22 +2,6 @@ window.onbeforeunload = function() {
   window.scrollTo(0, 0);
 };
 
-// using d3 for convenience
-var container = d3.select(".scroll");
-var graphic = container.select(".scroll__graphic");
-var text = container.select(".scroll__text");
-var step = text.selectAll(".step");
-
-var stepHeight = Math.floor(window.innerHeight * 0.75);
-step.style("height", stepHeight + "px");
-
-var bodyWidth = d3.select("body").node().offsetWidth;
-var textWidth = text.node().offsetWidth;
-
-var graphicMargin = 16 * 4; // 64px
-var graphicWidth = container.node().offsetWidth - graphicMargin;
-var graphicHeight = Math.floor(window.innerHeight / 2.4);
-var graphicMarginTop = graphicMargin / 2;
 
 var colors = [
   "#feedde",
@@ -36,16 +20,40 @@ var colors = [
   "#a63603"
 ];
 
-console.warn({ graphicWidth });
-console.warn({ graphicHeight });
+// initialize the scrollama
+var scroller = scrollama();
+
+// Setup sizes for the graphic and steps 
+var container = d3.select(".scroll");
+var graphic = container.select(".scroll__graphic");
+var text = container.select(".scroll__text");
+
+var bodyWidth = d3.select("body").node().offsetWidth;
+var textWidth = text.node().offsetWidth;
+
+var step = text.selectAll(".step");
+var stepHeight = Math.floor(window.innerHeight * 0.75);
+
+var graphicMargin = 16 * 4; // 64px
+var graphicWidth = container.node().offsetWidth - graphicMargin;
+
+var graphicHeight = Math.floor(window.innerHeight / 2.4);
+var graphicMarginTop = graphicMargin / 2;
+
+
+
+step.style("height", stepHeight + "px");
 
 graphic
   .style("width", graphicWidth + "px")
   .style("height", graphicHeight + "px")
   .style("top", graphicMarginTop + "px");
 
-// initialize the scrollama
-var scroller = scrollama();
+
+console.warn({ graphicHeight });
+console.warn({ graphicWidth });
+console.warn({ stepHeight });
+
 
 function firstAnimation() {
   var scale = 2;
@@ -66,7 +74,7 @@ function firstAnimation() {
 
   d3.select("#map")
     .transition()
-    .duration(500)
+    .duration(100)
     .attr(
       "transform",
       "translate(" +
@@ -141,7 +149,7 @@ function thirdAnimation() {
 }
 
 function fourthAnimation() {
-  console.warn("map", map);
+  console.log("map", map);
   console.warn("worldGeoJson", worldGeoJson);
   console.warn("path", path);
   console.warn({ svg });
