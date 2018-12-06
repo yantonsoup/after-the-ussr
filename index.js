@@ -93,7 +93,7 @@ function firstAnimation() {
     // d3.zoomIdentity
     //   .translate(width / 2, height / 2)
     //   .scale(8)
-      // .translate(translateX, translateY);
+    //   .translate(translateX, translateY);
 
   d3.selectAll(".soviet-country")
     .transition()

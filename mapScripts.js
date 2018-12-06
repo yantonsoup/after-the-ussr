@@ -35,10 +35,12 @@ var path = d3.geo.path().projection(projection);
 var worldGeoJson;
 var svg
 
-d3.json("world.json", function(json) {
+d3.json("110topoworld.json", function(json) {
   console.warn('loaded world.json:', json)
 
   worldGeoJson = json
+
+  var countrySubunits = topojson.feature(json, json.objects.subunits).features
 
   svg = d3
     .select(".scroll__graphic")
@@ -52,17 +54,18 @@ d3.json("world.json", function(json) {
 
   map
     .selectAll("path")
-    .data(json.features)
+    .data(topojson.feature(json, json.objects.subunits).features)
     .enter()
     .append("path")
     .attr("d", path)
     .style("stroke-width", 0.5 + "px")
     .attr("class", "country")
     .attr("id", function(d, i) {
-      return "country" + d.properties.ISO_A3;
+      console.warn('datapoint d', d)
+      return "country" + d.id;
     })
     .attr('class', function(datapoint, i){
-      if (sovietCountryIsoCodes.includes(datapoint.properties.ISO_A3)) {
+      if (sovietCountryIsoCodes.includes(datapoint.id)) {
         return "country soviet-country"
       } else {
         return "country non-soviet-country"
