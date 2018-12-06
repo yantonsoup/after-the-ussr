@@ -2,7 +2,6 @@ window.onbeforeunload = function() {
   window.scrollTo(0, 0);
 };
 
-
 var colors = [
   "#feedde",
   "#fdbe85",
@@ -36,11 +35,11 @@ var stepHeight = Math.floor(window.innerHeight * 0.75);
 
 var graphicMargin = 16 * 4; // 64px
 var graphicWidth = container.node().offsetWidth - graphicMargin;
+const graphicHeight = graphicWidth;
+// var graphicHeight = Math.floor(window.innerHeight / 2.4);
+console.warn({ graphicHeight });
 
-var graphicHeight = Math.floor(window.innerHeight / 2.4);
 var graphicMarginTop = graphicMargin / 2;
-
-
 
 step.style("height", stepHeight + "px");
 
@@ -48,12 +47,13 @@ graphic
   .style("width", graphicWidth + "px")
   .style("height", graphicHeight + "px")
   .style("top", graphicMarginTop + "px");
-
-
+// -----------------------------------
 console.warn({ graphicHeight });
 console.warn({ graphicWidth });
 console.warn({ stepHeight });
 
+
+// Animations 
 
 function firstAnimation() {
   var scale = 2;
@@ -71,10 +71,10 @@ function firstAnimation() {
 
   console.warn("FIRST translate(" + width / 2 + "," + height / 2 + ")");
   console.warn("SECOND translate(" + translateX + "," + translateY + ")");
-
+  console.warn('d3.zoomidentity', d3.zoomIdentity)
   d3.select("#map")
     .transition()
-    .duration(100)
+    .duration(1000)
     .attr(
       "transform",
       "translate(" +
@@ -89,6 +89,11 @@ function firstAnimation() {
         translateY +
         ")"
     );
+
+    // d3.zoomIdentity
+    //   .translate(width / 2, height / 2)
+    //   .scale(8)
+      // .translate(translateX, translateY);
 
   d3.selectAll(".soviet-country")
     .transition()
