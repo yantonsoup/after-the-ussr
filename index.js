@@ -150,7 +150,6 @@ function fourthAnimation() {
   console.warn("worldGeoJson", worldGeoJson);
   console.warn("path", path);
 
-  console.warn({centroids})
 
   map.selectAll(".place-label")
     .data(topojson.feature(worldGeoJson, worldGeoJson.objects.subunits).features)
