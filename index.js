@@ -69,9 +69,6 @@ function firstAnimation() {
   console.warn({ translateX });
   console.warn({ translateY });
 
-  console.warn("FIRST translate(" + width / 2 + "," + height / 2 + ")");
-  console.warn("SECOND translate(" + translateX + "," + translateY + ")");
-  console.warn('d3.zoomidentity', d3.zoomIdentity)
   d3.select("#map")
     .transition()
     .duration(1000)
@@ -89,11 +86,6 @@ function firstAnimation() {
         translateY +
         ")"
     );
-
-    // d3.zoomIdentity
-    //   .translate(width / 2, height / 2)
-    //   .scale(8)
-    //   .translate(translateX, translateY);
 
   d3.selectAll(".soviet-country")
     .transition()
@@ -157,48 +149,28 @@ function fourthAnimation() {
   console.log("map", map);
   console.warn("worldGeoJson", worldGeoJson);
   console.warn("path", path);
-  console.warn({ svg });
 
-  console.warn('path.bounds()', mercatorBounds(projection, maxlat))
+  console.warn({centroids})
 
-  d3.select('svg')
-  .selectAll("text")
-  .data(worldGeoJson.features)
-  .enter()
-  .append("text")
-  .each(function(d) {
-    if (sovietCountryIsoCodes.includes(d.properties.ISO_A3)) {
-      console.warn('datapoint of soviet', d)
-      d3.select(this)
-      .attr("x", function(d) {
-        return path.centroid(d)[0];
-      })
-      .attr("y", function(d) {
-        return path.centroid(d)[1];
-      })
-        .text(function(d) {
-          return d.properties.ADMIN;
-        });
-    }
-  })
-  .attr("class", "label");
-  // ver ok = d3.select(".scroll__graphic")
-  // d3.select(".scroll__graphic")
-  // .data(worldGeoJson.features)
-  // .enter()
-  // .append("text")
-  //   .attr("class", "label")
-  //   .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
-  //   .text(function(d) {
-  //     console.warn('d',d )
-  //     return d.properties.ADMIN;
-  //   } )
+  map.selectAll(".place-label")
+    .data(topojson.feature(worldGeoJson, worldGeoJson.objects.subunits).features)
+    .enter().append("text")
+    .attr("class", "place-label")
+    .attr("transform", function(d) { 
+        // can get centroid easily like this!  path.centroid(d)
+      const [x, y] = path.centroid(d)
+      return `translate(${x},${y})`; 
+    })
+    .attr("dy", ".85em")
+    .style("z-index", '100')
+    .text(function(d) { 
+      if (sovietCountryIsoCodes.includes(d.id)) {
+        console.warn('soviet datapoint', d)
+        return d.properties.name; 
+      }
 
-
-  // d3.selectAll('.soviet-country')
-  //   .transition()
-  //   .duration(500)
-  //   .style("stroke-width", 0.25 + "px");
+      return null;
+    }).style("font-size", 2 +"px")
 }
 
 // scrollama event handlers
