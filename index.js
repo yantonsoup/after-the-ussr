@@ -112,7 +112,6 @@ function secondAnimation() {
 
 function thirdAnimation() {
   var scale = 4;
-
   var translateX = -Math.floor(graphicWidth * 0.6);
   var translateY = -Math.floor(graphicHeight * 0.3);
 
@@ -145,11 +144,33 @@ function thirdAnimation() {
     .style("stroke-width", 0.25 + "px");
 }
 
+var sovietLabelShift = {
+  'ARM': {x: -12, y: 0}, 
+  'AZE': {x: -12, y: 0}, 
+  'BLR': {x: -12, y: 0}, 
+  'EST': {x: -12, y: 0}, 
+  'GEO': {x: -12, y: 0}, 
+  'KAZ': {x: 0, y: 0}, 
+  'KGZ': {x: -12, y: 0}, 
+  'LVA': {x: -12, y: 0}, 
+  'LTU': {x: -14, y: 0}, 
+  'MDA': {x: -12, y: 0}, 
+  'RUS': {x: -40, y: 10}, 
+  'TJK': {x: -12, y: 0}, 
+  'TKM': {x: -12, y: 0}, 
+  'UKR': {x: 0, y: 0}, 
+  'UZB': {x: -12, y: 0}
+}
+
 function fourthAnimation() {
   console.log("map", map);
   console.warn("worldGeoJson", worldGeoJson);
   console.warn("path", path);
 
+  d3.selectAll(".non-soviet-country")
+    .transition()
+    .duration(500)
+    .style("opacity", "0.15")
 
   map.selectAll(".place-label")
     .data(topojson.feature(worldGeoJson, worldGeoJson.objects.subunits).features)
@@ -160,7 +181,25 @@ function fourthAnimation() {
       const [x, y] = path.centroid(d)
       return `translate(${x},${y})`; 
     })
-    .attr("dy", ".85em")
+    .attr("dx", function({id}) { 
+      if (sovietCountryIsoCodes.includes(id)) {
+        const { x } = sovietLabelShift[id]
+        console.warn(x)
+        // can get centroid easily like this!  path.centroid(d)
+        return `${x}px`; 
+      } 
+      return
+    })
+    .attr("dy", function(d) { 
+      if (sovietCountryIsoCodes.includes(d.id)) {
+
+      const name = d.id
+      const { y } = sovietLabelShift[name]
+        // can get centroid easily like this!  path.centroid(d)
+      return `${y}px`; 
+      }
+      return
+    })
     .style("z-index", '100')
     .text(function(d) { 
       if (sovietCountryIsoCodes.includes(d.id)) {
@@ -169,7 +208,7 @@ function fourthAnimation() {
       }
 
       return null;
-    }).style("font-size", 2 +"px")
+    }).style("font-size", 3 +"px")
 }
 
 // scrollama event handlers
