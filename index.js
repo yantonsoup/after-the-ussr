@@ -269,13 +269,6 @@ function setupStickyfill() {
 
 function init() {
   setupStickyfill();
-
-  // 1. force a resize on load to ensure proper dimensions are sent to scrollama
-  // handleResize();
-
-  // 2. setup the scroller passing options
-  // this will also initialize trigger observations
-  // 3. bind scrollama event handlers (this can be chained like below)
   scroller
     .setup({
       container: ".scroll",
@@ -283,7 +276,7 @@ function init() {
       text: ".scroll__text",
       step: ".scroll__text .step",
       debug: false,
-      offset: 0.9
+      offset: 0.8
     })
     .onStepEnter(handleStepEnter)
     .onContainerEnter(handleContainerEnter)

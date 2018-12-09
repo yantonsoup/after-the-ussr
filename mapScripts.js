@@ -71,10 +71,10 @@ d3.json("110topoworld.json", function(json) {
       }
     })
 
-    d3.selectAll(".soviet-country")
-    .transition()
-    .duration(100)
-    .style("fill", "#a63603")
-    .style("stroke-width", 0.5 + "px");
+    // d3.selectAll(".soviet-country")
+    // .transition()
+    // .duration(100)
+    // .style("fill", "#a63603")
+    // .style("stroke-width", 0.5 + "px");
 });
 

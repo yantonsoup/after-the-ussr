@@ -175,19 +175,32 @@ a:hover {
 }
 
 .step p {
-  position: relative;
-  z-index: 10000;
-  margin-top: 50%;
   background-color: lightgoldenrodyellow;
   border: 1px solid #333;
   text-align: center;
   padding: 1rem;
+  vertical-align: middle;
   font-size: 1rem;
 }
 
-/* .step p:nth-of-type(1) {
-  color: red;
-} */
+.country,
+.soviet-country {
+  fill: #d0d0d0; /* country colour */
+  stroke: #2a2c39; /* country border colour */
+  stroke-width: 1; /* country border width */
+}
+.country-on {
+  fill: #4b5358; /* highlight colour for selected country */
+}
+.countryLabel {
+  display: none; /* hide all country labels by default */
+}
+.countryName {
+  fill: #fffaff; /* country label text colour */
+}
+.countryLabelBg {
+  fill: #30bced; /* country label background colour */
+}
 
 .opacity-fade-out {
   animation-name: opacity-fade;
@@ -206,22 +219,6 @@ a:hover {
 
 .subunit.SCT {
   fill: #ddc;
-}
-
-.subunit.WLS {
-  fill: #cdd;
-}
-
-.subunit.NIR {
-  fill: #cdc;
-}
-
-.subunit.ENG {
-  fill: #dcd;
-}
-
-.subunit.IRL {
-  display: none;
 }
 
 .subunit-boundary {
@@ -243,33 +240,4 @@ a:hover {
   text-anchor: middle;
 }
 
-/* body {
-    margin: 0;
-    background-color: #2A2C39;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
-    font-weight: 200;
-    font-size: 17px;
-  } */
 
-svg rect {
-  fill: #2a2c39; /* map background colour */
-  fill-opacity: 0;
-}
-.country,
-.soviet-country {
-  fill: #d0d0d0; /* country colour */
-  stroke: #2a2c39; /* country border colour */
-  stroke-width: 1; /* country border width */
-}
-.country-on {
-  fill: #4b5358; /* highlight colour for selected country */
-}
-.countryLabel {
-  display: none; /* hide all country labels by default */
-}
-.countryName {
-  fill: #fffaff; /* country label text colour */
-}
-.countryLabelBg {
-  fill: #30bced; /* country label background colour */
-}
