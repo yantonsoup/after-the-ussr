@@ -53,7 +53,9 @@ console.warn({ graphicHeight });
 console.warn({ graphicWidth });
 console.warn({ stepHeight });
 
-
+d3.select(".header-container").style("height", window.innerHeight + "px")
+d3.select(".ussr-svg").style("height", 200 + "px")
+d3.select(".ussr-svg").style("width", 200 + "px")
 // Animations 
 
 function firstAnimation() {
@@ -176,7 +178,7 @@ function fourthAnimation() {
   d3.selectAll(".non-soviet-country")
     .transition()
     .duration(500)
-    .style("opacity", "0.15")
+    .style("opacity", "0")
 
   map.selectAll(".place-label")
     .data(topojson.feature(worldGeoJson, worldGeoJson.objects.subunits).features)
