@@ -56,7 +56,7 @@ a:hover {
 }
 
 .header-container {
-  height: 450px;
+  height: 440px;
 }
 
 .intro-block {
@@ -175,6 +175,8 @@ a:hover {
 }
 
 .step p {
+  position: relative;
+  z-index: 10000;
   margin-top: 50%;
   background-color: lightgoldenrodyellow;
   border: 1px solid #333;

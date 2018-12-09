@@ -42,7 +42,7 @@ console.warn({ graphicHeight });
 var graphicMarginTop = Math.floor(window.innerHeight * 0.3);
 // graphicMargin / 2;
 
-step.style("height", "100vh");
+step.style("height", window.innerHeight+"px");
 
 graphic
   .style("width", graphicWidth + "px")
@@ -88,37 +88,35 @@ function firstAnimation() {
         ")"
     );
 
-  d3.selectAll(".soviet-country")
-    .transition()
-    .duration(100)
-    .style("fill", "#a63603")
-    .style("stroke-width", 0.5 + "px");
+  // d3.selectAll(".soviet-country")
+  //   .transition()
+  //   .duration(100)
+  //   .style("fill", "#a63603")
+  //   .style("stroke-width", 0.5 + "px");
 
   d3.selectAll(".non-soviet-country")
     .transition()
     .duration(100)
     .style("opacity", "0.5")
     .style("stroke-width", 0.25 + "px");
-}
 
-function secondAnimation() {
-  d3.selectAll(".soviet-country")
+    d3.selectAll(".soviet-country")
     .transition()
-    .duration(500)
+    .duration(1000)
     .style("fill", function(d, i) {
       // console.warn('i', i)
       return colors[i];
     });
 }
 
-function thirdAnimation() {
+function secondAnimation() {
   var scale = 4;
   var translateX = -Math.floor(graphicWidth * 0.6);
   var translateY = -Math.floor(graphicHeight * 0.3);
 
   d3.select("#map")
     .transition()
-    .duration(500)
+    .duration(1000)
     .attr(
       "transform",
       "translate(" +
@@ -143,6 +141,12 @@ function thirdAnimation() {
     .transition()
     .duration(500)
     .style("stroke-width", 0.25 + "px");
+
+  fourthAnimation()
+
+}
+
+function thirdAnimation() {
 }
 
 var sovietLabelShift = {
