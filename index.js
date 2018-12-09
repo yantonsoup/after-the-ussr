@@ -147,6 +147,7 @@ function secondAnimation() {
 }
 
 function thirdAnimation() {
+
 }
 
 var sovietLabelShift = {
@@ -205,7 +206,7 @@ function fourthAnimation() {
       }
       return
     })
-    .style("z-index", '100')
+    // .style("z-index", '100')
     .text(function(d) { 
       if (sovietCountryIsoCodes.includes(d.id)) {
         console.warn('soviet datapoint', d)
@@ -257,7 +258,6 @@ function handleContainerEnter(response) {
 
 function handleContainerExit(response) {
   console.warn({ handleContainerExit });
-
   // response = { direction }
 }
 
