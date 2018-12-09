@@ -39,9 +39,10 @@ const graphicHeight = graphicWidth;
 // var graphicHeight = Math.floor(window.innerHeight / 2.4);
 console.warn({ graphicHeight });
 
-var graphicMarginTop = graphicMargin / 2;
+var graphicMarginTop = Math.floor(window.innerHeight * 0.3);
+// graphicMargin / 2;
 
-step.style("height", stepHeight + "px");
+step.style("height", "100vh");
 
 graphic
   .style("width", graphicWidth + "px")
@@ -277,8 +278,8 @@ function init() {
       graphic: ".scroll__graphic",
       text: ".scroll__text",
       step: ".scroll__text .step",
-      debug: true,
-      offset: 0.5
+      debug: false,
+      offset: 0.9
     })
     .onStepEnter(handleStepEnter)
     .onContainerEnter(handleContainerEnter)

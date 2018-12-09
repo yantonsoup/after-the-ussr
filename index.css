@@ -1,243 +1,247 @@
-	/* default / demo page */
+/* default / demo page */
 
-  * {
-    box-sizing: border-box;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
 
-  body {
-    min-height: 1280px;
-    font-weight: 300;
-    color: #2a2a2a;
-  }
+body {
+  min-height: 1280px;
+  font-weight: 300;
+  color: #2a2a2a;
+}
 
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  a {
-    margin: 0;
-    font-weight: 300;
-  }
+p,
+h1,
+h2,
+h3,
+h4,
+a {
+  margin: 0;
+  font-weight: 300;
+}
 
-  a,
-  a:visited,
-  a:hover {
-    color: #f30;
-    text-decoration: none;
-    border-bottom: 1px solid currentColor;
-  }
+a,
+a:visited,
+a:hover {
+  color: #f30;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
 
-  #intro {
-    position: relative;
-    z-index: 99;
-    max-width: 40rem;
-    margin: 0 auto;
-    text-align: center;
-  }
+#intro {
+  position: relative;
+  z-index: 99;
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+}
 
-  .header {
-    background-color: lightgray;
-    border: 1px solid #000;
-    padding: 0.5rem;
-    margin: 0 2rem;
-    font-size: 1.4rem;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 1.5rem;
-  }
-  
+.header {
+  background-color: lightgray;
+  border: 1px solid #000;
+  padding: 0.5rem;
+  margin: 0 2rem;
+  font-size: 1.4rem;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1.5rem;
+}
 
-  .header-container {
-    height: 450px;
-  }
+.header-container {
+  height: 450px;
+}
 
-  .intro-block {
-    z-index: -3;
-    position: -webkit-sticky;
-    position: sticky;
-    margin: 3rem 0.5rem;
-  }
+.intro-block {
+  z-index: -3;
+  position: -webkit-sticky;
+  position: sticky;
+  margin: 3rem 0.5rem;
+}
 
-  .intro-title {
-    font-size: 1.4rem;
-    margin: 0.5rem auto;
-    text-transform: uppercase;
-    font-weight: 900;
-    letter-spacing: 0.05em;
-  }
+.intro-title {
+  font-size: 1.4rem;
+  margin: 0.5rem auto;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
 
-  .intro-subtitle {
-    font-size: 1.4rem;
-    margin: 0 auto;
-  }
+.intro-subtitle {
+  font-size: 1.4rem;
+  margin: 0 auto;
+}
 
-  .intro-scroll-tip {
-    font-size: 1.4rem;
-    margin: 2rem auto;
-  }
+.intro-scroll-tip {
+  font-size: 1.4rem;
+  margin: 2rem auto;
+}
 
-  .intro-paragraph {
-    text-align: left;
-    margin: 0.5rem 2rem;
-  }
+.intro-paragraph {
+  text-align: left;
+  margin: 0.5rem 2rem;
+}
 
-  #triangle-down {
-    margin: 0 auto;
-    width: 0;
-    height: 0;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-top: 100px solid red;
-  }
+#triangle-down {
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 100px solid red;
+}
 
-  /* demo */
+/* demo */
 
-  #intro {
-    /* margin-bottom: 320px; */
-  }
+#intro {
+  /* margin-bottom: 320px; */
+}
 
-  #outro {
-    height: 640px;
-  }
+#outro {
+  height: 640px;
+}
 
-  /* scrollama */
+/* scrollama */
 
-  .scroll {
-    /* top: -5rem; */
-    position: relative;
-    border-top: 2px dashed #000;
-    border-bottom: 2px dashed #000;
-  }
+.scroll {
+  /* top: -5rem; */
+  position: relative;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+}
 
-  .hide {
-    display: none;
-  }
+.hide {
+  display: none;
+}
 
-  .scroll__graphic {
-    position: -webkit-sticky;
-    /* margin-top: 320px; */
+.scroll__graphic {
+  position: -webkit-sticky;
+  /* margin-top: 320px; */
+  opacity: 1;
+  position: sticky;
+  float: right;
+  right: 2rem;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  z-index: 5;
+}
+
+.sticky_break {
+}
+
+.scroll__graphic p {
+  text-align: center;
+  padding: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+  font-weight: 900;
+  color: #666;
+}
+
+.scroll__text {
+  position: relative;
+  margin: 100% auto 0;
+  max-width: 30rem;
+  width: calc(100vw - 64px) ;
+}
+
+.step {
+  position: relative;
+  z-index: 1000;
+  opacity: 0.9;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+}
+
+.step:last-child {
+  border-bottom: 1px solid #333;
+}
+
+.step.is-active {
+  /* background-color: lightgoldenrodyellow; */
+}
+
+.step p {
+  margin-top: 50%;
+  background-color: lightgoldenrodyellow;
+  border: 1px solid #333;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+/* .step p:nth-of-type(1) {
+  color: red;
+} */
+
+.opacity-fade-out {
+  animation-name: opacity-fade;
+  animation-duration: 1.5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes opacity-fade {
+  0% {
     opacity: 1;
-    position: sticky;
-    float: right;
-    right: 2rem;
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    /* background-color: #ddd; */
-    border: 1px dotted #000;
-    z-index: 5;
   }
-
-  .sticky_break {
+  100% {
+    opacity: 0;
   }
+}
 
-  .scroll__graphic p {
-    text-align: center;
-    padding: 1rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -moz-transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    font-size: 8rem;
-    font-weight: 900;
-    color: #666;
-  }
+.subunit.SCT {
+  fill: #ddc;
+}
 
-  .scroll__text {
-    position: relative;
-    margin: 100% auto 0;
-    max-width: 30rem;
-    width: 80%;
-  }
+.subunit.WLS {
+  fill: #cdd;
+}
 
-  .step {
-    margin: 0 auto 2rem auto;
-    border: 1px solid #333;
-  }
+.subunit.NIR {
+  fill: #cdc;
+}
 
-  .step:last-child {
-    border-bottom: 1px solid #333;
-  }
+.subunit.ENG {
+  fill: #dcd;
+}
 
-  .step.is-active {
-    background-color: lightgoldenrodyellow;
-  }
+.subunit.IRL {
+  display: none;
+}
 
-  .step.is-active {
-    background-color: lightgoldenrodyellow;
-  }
+.subunit-boundary {
+  fill: none;
+  stroke: #777;
+  stroke-dasharray: 2, 2;
+  stroke-linejoin: round;
+}
 
-  .step p {
-    text-align: center;
-    padding: 1rem;
-    font-size: 1.5rem;
-  }
+.subunit-boundary.IRL {
+  stroke: #aaa;
+}
 
-  .opacity-fade-out {
-    animation-name: opacity-fade;
-    animation-duration: 1.5s; 
-    animation-iteration-count: 1; 
-  }
+.subunit-label {
+  fill: #777;
+  fill-opacity: 0.5;
+  font-size: 20px;
+  font-weight: 300;
+  text-anchor: middle;
+}
 
-  @keyframes opacity-fade {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-
-  .subunit.SCT {
-    fill: #ddc;
-  }
-
-  .subunit.WLS {
-    fill: #cdd;
-  }
-
-  .subunit.NIR {
-    fill: #cdc;
-  }
-
-  .subunit.ENG {
-    fill: #dcd;
-  }
-
-  .subunit.IRL {
-    display: none;
-  }
-
-  .subunit-boundary {
-    fill: none;
-    stroke: #777;
-    stroke-dasharray: 2, 2;
-    stroke-linejoin: round;
-  }
-
-  .subunit-boundary.IRL {
-    stroke: #aaa;
-  }
-
-  .subunit-label {
-    fill: #777;
-    fill-opacity: .5;
-    font-size: 20px;
-    font-weight: 300;
-    text-anchor: middle;
-  }
-
-  /* body {
+/* body {
     margin: 0;
     background-color: #2A2C39;
     font-family: 'Yanone Kaffeesatz', sans-serif;
@@ -245,24 +249,25 @@
     font-size: 17px;
   } */
 
-  svg rect {
-    fill: #2A2C39;   /* map background colour */
-    fill-opacity: 0;
-  }
-  .country, .soviet-country{
-    fill: #d0d0d0;   /* country colour */
-    stroke: #2A2C39; /* country border colour */
-    stroke-width: 1; /* country border width */
-  }
-  .country-on{
-    fill: #4B5358;   /* highlight colour for selected country */
-  }
-  .countryLabel{
-    display: none;   /* hide all country labels by default */
-  }
-  .countryName{
-    fill: #FFFAFF;   /* country label text colour */
-  }
-  .countryLabelBg{
-    fill: #30BCED;   /* country label background colour */
-  }
+svg rect {
+  fill: #2a2c39; /* map background colour */
+  fill-opacity: 0;
+}
+.country,
+.soviet-country {
+  fill: #d0d0d0; /* country colour */
+  stroke: #2a2c39; /* country border colour */
+  stroke-width: 1; /* country border width */
+}
+.country-on {
+  fill: #4b5358; /* highlight colour for selected country */
+}
+.countryLabel {
+  display: none; /* hide all country labels by default */
+}
+.countryName {
+  fill: #fffaff; /* country label text colour */
+}
+.countryLabelBg {
+  fill: #30bced; /* country label background colour */
+}
