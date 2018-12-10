@@ -26,13 +26,13 @@ h3,
 h4,
 a {
   margin: 0;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 a,
 a:visited,
 a:hover {
-  color: #fff;
+  color: lightgoldenrodyellow;
   text-decoration: none;
   /* border-bottom: 1px solid currentColor; */
 }
@@ -60,6 +60,19 @@ a:hover {
 .ussr-svg {
   width: 100px;
   height: 100px;
+  margin: 0 auto;
+}
+
+
+.ussr-star-svg {
+  fill: #a62116;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+}
+
+.ussr-svg-container {
+  margin: 1rem auto;
 }
 
 .header-container {
@@ -70,19 +83,26 @@ a:hover {
   z-index: -3;
   position: -webkit-sticky;
   position: sticky;
-  margin: 3rem 0.5rem;
+  color: lightgoldenrodyellow;
+  margin: 3rem auto;
 }
 
+.intro-step {
+
+}
+
+
 .intro-title {
-  font-size: 1.4rem;
+  font-size: 2rem;
   margin: 0.5rem auto;
-  text-transform: uppercase;
+  padding: 0.5rem auto;
   font-weight: 900;
   letter-spacing: 0.05em;
 }
 
 .intro-subtitle {
   font-size: 1.4rem;
+  text-align: left;
   margin: 0 auto;
 }
 
@@ -95,7 +115,11 @@ a:hover {
   text-align: left;
   margin: 0.5rem 2rem;
 }
-
+/* background-color: lightgoldenrodyellow;
+border: 1px solid #333;
+padding: 1rem;
+vertical-align: middle;
+font-size: 1rem; */
 #triangle-down {
   margin: 0 auto;
   width: 0;
@@ -175,7 +199,7 @@ a:hover {
 }
 
 .step:last-child {
-  border-bottom: 1px solid #333;
+  /* border-bottom: 1px solid #333; */
 }
 
 .step.is-active {
@@ -185,10 +209,10 @@ a:hover {
 .step p {
   background-color: lightgoldenrodyellow;
   border: 1px solid #333;
-  text-align: center;
   padding: 1rem;
   vertical-align: middle;
   font-size: 1rem;
+  text-align: left;
 }
 
 .country,

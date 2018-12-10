@@ -35,18 +35,19 @@ var stepHeight = Math.floor(window.innerHeight * 0.75);
 
 var graphicMargin = 16 * 4; // 64px
 var graphicWidth = container.node().offsetWidth - graphicMargin;
+const mapwidth = container.node().offsetWidth;
 const graphicHeight = graphicWidth;
 // var graphicHeight = Math.floor(window.innerHeight / 2.4);
 console.warn({ graphicHeight });
 
-var graphicMarginTop = Math.floor(window.innerHeight * 0.3);
+var graphicMarginTop = Math.floor(window.innerHeight * 0.25);
 // graphicMargin / 2;
 
 step.style("height", window.innerHeight+"px");
 
 graphic
-  .style("width", graphicWidth + "px")
-  .style("height", graphicHeight + "px")
+  .style("width", mapwidth + "px")
+  .style("height", mapwidth + "px")
   .style("top", graphicMarginTop + "px");
 // -----------------------------------
 console.warn({ graphicHeight });
@@ -54,6 +55,10 @@ console.warn({ graphicWidth });
 console.warn({ stepHeight });
 
 d3.select(".header-container").style("height", window.innerHeight + "px")
+
+d3.select(".ussr-svg-container").style("width", graphicWidth + "px")
+d3.select(".intro-block").style("width", graphicWidth + "px")
+
 d3.select(".ussr-svg").style("height", 200 + "px")
 d3.select(".ussr-svg").style("width", 200 + "px")
 // Animations 
@@ -113,8 +118,8 @@ function firstAnimation() {
 
 function secondAnimation() {
   var scale = 4;
-  var translateX = -Math.floor(graphicWidth * 0.6);
-  var translateY = -Math.floor(graphicHeight * 0.3);
+  var translateX = -Math.floor(graphicWidth * 0.7);
+  var translateY = -Math.floor(graphicHeight * 0.4);
 
   d3.select("#map")
     .transition()
