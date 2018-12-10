@@ -191,7 +191,7 @@ font-size: 1rem; */
 
 .scroll__text {
   position: relative;
-  margin: 100% auto 0;
+  margin: 135% auto 0;
   max-width: 30rem;
   width: calc(100vw - 64px) ;
 }

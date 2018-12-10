@@ -69,7 +69,7 @@ function firstAnimation() {
   console.warn("scroll container size", graphic.node().getBoundingClientRect());
 
   var translateX = -Math.floor(graphicWidth * 0.75);
-  var translateY = -Math.floor(graphicHeight * 0.4);
+  var translateY = -Math.floor(graphicHeight * 0.45);
 
   console.warn({ scale });
   console.warn({ width });
@@ -283,7 +283,7 @@ function init() {
       text: ".scroll__text",
       step: ".scroll__text .step",
       debug: false,
-      offset: 0.8
+      offset: 0.9
     })
     .onStepEnter(handleStepEnter)
     .onContainerEnter(handleContainerEnter)
