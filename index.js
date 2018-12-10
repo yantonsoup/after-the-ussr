@@ -54,7 +54,7 @@ console.warn({ graphicHeight });
 console.warn({ graphicWidth });
 console.warn({ stepHeight });
 console.warn('container.node().offsetHeight', container.node().offsetHeight)
-d3.select(".header-container").style("height", 800 + "px")
+d3.select(".header-container").style("height", 850 + "px")
 
 d3.select(".ussr-svg-container").style("width", graphicWidth + "px")
 d3.select(".intro-block").style("width", graphicWidth + "px")
