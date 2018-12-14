@@ -1,0 +1,9 @@
+{
+  "name": "after-the-ussr",
+  "version": "1.0.0",
+  "description": "A Visual Essay about immigration after the Collapse of The Soviet Union",
+  "main": "index.js",
+  "repository": "https://github.com/yantonsoup/after-the-ussr.git",
+  "author": "yantonsoup <ygoldobin@gmail.com>",
+  "license": "MIT"
+}
