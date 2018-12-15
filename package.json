@@ -22,5 +22,8 @@
   "repository": "https://github.com/yantonsoup/after-the-ussr.git",
   "author": "yantonsoup <ygoldobin@gmail.com>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "intersection-observer": "^0.5.1",
+    "scrollama": "^1.4.4"
+  }
 }
