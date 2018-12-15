@@ -1,17 +1,10 @@
 import "intersection-observer";
 import scrollama from "scrollama";
 
-import loadMap from "./loadMap";
 import animations from "./animations";
 
-function setupStickyfill() {
-  d3.selectAll(".sticky").each(function() {
-    Stickyfill.add(this);
-  });
-}
-
-export default function setupScrollama() {
-  setupStickyfill();
+export default function setupScrollama(countries) {
+  const scroller = scrollama();
 
   // response = { element, direction, index }
   function handleStepEnter(response) {
@@ -37,9 +30,6 @@ export default function setupScrollama() {
     console.warn("Scrollama :: handleContainerExit");
   }
 
-  const scroller = scrollama();
-
-
   scroller
     .setup({
       container: ".scroll",
@@ -52,13 +42,6 @@ export default function setupScrollama() {
     .onStepEnter(handleStepEnter)
     .onContainerEnter(handleContainerEnter)
     .onContainerExit(handleContainerExit);
-
-  let countries;
-  loadMap().then(countrySubunits => {
-    console.warn({ countrySubunits });
-    countries = countrySubunits;
-    return countries;
-  });
 }
 
 // setup resize event -> this is causing issues in mobile when the mobile headers resize

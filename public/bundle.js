@@ -1435,53 +1435,6 @@
   }
 
   const sovietCountryIsoCodes = ["ARM", "AZE", "BLR", "EST", "GEO", "KAZ", "KGZ", "LVA", "LTU", "MDA", "RUS", "TJK", "TKM", "UKR", "UZB"];
-
-  var mercatorBounds = function (projection, maxlat) {
-    var yaw = projection.rotate()[0],
-        xymax = projection([-yaw + 180 - 1e-6, -maxlat]),
-        xymin = projection([-yaw - 180 + 1e-6, maxlat]);
-    return [xymin, xymax];
-  };
-
-  function loadMap() {
-    return new Promise((resolve, reject) => {
-      d3.json("./json/110topoworld.json", function (json) {
-        console.warn("loaded 110topoworld.json:", json);
-        const mapContainer = d3.select(".scroll__graphic");
-        const boundingBox = mapContainer.node().getBoundingClientRect();
-        const {
-          height,
-          width
-        } = boundingBox;
-        var rotate = -20; // so that [-60, 0] becomes initial center of projection
-
-        var maxlat = 83;
-        var projection = d3.geo.mercator().rotate([rotate, 0]).scale(1) // we'll scale up to match viewport shortly.
-        .translate([width / 2, height / 2]); // .center([0, 25])
-
-        var b = mercatorBounds(projection, maxlat);
-        var s = width / (b[1][0] - b[0][0]);
-        var scaleExtent = [s, 10 * s];
-        projection.scale(scaleExtent[0]);
-        var path = d3.geo.path().projection(projection);
-        const countrySubunits = topojson.feature(json, json.objects.subunits).features;
-        const svg = d3.select(".scroll__graphic").append("svg").attr("width", width).attr("height", height);
-        const map = svg.append("g").attr("id", "map");
-        map.selectAll("path").data(countrySubunits).enter().append("path").attr("d", path).style("stroke-width", 0.5 + "px").attr("class", "country").attr("id", function (d, i) {
-          return "country" + d.id;
-        }).attr("class", function (datapoint, i) {
-          if (sovietCountryIsoCodes.includes(datapoint.id)) {
-            return "country soviet-country";
-          } else {
-            return "country non-soviet-country";
-          }
-        });
-        resolve(countrySubunits);
-      });
-    });
-  }
-
-  const sovietCountryIsoCodes$1 = ["ARM", "AZE", "BLR", "EST", "GEO", "KAZ", "KGZ", "LVA", "LTU", "MDA", "RUS", "TJK", "TKM", "UKR", "UZB"];
   const colors = ["#feedde", "#fdbe85", "#fd8d3c", "#e6550d", "#a63603", "#feedde", "#fdbe85", "#fd8d3c", "#e6550d", "#feedde", "#fdbe85", "#fd8d3c", "#e6550d", "#a63603"];
   const sovietLabelShift = {
     ARM: {
@@ -1607,7 +1560,7 @@
     }).attr("dx", function ({
       id
     }) {
-      if (sovietCountryIsoCodes$1.includes(id)) {
+      if (sovietCountryIsoCodes.includes(id)) {
         const {
           x
         } = sovietLabelShift[id];
@@ -1618,7 +1571,7 @@
 
       return;
     }).attr("dy", function (d) {
-      if (sovietCountryIsoCodes$1.includes(d.id)) {
+      if (sovietCountryIsoCodes.includes(d.id)) {
         const name = d.id;
         const {
           y
@@ -1630,7 +1583,7 @@
       return;
     }) // .style("z-index", '100')
     .text(function (d) {
-      if (sovietCountryIsoCodes$1.includes(d.id)) {
+      if (sovietCountryIsoCodes.includes(d.id)) {
         console.warn("soviet datapoint", d);
         return d.properties.name;
       }
@@ -1644,14 +1597,8 @@
     secondAnimation
   };
 
-  function setupStickyfill() {
-    d3.selectAll(".sticky").each(function () {
-      Stickyfill.add(this);
-    });
-  }
-
-  function setupScrollama() {
-    setupStickyfill(); // response = { element, direction, index }
+  function setupScrollama(countries) {
+    const scroller = scrollama(); // response = { element, direction, index }
 
     function handleStepEnter(response) {
       console.warn("handleStepEnter, response", {
@@ -1680,7 +1627,6 @@
       console.warn("Scrollama :: handleContainerExit");
     }
 
-    const scroller = scrollama();
     scroller.setup({
       container: ".scroll",
       graphic: ".scroll__graphic",
@@ -1689,14 +1635,6 @@
       debug: false,
       offset: 0.9
     }).onStepEnter(handleStepEnter).onContainerEnter(handleContainerEnter).onContainerExit(handleContainerExit);
-    let countries;
-    loadMap().then(countrySubunits => {
-      console.warn({
-        countrySubunits
-      });
-      countries = countrySubunits;
-      return countries;
-    });
   } // setup resize event -> this is causing issues in mobile when the mobile headers resize
   // window.addEventListener("resize", handleResize);
 
@@ -1736,6 +1674,53 @@
     d3.select(".ussr-svg").style("width", 200 + "px");
   }
 
+  function loadMap() {
+    return new Promise((resolve, reject) => {
+      d3.json("./json/110topoworld.json", function (json) {
+        console.warn("loaded 110topoworld.json:", json);
+        resolve(json);
+      });
+    });
+  }
+
+  var mercatorBounds = function (projection, maxlat) {
+    var yaw = projection.rotate()[0],
+        xymax = projection([-yaw + 180 - 1e-6, -maxlat]),
+        xymin = projection([-yaw - 180 + 1e-6, maxlat]);
+    return [xymin, xymax];
+  };
+
+  function paintMap(countries) {
+    const mapContainer = d3.select(".scroll__graphic");
+    const boundingBox = mapContainer.node().getBoundingClientRect();
+    const {
+      height,
+      width
+    } = boundingBox;
+    var rotate = -20; // so that [-60, 0] becomes initial center of projection
+
+    var maxlat = 83;
+    var projection = d3.geo.mercator().rotate([rotate, 0]).scale(1) // we'll scale up to match viewport shortly.
+    .translate([width / 2, height / 2]); // .center([0, 25])
+
+    var b = mercatorBounds(projection, maxlat);
+    var s = width / (b[1][0] - b[0][0]);
+    var scaleExtent = [s, 10 * s];
+    projection.scale(scaleExtent[0]);
+    var path = d3.geo.path().projection(projection);
+    const svg = d3.select(".scroll__graphic").append("svg").attr("width", width).attr("height", height);
+    const map = svg.append("g").attr("id", "map");
+    map.selectAll("path").data(countries).enter().append("path").attr("d", path).style("stroke-width", 0.5 + "px").attr("class", "country").attr("id", function (d, i) {
+      return "country" + d.id;
+    }).attr("class", function (datapoint, i) {
+      if (sovietCountryIsoCodes.includes(datapoint.id)) {
+        return "country soviet-country";
+      } else {
+        return "country non-soviet-country";
+      }
+    });
+  }
+
   // logs will still point to your original source modules
 
   console.log('if you have sourcemaps enabled in your devtools, click on main.js:5 -->');
@@ -1745,7 +1730,14 @@
   };
 
   firstPaint();
-  setupScrollama();
+  loadMap().then(json => {
+    const countries = topojson.feature(json, json.objects.subunits).features;
+    console.warn({
+      countries
+    });
+    paintMap(countries);
+    setupScrollama(countries);
+  });
 
 }());
 //# sourceMappingURL=bundle.js.map
