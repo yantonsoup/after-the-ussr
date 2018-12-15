@@ -17,15 +17,20 @@ export default function update() {
   var bodyWidth = d3.select("body").node().offsetWidth;
   var textWidth = text.node().offsetWidth;
 
+  const graphicContainer = d3.select(".scroll");
+  const boundingBox = graphicContainer.node().getBoundingClientRect();
+  const { width, height } = boundingBox;
+
   var step = text.selectAll(".step");
   var stepHeight = Math.floor(window.innerHeight * 0.75);
 
   var graphicMargin = 16 * 4; // 64px
   var graphicWidth = container.node().offsetWidth - graphicMargin;
-  const mapwidth = container.node().offsetWidth;
   const graphicHeight = graphicWidth;
   // var graphicHeight = Math.floor(window.innerHeight / 2.4);
-  console.warn({ graphicHeight });
+  console.warn('graphicHeight',{ graphicHeight });
+  console.warn('height',{ height });
+  console.warn('width',{ width });
 
   var graphicMarginTop = Math.floor(window.innerHeight * 0.25);
   // graphicMargin / 2;
@@ -33,8 +38,8 @@ export default function update() {
   step.style("height", window.innerHeight + "px");
 
   graphic
-    .style("width", mapwidth + "px")
-    .style("height", mapwidth + "px")
+    .style("width", width + "px")
+    .style("height", width + "px")
     .style("top", graphicMarginTop + "px");
   // -----------------------------------
   console.warn({ graphicHeight });
@@ -49,13 +54,8 @@ export default function update() {
 
   d3.select(".ussr-svg").style("height", 200 + "px");
   d3.select(".ussr-svg").style("width", 200 + "px");
+ 
   // Animations
-
-  const mapContainer = d3.select(".scroll__graphic");
-  const boundingBox = mapContainer.node().getBoundingClientRect();
-  const { height, width } = boundingBox;
-
-  // scrollama event handlers
   // response = { element, direction, index }
   function handleStepEnter(response) {
     console.warn("handleStepEnter, response", { response });
@@ -74,14 +74,11 @@ export default function update() {
       return i === response.index;
     });
 
-    // update graphic based on step
-    graphic.select("p").text(response.index + 1);
   }
 
   function handleContainerEnter(response) {
     d3.select(".intro__overline").classed("sticky_break", true);
     console.warn({ handleContainerEnter });
-    // response = { direction }
   }
 
   function handleContainerExit(response) {
