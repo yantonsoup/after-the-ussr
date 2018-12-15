@@ -8,6 +8,7 @@ function firstAnimation() {
 
   var translateX = -Math.floor(width * 0.7);
   var translateY = -Math.floor(height * 0.4);
+  
   console.warn("firstAnimation translateX", translateX);
   console.warn("first animation translateY", translateY);
 

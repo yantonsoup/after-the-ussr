@@ -211,82 +211,40 @@
     secondAnimation
   };
 
-  function update() {
-    window.onbeforeunload = function () {
-      window.scrollTo(0, 0);
-    }; // initialize the scrollama
-
-
-    var scroller = scrollama(); // Setup sizes for the graphic and steps
-
-    var container = d3.select(".scroll");
-    var graphic = container.select(".scroll__graphic");
-    var text = container.select(".scroll__text");
-    var bodyWidth = d3.select("body").node().offsetWidth;
-    var textWidth = text.node().offsetWidth;
-    const graphicContainer = d3.select(".scroll");
-    const boundingBox = graphicContainer.node().getBoundingClientRect();
-    const {
-      width,
-      height
-    } = boundingBox;
-    var step = text.selectAll(".step");
-    var stepHeight = Math.floor(window.innerHeight * 0.75);
-    var graphicMargin = 16 * 4; // 64px
-
-    var graphicWidth = container.node().offsetWidth - graphicMargin;
-    const graphicHeight = graphicWidth; // var graphicHeight = Math.floor(window.innerHeight / 2.4);
-
-    console.warn('graphicHeight', {
-      graphicHeight
+  function setupStickyfill() {
+    d3.selectAll(".sticky").each(function () {
+      Stickyfill.add(this);
     });
-    console.warn('height', {
-      height
-    });
-    console.warn('width', {
-      width
-    });
-    var graphicMarginTop = Math.floor(window.innerHeight * 0.25); // graphicMargin / 2;
+  }
 
-    step.style("height", window.innerHeight + "px");
-    graphic.style("width", width + "px").style("height", width + "px").style("top", graphicMarginTop + "px"); // -----------------------------------
-
-    console.warn({
-      graphicHeight
-    });
-    console.warn({
-      graphicWidth
-    });
-    console.warn({
-      stepHeight
-    });
-    console.warn("container.node().offsetHeight", container.node().offsetHeight);
-    d3.select(".header-container").style("height", 850 + "px");
-    d3.select(".ussr-svg-container").style("width", graphicWidth + "px");
-    d3.select(".intro-block").style("width", graphicWidth + "px");
-    d3.select(".name-block").style("width", graphicWidth + "px");
-    d3.select(".ussr-svg").style("height", 200 + "px");
-    d3.select(".ussr-svg").style("width", 200 + "px"); // Animations
-    // response = { element, direction, index }
+  function setupScrollama() {
+    const scroller = scrollama(); // response = { element, direction, index }
 
     function handleStepEnter(response) {
       console.warn("handleStepEnter, response", {
         response
       });
 
-      if (response.index === 0) {
-        console.warn("FIRST STEP!");
-        animations.firstAnimation();
+      switch (response.index) {
+        case 0:
+          animations.firstAnimation();
+          break;
+
+        case 1:
+          animations.secondAnimation(countries);
+          break;
+
+        default:
+          break;
       }
 
       if (response.index === 1) {
         animations.secondAnimation(countries);
       } // add color to current step only
+      // step.classed("is-active", function(d, i) {
+      //   return i === response.index;
+      // });
 
-
-      step.classed("is-active", function (d, i) {
-        return i === response.index;
-      });
     }
 
     function handleContainerEnter(response) {
@@ -300,12 +258,6 @@
       console.warn({
         handleContainerExit
       }); // response = { direction }
-    }
-
-    function setupStickyfill() {
-      d3.selectAll(".sticky").each(function () {
-        Stickyfill.add(this);
-      });
     }
 
     function init() {
@@ -333,10 +285,52 @@
     });
   }
 
+  function firstPaint() {
+    // Setup sizes for the graphic and steps
+    var container = d3.select(".scroll");
+    const boundingBox = container.node().getBoundingClientRect();
+    const {
+      width,
+      height
+    } = boundingBox;
+    var text = container.select(".scroll__text");
+    var textWidth = text.node().offsetWidth;
+    var step = text.selectAll(".step");
+    var stepHeight = Math.floor(window.innerHeight * 1);
+    step.style("height", stepHeight + "px"); // var graphicMargin = 16 * 4; // 64px
+
+    var graphicMarginTop = Math.floor(window.innerHeight * 0.25);
+    var graphic = container.select(".scroll__graphic");
+    console.warn('graphic width, height', graphic.node().offsetWidth);
+    graphic.style("width", width + "px").style("height", width + "px").style("top", graphicMarginTop + "px"); // -----------------------------------
+
+    console.warn({
+      textWidth
+    });
+    console.warn('height', {
+      height
+    });
+    console.warn('width', {
+      width
+    });
+    d3.select(".header-container").style("height", 850 + "px");
+    d3.select(".ussr-svg-container").style("width", textWidth + "px");
+    d3.select(".intro-block").style("width", textWidth + "px");
+    d3.select(".name-block").style("width", textWidth + "px");
+    d3.select(".ussr-svg").style("height", 200 + "px");
+    d3.select(".ussr-svg").style("width", 200 + "px");
+  }
+
   // logs will still point to your original source modules
 
   console.log('if you have sourcemaps enabled in your devtools, click on main.js:5 -->');
-  update();
+
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  };
+
+  firstPaint();
+  setupScrollama();
 
 }());
 //# sourceMappingURL=bundle.js.map
