@@ -3,7 +3,7 @@ import scrollama from "scrollama";
 
 import animations from "./animations";
 
-export default function setupScrollama(countries) {
+export default function setupScrollama({countries, path}) {
   const scroller = scrollama();
 
   // response = { element, direction, index }
@@ -15,7 +15,7 @@ export default function setupScrollama(countries) {
         animations.firstAnimation();
         break;
       case 1:
-        animations.secondAnimation(countries);
+        animations.secondAnimation({countries, path});
         break;
       default:
         break;

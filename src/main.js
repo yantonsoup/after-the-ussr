@@ -16,6 +16,8 @@ loadMap().then(json => {
   const countries = topojson.feature(json, json.objects.subunits)
   .features;
   console.warn({ countries });
-  paintMap(countries);
-  setupScrollama(countries);
+  const { path, projection } = paintMap(countries);
+  console.warn('main.js path', { path });
+
+  setupScrollama({countries, path});
 });

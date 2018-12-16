@@ -1539,7 +1539,10 @@
     });
   }
 
-  function secondAnimation(countries) {
+  function secondAnimation({
+    countries,
+    path
+  }) {
     const mapContainer = d3.select(".scroll__graphic");
     const boundingBox = mapContainer.node().getBoundingClientRect();
     const {
@@ -1597,7 +1600,10 @@
     secondAnimation
   };
 
-  function setupScrollama(countries) {
+  function setupScrollama({
+    countries,
+    path
+  }) {
     const scroller = scrollama(); // response = { element, direction, index }
 
     function handleStepEnter(response) {
@@ -1611,7 +1617,10 @@
           break;
 
         case 1:
-          animations.secondAnimation(countries);
+          animations.secondAnimation({
+            countries,
+            path
+          });
           break;
 
         default:
@@ -1639,7 +1648,7 @@
   // window.addEventListener("resize", handleResize);
 
   function firstPaint() {
-    // Setup sizes for the graphic and steps
+
     var container = d3.select(".scroll");
     const boundingBox = container.node().getBoundingClientRect();
     const {
@@ -1653,17 +1662,23 @@
     step.style("height", stepHeight + "px"); // var graphicMargin = 16 * 4; // 64px
 
     var graphicMarginTop = Math.floor(window.innerHeight * 0.25);
-    var graphic = container.select(".scroll__graphic");
-    console.warn('graphic width, height', graphic.node().offsetWidth);
-    graphic.style("width", width + "px").style("height", width + "px").style("top", graphicMarginTop + "px"); // -----------------------------------
+    var graphic = container.select(".scroll__graphic"); // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
 
-    console.warn({
-      textWidth
+    graphic.style("width", width + "px").style("height", width + "px").style("top", graphicMarginTop + "px");
+    console.warn('firstPaint graphicMarginTop', {
+      graphicMarginTop
     });
-    console.warn('height', {
+    console.warn('firstPaint height', {
+      stepHeight
+    }); // -----------------------------------
+
+    console.warn('firstPaint height', {
       height
     });
-    console.warn('width', {
+    console.warn('firstPaint width', {
+      width
+    });
+    console.warn('firstPaint textWidth', {
       width
     });
     d3.select(".header-container").style("height", 850 + "px");
@@ -1683,10 +1698,14 @@
     });
   }
 
-  var mercatorBounds = function (projection, maxlat) {
-    var yaw = projection.rotate()[0],
-        xymax = projection([-yaw + 180 - 1e-6, -maxlat]),
-        xymin = projection([-yaw - 180 + 1e-6, maxlat]);
+  const rotate = -20; // so that [-60, 0] becomes initial center of projection
+
+  const maxlat = 83;
+
+  var mercatorBounds = function (projection) {
+    const yaw = projection.rotate()[0];
+    const xymax = projection([-yaw + 180 - 1e-6, -maxlat]);
+    const xymin = projection([-yaw - 180 + 1e-6, maxlat]);
     return [xymin, xymax];
   };
 
@@ -1697,17 +1716,14 @@
       height,
       width
     } = boundingBox;
-    var rotate = -20; // so that [-60, 0] becomes initial center of projection
-
-    var maxlat = 83;
-    var projection = d3.geo.mercator().rotate([rotate, 0]).scale(1) // we'll scale up to match viewport shortly.
+    const projection = d3.geo.mercator().rotate([rotate, 0]).scale(1) // we'll scale up to match viewport shortly.
     .translate([width / 2, height / 2]); // .center([0, 25])
 
-    var b = mercatorBounds(projection, maxlat);
-    var s = width / (b[1][0] - b[0][0]);
-    var scaleExtent = [s, 10 * s];
+    const b = mercatorBounds(projection);
+    const s = width / (b[1][0] - b[0][0]);
+    const scaleExtent = [s, 10 * s];
     projection.scale(scaleExtent[0]);
-    var path = d3.geo.path().projection(projection);
+    const path = d3.geo.path().projection(projection);
     const svg = d3.select(".scroll__graphic").append("svg").attr("width", width).attr("height", height);
     const map = svg.append("g").attr("id", "map");
     map.selectAll("path").data(countries).enter().append("path").attr("d", path).style("stroke-width", 0.5 + "px").attr("class", "country").attr("id", function (d, i) {
@@ -1719,6 +1735,10 @@
         return "country non-soviet-country";
       }
     });
+    return {
+      path,
+      projection
+    };
   }
 
   // logs will still point to your original source modules
@@ -1735,8 +1755,17 @@
     console.warn({
       countries
     });
-    paintMap(countries);
-    setupScrollama(countries);
+    const {
+      path,
+      projection
+    } = paintMap(countries);
+    console.warn('main.js path', {
+      path
+    });
+    setupScrollama({
+      countries,
+      path
+    });
   });
 
 }());

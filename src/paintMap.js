@@ -1,9 +1,12 @@
 import { sovietCountryIsoCodes, colors, sovietLabelShift } from "./constants";
 
-var mercatorBounds = function(projection, maxlat) {
-  var yaw = projection.rotate()[0],
-    xymax = projection([-yaw + 180 - 1e-6, -maxlat]),
-    xymin = projection([-yaw - 180 + 1e-6, maxlat]);
+const rotate = -20; // so that [-60, 0] becomes initial center of projection
+const maxlat = 83;
+
+var mercatorBounds = function(projection) {
+  const yaw = projection.rotate()[0];
+  const xymax = projection([-yaw + 180 - 1e-6, -maxlat]);
+  const xymin = projection([-yaw - 180 + 1e-6, maxlat]);
 
   return [xymin, xymax];
 };
@@ -13,22 +16,19 @@ export default function paintMap(countries) {
   const boundingBox = mapContainer.node().getBoundingClientRect();
   const { height, width } = boundingBox;
 
-  var rotate = -20; // so that [-60, 0] becomes initial center of projection
-  var maxlat = 83;
-
-  var projection = d3.geo
+  const projection = d3.geo
     .mercator()
     .rotate([rotate, 0])
     .scale(1) // we'll scale up to match viewport shortly.
     .translate([width / 2, height / 2]);
   // .center([0, 25])
-  var b = mercatorBounds(projection, maxlat);
-  var s = width / (b[1][0] - b[0][0]);
-  var scaleExtent = [s, 10 * s];
+  const b = mercatorBounds(projection);
+  const s = width / (b[1][0] - b[0][0]);
+  const scaleExtent = [s, 10 * s];
 
   projection.scale(scaleExtent[0]);
 
-  var path = d3.geo.path().projection(projection);
+  const path = d3.geo.path().projection(projection);
 
   const svg = d3
     .select(".scroll__graphic")
@@ -56,4 +56,6 @@ export default function paintMap(countries) {
         return "country non-soviet-country";
       }
     });
+
+    return { path, projection };
 }
