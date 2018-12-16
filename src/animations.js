@@ -58,7 +58,7 @@ function firstAnimation() {
     });
 }
 
-function secondAnimation({countries, path}) {
+function secondAnimation({countries, path, map}) {
   const mapContainer = d3.select(".scroll__graphic");
   const boundingBox = mapContainer.node().getBoundingClientRect();
   const { width, height } = boundingBox;
@@ -100,7 +100,7 @@ function secondAnimation({countries, path}) {
     .duration(500)
     .style("opacity", "0.1");
 
-  d3.selectAll(".place-label")
+  d3.select("#map").selectAll(".place-label")
     .data(countries)
     .enter()
     .append("text")
@@ -115,19 +115,15 @@ function secondAnimation({countries, path}) {
       if (sovietCountryIsoCodes.includes(id)) {
         const { x } = sovietLabelShift[id];
         console.warn(x);
-        // can get centroid easily like this!  path.centroid(d)
         return `${x}px`;
       }
-      return;
     })
     .attr("dy", function(d) {
       if (sovietCountryIsoCodes.includes(d.id)) {
         const name = d.id;
         const { y } = sovietLabelShift[name];
-        // can get centroid easily like this!  path.centroid(d)
         return `${y}px`;
       }
-      return;
     })
     // .style("z-index", '100')
     .text(function(d) {
@@ -135,8 +131,6 @@ function secondAnimation({countries, path}) {
         console.warn("soviet datapoint", d);
         return d.properties.name;
       }
-
-      return;
     })
     .style("font-size", 3 + "px");
 }

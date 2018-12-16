@@ -57,5 +57,5 @@ export default function paintMap(countries) {
       }
     });
 
-    return { path, projection };
+    return { path, map, projection };
 }
