@@ -108,6 +108,7 @@ function secondAnimation({countries, path}) {
     .attr("transform", function(d) {
       // can get centroid easily like this!  path.centroid(d)
       const [x, y] = path.centroid(d);
+      console.warn('centroid', 'x', x, 'y', y)
       return `translate(${x},${y})`;
     })
     .attr("dx", function({ id }) {

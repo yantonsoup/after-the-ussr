@@ -1559,6 +1559,7 @@
     d3.selectAll(".place-label").data(countries).enter().append("text").attr("class", "place-label").attr("transform", function (d) {
       // can get centroid easily like this!  path.centroid(d)
       const [x, y] = path.centroid(d);
+      console.warn('centroid', 'x', x, 'y', y);
       return `translate(${x},${y})`;
     }).attr("dx", function ({
       id
@@ -1668,7 +1669,7 @@
     console.warn('firstPaint graphicMarginTop', {
       graphicMarginTop
     });
-    console.warn('firstPaint height', {
+    console.warn('firstPaint stepHeight', {
       stepHeight
     }); // -----------------------------------
 

@@ -27,7 +27,7 @@ export default function firstPaint () {
     .style("top", graphicMarginTop + "px");
 
     console.warn('firstPaint graphicMarginTop',{ graphicMarginTop });
-    console.warn('firstPaint height',{ stepHeight });
+    console.warn('firstPaint stepHeight',{ stepHeight });
 
   // -----------------------------------
   console.warn('firstPaint height',{ height });
