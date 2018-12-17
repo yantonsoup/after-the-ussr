@@ -114,7 +114,6 @@ function secondAnimation({countries, path, map}) {
     .attr("dx", function({ id }) {
       if (sovietCountryIsoCodes.includes(id)) {
         const { x } = sovietLabelShift[id];
-        console.warn(x);
         return `${x}px`;
       }
     })
