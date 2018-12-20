@@ -37,7 +37,7 @@ export default function firstPaint () {
 
 
   // Use this to set the distance ofo the first step
-  d3.select(".header-container").style("height", 1600 + "px");
+  d3.select(".header-container").style("height", 1700 + "px");
 
   d3.select(".ussr-svg-container").style("width", textWidth + "px");
   d3.select(".intro-block").style("width", textWidth + "px");
