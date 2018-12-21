@@ -1,5 +1,15 @@
 import { sovietCountryIsoCodes, colors, sovietLabelShift } from "./constants";
 
+function zeroAnimation() {
+
+  d3.selectAll(".soviet-country")
+    .transition()
+    .duration(1000)
+    .style("fill", "#fd8d3c")
+    .style("stroke-width", 0.5 + "px");
+
+}
+
 function firstAnimation() {
   var scale = 2;
   const mapContainer = d3.select(".scroll__graphic");
@@ -36,12 +46,6 @@ function firstAnimation() {
         translateY +
         ")"
     );
-
-  // d3.selectAll(".soviet-country")
-  //   .transition()
-  //   .duration(100)
-  //   .style("fill", "#a63603")
-  //   .style("stroke-width", 0.5 + "px");
 
   d3.selectAll(".non-soviet-country")
     .transition()
@@ -135,6 +139,7 @@ function secondAnimation({countries, path, map}) {
 }
 
 export default {
+  zeroAnimation,
   firstAnimation,
-  secondAnimation
+  secondAnimation,
 };

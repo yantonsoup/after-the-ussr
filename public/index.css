@@ -174,7 +174,7 @@ a:hover {
 .intro-paragraph {
   text-align: left;
   margin: 0.5rem 2rem;
-  height: 100px;
+  /* height: 100px; */
 }
 /* background-color: lightgoldenrodyellow;
 border: 1px solid #333;
