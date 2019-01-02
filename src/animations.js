@@ -4,7 +4,7 @@ function zeroAnimation() {
 
   d3.selectAll(".soviet-country")
     .transition()
-    .duration(1000)
+    .duration(100)
     .style("fill", "#fd8d3c")
     .style("stroke-width", 0.5 + "px");
 
@@ -29,23 +29,7 @@ function firstAnimation() {
   console.warn({ translateX });
   console.warn({ translateY });
 
-  d3.select("#map")
-    .transition()
-    .duration(1000)
-    .attr(
-      "transform",
-      "translate(" +
-        width / 2 +
-        "," +
-        height / 2 +
-        ")scale(" +
-        scale +
-        ")translate(" +
-        translateX +
-        "," +
-        translateY +
-        ")"
-    );
+
 
   d3.selectAll(".non-soviet-country")
     .transition()
