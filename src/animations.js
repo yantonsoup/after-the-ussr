@@ -12,27 +12,24 @@ function animateSectionProperty(section, animationProperties) {
       duration
     } = animationProperties
 
-    `translate(${width / 2 },${height / 2 })`
+    d3.select(section)
+    .transition()
+    .duration(duration)
+    .attr(
+      property,
+      value
+    );
+
+    
     switch (property) {
       case 'transform':
         d3.select(section)
           .transition()
-          .duration(1000)
+          .duration(duration)
           .attr(
             property,
-            "translate(" +
-              width / 2 +
-              "," +
-              height / 2 +
-              ")scale(" +
-              scale +
-              ")translate(" +
-              translateX +
-              "," +
-              translateY +
-              ")"
+            `translate(${width/2},${height/2})scale(${scale})translate(${translateX},${translateY})`
           );
-      
       break;
       case 'stroke-width':
         animations.firstAnimation({countries, path, map});
@@ -51,14 +48,6 @@ function animateSectionProperty(section, animationProperties) {
 }
 
 function zeroAnimation() {
-  console.warn('-----------------zeroAnimation');
-  // d3.selectAll(".soviet-country")
-  //   .transition()
-  //   .duration(100)
-  //   .style("fill", "#fd8d3c")
-  //   .style("stroke-width", 0.5 + "px");
-
-
     d3.selectAll(".non-soviet-country")
     .transition()
     .duration(1000)
@@ -83,30 +72,9 @@ function firstAnimation({countries, path, map}) {
     .duration(1000)
     .attr(
       "transform",
-      "translate(" +
-        width / 2 +
-        "," +
-        height / 2 +
-        ")scale(" +
-        scale +
-        ")translate(" +
-        translateX +
-        "," +
-        translateY +
-        ")"
+      `translate(${width/2},${height/2})scale(${scale})translate(${translateX},${translateY})`
     );
 
-  d3.selectAll(".non-soviet-country")
-    .transition()
-    .duration(500)
-    .style("stroke-width", 0.175 + "px");
-
-  console.warn({ scale });
-  console.warn({ width });
-  console.warn({ height });
-
-  console.warn({ translateX });
-  console.warn({ translateY });
 
   d3.select("#map").selectAll(".place-label")
     .data(countries)
@@ -116,7 +84,7 @@ function firstAnimation({countries, path, map}) {
     .attr("transform", function(d) {
       // can get centroid easily like this!  path.centroid(d)
       const [x, y] = path.centroid(d);
-      console.warn('centroid', 'x', x, 'y', y)
+      // console.warn('centroid', 'x', x, 'y', y)
       return `translate(${x},${y})`;
     })
     .attr("dx", function({ id }) {
@@ -141,14 +109,10 @@ function firstAnimation({countries, path, map}) {
     })
     .style("font-size", 3 + "px");
 
-
- 
   d3.selectAll(".non-soviet-country")
     .transition()
-    .duration(100)
-    .style("opacity", "0.5")
-    .style("stroke-width", 0.25 + "px");
-
+    .duration(500)
+    .style("stroke-width", 0.175 + "px");
 
   d3.selectAll(".soviet-country")
     .transition()
