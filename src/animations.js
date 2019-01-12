@@ -1,14 +1,63 @@
 import { sovietCountryIsoCodes, colors, sovietLabelShift } from "./constants";
 
-function zeroAnimation() {
+function animateSectionProperty(section, animationProperties) {
+    const { 
+      property, 
+      value, 
+      width, 
+      height, 
+      translateX, 
+      translateY, 
+      scale, 
+      duration
+    } = animationProperties
 
+    `translate(${width / 2 },${height / 2 })`
+    switch (property) {
+      case 'transform':
+        d3.select(section)
+          .transition()
+          .duration(1000)
+          .attr(
+            property,
+            "translate(" +
+              width / 2 +
+              "," +
+              height / 2 +
+              ")scale(" +
+              scale +
+              ")translate(" +
+              translateX +
+              "," +
+              translateY +
+              ")"
+          );
+      
+      break;
+      case 'stroke-width':
+        animations.firstAnimation({countries, path, map});
+        break;
+      case 2:
+        animations.secondAnimation({countries, path, map});
+        break;
+        case 2:
+        animations.thirdAnimation({countries, path, map});
+        break;
+
+      default:
+        break;
+    }
+
+}
+
+function zeroAnimation() {
+  console.warn('-----------------zeroAnimation');
   // d3.selectAll(".soviet-country")
   //   .transition()
   //   .duration(100)
   //   .style("fill", "#fd8d3c")
   //   .style("stroke-width", 0.5 + "px");
 
-  
 
     d3.selectAll(".non-soviet-country")
     .transition()
@@ -17,46 +66,13 @@ function zeroAnimation() {
     .style("stroke-width", 0.25 + "px");
 }
 
-function firstAnimation() {
+function firstAnimation({countries, path, map}) {
+  console.warn('-----------------firstAnimation');
+
   var scale = 2;
   const mapContainer = d3.select(".scroll__graphic");
   const boundingBox = mapContainer.node().getBoundingClientRect();
   const { height, width } = boundingBox;
-
-  var translateX = -Math.floor(width * 0.7);
-  var translateY = -Math.floor(height * 0.4);
-
-  console.warn("firstAnimation translateX", translateX);
-  console.warn("first animation translateY", translateY);
-
-  console.warn({ scale });
-  console.warn({ width });
-  console.warn({ height });
-
-  console.warn({ translateX });
-  console.warn({ translateY });
-
-
-
-  d3.selectAll(".non-soviet-country")
-    .transition()
-    .duration(100)
-    .style("opacity", "0.5")
-    .style("stroke-width", 0.25 + "px");
-
-  d3.selectAll(".soviet-country")
-    .transition()
-    .duration(1000)
-    .style("fill", function(d, i) {
-      // console.warn('i', i)
-      return colors[i];
-    });
-}
-
-function secondAnimation({countries, path, map}) {
-  const mapContainer = d3.select(".scroll__graphic");
-  const boundingBox = mapContainer.node().getBoundingClientRect();
-  const { width, height } = boundingBox;
 
   var scale = 4;
   var translateX = -Math.floor(width * 0.6);
@@ -85,15 +101,12 @@ function secondAnimation({countries, path, map}) {
     .duration(500)
     .style("stroke-width", 0.175 + "px");
 
-  d3.selectAll(".soviet-country")
-    .transition()
-    .duration(500)
-    .style("stroke-width", 0.25 + "px");
+  console.warn({ scale });
+  console.warn({ width });
+  console.warn({ height });
 
-  d3.selectAll(".non-soviet-country")
-    .transition()
-    .duration(500)
-    .style("opacity", "0.1");
+  console.warn({ translateX });
+  console.warn({ translateY });
 
   d3.select("#map").selectAll(".place-label")
     .data(countries)
@@ -127,7 +140,36 @@ function secondAnimation({countries, path, map}) {
       }
     })
     .style("font-size", 3 + "px");
+
+
+ 
+  d3.selectAll(".non-soviet-country")
+    .transition()
+    .duration(100)
+    .style("opacity", "0.5")
+    .style("stroke-width", 0.25 + "px");
+
+
+  d3.selectAll(".soviet-country")
+    .transition()
+    .duration(1000)
+    .style("fill", function(d, i) {
+      // console.warn('i', i)
+      return colors[i];
+    })
+    .style("stroke-width", 0.25 + "px");
+  
+  
 }
+
+function secondAnimation({countries, path, map}) {
+
+  d3.selectAll(".non-soviet-country")
+    .transition()
+    .duration(500)
+    .style("opacity", "0.1");
+}
+
 
 export default {
   zeroAnimation,
