@@ -2,12 +2,19 @@ import { sovietCountryIsoCodes, colors, sovietLabelShift } from "./constants";
 
 function zeroAnimation() {
 
-  d3.selectAll(".soviet-country")
-    .transition()
-    .duration(100)
-    .style("fill", "#fd8d3c")
-    .style("stroke-width", 0.5 + "px");
+  // d3.selectAll(".soviet-country")
+  //   .transition()
+  //   .duration(100)
+  //   .style("fill", "#fd8d3c")
+  //   .style("stroke-width", 0.5 + "px");
 
+  
+
+    d3.selectAll(".non-soviet-country")
+    .transition()
+    .duration(1000)
+    .style("opacity", "0.5")
+    .style("stroke-width", 0.25 + "px");
 }
 
 function firstAnimation() {
