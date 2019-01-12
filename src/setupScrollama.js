@@ -12,11 +12,18 @@ export default function setupScrollama({countries, path, map}) {
 
     switch (response.index) {
       case 0:
-        animations.firstAnimation();
-        break;
+        animations.zeroAnimation({countries, path, map});
+      break;
       case 1:
+        animations.firstAnimation({countries, path, map});
+        break;
+      case 2:
         animations.secondAnimation({countries, path, map});
         break;
+        case 2:
+        animations.thirdAnimation({countries, path, map});
+        break;
+
       default:
         break;
     }
