@@ -20,7 +20,7 @@ export default function setupScrollama({countries, path, map}) {
       case 2:
         animations.secondAnimation({countries, path, map});
         break;
-        case 2:
+      case 3:
         animations.thirdAnimation({countries, path, map});
         break;
 

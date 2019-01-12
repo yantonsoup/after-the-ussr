@@ -282,18 +282,7 @@ font-size: 1rem; */
   stroke: #2a2c39; /* country border colour */
   stroke-width: 1; /* country border width */
 }
-.country-on {
-  fill: #4b5358; /* highlight colour for selected country */
-}
-.countryLabel {
-  display: none; /* hide all country labels by default */
-}
-.countryName {
-  fill: #fffaff; /* country label text colour */
-}
-.countryLabelBg {
-  fill: #30bced; /* country label background colour */
-}
+
 
 .opacity-fade-out {
   animation-name: opacity-fade;
@@ -309,28 +298,4 @@ font-size: 1rem; */
     opacity: 0;
   }
 }
-
-.subunit.SCT {
-  fill: #ddc;
-}
-
-.subunit-boundary {
-  fill: none;
-  stroke: #777;
-  stroke-dasharray: 2, 2;
-  stroke-linejoin: round;
-}
-
-.subunit-boundary.IRL {
-  stroke: #aaa;
-}
-
-.subunit-label {
-  fill: #777;
-  fill-opacity: 0.5;
-  font-size: 20px;
-  font-weight: 300;
-  text-anchor: middle;
-}
-
 
