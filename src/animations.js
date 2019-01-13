@@ -121,8 +121,51 @@ function firstAnimation({ countries, path, map }) {
     .style("stroke-width", 0.25 + "px");
 }
 
-function secondAnimation({ countries, path, map }) {
+function secondAnimation({ projection, countries, path, map }) {
   console.warn("-----------------secondAnimation");
+  const nextprojection = d3.geo.albers().scale(145).parallels([20, 50])
+  var container = d3.select(".scroll");
+
+  const projection0 = projection
+
+  const boundingBox = container.node().getBoundingClientRect();
+  const { width, height } = boundingBox;
+
+  function projectionTween(projection0, projection1) {
+    return function(d) {
+      console.warn('tween d', d)
+      var t = 0;
+    
+      function project(λ, φ) {
+        λ *= 180 / Math.PI, φ *= 180 / Math.PI;
+        var p0 = projection0([λ, φ])
+        var p1 = projection1([λ, φ]);
+        return [(1 - t) * p0[0] + t * p1[0], (1 - t) * -p0[1] + t * -p1[1]];
+      }
+      
+      var projection = d3.geo.projection(project)
+          .scale(1)
+          .translate([width / 2, height / 2]);
+  
+      var path = d3.geo.path()
+          .projection(projection);
+  
+  
+  
+      return function(_) {
+        t = _;
+        return path(d);
+      };
+    };
+  }
+
+  d3.select(".scroll__graphic")
+  .selectAll('svg')
+  .selectAll('path')
+  .transition()
+  .duration(750)
+  .attrTween("d", projectionTween(projection0, nextprojection));
+
 }
 
 function thirdAnimation({ countries, path, map }) {
