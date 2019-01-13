@@ -133,13 +133,13 @@ function thirdAnimation({ countries, path, map }) {
     .duration(500)
     .style("opacity", "0");
 
-  d3.selectAll(".scroll__graphic")
-    .transition()
-    .duration(2500)
-    .attr(
-      "transform",
-      `translate(0,0)scale(0)translate(0,1000)`
-    );
+    // var graphicMargin = 16 * 4; // 64px
+    var graphicMarginTop = Math.floor(window.innerHeight * 0.05);
+    // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
+    d3.select(".scroll__graphic")
+      .transition()
+      .duration(1000)
+      .style("top", graphicMarginTop + "px");
 }
 
 export default {
