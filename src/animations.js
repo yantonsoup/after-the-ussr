@@ -140,6 +140,15 @@ function thirdAnimation({ countries, path, map }) {
       .transition()
       .duration(1000)
       .style("top", graphicMarginTop + "px");
+
+    d3.selectAll(".data-bar")
+      .transition()
+      .duration(5000)//time in ms
+      .attr("width", function(d){
+          return 450;
+      });//now, the final value
+
+    
 }
 
 export default {

@@ -227,7 +227,21 @@ font-size: 1rem; */
   z-index: 5;
 }
 
-.sticky_break {
+.data__graphic {
+  position: -webkit-sticky;
+  /* margin-top: 320px; */
+  opacity: 1;
+  position: sticky;
+  right: 2rem;
+  z-index: 15;
+  top: 400px;
+  height: 300px;
+  background-color: transparent;
+  margin: 0 2rem;
+}
+
+.data-bar-container {
+  height: 20px;
 }
 
 .scroll__graphic p {
@@ -282,27 +296,3 @@ font-size: 1rem; */
   stroke: #2a2c39; /* country border colour */
   stroke-width: 1; /* country border width */
 }
-
-.top-lower {
-  top: '100px'
-}
-
-.top-fade-up {
-  /* transform: translateY("-500px") */
-  margin-top: "-100px";
-  /* position: sticky;
-  top: 0;
-  animation-name: top-transition;
-  animation-duration: 1.5s;
-  animation-iteration-count: 1; */
-}
-
-@keyframes top-transition {
-  0% {
-    top: "0px";
-  }
-  100% {
-    top: "100px";
-  }
-}
-
