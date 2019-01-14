@@ -51,7 +51,7 @@ function zeroAnimation() {
     .style("stroke-width", 0.25 + "px");
 }
 
-function firstAnimation({ countries, path, map }) {
+function firstAnimation({ projection, countries, path, map }) {
   console.warn("-----------------firstAnimation");
 
   var scale = 2;
@@ -124,6 +124,21 @@ function firstAnimation({ countries, path, map }) {
     .transition()
     .duration(500)
     .style("opacity", "0");
+
+  console.warn('APPENDING A DT',   d3.select('#countryRUS'))
+  d3.select('#countryRUS')
+  .append('circle')
+  .attr("cx", function (d) { 
+    const [x, y] = path.centroid(d);
+    return x
+   })
+		.attr("cy", function (d) { 
+      const [x, y] = path.centroid(d);
+      return y
+     })
+		.attr("r", "8px")
+		.attr("fill", "black")
+
 }
 
 function secondAnimation({ projection, countries, path, map }) {
@@ -161,7 +176,7 @@ function thirdAnimation({ countries, path, map }) {
     .style("opacity", "0");
 
     // var graphicMargin = 16 * 4; // 64px
-    var graphicMarginTop = Math.floor(window.innerHeight * 0.01);
+    var graphicMarginTop = Math.floor(window.innerHeight * 0.05);
     // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
     d3.select(".scroll__graphic")
       .transition()

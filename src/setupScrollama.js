@@ -15,7 +15,7 @@ export default function setupScrollama({countries, path, map, projection}) {
         animations.zeroAnimation({countries, path, map});
       break;
       case 1:
-        animations.firstAnimation({countries, path, map});
+        animations.firstAnimation({projection, countries, path, map});
         break;
       case 2:
         animations.secondAnimation({projection, countries, path, map});
