@@ -52,7 +52,10 @@ export default function paintMap(countries) {
     .attr("class", function(datapoint, i) {
       if (sovietCountryIsoCodes.includes(datapoint.id)) {
         return "country soviet-country";
-      } else {
+      } else if (datapoint.id === 'ATA') {
+        return "transparent-ATA"
+      }
+      else {
         return "country non-soviet-country";
       }
     });

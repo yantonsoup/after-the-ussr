@@ -244,6 +244,10 @@ font-size: 1rem; */
   height: 20px;
 }
 
+.transparent-ATA {
+  fill: transparent;
+}
+
 .scroll__graphic p {
   text-align: center;
   padding: 1rem;
