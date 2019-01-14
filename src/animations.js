@@ -60,7 +60,7 @@ function firstAnimation({ countries, path, map }) {
   const { height, width } = boundingBox;
 
   var scale = 4;
-  var translateX = -Math.floor(width * 0.6);
+  var translateX = -Math.floor(width * 0.585);
   var translateY = -Math.floor(height * 0.33);
 
   d3.select("#map")
@@ -104,7 +104,7 @@ function firstAnimation({ countries, path, map }) {
         return d.properties.name;
       }
     })
-    .style("font-size", 3 + "px");
+    .style("font-size", 4 + "px");
 
   d3.selectAll(".non-soviet-country")
     .transition()
@@ -119,52 +119,36 @@ function firstAnimation({ countries, path, map }) {
       return colors[i];
     })
     .style("stroke-width", 0.25 + "px");
+
+   d3.selectAll(".non-soviet-country")
+    .transition()
+    .duration(500)
+    .style("opacity", "0");
 }
 
 function secondAnimation({ projection, countries, path, map }) {
   console.warn("-----------------secondAnimation");
   // const nextprojection = d3.geo.albers().scale(145).parallels([20, 50])
   // var container = d3.select(".scroll");
+  d3.selectAll(".non-soviet-country")
+    .transition()
+    .duration(500)
+    .style("opacity", "0");
 
-  // const projection0 = projection
+    // var graphicMargin = 16 * 4; // 64px
+    var graphicMarginTop = Math.floor(window.innerHeight * 0.05);
+    // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
+    d3.select(".scroll__graphic")
+      .transition()
+      .duration(1000)
+      .style("top", graphicMarginTop + "px");
 
-  // const boundingBox = container.node().getBoundingClientRect();
-  // const { width, height } = boundingBox;
-
-  // function projectionTween(projection0, projection1) {
-  //   return function(d) {
-  //     console.warn('tween d', d)
-  //     var t = 0;
-    
-  //     function project(λ, φ) {
-  //       λ *= 180 / Math.PI, φ *= 180 / Math.PI;
-  //       var p0 = projection0([λ, φ])
-  //       var p1 = projection1([λ, φ]);
-  //       return [(1 - t) * p0[0] + t * p1[0], (1 - t) * -p0[1] + t * -p1[1]];
-  //     }
-      
-  //     var projection = d3.geo.projection(project)
-  //         .scale(1)
-  //         .translate([width / 2, height / 2]);
-  
-  //     var path = d3.geo.path()
-  //         .projection(projection);
-  
-  
-  
-  //     return function(_) {
-  //       t = _;
-  //       return path(d);
-  //     };
-  //   };
-  // }
-
-  // d3.select(".scroll__graphic")
-  // .selectAll('svg')
-  // .selectAll('path')
-  // .transition()
-  // .duration(750)
-  // .attrTween("d", projectionTween(projection0, nextprojection));
+    d3.selectAll(".data-bar")
+      .transition()
+      .duration(5000)//time in ms
+      .attr("width", function(d){
+          return 450;
+      });//now, the final value
 
 }
 
