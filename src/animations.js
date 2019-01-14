@@ -104,7 +104,7 @@ function firstAnimation({ countries, path, map }) {
         return d.properties.name;
       }
     })
-    .style("font-size", 4 + "px");
+    .style("font-size", 3 + "px");
 
   d3.selectAll(".non-soviet-country")
     .transition()
@@ -161,7 +161,7 @@ function thirdAnimation({ countries, path, map }) {
     .style("opacity", "0");
 
     // var graphicMargin = 16 * 4; // 64px
-    var graphicMarginTop = Math.floor(window.innerHeight * 0.05);
+    var graphicMarginTop = Math.floor(window.innerHeight * 0.01);
     // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
     d3.select(".scroll__graphic")
       .transition()
@@ -172,7 +172,7 @@ function thirdAnimation({ countries, path, map }) {
       .transition()
       .duration(5000)//time in ms
       .attr("width", function(d){
-          return 450;
+          return 350;
       });//now, the final value
 
     

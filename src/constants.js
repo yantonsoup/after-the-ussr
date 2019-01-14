@@ -34,19 +34,19 @@ export const colors = [
 ];
 
 export const sovietLabelShift = {
-  ARM: { x: -18, y: 3 },
-  AZE: { x: -16, y: 8 },
+  ARM: { x: -16, y: 3 },
+  AZE: { x: -14, y: 7 },
   BLR: { x: -20, y: 2 },
   EST: { x: -13, y: -3 },
   GEO: { x: -18, y: 1 },
-  KAZ: { x: 14, y: 6 },
-  KGZ: { x: 5, y: 3 },
+  KAZ: { x: 13, y:15 },
+  KGZ: { x: 1, y: 10 },
   LVA: { x: -15, y: -2 },
-  LTU: { x: -20, y: 0 },
+  LTU: { x: -18, y: 0 },
   MDA: { x: -18, y: 2 },
   RUS: { x: -40, y: 10 },
-  TJK: { x: -4, y: 6 },
-  TKM: { x: -20, y: 12 },
+  TJK: { x: -6, y: 10 },
+  TKM: { x: -20, y: 10 },
   UKR: { x: -23, y: 0 },
-  UZB: { x: -12, y: 10 }
+  UZB: { x: -12, y: 18 }
 };
