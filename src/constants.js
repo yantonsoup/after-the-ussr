@@ -50,3 +50,21 @@ export const sovietLabelShift = {
   UKR: { x: -23, y: 0 },
   UZB: { x: -12, y: 18 }
 };
+
+// const populationsIn1991 = {
+//   ARM: 3.5 million,
+//   AZE: 7.271 million (1991),
+//   BLR: 10.19 million (1991)
+//   EST: 1.568 million (1991)
+//   GEO: 6.653 million (1991)
+//   KAZ: 16,450,000
+//   KGZ: 4.464 million (1991),
+//   LVA: 2.658 million (1991)
+//   LTU: 3.702 million (1991)
+//   MDA: 3.7 million,
+//   RUS: 148.6 million
+//   TJK: 5.4 million,
+//   TKM: 3.772 million,
+//   UKR: 52 million,
+//   UZB: 20,950,000
+// }
