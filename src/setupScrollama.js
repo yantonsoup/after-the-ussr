@@ -8,25 +8,9 @@ export default function setupScrollama({countries, path, map, projection}) {
 
   // response = { element, direction, index }
   function handleStepEnter(response) {
-    console.warn("handleStepEnter, response", { response });
-
-    switch (response.index) {
-      case 0:
-        animations.zeroAnimation({countries, path, map});
-      break;
-      case 1:
-        animations.firstAnimation({projection, countries, path, map});
-        break;
-      case 2:
-        animations.secondAnimation({projection, countries, path, map});
-        break;
-      case 3:
-        animations.thirdAnimation({countries, path, map});
-        break;
-
-      default:
-        break;
-    }
+    const animationIndex = response.index
+    const animationHandler = animations[animationIndex]
+    animationHandler({projection, countries, path, map})
   }
 
   function handleContainerEnter(response) {

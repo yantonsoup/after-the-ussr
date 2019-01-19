@@ -194,8 +194,8 @@ function thirdAnimation({ countries, path, map }) {
 }
 
 export default {
-  zeroAnimation,
-  firstAnimation,
-  secondAnimation,
-  thirdAnimation
+  0: zeroAnimation,
+  1: firstAnimation,
+  2: secondAnimation,
+  3: thirdAnimation
 };
