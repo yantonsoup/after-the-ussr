@@ -172,27 +172,17 @@ function secondAnimation({ projection, countries, path, map }) {
 
 function thirdAnimation({ countries, path, map }) {
   console.warn("-----------------thirdAnimation");
+
+  const text = d3.select(".scroll").select(".scroll__text");
+  const textWidth = text.node().offsetWidth;
+  console.warn({textWidth})
   const mapContainer = d3.select(".scroll__graphic");
   const boundingBox = mapContainer.node().getBoundingClientRect();
   const { height, width } = boundingBox;
 
-  d3.selectAll(".non-soviet-country")
-    .transition()
-    .duration(500)
-    .style("opacity", "0");
-
-  // var graphicMargin = 16 * 4; // 64px
-  var graphicMarginTop = Math.floor(window.innerHeight * 0.05);
-  // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
-  d3.select(".scroll__graphic")
-    .transition()
-    .duration(1000)
-    .style("top", graphicMarginTop + "px");
-
   const sortedPopulationData = populationsIn1991.sort(function(a, b) {
     return d3.ascending(a.population, b.population);
   });
-  console.warn({ sortedPopulationData });
 
   const barMargin = {
     top: 15,
@@ -201,14 +191,13 @@ function thirdAnimation({ countries, path, map }) {
     left: 60
   };
 
-  const barWidth = width - barMargin.left - barMargin.right;
-  const barHeight = height - barMargin.top - barMargin.bottom;
+  const barWidth = textWidth - barMargin.left - barMargin.right;
+  const barHeight = height- 100 - barMargin.top - barMargin.bottom;
   console.warn("last", d3.select("#bar-graphic").selectAll(".bar"));
 
   const barsHaveRendered =
     d3.select("#bar-graphic").selectAll(".bar")[0].length !== 0;
 
-  console.warn('ALReaDY rendered bars', barsHaveRendered)
   if (!barsHaveRendered) {
     var svg = d3
       .select("#bar-graphic")
