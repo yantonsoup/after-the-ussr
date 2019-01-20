@@ -21,7 +21,7 @@ export const colors = [
   "#fdbe85",
   "#fd8d3c",
   "#e6550d",
-  "#a63603",
+  "#dd6344",
   "#feedde",
   "#fdbe85",
   "#fd8d3c",
@@ -30,7 +30,7 @@ export const colors = [
   "#fdbe85",
   "#fd8d3c",
   "#e6550d",
-  "#a63603"
+  "#dd6344"
 ];
 
 export const sovietLabelShift = {

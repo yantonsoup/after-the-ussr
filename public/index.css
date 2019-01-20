@@ -240,6 +240,10 @@ font-size: 1rem; */
   margin: 0 2rem;
 }
 
+.bar-graphic-header {
+  opacity: 0;
+}
+
 .data-bar-container {
   height: 20px;
 }

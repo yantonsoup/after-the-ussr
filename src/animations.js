@@ -5,49 +5,6 @@ import {
   populationsIn1991
 } from "./constants";
 
-function animateSectionProperty(section, animationProperties) {
-  const {
-    property,
-    value,
-    width,
-    height,
-    translateX,
-    translateY,
-    scale,
-    duration
-  } = animationProperties;
-
-  d3.select(section)
-    .transition()
-    .duration(duration)
-    .attr(property, value);
-
-  switch (property) {
-    case "transform":
-      d3.select(section)
-        .transition()
-        .duration(duration)
-        .attr(
-          property,
-          `translate(${width / 2},${height /
-            2})scale(${scale})translate(${translateX},${translateY})`
-        );
-      break;
-    case "stroke-width":
-      animations.firstAnimation({ countries, path, map });
-      break;
-    case 2:
-      animations.secondAnimation({ countries, path, map });
-      break;
-    case 2:
-      animations.thirdAnimation({ countries, path, map });
-      break;
-
-    default:
-      break;
-  }
-}
-
 function zeroAnimation() {
   d3.selectAll(".non-soviet-country")
     .transition()
@@ -162,44 +119,31 @@ function secondAnimation({ projection, countries, path, map }) {
     .duration(1000)
     .style("top", graphicMarginTop + "px");
 
-  d3.selectAll(".data-bar")
-    .transition()
-    .duration(5000) //time in ms
-    .attr("width", function(d) {
-      return 450;
-    }); //now, the final value
-}
+    const text = d3.select(".scroll").select(".scroll__text");
+    const textWidth = text.node().offsetWidth;
+    console.warn({textWidth})
+    const mapContainer = d3.select(".scroll__graphic");
+    const boundingBox = mapContainer.node().getBoundingClientRect();
+    const { height, width } = boundingBox;
+  
+    const sortedPopulationData = populationsIn1991.sort(function(a, b) {
+      return d3.ascending(a.population, b.population);
+    });
+  
+    const barMargin = {
+      top: 15,
+      right: 75,
+      bottom: 40,
+      left: 60
+    };
+  
+    const barWidth = textWidth - barMargin.left - barMargin.right;
+    const barHeight = height- 100 - barMargin.top - barMargin.bottom;
+    console.warn("last", d3.select("#bar-graphic").selectAll(".bar"));
+  
 
-function thirdAnimation({ countries, path, map }) {
-  console.warn("-----------------thirdAnimation");
-
-  const text = d3.select(".scroll").select(".scroll__text");
-  const textWidth = text.node().offsetWidth;
-  console.warn({textWidth})
-  const mapContainer = d3.select(".scroll__graphic");
-  const boundingBox = mapContainer.node().getBoundingClientRect();
-  const { height, width } = boundingBox;
-
-  const sortedPopulationData = populationsIn1991.sort(function(a, b) {
-    return d3.ascending(a.population, b.population);
-  });
-
-  const barMargin = {
-    top: 15,
-    right: 75,
-    bottom: 40,
-    left: 60
-  };
-
-  const barWidth = textWidth - barMargin.left - barMargin.right;
-  const barHeight = height- 100 - barMargin.top - barMargin.bottom;
-  console.warn("last", d3.select("#bar-graphic").selectAll(".bar"));
-
-  const barsHaveRendered =
-    d3.select("#bar-graphic").selectAll(".bar")[0].length !== 0;
-
-  if (!barsHaveRendered) {
-    var svg = d3
+  
+      var svg = d3
       .select("#bar-graphic")
       .append("svg")
       .attr("width", barWidth + barMargin.left + barMargin.right)
@@ -208,8 +152,10 @@ function thirdAnimation({ countries, path, map }) {
       .attr(
         "transform",
         "translate(" + barMargin.left + "," + barMargin.top + ")"
-      );
+      )
+      .style('opacity', '0')
 
+  
     var x = d3.scale
       .linear()
       .range([0, barWidth])
@@ -219,7 +165,7 @@ function thirdAnimation({ countries, path, map }) {
           return d.population;
         })
       ]);
-
+  
     var y = d3.scale
       .ordinal()
       .rangeRoundBands([barHeight, 0], 0.1)
@@ -228,7 +174,7 @@ function thirdAnimation({ countries, path, map }) {
           return d.name;
         })
       );
-
+  
     //make y axis to show bar names
     var yAxis = d3.svg
       .axis()
@@ -236,18 +182,18 @@ function thirdAnimation({ countries, path, map }) {
       //no tick marks
       .tickSize(0)
       .orient("left");
-
+  
     var gy = svg
       .append("g")
-      .attr("class", "y axis")
+      .attr("class", "y-axis")
       .call(yAxis);
-
+  
     var bars = svg
       .selectAll(".bar")
       .data(sortedPopulationData)
       .enter()
       .append("g");
-
+  
     //append rects
     bars
       .append("rect")
@@ -258,15 +204,61 @@ function thirdAnimation({ countries, path, map }) {
       .attr("height", y.rangeBand())
       .attr("x", 0)
       .attr("width", 0)
-      .transition()
-      .delay(function (d, i) { return i*100; })
-      .attr("fill", function(d, i) {
-        return colors[i];
-      })
-      .attr("width", function(d) {
-        return x(d.population);
-      });
+
+    console.warn('text',  d3.select('#bar-graphic').select('.y-axis')
+        .selectAll('text'))
+        
+  svg
+    .transition()
+    .duration(2000)
+    .style('opacity', '1')
+  
+  d3.select('.bar-graphic-header').transition()
+  .duration(2000)
+  .style('opacity', '1')
+
   }
+
+
+function thirdAnimation({ countries, path, map }) {
+  console.warn("-----------------thirdAnimation");
+
+  const sortedPopulationData = populationsIn1991.sort(function(a, b) {
+    return d3.ascending(a.population, b.population);
+  });
+
+  const barMargin = {
+    top: 15,
+    right: 50,
+    bottom: 40,
+    left: 60
+  };
+
+  const text = d3.select(".scroll").select(".scroll__text");
+  const textWidth = text.node().offsetWidth;
+  const barWidth = textWidth - barMargin.left - barMargin.right;
+
+  var x = d3.scale
+  .linear()
+  .range([0, barWidth])
+  .domain([
+    0,
+    d3.max(sortedPopulationData, function(d) {
+      return d.population;
+    })
+  ]);
+
+
+  d3.selectAll('rect')
+  .transition()
+  .delay(function (d, i) { return i*100; })
+  .attr("fill", function(d, i) {
+    return colors[i];
+  })
+  .attr("width", function(d) {
+    return x(d.population);
+  });
+  
 }
 
 export default {
@@ -274,5 +266,7 @@ export default {
   1: firstAnimation,
   2: secondAnimation,
   3: thirdAnimation,
-  4: () => {}
+  4: () => {},
+  5: () => {},
+  6: () => {}
 };
