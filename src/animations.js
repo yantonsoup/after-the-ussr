@@ -219,7 +219,6 @@ function secondAnimation({ projection, countries, path, map }) {
 
   }
 
-
 function thirdAnimation({ countries, path, map }) {
   console.warn("-----------------thirdAnimation");
 
@@ -228,9 +227,9 @@ function thirdAnimation({ countries, path, map }) {
   });
 
   const barMargin = {
-    top: 15,
+    top: 10,
     right: 50,
-    bottom: 40,
+    bottom: 0,
     left: 60
   };
 
@@ -248,16 +247,16 @@ function thirdAnimation({ countries, path, map }) {
     })
   ]);
 
+    d3.selectAll('rect')
+    .transition()
+    .delay(function (d, i) { return i*100; })
+    .attr("fill", function(d, i) {
+      return colors[i];
+    })
+    .attr("width", function(d) {
+      return x(d.population);
+    });
 
-  d3.selectAll('rect')
-  .transition()
-  .delay(function (d, i) { return i*100; })
-  .attr("fill", function(d, i) {
-    return colors[i];
-  })
-  .attr("width", function(d) {
-    return x(d.population);
-  });
   
 }
 
