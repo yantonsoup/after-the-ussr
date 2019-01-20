@@ -197,7 +197,7 @@ function thirdAnimation({ countries, path, map }) {
   const barMargin = {
     top: 15,
     right: 75,
-    bottom: 15,
+    bottom: 40,
     left: 60
   };
 
@@ -207,6 +207,8 @@ function thirdAnimation({ countries, path, map }) {
 
   const barsHaveRendered =
     d3.select("#bar-graphic").selectAll(".bar")[0].length !== 0;
+
+  console.warn('ALReaDY rendered bars', barsHaveRendered)
   if (!barsHaveRendered) {
     var svg = d3
       .select("#bar-graphic")
@@ -237,8 +239,6 @@ function thirdAnimation({ countries, path, map }) {
           return d.name;
         })
       );
-    console.warn({ x });
-    console.warn({ y });
 
     //make y axis to show bar names
     var yAxis = d3.svg
@@ -268,6 +268,12 @@ function thirdAnimation({ countries, path, map }) {
       })
       .attr("height", y.rangeBand())
       .attr("x", 0)
+      .attr("width", 0)
+      .transition()
+      .delay(function (d, i) { return i*100; })
+      .attr("fill", function(d, i) {
+        return colors[i];
+      })
       .attr("width", function(d) {
         return x(d.population);
       });
@@ -278,5 +284,6 @@ export default {
   0: zeroAnimation,
   1: firstAnimation,
   2: secondAnimation,
-  3: thirdAnimation
+  3: thirdAnimation,
+  4: () => {}
 };
