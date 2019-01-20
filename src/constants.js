@@ -39,7 +39,7 @@ export const sovietLabelShift = {
   BLR: { x: -20, y: 2 },
   EST: { x: -13, y: -3 },
   GEO: { x: -18, y: 1 },
-  KAZ: { x: 13, y:15 },
+  KAZ: { x: 13, y: 15 },
   KGZ: { x: 1, y: 10 },
   LVA: { x: -15, y: -2 },
   LTU: { x: -18, y: 0 },
@@ -51,7 +51,25 @@ export const sovietLabelShift = {
   UZB: { x: -12, y: 18 }
 };
 
-// const populationsIn1991 = {
+export const populationsIn1991 = [
+  { name: 'ARM', population: 3.5 },
+  { name: 'AZE', population: 7.271 },
+  { name: 'BLR', population: 10.19 },
+  { name: 'EST', population: 1.568 },
+  { name: 'GEO', population: 6.653 },
+  { name: 'KAZ', population: 16.45 },
+  { name: 'KGZ', population: 4.464 },
+  { name: 'LVA', population: 2.658 },
+  { name: 'LTU', population: 3.7 },
+  { name: 'MDA', population: 3.7 },
+  { name: 'TJK', population: 5.4 },
+  { name: 'TKM', population: 3.772 },
+  { name: 'UKR', population: 52 },
+  { name: 'UZB', population: 20.95 }
+];
+
+// RUS: 148.6 million
+
 //   ARM: 3.5 million,
 //   AZE: 7.271 million (1991),
 //   BLR: 10.19 million (1991)

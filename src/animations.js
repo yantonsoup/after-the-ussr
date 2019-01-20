@@ -1,4 +1,9 @@
-import { sovietCountryIsoCodes, colors, sovietLabelShift } from "./constants";
+import {
+  sovietCountryIsoCodes,
+  colors,
+  sovietLabelShift,
+  populationsIn1991
+} from "./constants";
 
 function animateSectionProperty(section, animationProperties) {
   const {
@@ -120,25 +125,24 @@ function firstAnimation({ projection, countries, path, map }) {
     })
     .style("stroke-width", 0.25 + "px");
 
-   d3.selectAll(".non-soviet-country")
+  d3.selectAll(".non-soviet-country")
     .transition()
     .duration(500)
     .style("opacity", "0");
 
-  console.warn('APPENDING A DT',   d3.select('#countryRUS'))
-  d3.select('#countryRUS')
-  .append('circle')
-  .attr("cx", function (d) { 
-    const [x, y] = path.centroid(d);
-    return x
-   })
-		.attr("cy", function (d) { 
+  console.warn("APPENDING A DT", d3.select("#countryRUS"));
+  d3.select("#countryRUS")
+    .append("circle")
+    .attr("cx", function(d) {
       const [x, y] = path.centroid(d);
-      return y
-     })
-		.attr("r", "8px")
-		.attr("fill", "black")
-
+      return x;
+    })
+    .attr("cy", function(d) {
+      const [x, y] = path.centroid(d);
+      return y;
+    })
+    .attr("r", "8px")
+    .attr("fill", "black");
 }
 
 function secondAnimation({ projection, countries, path, map }) {
@@ -150,47 +154,124 @@ function secondAnimation({ projection, countries, path, map }) {
     .duration(500)
     .style("opacity", "0");
 
-    // var graphicMargin = 16 * 4; // 64px
-    var graphicMarginTop = Math.floor(window.innerHeight * 0.05);
-    // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
-    d3.select(".scroll__graphic")
-      .transition()
-      .duration(1000)
-      .style("top", graphicMarginTop + "px");
+  // var graphicMargin = 16 * 4; // 64px
+  var graphicMarginTop = Math.floor(window.innerHeight * 0.05);
+  // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
+  d3.select(".scroll__graphic")
+    .transition()
+    .duration(1000)
+    .style("top", graphicMarginTop + "px");
 
-    d3.selectAll(".data-bar")
-      .transition()
-      .duration(5000)//time in ms
-      .attr("width", function(d){
-          return 450;
-      });//now, the final value
-
+  d3.selectAll(".data-bar")
+    .transition()
+    .duration(5000) //time in ms
+    .attr("width", function(d) {
+      return 450;
+    }); //now, the final value
 }
 
 function thirdAnimation({ countries, path, map }) {
   console.warn("-----------------thirdAnimation");
+  const mapContainer = d3.select(".scroll__graphic");
+  const boundingBox = mapContainer.node().getBoundingClientRect();
+  const { height, width } = boundingBox;
 
   d3.selectAll(".non-soviet-country")
     .transition()
     .duration(500)
     .style("opacity", "0");
 
-    // var graphicMargin = 16 * 4; // 64px
-    var graphicMarginTop = Math.floor(window.innerHeight * 0.05);
-    // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
-    d3.select(".scroll__graphic")
-      .transition()
-      .duration(1000)
-      .style("top", graphicMarginTop + "px");
+  // var graphicMargin = 16 * 4; // 64px
+  var graphicMarginTop = Math.floor(window.innerHeight * 0.05);
+  // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
+  d3.select(".scroll__graphic")
+    .transition()
+    .duration(1000)
+    .style("top", graphicMarginTop + "px");
 
-    d3.selectAll(".data-bar")
-      .transition()
-      .duration(5000)//time in ms
-      .attr("width", function(d){
-          return 350;
-      });//now, the final value
+  const sortedPopulationData = populationsIn1991.sort(function(a, b) {
+    return d3.ascending(a.population, b.population);
+  });
+  console.warn({ sortedPopulationData });
 
-    
+  const barMargin = {
+    top: 15,
+    right: 75,
+    bottom: 15,
+    left: 60
+  };
+
+  const barWidth = width - barMargin.left - barMargin.right;
+  const barHeight = height - barMargin.top - barMargin.bottom;
+  console.warn("last", d3.select("#bar-graphic").selectAll(".bar"));
+
+  const barsHaveRendered =
+    d3.select("#bar-graphic").selectAll(".bar")[0].length !== 0;
+  if (!barsHaveRendered) {
+    var svg = d3
+      .select("#bar-graphic")
+      .append("svg")
+      .attr("width", barWidth + barMargin.left + barMargin.right)
+      .attr("height", barHeight + barMargin.top + barMargin.bottom)
+      .append("g")
+      .attr(
+        "transform",
+        "translate(" + barMargin.left + "," + barMargin.top + ")"
+      );
+
+    var x = d3.scale
+      .linear()
+      .range([0, barWidth])
+      .domain([
+        0,
+        d3.max(sortedPopulationData, function(d) {
+          return d.population;
+        })
+      ]);
+
+    var y = d3.scale
+      .ordinal()
+      .rangeRoundBands([barHeight, 0], 0.1)
+      .domain(
+        sortedPopulationData.map(function(d) {
+          return d.name;
+        })
+      );
+    console.warn({ x });
+    console.warn({ y });
+
+    //make y axis to show bar names
+    var yAxis = d3.svg
+      .axis()
+      .scale(y)
+      //no tick marks
+      .tickSize(0)
+      .orient("left");
+
+    var gy = svg
+      .append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+    var bars = svg
+      .selectAll(".bar")
+      .data(sortedPopulationData)
+      .enter()
+      .append("g");
+
+    //append rects
+    bars
+      .append("rect")
+      .attr("class", "bar")
+      .attr("y", function(d) {
+        return y(d.name);
+      })
+      .attr("height", y.rangeBand())
+      .attr("x", 0)
+      .attr("width", function(d) {
+        return x(d.population);
+      });
+  }
 }
 
 export default {
