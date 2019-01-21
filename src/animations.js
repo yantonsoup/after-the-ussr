@@ -119,94 +119,90 @@ function secondAnimation({ projection, countries, path, map }) {
     .duration(1000)
     .style("top", graphicMarginTop + "px");
 
-    const text = d3.select(".scroll").select(".scroll__text");
-    const textWidth = text.node().offsetWidth;
-    console.warn({textWidth})
-    const mapContainer = d3.select(".scroll__graphic");
-    const boundingBox = mapContainer.node().getBoundingClientRect();
-    const { height, width } = boundingBox;
+  const text = d3.select(".scroll").select(".scroll__text");
+  const textWidth = text.node().offsetWidth;
+  console.warn({textWidth})
+  const mapContainer = d3.select(".scroll__graphic");
+  const boundingBox = mapContainer.node().getBoundingClientRect();
+  const { height, width } = boundingBox;
+
+  const sortedPopulationData = populationsIn1991.sort(function(a, b) {
+    return d3.ascending(a.population, b.population);
+  });
+
+  const barMargin = {
+    top: 15,
+    right: 75,
+    bottom: 40,
+    left: 60
+  };
   
-    const sortedPopulationData = populationsIn1991.sort(function(a, b) {
-      return d3.ascending(a.population, b.population);
-    });
-  
-    const barMargin = {
-      top: 15,
-      right: 75,
-      bottom: 40,
-      left: 60
-    };
-  
-    const barWidth = textWidth - barMargin.left - barMargin.right;
-    const barHeight = height- 100 - barMargin.top - barMargin.bottom;
-    console.warn("last", d3.select("#bar-graphic").selectAll(".bar"));
+  const barWidth = textWidth - barMargin.left - barMargin.right;
+  const barHeight = height- 100 - barMargin.top - barMargin.bottom;
+  console.warn("last", d3.select("#bar-graphic").selectAll(".bar"));
+
+  var svg = d3
+  .select("#bar-graphic")
+  .append("svg")
+  .attr("width", barWidth + barMargin.left + barMargin.right)
+  .attr("height", barHeight + barMargin.top + barMargin.bottom)
+  .append("g")
+  .attr(
+    "transform",
+    "translate(" + barMargin.left + "," + barMargin.top + ")"
+  )
+  .style('opacity', '0')
   
 
-  
-      var svg = d3
-      .select("#bar-graphic")
-      .append("svg")
-      .attr("width", barWidth + barMargin.left + barMargin.right)
-      .attr("height", barHeight + barMargin.top + barMargin.bottom)
-      .append("g")
-      .attr(
-        "transform",
-        "translate(" + barMargin.left + "," + barMargin.top + ")"
-      )
-      .style('opacity', '0')
-
-  
-    var x = d3.scale
-      .linear()
-      .range([0, barWidth])
-      .domain([
-        0,
-        d3.max(sortedPopulationData, function(d) {
-          return d.population;
-        })
-      ]);
-  
-    var y = d3.scale
-      .ordinal()
-      .rangeRoundBands([barHeight, 0], 0.1)
-      .domain(
-        sortedPopulationData.map(function(d) {
-          return d.name;
-        })
-      );
-  
-    //make y axis to show bar names
-    var yAxis = d3.svg
-      .axis()
-      .scale(y)
-      //no tick marks
-      .tickSize(0)
-      .orient("left");
-  
-    var gy = svg
-      .append("g")
-      .attr("class", "y-axis")
-      .call(yAxis);
-  
-    var bars = svg
-      .selectAll(".bar")
-      .data(sortedPopulationData)
-      .enter()
-      .append("g");
-  
-    //append rects
-    bars
-      .append("rect")
-      .attr("class", "bar")
-      .attr("y", function(d) {
-        return y(d.name);
+  // x scale
+  var x = d3.scale
+    .linear()
+    .range([0, barWidth])
+    .domain([
+      0,
+      d3.max(sortedPopulationData, function(d) {
+        return d.population;
       })
-      .attr("height", y.rangeBand())
-      .attr("x", 0)
-      .attr("width", 0)
+    ]);
+  
+  // y scale
+  var y = d3.scale
+  .ordinal()
+  .rangeRoundBands([barHeight, 0], 0.1)
+  .domain(
+    sortedPopulationData.map(function(d) {
+      return d.name;
+    })
+  );
+  
+  //make y axis to show bar names
+  var yAxis = d3.svg
+    .axis()
+    .scale(y)
+    //no tick marks
+    .tickSize(0)
+    .orient("left");
 
-    console.warn('text',  d3.select('#bar-graphic').select('.y-axis')
-        .selectAll('text'))
+  var gy = svg
+    .append("g")
+    .attr("class", "y-axis")
+    .call(yAxis);
+
+  var bars = svg
+    .selectAll(".bar")
+    .data(sortedPopulationData)
+    .enter()
+    .append("g");
+  
+  bars
+    .append("rect")
+    .attr("class", "bar")
+    .attr("y", function(d) {
+      return y(d.name);
+    })
+    .attr("height", y.rangeBand())
+    .attr("x", 0)
+    .attr("width", 0)
         
   svg
     .transition()
@@ -214,10 +210,10 @@ function secondAnimation({ projection, countries, path, map }) {
     .style('opacity', '1')
   
   d3.select('.bar-graphic-header').transition()
-  .duration(2000)
-  .style('opacity', '1')
+    .duration(2000)
+    .style('opacity', '1')
 
-  }
+}
 
 function thirdAnimation({ countries, path, map }) {
   console.warn("-----------------thirdAnimation");
@@ -232,10 +228,14 @@ function thirdAnimation({ countries, path, map }) {
     bottom: 0,
     left: 60
   };
-
+  const mapContainer = d3.select(".scroll__graphic");
+  const boundingBox = mapContainer.node().getBoundingClientRect();
+  const { height, width } = boundingBox;
+  
   const text = d3.select(".scroll").select(".scroll__text");
   const textWidth = text.node().offsetWidth;
   const barWidth = textWidth - barMargin.left - barMargin.right;
+  const barHeight = height- 100 - barMargin.top - barMargin.bottom;
 
   var x = d3.scale
   .linear()
@@ -247,7 +247,16 @@ function thirdAnimation({ countries, path, map }) {
     })
   ]);
 
-    d3.selectAll('rect')
+  var y = d3.scale
+  .ordinal()
+  .rangeRoundBands([barHeight, 0], 0.1)
+  .domain(
+    sortedPopulationData.map(function(d) {
+      return d.name;
+    })
+  );
+
+  d3.selectAll('rect')
     .transition()
     .delay(function (d, i) { return i*100; })
     .attr("fill", function(d, i) {
@@ -257,7 +266,21 @@ function thirdAnimation({ countries, path, map }) {
       return x(d.population);
     });
 
-  
+
+    /// Add labels
+  d3.select("#bar-graphic")
+    .selectAll(".text")  		
+	  .data(sortedPopulationData)
+	  .enter()
+	  .append("text")
+	  .attr("class","label")
+	  .attr("y", function(d) { 
+      console.warn('d')
+      return x(d.food) 
+    } )
+	  .attr("x", function(d) { return y(d.population) + 1; })
+	  .attr("dx", ".75em")
+	  .text(function(d) { return d.population; });   	
 }
 
 export default {
