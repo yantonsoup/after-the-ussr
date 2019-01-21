@@ -133,7 +133,7 @@ function secondAnimation({ projection, countries, path, map }) {
   const barMargin = {
     top: 15,
     right: 75,
-    bottom: 40,
+    bottom: 0,
     left: 60
   };
   
@@ -266,21 +266,41 @@ function thirdAnimation({ countries, path, map }) {
       return x(d.population);
     });
 
-
+  // bars
+  // .append("rect")
+  // .attr("class", "bar")
+  // .attr("y", function(d) {
+  //   return y(d.name);
+  // })
+  // .attr("height", y.rangeBand())
+  // .attr("x", 0)
+  // .attr("width", 0)
+  
     /// Add labels
   d3.select("#bar-graphic")
+    .select('svg')
+    .select('g')
     .selectAll(".text")  		
 	  .data(sortedPopulationData)
 	  .enter()
 	  .append("text")
 	  .attr("class","label")
 	  .attr("y", function(d) { 
-      console.warn('d')
-      return x(d.food) 
+      console.warn('APPENDING BAR TEXT LABEL')
+      console.warn('d', d)
+      console.warn('y(d.name) ', y(d.name) )
+      return y(d.name) 
     } )
-	  .attr("x", function(d) { return y(d.population) + 1; })
+	  .attr("x", function(d) { 
+      console.warn('x(d.population) + 1', x(d.population) + 1 )
+      return x(d.population) + 1; 
+    })
 	  .attr("dx", ".75em")
-	  .text(function(d) { return d.population; });   	
+    .text(function(d) { return d.population; })
+    .attr(
+      "transform",
+      "translate(" + 0 + "," + barMargin.top + ")"
+    )
 }
 
 export default {
