@@ -50,12 +50,14 @@ export default class WorldMap {
   }
 
   paintMap() {
-    const svg = d3.select(this.element).append("svg");
-    svg.attr("width", this.width);
-    svg.attr("height", this.height);
+    const svg = d3
+      .select(this.element)
+      .append("svg")
+      .attr("width", this.width)
+      .attr("height", this.height);
 
     this.container = svg.append("g").attr("id", "map");
-    console.warn('this.mapCanvas', this.mapCanvas)
+
     this.container
       .selectAll("path")
       .data(this.data)
@@ -77,4 +79,19 @@ export default class WorldMap {
         }
       });
   }
+
+  ////////// SETTTERS
+  animateStyles({ duration, section, property, value }) {
+    d3
+      .select(this.element)
+      .selectAll(section)
+      .transition()
+      .duration(duration).style(property, value);
+  }
+
+  // animateTransform({
+
+  // }) {
+
+  // }
 }

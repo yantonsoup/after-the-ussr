@@ -6,12 +6,19 @@ import {
 } from "./constants";
 
 function zeroAnimation(worldMap) {
-  console.warn('map')
-  worldMap.container.selectAll(".non-soviet-country")
-    .transition()
-    .duration(1000)
-    .style("opacity", "0.5")
-    .style("stroke-width", 0.25 + "px");
+  worldMap.animateStyles({
+    duration: 1000,
+    section: ".non-soviet-country",
+    property: "stroke-width",
+    value: "0.25px",
+  });
+
+  worldMap.animateStyles({
+    duration: 1000,
+    section: ".non-soviet-country",
+    property: "opacity",
+    value: "0.5",
+  });
 }
 
 function firstAnimation(map) {
@@ -306,7 +313,7 @@ function fourthAnimation (map) {
     const [x, y] = map.path.centroid(d);
     return x })
   .attr("cy", function (d) { 
-    const [x, y] = mappath.centroid(d);
+    const [x, y] = map.path.centroid(d);
     return x 
   })
   .attr("r", "8px")
