@@ -82,16 +82,11 @@ export default class WorldMap {
 
   ////////// SETTTERS
   animateStyles({ duration, section, property, value }) {
-    d3
-      .select(this.element)
+    d3.select(this.element)
       .selectAll(section)
       .transition()
-      .duration(duration).style(property, value);
+      .duration(duration)
+      .style(property, value);
   }
 
-  // animateTransform({
-
-  // }) {
-
-  // }
 }
