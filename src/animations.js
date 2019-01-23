@@ -297,19 +297,24 @@ function thirdAnimation({ countries, path, map }) {
 }
 
 function fourthAnimation ({ projection, countries, path, map }) {
-      // points
-      const aa = [-122.490402, 37.786453];
-      const bb = [-122.389809, 37.72728];
-  const mapSvg = d3.select(".scroll-graphic").select('svg')
 
+  const mapSvg = d3.select(".scroll-graphic").select('svg')
+  const filteredCountries = countries.filter(country => sovietCountryIsoCodes.includes(country.id))
+
+    
   mapSvg.selectAll("circle")
-		.data([aa,bb]).enter()
-		.append("circle")
-		.attr("cx", function (d) { console.log(projection(d)); return projection(d)[0]; })
-		.attr("cy", function (d) { return projection(d)[1]; })
-		.attr("r", "8px")
-		.attr("fill", "red")
-  console.warn({mapSvg})
+  .data(filteredCountries)
+  .enter()
+  .append("circle")
+  .attr("cx", function (d) {
+    const [x, y] = path.centroid(d);
+    return x })
+  .attr("cy", function (d) { 
+    const [x, y] = path.centroid(d);
+    return x 
+  })
+  .attr("r", "8px")
+  .attr("fill", "red")
 }
 
 export default {
