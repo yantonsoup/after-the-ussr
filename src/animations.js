@@ -14,7 +14,6 @@ function zeroAnimation() {
 }
 
 function firstAnimation({ projection, countries, path, map }) {
-  console.warn("-----------------firstAnimation");
 
   var scale = 2;
   const mapContainer = d3.select(".scroll__graphic");
@@ -103,7 +102,6 @@ function firstAnimation({ projection, countries, path, map }) {
 }
 
 function secondAnimation({ projection, countries, path, map }) {
-  console.warn("-----------------secondAnimation");
   // const nextprojection = d3.geo.albers().scale(145).parallels([20, 50])
   // var container = d3.select(".scroll");
   d3.selectAll(".non-soviet-country")
@@ -216,8 +214,6 @@ function secondAnimation({ projection, countries, path, map }) {
 }
 
 function thirdAnimation({ countries, path, map }) {
-  console.warn("-----------------thirdAnimation");
-
   const sortedPopulationData = populationsIn1991.sort(function(a, b) {
     return d3.ascending(a.population, b.population);
   });
@@ -277,8 +273,9 @@ function thirdAnimation({ countries, path, map }) {
   // .attr("width", 0)
   
     /// Add labels
-  d3.select("#bar-graphic")
-    .select('svg')
+    const barGraphicSvg = d3.select("#bar-graphic").select('svg')
+    console.warn({barGraphicSvg})
+  barGraphicSvg
     .select('g')
     .selectAll(".text")  		
 	  .data(sortedPopulationData)
@@ -286,13 +283,9 @@ function thirdAnimation({ countries, path, map }) {
 	  .append("text")
 	  .attr("class","label")
 	  .attr("y", function(d) { 
-      console.warn('APPENDING BAR TEXT LABEL')
-      console.warn('d', d)
-      console.warn('y(d.name) ', y(d.name) )
       return y(d.name) 
     } )
 	  .attr("x", function(d) { 
-      console.warn('x(d.population) + 1', x(d.population) + 1 )
       return x(d.population) + 1; 
     })
 	  .attr("dx", ".75em")
@@ -303,12 +296,28 @@ function thirdAnimation({ countries, path, map }) {
     )
 }
 
+function fourthAnimation ({ projection, countries, path, map }) {
+      // points
+      const aa = [-122.490402, 37.786453];
+      const bb = [-122.389809, 37.72728];
+  const mapSvg = d3.select(".scroll-graphic").select('svg')
+
+  mapSvg.selectAll("circle")
+		.data([aa,bb]).enter()
+		.append("circle")
+		.attr("cx", function (d) { console.log(projection(d)); return projection(d)[0]; })
+		.attr("cy", function (d) { return projection(d)[1]; })
+		.attr("r", "8px")
+		.attr("fill", "red")
+  console.warn({mapSvg})
+}
+
 export default {
   0: zeroAnimation,
   1: firstAnimation,
   2: secondAnimation,
   3: thirdAnimation,
-  4: () => {},
+  4: fourthAnimation,
   5: () => {},
   6: () => {}
 };
