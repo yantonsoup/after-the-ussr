@@ -5,43 +5,39 @@ import {
   populationsIn1991
 } from "./constants";
 
-function zeroAnimation() {
-  d3.selectAll(".non-soviet-country")
+function zeroAnimation(worldMap) {
+  console.warn('map')
+  worldMap.container.selectAll(".non-soviet-country")
     .transition()
     .duration(1000)
     .style("opacity", "0.5")
     .style("stroke-width", 0.25 + "px");
 }
 
-function firstAnimation({ projection, countries, path, map }) {
-
-  var scale = 2;
-  const mapContainer = d3.select(".scroll__graphic");
-  const boundingBox = mapContainer.node().getBoundingClientRect();
-  const { height, width } = boundingBox;
-
+function firstAnimation(map) {
+  console.warn('map', map)
   var scale = 4;
-  var translateX = -Math.floor(width * 0.585);
-  var translateY = -Math.floor(height * 0.33);
+  var translateX = -Math.floor(map.width * 0.585);
+  var translateY = -Math.floor(map.height * 0.33);
 
   d3.select("#map")
     .transition()
     .duration(1000)
     .attr(
       "transform",
-      `translate(${width / 2},${height /
+      `translate(${map.width / 2},${map.height /
         2})scale(${scale})translate(${translateX},${translateY})`
     );
 
   d3.select("#map")
     .selectAll(".place-label")
-    .data(countries)
+    .data(map.data)
     .enter()
     .append("text")
     .attr("class", "place-label")
     .attr("transform", function(d) {
       // can get centroid easily like this!  path.centroid(d)
-      const [x, y] = path.centroid(d);
+      const [x, y] = map.path.centroid(d);
       // console.warn('centroid', 'x', x, 'y', y)
       return `translate(${x},${y})`;
     })
@@ -86,22 +82,22 @@ function firstAnimation({ projection, countries, path, map }) {
     .duration(500)
     .style("opacity", "0");
 
-  console.warn("APPENDING A DT", d3.select("#countryRUS"));
-  d3.select("#countryRUS")
-    .append("circle")
-    .attr("cx", function(d) {
-      const [x, y] = path.centroid(d);
-      return x;
-    })
-    .attr("cy", function(d) {
-      const [x, y] = path.centroid(d);
-      return y;
-    })
-    .attr("r", "8px")
-    .attr("fill", "black");
+  // console.warn("APPENDING A DT", d3.select("#countryRUS"));
+  // d3.select("#countryRUS")
+  //   .append("circle")
+  //   .attr("cx", function(d) {
+  //     const [x, y] = map.path.centroid(d);
+  //     return x;
+  //   })
+  //   .attr("cy", function(d) {
+  //     const [x, y] = map.path.centroid(d);
+  //     return y;
+  //   })
+  //   .attr("r", "8px")
+  //   .attr("fill", "black");
 }
 
-function secondAnimation({ projection, countries, path, map }) {
+function secondAnimation() {
   // const nextprojection = d3.geo.albers().scale(145).parallels([20, 50])
   // var container = d3.select(".scroll");
   d3.selectAll(".non-soviet-country")
@@ -213,7 +209,7 @@ function secondAnimation({ projection, countries, path, map }) {
 
 }
 
-function thirdAnimation({ countries, path, map }) {
+function thirdAnimation(map) {
   const sortedPopulationData = populationsIn1991.sort(function(a, b) {
     return d3.ascending(a.population, b.population);
   });
@@ -296,10 +292,10 @@ function thirdAnimation({ countries, path, map }) {
     )
 }
 
-function fourthAnimation ({ projection, countries, path, map }) {
+function fourthAnimation (map) {
 
   const mapSvg = d3.select(".scroll-graphic").select('svg')
-  const filteredCountries = countries.filter(country => sovietCountryIsoCodes.includes(country.id))
+  const filteredCountries = map.data.filter(country => sovietCountryIsoCodes.includes(country.id))
 
     
   mapSvg.selectAll("circle")
@@ -307,10 +303,10 @@ function fourthAnimation ({ projection, countries, path, map }) {
   .enter()
   .append("circle")
   .attr("cx", function (d) {
-    const [x, y] = path.centroid(d);
+    const [x, y] = map.path.centroid(d);
     return x })
   .attr("cy", function (d) { 
-    const [x, y] = path.centroid(d);
+    const [x, y] = mappath.centroid(d);
     return x 
   })
   .attr("r", "8px")

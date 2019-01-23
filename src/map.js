@@ -3,25 +3,13 @@ import { sovietCountryIsoCodes, colors, sovietLabelShift } from "./constants";
 const rotate = -20; // so that [-60, 0] becomes initial center of projection
 const maxlat = 83;
 
-export default class Map {
+export default class WorldMap {
   constructor(opts) {
+    console.warn("opts.data", opts);
     // load in arguments from config object
     this.data = opts.data;
     this.element = opts.element;
-    // create the chart
-    this.draw();
-  }
 
-  getMercatorBounds(projection) {
-    const yaw = projection.rotate()[0];
-    const xymax = projection([-yaw + 180 - 1e-6, -maxlat]);
-    const xymin = projection([-yaw - 180 + 1e-6, maxlat]);
-  
-    return [xymin, xymax];
-  }
-
-  draw() {
-    // define width, height and margin
     const boundingBox = d3
       .select(this.element)
       .node()
@@ -30,6 +18,20 @@ export default class Map {
     this.height = boundingBox.height;
     this.width = boundingBox.width;
 
+    // create the chart
+    this.draw();
+  }
+
+  getMercatorBounds(projection) {
+    const yaw = projection.rotate()[0];
+    const xymax = projection([-yaw + 180 - 1e-6, -maxlat]);
+    const xymin = projection([-yaw - 180 + 1e-6, maxlat]);
+
+    return [xymin, xymax];
+  }
+
+  draw() {
+    // define width, height and margin
     this.projection = d3.geo
       .mercator()
       .rotate([rotate, 0])
@@ -44,13 +46,17 @@ export default class Map {
     this.path = d3.geo.path().projection(this.projection);
 
     // set up parent element and SVG
+    this.paintMap();
+  }
+
+  paintMap() {
     const svg = d3.select(this.element).append("svg");
     svg.attr("width", this.width);
     svg.attr("height", this.height);
 
-    this.mapCanvas = svg.append("g").attr("id", "map");
-
-    this.mapCanvas
+    this.container = svg.append("g").attr("id", "map");
+    console.warn('this.mapCanvas', this.mapCanvas)
+    this.container
       .selectAll("path")
       .data(this.data)
       .enter()
@@ -71,5 +77,4 @@ export default class Map {
         }
       });
   }
-
 }

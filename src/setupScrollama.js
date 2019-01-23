@@ -3,15 +3,14 @@ import scrollama from "scrollama";
 
 import animations from "./animations";
 
-export default function setupScrollama({countries, path, map, projection}) {
-  const scroller = scrollama();
+export default function setupScrollama(map) {
 
   // response = { element, direction, index }
   function handleStepEnter(response) {
     console.warn('SCROLLAMA animation[index]:: ', response.index)
     const animationIndex = response.index
     const animationHandler = animations[animationIndex]
-    animationHandler({projection, countries, path, map})
+    animationHandler(map)
   }
 
   function handleContainerEnter(response) {
@@ -22,7 +21,7 @@ export default function setupScrollama({countries, path, map, projection}) {
     console.warn("Scrollama :: handleContainerExit");
   }
 
-  scroller
+  scrollama()
     .setup({
       container: ".scroll",
       graphic: ".scroll__graphic",
