@@ -136,10 +136,29 @@ export default class WorldMap {
       .style("stroke-width", 0.25 + "px");
     }
 
-    shiftContainer({ top, duration}) {
+    moveMapContainer({ top, duration}) {
      d3.select(this.element)
       .transition()
       .duration(duration)
       .style("top", top + "px");
+    }
+
+    addPointsToMap() {
+      const mapSvg = d3.select(".scroll-graphic").select('svg')
+        
+      mapSvg.selectAll("circle")
+        .data(this.sovietDataPoints)
+        .enter()
+        .append("circle")
+        .attr("cx",  (d) => {
+          const [x, y] = this.path.centroid(d);
+          return x 
+        })
+        .attr("cy", (d) => { 
+          const [x, y] = this.path.centroid(d);
+          return x 
+        })
+        .attr("r", "8px")
+        .attr("fill", "red")
     }
 }
