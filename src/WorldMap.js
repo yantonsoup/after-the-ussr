@@ -97,6 +97,10 @@ export default class WorldMap {
 
   // TODO: find a better way to shift labels
   createLabels(){
+    const centroids = this.sovietDataPoints.map( country =>{
+      return this.path.centroid(country);
+    });
+
     this.mapGraphic
       .selectAll(".place-label")
       .data(this.sovietDataPoints)
@@ -144,24 +148,29 @@ export default class WorldMap {
     }
 
     addPointsToMap() {
-      const mapSvg = d3.select(".scroll-graphic").select('svg')
+      const centroids = this.sovietDataPoints.map( country =>{
+        return this.path.centroid(country);
+      });
 
-      mapSvg.selectAll("circle")
-        .data(this.sovietDataPoints)
+      this.mapGraphic.selectAll(".centroid")
+        .data(centroids)
         .enter()
         .append("circle")
-        .attr("cx",  (d) => {
-          console.warn('circle d', d)
-          const [x, y] = this.path.centroid(d);
-          console.warn('when appending circles: this.path.centroid(d)', this.path.centroid(d))
-          return x 
-        })
-        .attr("cy", (d) => { 
-          const [x, y] = this.path.centroid(d);
-          return x 
-        })
-        .attr("r", "8px")
         .attr("fill", "red")
-
+        .attr("r", "1px")
+        .attr("cx", function (d){ return d[0]; })
+        .attr("cy", function (d){ return d[1]; });
+        // .attr("cx",  (d) => {
+        //   console.warn('circle d', d)
+        //   const [x, y] = this.path.centroid(d);
+        //   console.warn('when appending circles: this.path.centroid(d)', this.path.centroid(d))
+        //   return x 
+        // })
+        // .attr("cy", (d) => { 
+        //   const [x, y] = this.path.centroid(d);
+        //   return x 
+        // })
+        // .attr("r", "8px")
+        // .attr("fill", "red")
     }
 }
