@@ -5,7 +5,6 @@ const maxlat = 83;
 
 export default class WorldMap {
   constructor(opts) {
-    console.warn("opts.data", opts);
     // load in arguments from config object
     this.data = opts.data;
     this.sovietDataPoints = opts.data.filter(country => sovietCountryIsoCodes.includes(country.id))
@@ -96,7 +95,8 @@ export default class WorldMap {
       );
   }
 
-  placeLabels(){
+  // TODO: find a better way to shift labels
+  createLabels(){
     this.mapGraphic
       .selectAll(".place-label")
       .data(this.sovietDataPoints)
@@ -123,5 +123,23 @@ export default class WorldMap {
       })
       .style("font-size", 3 + "px");
     }
-  
+
+    // TODO: makethis an actual cloropleth funk
+    createPopulationChoropleth(){
+      d3.selectAll(".soviet-country")
+      .transition()
+      .duration(1000)
+      .style("fill", function(d, i) {
+        // console.warn('i', i)
+        return colors[i];
+      })
+      .style("stroke-width", 0.25 + "px");
+    }
+
+    shiftContainer({ top, duration}) {
+     d3.select(this.element)
+      .transition()
+      .duration(duration)
+      .style("top", top + "px");
+    }
 }

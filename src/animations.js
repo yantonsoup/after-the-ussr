@@ -26,90 +26,25 @@ function firstAnimation(map) {
 
   map.animateMapZoom(zoomParams)
 
-  map.placeLabels()
-  // d3.select("#map")
-  //   .selectAll(".place-label")
-  //   .data(map.data)
-  //   .enter()
-  //   .append("text")
-  //   .attr("class", "place-label")
-  //   .attr("transform", function(d) {
-  //     // can get centroid easily like this!  path.centroid(d)
-  //     const [x, y] = map.path.centroid(d);
-  //     // console.warn('centroid', 'x', x, 'y', y)
-  //     return `translate(${x},${y})`;
-  //   })
-  //   .attr("dx", function({ id }) {
-  //     if (sovietCountryIsoCodes.includes(id)) {
-  //       const { x } = sovietLabelShift[id];
-  //       return `${x}px`;
-  //     }
-  //   })
-  //   .attr("dy", function(d) {
-  //     if (sovietCountryIsoCodes.includes(d.id)) {
-  //       const name = d.id;
-  //       const { y } = sovietLabelShift[name];
-  //       return `${y}px`;
-  //     }
-  //   })
-  //   // .style("z-index", '100')
-  //   .text(function(d) {
-  //     if (sovietCountryIsoCodes.includes(d.id)) {
-  //       // console.warn("soviet datapoint", d);
-  //       return d.properties.name;
-  //     }
-  //   })
-  //   .style("font-size", 3 + "px");
+  map.createLabels()
 
-  d3.selectAll(".non-soviet-country")
-    .transition()
-    .duration(500)
-    .style("stroke-width", 0.175 + "px");
+  map.createPopulationChoropleth()
 
-  d3.selectAll(".soviet-country")
-    .transition()
-    .duration(1000)
-    .style("fill", function(d, i) {
-      // console.warn('i', i)
-      return colors[i];
-    })
-    .style("stroke-width", 0.25 + "px");
-
-  d3.selectAll(".non-soviet-country")
-    .transition()
-    .duration(500)
-    .style("opacity", "0");
-
-  // console.warn("APPENDING A DT", d3.select("#countryRUS"));
-  // d3.select("#countryRUS")
-  //   .append("circle")
-  //   .attr("cx", function(d) {
-  //     const [x, y] = map.path.centroid(d);
-  //     return x;
-  //   })
-  //   .attr("cy", function(d) {
-  //     const [x, y] = map.path.centroid(d);
-  //     return y;
-  //   })
-  //   .attr("r", "8px")
-  //   .attr("fill", "black");
+  map.animateSectionStyles({ 
+    duration: 500, 
+    section: '.non-soviet-country', 
+    styles: { 
+      opacity: '0',
+      'stroke-width': '0.175px' 
+    }
+  })
 }
 
-function secondAnimation() {
-  // const nextprojection = d3.geo.albers().scale(145).parallels([20, 50])
-  // var container = d3.select(".scroll");
-  d3.selectAll(".non-soviet-country")
-    .transition()
-    .duration(500)
-    .style("opacity", "0");
-
-  // var graphicMargin = 16 * 4; // 64px
-  var graphicMarginTop = Math.floor(window.innerHeight * 0.05);
-  // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
-  d3.select(".scroll__graphic")
-    .transition()
-    .duration(1000)
-    .style("top", graphicMarginTop + "px");
+function secondAnimation(map) {
+  map.shiftContainer({
+    duration: 1000,
+    top: Math.floor(window.innerHeight * 0.05)
+  })
 
   const text = d3.select(".scroll").select(".scroll__text");
   const textWidth = text.node().offsetWidth;
