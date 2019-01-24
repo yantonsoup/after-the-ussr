@@ -141,6 +141,16 @@ export default class BarChart {
   }
 
 
+//   animateSectionStyles({ duration, section, styles }) {
+//     console.warn({ duration, section, styles });
+
+//     d3.select(this.element)
+//       .selectAll(section)
+//       .transition()
+//       .duration(duration)
+//       .style(styles);
+//   }
+
   fadeTextIn() {
     this.plot
         .transition()

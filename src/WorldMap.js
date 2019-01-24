@@ -145,13 +145,15 @@ export default class WorldMap {
 
     addPointsToMap() {
       const mapSvg = d3.select(".scroll-graphic").select('svg')
-        
+
       mapSvg.selectAll("circle")
         .data(this.sovietDataPoints)
         .enter()
         .append("circle")
         .attr("cx",  (d) => {
+          console.warn('circle d', d)
           const [x, y] = this.path.centroid(d);
+          console.warn('when appending circles: this.path.centroid(d)', this.path.centroid(d))
           return x 
         })
         .attr("cy", (d) => { 
@@ -160,5 +162,6 @@ export default class WorldMap {
         })
         .attr("r", "8px")
         .attr("fill", "red")
+
     }
 }

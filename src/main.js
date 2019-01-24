@@ -1,7 +1,7 @@
 import setupScrollama from './setupScrollama.js';
 import firstPaint from './firstPaint';
 import loadMap from "./loadMap";
-import Map from './map.js'
+import WorldMap from './WorldMap.js'
 import BarChart from './BarChart.js'
 
 // even though Rollup is bundling all your files together, errors and
@@ -20,7 +20,7 @@ loadMap().then(json => {
   const countries = topojson.feature(json, json.objects.subunits)
   .features;
 
-  const worldMap = new Map({
+  const worldMap = new WorldMap({
     data: countries,
     element: '.scroll__graphic'
   })
