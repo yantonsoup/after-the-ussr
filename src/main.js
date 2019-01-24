@@ -2,6 +2,7 @@ import setupScrollama from './setupScrollama.js';
 import firstPaint from './firstPaint';
 import loadMap from "./loadMap";
 import Map from './map.js'
+import BarChart from './BarChart.js'
 
 // even though Rollup is bundling all your files together, errors and
 // logs will still point to your original source modules
@@ -22,8 +23,13 @@ loadMap().then(json => {
     element: '.scroll__graphic'
   })
 
+  const barChart = new BarChart({
+    element: '#bar-graphic',
+    data: countries
+  })
+
   console.warn('countries', countries);
   console.warn('map', map);
 
-  setupScrollama(worldMap);
+  setupScrollama(worldMap, barChart);
 });

@@ -10,14 +10,6 @@ export default class WorldMap {
     this.sovietDataPoints = opts.data.filter(country => sovietCountryIsoCodes.includes(country.id))
     this.element = opts.element;
 
-    const boundingBox = d3
-      .select(this.element)
-      .node()
-      .getBoundingClientRect();
-
-    this.height = boundingBox.height;
-    this.width = boundingBox.width;
-
     // create the chart
     this.draw();
   }
@@ -31,6 +23,14 @@ export default class WorldMap {
   }
 
   draw() {
+    const boundingBox = d3
+    .select(this.element)
+    .node()
+    .getBoundingClientRect();
+
+    this.height = boundingBox.height;
+    this.width = boundingBox.width;
+
     // define width, height and margin
     this.projection = d3.geo
       .mercator()

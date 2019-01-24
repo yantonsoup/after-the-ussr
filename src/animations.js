@@ -4,6 +4,8 @@ import {
   sovietLabelShift,
   populationsIn1991
 } from "./constants";
+import Map from './map.js'
+
 
 function zeroAnimation(map) {
   map.animateSectionStyles({ 
@@ -40,11 +42,12 @@ function firstAnimation(map) {
   })
 }
 
-function secondAnimation(map) {
+function secondAnimation(map, barChart) {
   map.shiftContainer({
     duration: 1000,
     top: Math.floor(window.innerHeight * 0.05)
   })
+  
 
   const text = d3.select(".scroll").select(".scroll__text");
   const textWidth = text.node().offsetWidth;
@@ -52,6 +55,8 @@ function secondAnimation(map) {
   const mapContainer = d3.select(".scroll__graphic");
   const boundingBox = mapContainer.node().getBoundingClientRect();
   const { height, width } = boundingBox;
+
+
 
   const sortedPopulationData = populationsIn1991.sort(function(a, b) {
     return d3.ascending(a.population, b.population);
