@@ -32,7 +32,9 @@ export default class BarChart {
       bottom: 0,
       left: 60
     };
-
+    const text = d3.select(".scroll").select(".scroll__text");
+    const textWidth = text.node().offsetWidth;
+    
     this.width = width - this.barMargin.left - this.barMargin.right;
     this.height = height - 100 - this.barMargin.top - this.barMargin.bottom;
 
