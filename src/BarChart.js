@@ -127,7 +127,17 @@ export default class BarChart {
       .text(function(d) {
         return d.population;
       })
-      .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
+      .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")")
+      .style("opacity", "0");
+
+
+    barGraphicSvg
+      .selectAll('.label')
+      .transition()
+      .delay(1000)
+      .duration(500)
+      .style("opacity", "1");
+
   }
 
 

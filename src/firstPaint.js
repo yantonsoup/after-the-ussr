@@ -1,6 +1,4 @@
 export default function firstPaint () {
-
-  const textMargin = 16 * 4
   // Setup sizes for the graphic and steps
   var container = d3.select(".scroll");
 
@@ -9,27 +7,19 @@ export default function firstPaint () {
 
   const text = container.select(".scroll__text");
   const textWidth = text.node().offsetWidth;
+
   const step = text.selectAll(".step");
   const stepHeight = Math.floor(window.innerHeight * 1);
   step.style("height", stepHeight + "px");
-  // d3.selectAll('.step').style("height", stepHeight + "px");
-
-  const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
-  const graphic = container.select(".scroll__graphic");
-  
   text.selectAll(".step-two").style('height', '200px');
 
+  const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
+
   // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
-  graphic
+  d3.select(".scroll__graphic")
     .style("width", width + "px")
     .style("height", width + "px")
     .style("top", graphicMarginTop + "px");
-
-  // -----------------------------------
-  console.warn('firstPaint top',{ graphicMarginTop });
-  console.warn('firstPaint height',{ height });
-  console.warn('firstPaint width',{ width });
-  console.warn('firstPaint textWidth',{ width });
 
 
   // Use this to set the distance ofo the first step

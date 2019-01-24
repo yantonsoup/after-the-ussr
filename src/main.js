@@ -12,9 +12,11 @@ window.onbeforeunload = function() {
   window.scrollTo(0, 0);
 };
 
-firstPaint();
 
 loadMap().then(json => {
+
+  firstPaint();
+
   const countries = topojson.feature(json, json.objects.subunits)
   .features;
 
@@ -29,7 +31,6 @@ loadMap().then(json => {
   })
 
   console.warn('countries', countries);
-  console.warn('map', map);
 
   setupScrollama(worldMap, barChart);
 });
