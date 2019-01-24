@@ -8,6 +8,7 @@ export default function setupScrollama(worldMap, barChart) {
   // response = { element, direction, index }
   function handleStepEnter(response) {
     console.warn('SCROLLAMA animation[index]:: ', response.index)
+
     const animationIndex = response.index
     const animationHandler = animations[animationIndex]
     animationHandler(worldMap, barChart)

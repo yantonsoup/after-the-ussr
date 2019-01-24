@@ -16,6 +16,8 @@ export default function firstPaint () {
 
   const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
   const graphic = container.select(".scroll__graphic");
+  
+  text.selectAll(".step-two").style('height', '200px');
 
   // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
   graphic

@@ -45,11 +45,13 @@ function secondAnimation(map, barChart) {
     duration: 1000,
     top: Math.floor(window.innerHeight * 0.05)
   })
+  barChart.fadeTextIn()
 
 }
 
 function thirdAnimation(map, barChart) {
   barChart.animateBarsIn()
+  barChart.addPopulationLabels()
 }
 
 function fourthAnimation (map, barChart) {

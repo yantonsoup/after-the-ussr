@@ -34,8 +34,8 @@ export default class BarChart {
     };
     const text = d3.select(".scroll").select(".scroll__text");
     const textWidth = text.node().offsetWidth;
-    
-    this.width = width - this.barMargin.left - this.barMargin.right;
+
+    this.width = textWidth - this.barMargin.left - this.barMargin.right;
     this.height = height - 100 - this.barMargin.top - this.barMargin.bottom;
 
     // we'll actually be appending to a <g> element
@@ -43,7 +43,7 @@ export default class BarChart {
       .select("#bar-graphic")
       .append("svg")
       .attr("width", this.width + this.barMargin.left + this.barMargin.right)
-      .attr("height", this.width + this.barMargin.top + this.barMargin.bottom)
+      .attr("height", this.height + this.barMargin.top + this.barMargin.bottom)
       .append("g")
       .attr(
         "transform",
@@ -53,7 +53,6 @@ export default class BarChart {
     // create the other stuff
     this.createScales();
     this.addYAxes();
-    this.addAxisLabels();
   }
 
   createScales() {
@@ -106,19 +105,9 @@ export default class BarChart {
       .attr("height", () => this.yScale.rangeBand())
       .attr("x", 0)
       .attr("width", 0);
-
-    this.plot
-      .transition()
-      .duration(2000)
-      .style("opacity", "1");
-
-    d3.select(".bar-graphic-header")
-      .transition()
-      .duration(2000)
-      .style("opacity", "1");
   }
 
-  addAxisLabels() {
+  addPopulationLabels() {
     const barGraphicSvg = d3.select("#bar-graphic").select("svg");
 
     barGraphicSvg
@@ -140,6 +129,22 @@ export default class BarChart {
       })
       .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
   }
+
+
+  fadeTextIn() {
+    this.plot
+        .transition()
+        .delay(1000)
+        .duration(500)
+        .style("opacity", "1");
+
+    d3.select(".bar-graphic-header")
+        .transition()
+        .delay(1000)
+        .duration(500)
+        .style("opacity", "1");
+    }
+
 
   animateBarsIn() {
     d3.selectAll("rect")
