@@ -45,20 +45,15 @@ export default class WorldMap {
     this.projection.scale(scaleExtent[0]);
     this.path = d3.geo.path().projection(this.projection);
 
-    // set up parent element and SVG
-    this.paintMap();
-  }
-
-  paintMap() {
     const svg = d3
       .select(this.element)
       .append("svg")
       .attr("width", this.width)
       .attr("height", this.height);
 
-    this.container = svg.append("g").attr("id", "map");
+    const mapGraphic = svg.append("g").attr("id", "map");
 
-    this.container
+    mapGraphic
       .selectAll("path")
       .data(this.data)
       .enter()
@@ -80,13 +75,15 @@ export default class WorldMap {
       });
   }
 
-  ////////// SETTTERS
-  animateStyles({ duration, section, property, value }) {
+  animateStyles({ duration, section,  styles }) {
+    console.warn({ duration, section, styles })
+
     d3.select(this.element)
       .selectAll(section)
       .transition()
       .duration(duration)
-      .style(property, value);
+      .style(styles)
   }
+
 
 }
