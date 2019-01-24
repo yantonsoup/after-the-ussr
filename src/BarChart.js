@@ -134,8 +134,8 @@ export default class BarChart {
     barGraphicSvg
       .selectAll('.label')
       .transition()
-      .delay(1000)
-      .duration(500)
+      .delay(1500)
+      .duration(1000)
       .style("opacity", "1");
 
   }
