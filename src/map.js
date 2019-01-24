@@ -8,6 +8,7 @@ export default class WorldMap {
     console.warn("opts.data", opts);
     // load in arguments from config object
     this.data = opts.data;
+    this.sovietDataPoints = opts.data.filter(country => sovietCountryIsoCodes.includes(country.id))
     this.element = opts.element;
 
     const boundingBox = d3
@@ -51,9 +52,9 @@ export default class WorldMap {
       .attr("width", this.width)
       .attr("height", this.height);
 
-    const mapGraphic = svg.append("g").attr("id", "map");
+    this.mapGraphic = svg.append("g").attr("id", "map");
 
-    mapGraphic
+    this.mapGraphic
       .selectAll("path")
       .data(this.data)
       .enter()
@@ -75,15 +76,52 @@ export default class WorldMap {
       });
   }
 
-  animateStyles({ duration, section,  styles }) {
-    console.warn({ duration, section, styles })
+  animateSectionStyles({ duration, section, styles }) {
+    console.warn({ duration, section, styles });
 
     d3.select(this.element)
       .selectAll(section)
       .transition()
       .duration(duration)
-      .style(styles)
+      .style(styles);
   }
 
+  animateMapZoom({ scale, translateX, translateY, duration }) {
+    this.mapGraphic
+      .transition()
+      .duration(duration)
+      .attr(
+        "transform",
+        `scale(${scale})translate(${translateX},${translateY})`
+      );
+  }
 
+  placeLabels(){
+    this.mapGraphic
+      .selectAll(".place-label")
+      .data(this.sovietDataPoints)
+      .enter()
+      .append("text")
+      .attr("class", "place-label")
+      .attr("transform", (d) => {
+        const [x, y] = this.path.centroid(d);
+
+        return `translate(${x},${y})`;
+      })
+      .attr("dx", function({ id }) {
+          const { x } = sovietLabelShift[id];
+  
+          return `${x}px`;
+      })
+      .attr("dy", function({ id }) {
+          const { y } = sovietLabelShift[id];
+
+          return `${y}px`;
+      })
+      .text(function(d) {
+          return d.properties.name;
+      })
+      .style("font-size", 3 + "px");
+    }
+  
 }

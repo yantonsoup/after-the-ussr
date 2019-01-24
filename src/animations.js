@@ -5,8 +5,8 @@ import {
   populationsIn1991
 } from "./constants";
 
-function zeroAnimation(worldMap) {
-  worldMap.animateSectionStyles({ 
+function zeroAnimation(map) {
+  map.animateSectionStyles({ 
     duration: 1000, 
     section: '.non-soviet-country', 
     styles: { 
@@ -14,68 +14,52 @@ function zeroAnimation(worldMap) {
       'stroke-width': '0.25px' 
     }
   })
-  // worldMap.animateStyles({ 
-  //   duration: 1000, 
-  //   section: '.non-soviet-country', 
-  //   property: 'stroke-width', 
-  //   value: '0.25px'
-  // })
-  // d3.select("#map")
-  //   .selectAll(".non-soviet-country")
-  //   .transition()
-  //   .duration(1000)
-  //   .style("opacity", "0.5")
-  //   .style("stroke-width", 0.25 + "px");
 }
 
 function firstAnimation(map) {
-  console.warn('map', map)
-  var scale = 4;
-  var translateX = -Math.floor(map.width * 0.585);
-  var translateY = -Math.floor(map.height * 0.33);
+  const zoomParams = {
+    scale: 4,
+    duration: 1000,
+    translateX: (-Math.floor(map.width * 0.462)),
+    translateY: -Math.floor(map.height * 0.2),
+  }
 
-  d3.select("#map")
-    .transition()
-    .duration(1000)
-    .attr(
-      "transform",
-      `translate(${map.width / 2},${map.height /
-        2})scale(${scale})translate(${translateX},${translateY})`
-    );
+  map.animateMapZoom(zoomParams)
 
-  d3.select("#map")
-    .selectAll(".place-label")
-    .data(map.data)
-    .enter()
-    .append("text")
-    .attr("class", "place-label")
-    .attr("transform", function(d) {
-      // can get centroid easily like this!  path.centroid(d)
-      const [x, y] = map.path.centroid(d);
-      // console.warn('centroid', 'x', x, 'y', y)
-      return `translate(${x},${y})`;
-    })
-    .attr("dx", function({ id }) {
-      if (sovietCountryIsoCodes.includes(id)) {
-        const { x } = sovietLabelShift[id];
-        return `${x}px`;
-      }
-    })
-    .attr("dy", function(d) {
-      if (sovietCountryIsoCodes.includes(d.id)) {
-        const name = d.id;
-        const { y } = sovietLabelShift[name];
-        return `${y}px`;
-      }
-    })
-    // .style("z-index", '100')
-    .text(function(d) {
-      if (sovietCountryIsoCodes.includes(d.id)) {
-        // console.warn("soviet datapoint", d);
-        return d.properties.name;
-      }
-    })
-    .style("font-size", 3 + "px");
+  map.placeLabels()
+  // d3.select("#map")
+  //   .selectAll(".place-label")
+  //   .data(map.data)
+  //   .enter()
+  //   .append("text")
+  //   .attr("class", "place-label")
+  //   .attr("transform", function(d) {
+  //     // can get centroid easily like this!  path.centroid(d)
+  //     const [x, y] = map.path.centroid(d);
+  //     // console.warn('centroid', 'x', x, 'y', y)
+  //     return `translate(${x},${y})`;
+  //   })
+  //   .attr("dx", function({ id }) {
+  //     if (sovietCountryIsoCodes.includes(id)) {
+  //       const { x } = sovietLabelShift[id];
+  //       return `${x}px`;
+  //     }
+  //   })
+  //   .attr("dy", function(d) {
+  //     if (sovietCountryIsoCodes.includes(d.id)) {
+  //       const name = d.id;
+  //       const { y } = sovietLabelShift[name];
+  //       return `${y}px`;
+  //     }
+  //   })
+  //   // .style("z-index", '100')
+  //   .text(function(d) {
+  //     if (sovietCountryIsoCodes.includes(d.id)) {
+  //       // console.warn("soviet datapoint", d);
+  //       return d.properties.name;
+  //     }
+  //   })
+  //   .style("font-size", 3 + "px");
 
   d3.selectAll(".non-soviet-country")
     .transition()
