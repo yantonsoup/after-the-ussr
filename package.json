@@ -16,7 +16,7 @@
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c -w",
-    "dev": "npm-run-all --parallel start watch -p 3030",
+    "dev": "npm-run-all --parallel start watch",
     "start": "serve public"
   },
   "repository": "https://github.com/yantonsoup/after-the-ussr.git",

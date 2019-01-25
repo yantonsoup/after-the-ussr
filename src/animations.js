@@ -1,10 +1,3 @@
-import {
-  sovietCountryIsoCodes,
-  colors,
-  sovietLabelShift,
-  populationsIn1991
-} from "./constants";
-
 function zeroAnimation(map) {
   map.animateSectionStyles({ 
     duration: 1000, 
@@ -52,10 +45,12 @@ function secondAnimation(map, barChart) {
 function thirdAnimation(map, barChart) {
   barChart.animateBarsIn()
   barChart.addPopulationLabels()
+  //
+  map.addPointsToMap()
+  map.drawArrows()
 }
 
 function fourthAnimation (map, barChart) {
-  map.addPointsToMap()
 }
 
 export default {

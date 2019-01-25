@@ -156,21 +156,44 @@ export default class WorldMap {
         .data(centroids)
         .enter()
         .append("circle")
-        .attr("fill", "red")
+        .attr("fill", "black")
         .attr("r", "1px")
         .attr("cx", function (d){ return d[0]; })
         .attr("cy", function (d){ return d[1]; });
-        // .attr("cx",  (d) => {
-        //   console.warn('circle d', d)
-        //   const [x, y] = this.path.centroid(d);
-        //   console.warn('when appending circles: this.path.centroid(d)', this.path.centroid(d))
-        //   return x 
-        // })
-        // .attr("cy", (d) => { 
-        //   const [x, y] = this.path.centroid(d);
-        //   return x 
-        // })
-        // .attr("r", "8px")
-        // .attr("fill", "red")
+      
+        const russiaCoordinates = [235, 110];
+      this.mapGraphic.selectAll(".russia-centroid")
+        .data(russiaCoordinates)
+        .enter()
+        .append("circle")
+        .attr("fill", "black")
+        .attr("r", "0.5px")
+        .attr("cx", function (d){ return d[0]; })
+        .attr("cy", function (d){ return d[1]; });
+    }
+
+    drawArrows() {
+      const centroidsWithoutRussia = this.sovietDataPoints
+        .filter(({id}) => id !== 'RUS')
+        .map( country =>{
+          return this.path.centroid(country);
+        });
+
+      console.warn('ayyeee drawing an arrow')
+      const russiaCoordinates = [235, 110];
+
+      this.mapGraphic.selectAll(".centroid")
+      .data(centroidsWithoutRussia)
+      .enter()
+        .append('line')
+        .attr("x1",function (d){ return d[0];})  
+        .attr("y1",function (d){ return d[1];} )  
+        .attr("x2", russiaCoordinates[0])  
+        .attr("y2", russiaCoordinates[1])  
+        .attr("stroke","red")  
+        .attr("stroke-width",1)  
+        .attr("marker-end","url(#arrow)");  
+
+
     }
 }
