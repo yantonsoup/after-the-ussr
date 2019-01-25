@@ -20,8 +20,6 @@ loadMap().then(json => {
   const countries = topojson.feature(json, json.objects.subunits)
   .features;
 
-
-
   const worldMap = new WorldMap({
     data: countries,
     element: '.scroll__graphic'
