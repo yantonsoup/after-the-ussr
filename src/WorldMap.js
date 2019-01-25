@@ -175,7 +175,7 @@ export default class WorldMap {
       .enter()
       .append("circle")
       .attr("fill", "white")
-      .attr("r", "0.5px")
+      .attr("r", "0.25px")
       .attr("cx", function(d) {
         return d[0];
       })

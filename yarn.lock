@@ -721,6 +721,7 @@ jest-worker@^23.2.0:
   dependencies:
     merge-stream "^1.0.1"
 
+<<<<<<< HEAD
 jest-worker@^24.0.0-alpha.9:
   version "24.0.0-alpha.15"
   resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-24.0.0-alpha.15.tgz#8c48e8679060fe475557a5b6a36c9901900ce722"
@@ -728,6 +729,8 @@ jest-worker@^24.0.0-alpha.9:
     merge-stream "^1.0.1"
     supports-color "^6.1.0"
 
+=======
+>>>>>>> 55e8d1187230533f7ab419ff389e857f4e36123c
 js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -929,6 +932,7 @@ on-headers@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/on-headers/-/on-headers-1.0.1.tgz#928f5d0f470d49342651ea6794b0857c100693f7"
 
+<<<<<<< HEAD
 optionator@^0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/optionator/-/optionator-0.8.2.tgz#364c5e409d3f4d6301d6c0b4c05bba50180aeb64"
@@ -940,6 +944,8 @@ optionator@^0.8.1:
     type-check "~0.3.2"
     wordwrap "~1.0.0"
 
+=======
+>>>>>>> 55e8d1187230533f7ab419ff389e857f4e36123c
 p-finally@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/p-finally/-/p-finally-1.0.0.tgz#3fbcfb15b899a44123b34b6dcc18b724336a2cae"
@@ -1122,6 +1128,7 @@ rollup-plugin-node-resolve@^4.0.0:
     is-module "^1.0.0"
     resolve "^1.8.1"
 
+<<<<<<< HEAD
 rollup-plugin-terser@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/rollup-plugin-terser/-/rollup-plugin-terser-4.0.2.tgz#78936d182ae7c4ecb313403ff5d5faad1b69e2aa"
@@ -1137,6 +1144,13 @@ rollup-plugin-uglify@^6.0.1:
   resolved "https://registry.yarnpkg.com/rollup-plugin-uglify/-/rollup-plugin-uglify-6.0.1.tgz#f8d8e0309104af33981ec0956670b0bd7fac75f5"
   dependencies:
     "@babel/code-frame" "^7.0.0"
+=======
+rollup-plugin-uglify@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-uglify/-/rollup-plugin-uglify-6.0.1.tgz#f8d8e0309104af33981ec0956670b0bd7fac75f5"
+  dependencies:
+    "@babel/code-frame" "^7.0.0"
+>>>>>>> 55e8d1187230533f7ab419ff389e857f4e36123c
     jest-worker "^23.2.0"
     serialize-javascript "^1.5.0"
     uglify-js "^3.4.9"
@@ -1229,6 +1243,7 @@ signal-exit@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
+<<<<<<< HEAD
 source-map-support@~0.5.6:
   version "0.5.10"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.10.tgz#2214080bc9d51832511ee2bab96e3c2f9353120c"
@@ -1236,6 +1251,8 @@ source-map-support@~0.5.6:
     buffer-from "^1.0.0"
     source-map "^0.6.0"
 
+=======
+>>>>>>> 55e8d1187230533f7ab419ff389e857f4e36123c
 source-map@^0.5.0:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
@@ -1315,18 +1332,22 @@ supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
+<<<<<<< HEAD
 supports-color@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-6.1.0.tgz#0764abc69c63d5ac842dd4867e8d025e880df8f3"
   dependencies:
     has-flag "^3.0.0"
 
+=======
+>>>>>>> 55e8d1187230533f7ab419ff389e857f4e36123c
 term-size@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/term-size/-/term-size-1.2.0.tgz#458b83887f288fc56d6fffbfad262e26638efa69"
   dependencies:
     execa "^0.7.0"
 
+<<<<<<< HEAD
 terser@^3.14.1:
   version "3.14.1"
   resolved "https://registry.yarnpkg.com/terser/-/terser-3.14.1.tgz#cc4764014af570bc79c79742358bd46926018a32"
@@ -1335,6 +1356,8 @@ terser@^3.14.1:
     source-map "~0.6.1"
     source-map-support "~0.5.6"
 
+=======
+>>>>>>> 55e8d1187230533f7ab419ff389e857f4e36123c
 to-fast-properties@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
@@ -1343,12 +1366,15 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
+<<<<<<< HEAD
 type-check@~0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/type-check/-/type-check-0.3.2.tgz#5884cab512cf1d355e3fb784f30804b2b520db72"
   dependencies:
     prelude-ls "~1.1.2"
 
+=======
+>>>>>>> 55e8d1187230533f7ab419ff389e857f4e36123c
 uglify-js@^3.4.9:
   version "3.4.9"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.4.9.tgz#af02f180c1207d76432e473ed24a28f4a782bae3"
@@ -1396,10 +1422,13 @@ widest-line@^2.0.0:
   dependencies:
     string-width "^2.1.1"
 
+<<<<<<< HEAD
 wordwrap@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
 
+=======
+>>>>>>> 55e8d1187230533f7ab419ff389e857f4e36123c
 yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
