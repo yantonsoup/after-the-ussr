@@ -51,7 +51,6 @@ function thirdAnimation(map, barChart) {
 }
 
 function fourthAnimation (map, barChart) {
-  map.drawArrows()
 }
 
 export default {

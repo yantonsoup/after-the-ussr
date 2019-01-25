@@ -18,19 +18,19 @@ loadMap().then(json => {
   firstPaint();
 
   const countries = topojson.feature(json, json.objects.subunits)
-  .features;
+  const features = countries.features;
 
   const worldMap = new WorldMap({
-    data: countries,
+    data: features,
     element: '.scroll__graphic'
   })
 
   const barChart = new BarChart({
     element: '#bar-graphic',
-    data: countries
+    data: features
   })
 
-  console.warn('countries', countries);
+  console.warn('features', features);
 
   setupScrollama(worldMap, barChart);
 });

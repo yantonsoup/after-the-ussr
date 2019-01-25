@@ -213,15 +213,15 @@ export default class WorldMap {
   }
 
   drawCurves() {
-    const centroids = this.sovietDataPoints.map(country => {
+    const russiaCentroids = this.sovietDataPoints.filter(({id}) => id !== 'RUS').map(country => {
       return this.path.centroid(country);
     });
-    const centroidsWithValues = centroids.map((centroid, index) => ({
+    const centroidsWithValues = russiaCentroids.map((centroid, index) => ({
       trade: index,
       ...centroid,
     }))
   
-    console.warn("centroids", centroids);
+    console.warn("centroidsWithValues", centroidsWithValues);
     const russiaCoordinates = [235, 110];
 
     const arcs = this.mapGraphic
@@ -235,26 +235,18 @@ export default class WorldMap {
       .attr("class", "arc")
       .attr("d", datum => {
         console.warn({datum})
-        const test = [-69.445469,45.253783]
-        const countryCentroid = [datum[0], datum[1]]
 
-
-        const origin = countryCentroid
+        const curveoffset = 15;
+        const origin = [datum[0], datum[1]]
         const dest = russiaCoordinates;
         const mid = [(origin[0] + dest[0]) / 2, (origin[1] + dest[1]) / 2];
 
         //define handle points for Bezier curves. Higher values for curveoffset will generate more pronounced curves.
-        const curveoffset = 20;
-        const midcurve = [mid[0] + curveoffset, mid[1] - curveoffset];
+        const midcurve = [mid[0] , mid[1] - curveoffset];
 
         // move cursor to origin
-        const scalar = Math.sqrt(Math.pow(dest[0],2) - 2*dest[0]*midcurve[0]+Math.pow(midcurve[0],2)+Math.pow(dest[1],2)-2*dest[1]*midcurve[1]+Math.pow(midcurve[1],2));
-		
         // define the arrowpoint: the destination, minus a scaled tangent vector, minus an orthogonal vector scaled to the datum.trade variable
-        const arrowpoint = [ 
-          dest[0] - ( 0.5*datum.trade*(dest[0]-midcurve[0]) - datum.trade*(dest[1]-midcurve[1]) ) / scalar , 
-          dest[1] - ( 0.5*datum.trade*(dest[1]-midcurve[1]) - datum.trade*(-dest[0]+midcurve[0]) ) / scalar	
-        ];
+     
   
         // move cursor to origin
         return "M" + origin[0] + ',' + origin[1] 
@@ -262,14 +254,9 @@ export default class WorldMap {
           + "S" + midcurve[0] + "," + midcurve[1]
         //smooth curve to destination	
           + "," + dest[0] + "," + dest[1]
-        //straight line to arrowhead point
-          + "L" + arrowpoint[0] + "," + arrowpoint[1] 
-        // straight line towards original curve along scaled orthogonal vector (creates notched arrow head)
-          + "l" + (0.3*datum.trade*(-dest[1]+midcurve[1])/scalar) + "," + (0.3*datum.trade*(dest[0]-midcurve[0])/scalar)
-          // smooth curve to midpoint	
-          + "S" + (midcurve[0]) + "," + (midcurve[1]) 
-          //smooth curve to origin	
-          + "," + origin[0] + "," + origin[1]
-      });
+      })
+      .style('fill', 'none')
+      .style('stroke-width', '0.5px')
+      .style('stroke', 'lightgoldenrodyellow')
   }
 }
