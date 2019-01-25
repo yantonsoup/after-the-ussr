@@ -174,8 +174,8 @@ export default class WorldMap {
       .data(russiaCoordinates)
       .enter()
       .append("circle")
-      .attr("fill", "black")
-      .attr("r", "0.5px")
+      .attr("fill", "white")
+      .attr("r", "0.25px")
       .attr("cx", function(d) {
         return d[0];
       })
@@ -233,7 +233,7 @@ export default class WorldMap {
       .enter()
       .append("path")
       .attr("class", "arc")
-      .attr("d", datum => {
+      .attr("d", (datum, index) => {
         console.warn({datum})
 
         const curveoffset = 15;
@@ -257,6 +257,6 @@ export default class WorldMap {
       })
       .style('fill', 'none')
       .style('stroke-width', '0.5px')
-      .style('stroke', 'lightgoldenrodyellow')
+      .style('stroke', (d, i) => colors[i])
   }
 }

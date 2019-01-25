@@ -162,7 +162,8 @@ export default class BarChart {
         .transition()
         .delay(1000)
         .duration(500)
-        .style("opacity", "1");
+        .style("opacity", "1")
+        .style('color', 'black')
     }
 
 

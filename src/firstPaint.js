@@ -13,9 +13,12 @@ export default function firstPaint () {
   step.style("height", stepHeight + "px");
   text.selectAll(".step-two").style('height', '200px');
 
-  const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
+  
+  const barMarginTop = Math.floor(window.innerHeight * 0.5);
+  d3.select(".data__graphic").style('top', barMarginTop + 'px')
 
   // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
+  const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
   d3.select(".scroll__graphic")
     .style("width", width + "px")
     .style("height", width + "px")
