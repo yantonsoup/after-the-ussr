@@ -51,10 +51,10 @@ function thirdAnimation(worldMap, barChart) {
 
 function fourthAnimation(worldMap) {
   worldMap.drawCurves()
+  worldMap.drawArrows()
 }
 
 function fifthAnimation (worldMap, barChart) {
-  worldMap.drawArrows()
 }
 
 export default {

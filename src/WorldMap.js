@@ -205,10 +205,14 @@ export default class WorldMap {
       .attr("y1", function(d) {
         return d[1];
       })
-      .attr("x2", russiaCoordinates[0])
-      .attr("y2", russiaCoordinates[1])
-      .attr("stroke", "red")
-      .attr("stroke-width", 1)
+      .attr("x2", function(d) {
+        return d[0] + 5;
+      })
+      .attr("y2", function(d) {
+        return d[1] + 10;
+      })
+      .attr("stroke", "black")
+      .attr("stroke-width", 0.1)
       .attr("marker-end", "url(#arrow)");
   }
 
