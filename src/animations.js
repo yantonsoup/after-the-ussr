@@ -1,5 +1,5 @@
-function zeroAnimation(map) {
-  map.animateSectionStyles({ 
+function zeroAnimation(worldMap) {
+  worldMap.animateSectionStyles({ 
     duration: 1000, 
     section: '.non-soviet-country', 
     styles: { 
@@ -9,21 +9,21 @@ function zeroAnimation(map) {
   })
 }
 
-function firstAnimation(map) {
+function firstAnimation(worldMap) {
   const zoomParams = {
     scale: 4,
     duration: 1000,
-    translateX: (-Math.floor(map.width * 0.462)),
-    translateY: -Math.floor(map.height * 0.2),
+    translateX: (-Math.floor(worldMap.width * 0.462)),
+    translateY: -Math.floor(worldMap.height * 0.2),
   }
 
-  map.animateMapZoom(zoomParams)
+  worldMap.animateMapZoom(zoomParams)
 
-  map.createLabels()
+  worldMap.createLabels()
 
-  map.createPopulationChoropleth()
+  worldMap.createPopulationChoropleth()
 
-  map.animateSectionStyles({ 
+  worldMap.animateSectionStyles({ 
     duration: 500, 
     section: '.non-soviet-country', 
     styles: { 
@@ -33,8 +33,8 @@ function firstAnimation(map) {
   })
 }
 
-function secondAnimation(map, barChart) {
-  map.moveMapContainer({
+function secondAnimation(worldMap, barChart) {
+  worldMap.moveMapContainer({
     duration: 1000,
     top: Math.floor(window.innerHeight * 0.05)
   })
@@ -42,15 +42,19 @@ function secondAnimation(map, barChart) {
 
 }
 
-function thirdAnimation(map, barChart) {
+function thirdAnimation(worldMap, barChart) {
   barChart.animateBarsIn()
   barChart.addPopulationLabels()
   //
-  map.addPointsToMap()
-  map.drawCurves()
+  worldMap.addPointsToMap()
 }
 
-function fourthAnimation (map, barChart) {
+function fourthAnimation(worldMap) {
+  worldMap.drawCurves()
+}
+
+function fifthAnimation (worldMap, barChart) {
+  worldMap.drawArrows()
 }
 
 export default {
@@ -59,6 +63,6 @@ export default {
   2: secondAnimation,
   3: thirdAnimation,
   4: fourthAnimation,
-  5: () => {},
+  5: fifthAnimation,
   6: () => {}
 };
