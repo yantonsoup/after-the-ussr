@@ -47,10 +47,10 @@ function thirdAnimation(map, barChart) {
   barChart.addPopulationLabels()
   //
   map.addPointsToMap()
-  map.drawCurves()
 }
 
 function fourthAnimation (map, barChart) {
+  map.drawCurves()
 }
 
 export default {

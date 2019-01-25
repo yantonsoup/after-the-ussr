@@ -258,5 +258,9 @@ export default class WorldMap {
       .style('fill', 'none')
       .style('stroke-width', '0.5px')
       .style('stroke', (d, i) => colors[i])
+      .style('opacity', '0')
+      .transition()
+      .duration(1000)
+      .style('opacity', '1')
   }
 }
