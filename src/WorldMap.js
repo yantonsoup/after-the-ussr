@@ -69,8 +69,6 @@ export default class WorldMap {
       .attr("class", function(datapoint, i) {
         if (sovietCountryIsoCodes.includes(datapoint.id)) {
           return "country soviet-country";
-        } else if (datapoint.id === "ATA") {
-          return "transparent-ATA";
         } else {
           return "country non-soviet-country";
         }
