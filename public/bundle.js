@@ -1,2 +1,1989 @@
-!function(){"use strict";function t(t){const e=t.length,n=[];for(let o=0;o<e;o+=1)n.push(t[o]);return n}function e(t){return t instanceof Element?t:"string"==typeof t?document.querySelector(t):null}function n({id:t}){return`scrollama__debug-offset--${t}`}function o({id:t,offsetVal:e,stepEl:o}){!function({id:t,offsetVal:e,stepClass:o}){const i=document.createElement("div");i.setAttribute("id",n({id:t})),i.setAttribute("class","scrollama__debug-offset"),i.style.position="fixed",i.style.left="0",i.style.width="100%",i.style.height="0px",i.style.borderTop="2px dashed black",i.style.zIndex="9999";const r=document.createElement("p");r.innerText=`".${o}" trigger: ${e}`,r.style.fontSize="12px",r.style.fontFamily="monospace",r.style.color="black",r.style.margin="0",r.style.padding="6px",i.appendChild(r),document.body.appendChild(i)}({id:t,offsetVal:e,stepClass:o[0].getAttribute("class")})}function i({id:t,stepOffsetHeight:e,offsetMargin:o,offsetVal:i}){!function({id:t,offsetMargin:e,offsetVal:o}){const i=n({id:t});document.querySelector(`#${i}`).style.top=`${e}px`}({id:t,offsetMargin:o})}function r({id:t,index:e,state:n}){const o=function({id:t,i:e}){return`scrollama__debug-step--${t}-${e}`}({id:t,i:e}),i=document.querySelector(`#${o}_above`),r=document.querySelector(`#${o}_below`),s="enter"===n?"block":"none";i&&(i.style.display=s),r&&(r.style.display=s)}function s(){const n=1,s={},a={};let c=null,l=null,h=null,d=null,p=0,u=0,f=0,g=0,m=null,y=null,b=null,w=!1,x=!1,v=!1,_=!1,E=0,M=!1,I=!1,R=null,A=null,T=-1,O=null;const S=[];function k(t){let e=0;if(t.offsetParent)do{e+=t.offsetTop,t=t.offsetParent}while(t);return e<0?0:e}function C(t){return+t.getAttribute("data-scrollama-index")}function B(){window.pageYOffset>T?O="down":window.pageYOffset<T&&(O="up"),T=window.pageYOffset}function $(){f=window.innerHeight,g=function(){const t=document.body,e=document.documentElement;return Math.max(t.scrollHeight,t.offsetHeight,e.clientHeight,e.scrollHeight,e.offsetHeight)}(),b=l?l.getBoundingClientRect():null,u=p*f,m=h?h.map(t=>t.offsetHeight):[],y=h?h.map(k):[],x&&w&&Y(),v&&i({id:d,stepOffsetHeight:m,offsetMargin:u,offsetVal:p})}function L(t){t&&!x?(w&&Y(),x=!0):t||(a.top&&a.top.disconnect(),a.bottom&&a.bottom.disconnect(),a.stepAbove&&a.stepAbove.forEach(t=>t.disconnect()),a.stepBelow&&a.stepBelow.forEach(t=>t.disconnect()),a.stepProgress&&a.stepProgress.forEach(t=>t.disconnect()),a.viewportAbove&&a.viewportAbove.forEach(t=>t.disconnect()),a.viewportBelow&&a.viewportBelow.forEach(t=>t.disconnect()),x=!1)}function P(t,e){if("above"===e)for(let e=0;e<t;e++){const t=R[e];"enter"===t.state&&U(h[e],"down"),"up"===t.direction&&(H(h[e],"down",!1),U(h[e],"down"))}else if("below"===e)for(let e=R.length-1;e>t;e--){const t=R[e];"enter"===t.state&&U(h[e],"up"),"down"===t.direction&&(H(h[e],"up",!1),U(h[e],"up"))}}function H(t,e,n=!0){const o=C(t),i={element:t,index:o,direction:e};R[o].direction=e,R[o].state="enter",M&&n&&"down"===e&&P(o,"above"),M&&n&&"up"===e&&P(o,"below"),s.stepEnter&&"function"==typeof s.stepEnter&&!S[o]&&(s.stepEnter(i,R),v&&r({id:d,index:o,state:"enter"}),I&&(S[o]=!0)),_&&V(t,"down"===e?0:1)}function U(t,e){const n=C(t),o={element:t,index:n,direction:e};R[n].direction=e,R[n].state="exit",_&&V(t,"down"===e?1:0),s.stepExit&&"function"==typeof s.stepExit&&(s.stepExit(o,R),v&&r({id:d,index:n,state:"exit"}))}function V(t,e){const n={element:t,index:C(t),progress:e};s.stepProgress&&"function"==typeof s.stepProgress&&s.stepProgress(n)}function j(){const t={direction:O};A.direction=O,A.state="enter",s.containerEnter&&"function"==typeof s.containerEnter&&s.containerEnter(t)}function K(){const t={direction:O};A.direction=O,A.state="exit",s.containerExit&&"function"==typeof s.containerExit&&s.containerExit(t)}function D(t){B(),t.forEach(t=>{const{isIntersecting:e,boundingClientRect:o,target:i}=t,{bottom:r,height:s}=o,a=r-u,c=C(i),l=R[c];a>=-n&&(e&&"down"===O&&"enter"!==l.state?H(i,O):e||"up"!==O||"enter"!==l.state?!e&&a>=s&&"down"===O&&"enter"===l.state&&U(i,O):U(i,O))})}function F(t){B(),t.forEach(t=>{const{isIntersecting:e,boundingClientRect:o,target:i}=t,{bottom:r,height:s}=o,a=r-u,c=C(i),l=R[c];a>=-n&&a<s&&e&&"up"===O&&"enter"!==l.state?H(i,O):a<=n&&!e&&"down"===O&&"enter"===l.state&&U(i,O)})}function G(t){B(),t.forEach(t=>{const{isIntersecting:e,target:n}=t,o=C(n),i=R[o];e&&"down"===O&&"enter"!==i.state&&"down"!==i.direction&&(H(n,"down"),U(n,"down"))})}function Z(t){B(),t.forEach(t=>{const{isIntersecting:e,target:n}=t,o=C(n),i=R[o];e&&"up"===O&&"enter"!==i.state&&"up"!==i.direction&&(H(n,"up"),U(n,"up"))})}function q(t){B(),t.forEach(({isIntersecting:t,intersectionRatio:e,boundingClientRect:o,target:i})=>{const{bottom:r}=o;t&&r-u>=-n&&V(i,+e.toFixed(3))})}function N(t){B();const{isIntersecting:e,boundingClientRect:o}=t[0],{top:i,bottom:r}=o;r>-n&&(e?j():"enter"===A.state&&K())}function z(t){B();const{isIntersecting:e,boundingClientRect:o}=t[0],{top:i}=o;i<n&&(e?j():"enter"===A.state&&K())}function W(){a.stepProgress&&a.stepProgress.forEach(t=>t.disconnect()),a.stepProgress=h.map((t,e)=>{const n=`${m[e]-u}px 0px ${-f+u}px 0px`,o=function(t){const e=Math.ceil(t/E),n=[],o=1/e;for(let t=0;t<e;t++)n.push(t*o);return n}(m[e]),i=new IntersectionObserver(q,{root:null,rootMargin:n,threshold:o});return i.observe(t),i})}function Y(){a.viewportAbove&&a.viewportAbove.forEach(t=>t.disconnect()),a.viewportAbove=h.map((t,e)=>{const n=y[e],o=-(f-u+m[e]),i=new IntersectionObserver(G,{root:null,rootMargin:`${n}px 0px ${o}px 0px`,threshold:0});return i.observe(t),i}),a.viewportBelow&&a.viewportBelow.forEach(t=>t.disconnect()),a.viewportBelow=h.map((t,e)=>{const n=-(u+m[e]),o=g-y[e]-m[e]-u,i=new IntersectionObserver(Z,{root:null,rootMargin:`${n}px 0px ${o}px 0px`,threshold:0});return i.observe(t),i}),a.stepAbove&&a.stepAbove.forEach(t=>t.disconnect()),a.stepAbove=h.map((t,e)=>{const n=m[e],o=new IntersectionObserver(D,{root:null,rootMargin:`${n}px 0px ${-f+u}px 0px`,threshold:0});return o.observe(t),o}),a.stepBelow&&a.stepBelow.forEach(t=>t.disconnect()),a.stepBelow=h.map((t,e)=>{const n=-u,o=g-f+m[e]+u,i=new IntersectionObserver(F,{root:null,rootMargin:`${n}px 0px ${o}px 0px`,threshold:0});return i.observe(t),i}),_&&W(),c&&l&&(function(){a.top&&a.top.unobserve(c);const t={root:null,rootMargin:`${f}px 0px -${f}px 0px`,threshold:0};a.top=new IntersectionObserver(N,t),a.top.observe(c)}(),function(){a.bottom&&a.bottom.unobserve(c);const t={root:null,rootMargin:`-${b.height}px 0px ${b.height}px 0px`,threshold:0};a.bottom=new IntersectionObserver(z,t),a.bottom.observe(c)}())}const J={};return J.setup=(({container:n,graphic:i,step:r,offset:s=.5,progress:a=!1,threshold:u=4,debug:f=!1,order:g=!0,once:m=!1})=>(d=function(){const t="abcdefghijklmnopqrstuv",e=t.length,n=(new Date).getTime();return`${[0,0,0].map(n=>t[Math.floor(Math.random()*e)]).join("")}${n}`}(),h=function(e,n=document){return"string"==typeof e?t(n.querySelectorAll(e)):e instanceof Element?t([e]):e instanceof NodeList?t(e):e instanceof Array?e:[]}(r),c=n?e(n):null,l=i?e(i):null,h.length?(v=f,_=a,M=g,I=m,J.offsetTrigger(s),E=Math.max(1,+u),w=!0,v&&o({id:d,stepEl:h,offsetVal:p}),h.forEach((t,e)=>t.setAttribute("data-scrollama-index",e)),R=h.map(()=>({direction:null,state:null})),A={direction:null,state:null},$(),L(!0),J):(console.error("scrollama error: no step elements"),J))),J.resize=(()=>($(),J)),J.enable=(()=>(L(!0),J)),J.disable=(()=>(L(!1),J)),J.destroy=(()=>{L(!1),Object.keys(s).forEach(t=>s[t]=null),Object.keys(a).forEach(t=>a[t]=null)}),J.offsetTrigger=function(t){return t&&!isNaN(t)?(p=Math.min(Math.max(0,t),1),J):p},J.onStepEnter=(t=>(s.stepEnter=t,J)),J.onStepExit=(t=>(s.stepExit=t,J)),J.onStepProgress=(t=>(s.stepProgress=t,J)),J.onContainerEnter=(t=>(s.containerEnter=t,J)),J.onContainerExit=(t=>(s.containerExit=t,J)),J}!function(t,e){function n(t){this.time=t.time,this.target=t.target,this.rootBounds=t.rootBounds,this.boundingClientRect=t.boundingClientRect,this.intersectionRect=t.intersectionRect||{top:0,bottom:0,left:0,right:0,width:0,height:0},this.isIntersecting=!!t.intersectionRect;var e=this.boundingClientRect,n=e.width*e.height,o=this.intersectionRect,i=o.width*o.height;this.intersectionRatio=n?Number((i/n).toFixed(4)):this.isIntersecting?1:0}function o(t,e){var n,o,i,r=e||{};if("function"!=typeof t)throw new Error("callback must be a function");if(r.root&&1!=r.root.nodeType)throw new Error("root must be an Element");this._checkForIntersections=(n=this._checkForIntersections.bind(this),o=this.THROTTLE_TIMEOUT,i=null,function(){i||(i=setTimeout(function(){n(),i=null},o))}),this._callback=t,this._observationTargets=[],this._queuedEntries=[],this._rootMarginValues=this._parseRootMargin(r.rootMargin),this.thresholds=this._initThresholds(r.threshold),this.root=r.root||null,this.rootMargin=this._rootMarginValues.map(function(t){return t.value+t.unit}).join(" ")}function i(t,e,n,o){"function"==typeof t.addEventListener?t.addEventListener(e,n,o||!1):"function"==typeof t.attachEvent&&t.attachEvent("on"+e,n)}function r(t,e,n,o){"function"==typeof t.removeEventListener?t.removeEventListener(e,n,o||!1):"function"==typeof t.detatchEvent&&t.detatchEvent("on"+e,n)}function s(t){var e;try{e=t.getBoundingClientRect()}catch(t){}return e?(e.width&&e.height||(e={top:e.top,right:e.right,bottom:e.bottom,left:e.left,width:e.right-e.left,height:e.bottom-e.top}),e):{top:0,bottom:0,left:0,right:0,width:0,height:0}}function a(t,e){for(var n=e;n;){if(n==t)return!0;n=c(n)}return!1}function c(t){var e=t.parentNode;return e&&11==e.nodeType&&e.host?e.host:e}"IntersectionObserver"in t&&"IntersectionObserverEntry"in t&&"intersectionRatio"in t.IntersectionObserverEntry.prototype?"isIntersecting"in t.IntersectionObserverEntry.prototype||Object.defineProperty(t.IntersectionObserverEntry.prototype,"isIntersecting",{get:function(){return this.intersectionRatio>0}}):(o.prototype.THROTTLE_TIMEOUT=100,o.prototype.POLL_INTERVAL=null,o.prototype.USE_MUTATION_OBSERVER=!0,o.prototype.observe=function(t){if(!this._observationTargets.some(function(e){return e.element==t})){if(!t||1!=t.nodeType)throw new Error("target must be an Element");this._registerInstance(),this._observationTargets.push({element:t,entry:null}),this._monitorIntersections(),this._checkForIntersections()}},o.prototype.unobserve=function(t){this._observationTargets=this._observationTargets.filter(function(e){return e.element!=t}),this._observationTargets.length||(this._unmonitorIntersections(),this._unregisterInstance())},o.prototype.disconnect=function(){this._observationTargets=[],this._unmonitorIntersections(),this._unregisterInstance()},o.prototype.takeRecords=function(){var t=this._queuedEntries.slice();return this._queuedEntries=[],t},o.prototype._initThresholds=function(t){var e=t||[0];return Array.isArray(e)||(e=[e]),e.sort().filter(function(t,e,n){if("number"!=typeof t||isNaN(t)||t<0||t>1)throw new Error("threshold must be a number between 0 and 1 inclusively");return t!==n[e-1]})},o.prototype._parseRootMargin=function(t){var e=(t||"0px").split(/\s+/).map(function(t){var e=/^(-?\d*\.?\d+)(px|%)$/.exec(t);if(!e)throw new Error("rootMargin must be specified in pixels or percent");return{value:parseFloat(e[1]),unit:e[2]}});return e[1]=e[1]||e[0],e[2]=e[2]||e[0],e[3]=e[3]||e[1],e},o.prototype._monitorIntersections=function(){this._monitoringIntersections||(this._monitoringIntersections=!0,this.POLL_INTERVAL?this._monitoringInterval=setInterval(this._checkForIntersections,this.POLL_INTERVAL):(i(t,"resize",this._checkForIntersections,!0),i(e,"scroll",this._checkForIntersections,!0),this.USE_MUTATION_OBSERVER&&"MutationObserver"in t&&(this._domObserver=new MutationObserver(this._checkForIntersections),this._domObserver.observe(e,{attributes:!0,childList:!0,characterData:!0,subtree:!0}))))},o.prototype._unmonitorIntersections=function(){this._monitoringIntersections&&(this._monitoringIntersections=!1,clearInterval(this._monitoringInterval),this._monitoringInterval=null,r(t,"resize",this._checkForIntersections,!0),r(e,"scroll",this._checkForIntersections,!0),this._domObserver&&(this._domObserver.disconnect(),this._domObserver=null))},o.prototype._checkForIntersections=function(){var e=this._rootIsInDom(),o=e?this._getRootRect():{top:0,bottom:0,left:0,right:0,width:0,height:0};this._observationTargets.forEach(function(i){var r=i.element,a=s(r),c=this._rootContainsTarget(r),l=i.entry,h=e&&c&&this._computeTargetAndRootIntersection(r,o),d=i.entry=new n({time:t.performance&&performance.now&&performance.now(),target:r,boundingClientRect:a,rootBounds:o,intersectionRect:h});l?e&&c?this._hasCrossedThreshold(l,d)&&this._queuedEntries.push(d):l&&l.isIntersecting&&this._queuedEntries.push(d):this._queuedEntries.push(d)},this),this._queuedEntries.length&&this._callback(this.takeRecords(),this)},o.prototype._computeTargetAndRootIntersection=function(n,o){if("none"!=t.getComputedStyle(n).display){for(var i,r,a,l,h,d,p,u,f=s(n),g=c(n),m=!1;!m;){var y=null,b=1==g.nodeType?t.getComputedStyle(g):{};if("none"==b.display)return;if(g==this.root||g==e?(m=!0,y=o):g!=e.body&&g!=e.documentElement&&"visible"!=b.overflow&&(y=s(g)),y&&(i=y,r=f,a=void 0,l=void 0,h=void 0,d=void 0,p=void 0,u=void 0,a=Math.max(i.top,r.top),l=Math.min(i.bottom,r.bottom),h=Math.max(i.left,r.left),d=Math.min(i.right,r.right),u=l-a,!(f=(p=d-h)>=0&&u>=0&&{top:a,bottom:l,left:h,right:d,width:p,height:u})))break;g=c(g)}return f}},o.prototype._getRootRect=function(){var t;if(this.root)t=s(this.root);else{var n=e.documentElement,o=e.body;t={top:0,left:0,right:n.clientWidth||o.clientWidth,width:n.clientWidth||o.clientWidth,bottom:n.clientHeight||o.clientHeight,height:n.clientHeight||o.clientHeight}}return this._expandRectByRootMargin(t)},o.prototype._expandRectByRootMargin=function(t){var e=this._rootMarginValues.map(function(e,n){return"px"==e.unit?e.value:e.value*(n%2?t.width:t.height)/100}),n={top:t.top-e[0],right:t.right+e[1],bottom:t.bottom+e[2],left:t.left-e[3]};return n.width=n.right-n.left,n.height=n.bottom-n.top,n},o.prototype._hasCrossedThreshold=function(t,e){var n=t&&t.isIntersecting?t.intersectionRatio||0:-1,o=e.isIntersecting?e.intersectionRatio||0:-1;if(n!==o)for(var i=0;i<this.thresholds.length;i++){var r=this.thresholds[i];if(r==n||r==o||r<n!=r<o)return!0}},o.prototype._rootIsInDom=function(){return!this.root||a(e,this.root)},o.prototype._rootContainsTarget=function(t){return a(this.root||e,t)},o.prototype._registerInstance=function(){},o.prototype._unregisterInstance=function(){},t.IntersectionObserver=o,t.IntersectionObserverEntry=n)}(window,document);var a={0:function(t){t.animateSectionStyles({duration:1e3,section:".non-soviet-country",styles:{opacity:"0.5","stroke-width":"0.25px"}})},1:function(t){const e={scale:4,duration:1e3,translateX:-Math.floor(.462*t.width),translateY:-Math.floor(.2*t.height)};t.animateMapZoom(e),t.createLabels(),t.createPopulationChoropleth(),t.animateSectionStyles({duration:500,section:".non-soviet-country",styles:{opacity:"0","stroke-width":"0.175px"}})},2:function(t,e){t.moveMapContainer({duration:1e3,top:Math.floor(.05*window.innerHeight)}),e.fadeTextIn()},3:function(t,e){e.animateBarsIn(),e.addPopulationLabels(),t.addPointsToMap()},4:function(t){t.drawCurves(),t.drawArrows()},5:function(t,e){},6:()=>{}};const c=["ARM","AZE","BLR","EST","GEO","KAZ","KGZ","LVA","LTU","MDA","RUS","TJK","TKM","UKR","UZB"],l=["#feedde","#fdbe85","#fd8d3c","#e6550d","#dd6344","#feedde","#fdbe85","#fd8d3c","#e6550d","#feedde","#fdbe85","#fd8d3c","#e6550d","#dd6344"],h={ARM:{x:-16,y:3},AZE:{x:-14,y:7},BLR:{x:-20,y:2},EST:{x:-13,y:-3},GEO:{x:-18,y:1},KAZ:{x:13,y:15},KGZ:{x:1,y:10},LVA:{x:-15,y:-2},LTU:{x:-18,y:0},MDA:{x:-18,y:2},RUS:{x:-40,y:10},TJK:{x:-6,y:10},TKM:{x:-20,y:10},UKR:{x:-23,y:0},UZB:{x:-12,y:18}},d=-20,p=83;class u{constructor(t){this.data=t.data,this.sovietDataPoints=t.data.filter(t=>c.includes(t.id)),this.element=t.element,this.draw()}getMercatorBounds(t){const e=t.rotate()[0],n=t([180-e-1e-6,-p]);return[t([-e-180+1e-6,p]),n]}draw(){const t=d3.select(this.element).node().getBoundingClientRect();this.height=t.height,this.width=t.width,this.projection=d3.geo.mercator().rotate([d,0]).scale(1).translate([this.width/2,this.height/2]);const e=this.getMercatorBounds(this.projection),n=this.width/(e[1][0]-e[0][0]),o=[n,10*n];this.projection.scale(o[0]),this.path=d3.geo.path().projection(this.projection);const i=d3.select(this.element).append("svg").attr("width",this.width).attr("height",this.height);this.mapGraphic=i.append("g").attr("id","map"),this.mapGraphic.selectAll("path").data(this.data).enter().append("path").attr("d",this.path).style("stroke-width","0.5px").attr("class","country").attr("id",function(t,e){return"country"+t.id}).attr("class",function(t,e){return c.includes(t.id)?"country soviet-country":"country non-soviet-country"})}animateSectionStyles({duration:t,section:e,styles:n}){console.warn({duration:t,section:e,styles:n}),d3.select(this.element).selectAll(e).transition().duration(t).style(n)}animateMapZoom({scale:t,translateX:e,translateY:n,duration:o}){this.mapGraphic.transition().duration(o).attr("transform",`scale(${t})translate(${e},${n})`)}createLabels(){this.sovietDataPoints.map(t=>this.path.centroid(t));this.mapGraphic.selectAll(".place-label").data(this.sovietDataPoints).enter().append("text").attr("class","place-label").attr("transform",t=>{const[e,n]=this.path.centroid(t);return`translate(${e},${n})`}).attr("dx",function({id:t}){const{x:e}=h[t];return`${e}px`}).attr("dy",function({id:t}){const{y:e}=h[t];return`${e}px`}).text(function(t){return t.properties.name}).style("font-size","3px")}createPopulationChoropleth(){d3.selectAll(".soviet-country").transition().duration(1e3).style("fill",function(t,e){return l[e]}).style("stroke-width","0.25px")}moveMapContainer({top:t,duration:e}){d3.select(this.element).transition().duration(e).style("top",t+"px")}addPointsToMap(){const t=this.sovietDataPoints.map(t=>this.path.centroid(t));this.mapGraphic.selectAll(".centroid").data(t).enter().append("circle").attr("fill","black").attr("r","0.45px").attr("cx",function(t){return t[0]}).attr("cy",function(t){return t[1]});this.mapGraphic.selectAll(".russia-centroid").data([235,110]).enter().append("circle").attr("fill","white").attr("r","0.25px").attr("cx",function(t){return t[0]}).attr("cy",function(t){return t[1]})}drawArrows(){const t=this.sovietDataPoints.filter(({id:t})=>"RUS"!==t).map(t=>this.path.centroid(t));console.warn("ayyeee drawing an arrow"),this.mapGraphic.selectAll(".centroid").data(t).enter().append("line").attr("x1",function(t){return t[0]}).attr("y1",function(t){return t[1]}).attr("x2",function(t){return t[0]+5}).attr("y2",function(t){return t[1]+10}).attr("stroke","black").attr("stroke-width",.1).attr("marker-end","url(#arrow)")}drawCurves(){const t=this.sovietDataPoints.filter(({id:t})=>"RUS"!==t).map(t=>this.path.centroid(t)).map((t,e)=>({trade:e,...t}));console.warn("centroidsWithValues",t);const e=[235,110];this.mapGraphic.append("g").selectAll("path.datamaps-arc").data(t).enter().append("path").attr("class","arc").attr("d",(t,n)=>{console.warn({datum:t});const o=[t[0],t[1]],i=[(o[0]+e[0])/2,(o[1]+e[1])/2],r=[i[0],i[1]-15];return"M"+o[0]+","+o[1]+"S"+r[0]+","+r[1]+","+e[0]+","+e[1]}).style("fill","none").style("stroke-width","0.5px").style("stroke",(t,e)=>l[e]).style("opacity","0").transition().duration(1e3).style("opacity","1")}animateNetMigration(){}}const f=[{name:"ARM",population:3.5},{name:"AZE",population:7.271},{name:"BLR",population:10.19},{name:"EST",population:1.568},{name:"GEO",population:6.653},{name:"KAZ",population:16.45},{name:"KGZ",population:4.464},{name:"LVA",population:2.658},{name:"LTU",population:3.7},{name:"MDA",population:3.7},{name:"TJK",population:5.4},{name:"TKM",population:3.772},{name:"UKR",population:52},{name:"UZB",population:20.95}].sort(function(t,e){return d3.ascending(t.population,e.population)});class g{constructor(t){this.data=t.data,this.sovietDataPoints=t.data.filter(t=>c.includes(t.id)),this.element=t.element,this.draw()}draw(){const t=d3.select(".scroll__graphic").node().getBoundingClientRect(),{height:e,width:n}=t;this.barMargin={top:15,right:75,bottom:0,left:60};const o=d3.select(".scroll").select(".scroll__text").node().offsetWidth;this.width=o-this.barMargin.left-this.barMargin.right,this.height=e-100-this.barMargin.top-this.barMargin.bottom,this.plot=d3.select("#bar-graphic").append("svg").attr("width",this.width+this.barMargin.left+this.barMargin.right).attr("height",this.height+this.barMargin.top+this.barMargin.bottom).append("g").attr("transform","translate("+this.barMargin.left+","+this.barMargin.top+")").style("opacity","0"),this.createScales(),this.addYAxes()}createScales(){this.xScale=d3.scale.linear().range([0,this.width]).domain([0,d3.max(f,function(t){return t.population})]),this.yScale=d3.scale.ordinal().rangeRoundBands([this.height,0],.1).domain(f.map(function(t){return t.name}))}addYAxes(){const t=d3.svg.axis().scale(this.yScale).tickSize(0).orient("left");this.plot.append("g").attr("class","y-axis").call(t),this.bars=this.plot.selectAll(".bar").data(f).enter().append("g"),this.bars.append("rect").attr("class","bar").attr("y",t=>this.yScale(t.name)).attr("height",()=>this.yScale.rangeBand()).attr("x",0).attr("width",0)}addPopulationLabels(){const t=d3.select("#bar-graphic").select("svg");t.select("g").selectAll(".text").data(f).enter().append("text").attr("class","label").attr("y",t=>this.yScale(t.name)).attr("x",t=>this.xScale(t.population)+1).attr("dx",".75em").text(function(t){return t.population}).attr("transform","translate(0,"+this.barMargin.top+")").style("opacity","0"),t.selectAll(".label").transition().delay(1500).duration(1e3).style("opacity","1")}fadeTextIn(){this.plot.transition().delay(1e3).duration(500).style("opacity","1"),d3.select(".bar-graphic-header").transition().delay(1e3).duration(500).style("opacity","1").style("color","black")}animateBarsIn(){d3.selectAll("rect").transition().delay(function(t,e){return 100*e}).attr("fill",function(t,e){return l[e]}).attr("width",t=>this.xScale(t.population))}}console.log("if you have sourcemaps enabled in your devtools, click on main.js:5 --\x3e"),window.onbeforeunload=function(){window.scrollTo(0,0)},new Promise((t,e)=>{d3.json("https://yantonsoup.github.io/after-the-ussr/public/json/110topoworld.json",function(e){console.warn("loaded 110topoworld.json:",e),t(e)})}).then(t=>{!function(){var t=d3.select(".scroll");const e=t.node().getBoundingClientRect(),{width:n,height:o}=e,i=t.select(".scroll__text"),r=i.node().offsetWidth,s=i.selectAll(".step"),a=Math.floor(1*window.innerHeight);s.style("height",a+"px"),i.selectAll(".step-two").style("height","200px");const c=Math.floor(.5*window.innerHeight);d3.select(".data__graphic").style("top",c+"px");const l=Math.floor(.25*window.innerHeight);d3.select(".scroll__graphic").style("width",n+"px").style("height",n+"px").style("top",l+"px"),d3.select(".header-container").style("height","900px"),d3.select(".ussr-svg-container").style("width",r+"px"),d3.select(".intro-block").style("width",r+"px"),d3.select(".name-block").style("width",r+"px"),d3.select(".ussr-svg").style("height","200px"),d3.select(".ussr-svg").style("width","200px")}();const e=topojson.feature(t,t.objects.subunits).features,n=new u({data:e,element:".scroll__graphic"}),o=new g({element:"#bar-graphic",data:e});console.warn("features",e),function(t,e){s().setup({container:".scroll",graphic:".scroll__graphic",text:".scroll__text",step:".scroll__text .step",debug:!1,offset:.9}).onStepEnter(function(n){console.warn("SCROLLAMA animation[index]:: ",n.index);const o=n.index;(0,a[o])(t,e)}).onContainerEnter(function(t){console.warn("Scrollama :: handleContainerEnter")}).onContainerExit(function(t){console.warn("Scrollama :: handleContainerExit")})}(n,o)})}();
+(function () {
+  'use strict';
+
+  /**
+   * Copyright 2016 Google Inc. All Rights Reserved.
+   *
+   * Licensed under the W3C SOFTWARE AND DOCUMENT NOTICE AND LICENSE.
+   *
+   *  https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+   *
+   */
+
+  (function(window, document) {
+
+
+  // Exits early if all IntersectionObserver and IntersectionObserverEntry
+  // features are natively supported.
+  if ('IntersectionObserver' in window &&
+      'IntersectionObserverEntry' in window &&
+      'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
+
+    // Minimal polyfill for Edge 15's lack of `isIntersecting`
+    // See: https://github.com/w3c/IntersectionObserver/issues/211
+    if (!('isIntersecting' in window.IntersectionObserverEntry.prototype)) {
+      Object.defineProperty(window.IntersectionObserverEntry.prototype,
+        'isIntersecting', {
+        get: function () {
+          return this.intersectionRatio > 0;
+        }
+      });
+    }
+    return;
+  }
+
+
+  /**
+   * Creates the global IntersectionObserverEntry constructor.
+   * https://w3c.github.io/IntersectionObserver/#intersection-observer-entry
+   * @param {Object} entry A dictionary of instance properties.
+   * @constructor
+   */
+  function IntersectionObserverEntry(entry) {
+    this.time = entry.time;
+    this.target = entry.target;
+    this.rootBounds = entry.rootBounds;
+    this.boundingClientRect = entry.boundingClientRect;
+    this.intersectionRect = entry.intersectionRect || getEmptyRect();
+    this.isIntersecting = !!entry.intersectionRect;
+
+    // Calculates the intersection ratio.
+    var targetRect = this.boundingClientRect;
+    var targetArea = targetRect.width * targetRect.height;
+    var intersectionRect = this.intersectionRect;
+    var intersectionArea = intersectionRect.width * intersectionRect.height;
+
+    // Sets intersection ratio.
+    if (targetArea) {
+      // Round the intersection ratio to avoid floating point math issues:
+      // https://github.com/w3c/IntersectionObserver/issues/324
+      this.intersectionRatio = Number((intersectionArea / targetArea).toFixed(4));
+    } else {
+      // If area is zero and is intersecting, sets to 1, otherwise to 0
+      this.intersectionRatio = this.isIntersecting ? 1 : 0;
+    }
+  }
+
+
+  /**
+   * Creates the global IntersectionObserver constructor.
+   * https://w3c.github.io/IntersectionObserver/#intersection-observer-interface
+   * @param {Function} callback The function to be invoked after intersection
+   *     changes have queued. The function is not invoked if the queue has
+   *     been emptied by calling the `takeRecords` method.
+   * @param {Object=} opt_options Optional configuration options.
+   * @constructor
+   */
+  function IntersectionObserver(callback, opt_options) {
+
+    var options = opt_options || {};
+
+    if (typeof callback != 'function') {
+      throw new Error('callback must be a function');
+    }
+
+    if (options.root && options.root.nodeType != 1) {
+      throw new Error('root must be an Element');
+    }
+
+    // Binds and throttles `this._checkForIntersections`.
+    this._checkForIntersections = throttle(
+        this._checkForIntersections.bind(this), this.THROTTLE_TIMEOUT);
+
+    // Private properties.
+    this._callback = callback;
+    this._observationTargets = [];
+    this._queuedEntries = [];
+    this._rootMarginValues = this._parseRootMargin(options.rootMargin);
+
+    // Public properties.
+    this.thresholds = this._initThresholds(options.threshold);
+    this.root = options.root || null;
+    this.rootMargin = this._rootMarginValues.map(function(margin) {
+      return margin.value + margin.unit;
+    }).join(' ');
+  }
+
+
+  /**
+   * The minimum interval within which the document will be checked for
+   * intersection changes.
+   */
+  IntersectionObserver.prototype.THROTTLE_TIMEOUT = 100;
+
+
+  /**
+   * The frequency in which the polyfill polls for intersection changes.
+   * this can be updated on a per instance basis and must be set prior to
+   * calling `observe` on the first target.
+   */
+  IntersectionObserver.prototype.POLL_INTERVAL = null;
+
+  /**
+   * Use a mutation observer on the root element
+   * to detect intersection changes.
+   */
+  IntersectionObserver.prototype.USE_MUTATION_OBSERVER = true;
+
+
+  /**
+   * Starts observing a target element for intersection changes based on
+   * the thresholds values.
+   * @param {Element} target The DOM element to observe.
+   */
+  IntersectionObserver.prototype.observe = function(target) {
+    var isTargetAlreadyObserved = this._observationTargets.some(function(item) {
+      return item.element == target;
+    });
+
+    if (isTargetAlreadyObserved) {
+      return;
+    }
+
+    if (!(target && target.nodeType == 1)) {
+      throw new Error('target must be an Element');
+    }
+
+    this._registerInstance();
+    this._observationTargets.push({element: target, entry: null});
+    this._monitorIntersections();
+    this._checkForIntersections();
+  };
+
+
+  /**
+   * Stops observing a target element for intersection changes.
+   * @param {Element} target The DOM element to observe.
+   */
+  IntersectionObserver.prototype.unobserve = function(target) {
+    this._observationTargets =
+        this._observationTargets.filter(function(item) {
+
+      return item.element != target;
+    });
+    if (!this._observationTargets.length) {
+      this._unmonitorIntersections();
+      this._unregisterInstance();
+    }
+  };
+
+
+  /**
+   * Stops observing all target elements for intersection changes.
+   */
+  IntersectionObserver.prototype.disconnect = function() {
+    this._observationTargets = [];
+    this._unmonitorIntersections();
+    this._unregisterInstance();
+  };
+
+
+  /**
+   * Returns any queue entries that have not yet been reported to the
+   * callback and clears the queue. This can be used in conjunction with the
+   * callback to obtain the absolute most up-to-date intersection information.
+   * @return {Array} The currently queued entries.
+   */
+  IntersectionObserver.prototype.takeRecords = function() {
+    var records = this._queuedEntries.slice();
+    this._queuedEntries = [];
+    return records;
+  };
+
+
+  /**
+   * Accepts the threshold value from the user configuration object and
+   * returns a sorted array of unique threshold values. If a value is not
+   * between 0 and 1 and error is thrown.
+   * @private
+   * @param {Array|number=} opt_threshold An optional threshold value or
+   *     a list of threshold values, defaulting to [0].
+   * @return {Array} A sorted list of unique and valid threshold values.
+   */
+  IntersectionObserver.prototype._initThresholds = function(opt_threshold) {
+    var threshold = opt_threshold || [0];
+    if (!Array.isArray(threshold)) threshold = [threshold];
+
+    return threshold.sort().filter(function(t, i, a) {
+      if (typeof t != 'number' || isNaN(t) || t < 0 || t > 1) {
+        throw new Error('threshold must be a number between 0 and 1 inclusively');
+      }
+      return t !== a[i - 1];
+    });
+  };
+
+
+  /**
+   * Accepts the rootMargin value from the user configuration object
+   * and returns an array of the four margin values as an object containing
+   * the value and unit properties. If any of the values are not properly
+   * formatted or use a unit other than px or %, and error is thrown.
+   * @private
+   * @param {string=} opt_rootMargin An optional rootMargin value,
+   *     defaulting to '0px'.
+   * @return {Array<Object>} An array of margin objects with the keys
+   *     value and unit.
+   */
+  IntersectionObserver.prototype._parseRootMargin = function(opt_rootMargin) {
+    var marginString = opt_rootMargin || '0px';
+    var margins = marginString.split(/\s+/).map(function(margin) {
+      var parts = /^(-?\d*\.?\d+)(px|%)$/.exec(margin);
+      if (!parts) {
+        throw new Error('rootMargin must be specified in pixels or percent');
+      }
+      return {value: parseFloat(parts[1]), unit: parts[2]};
+    });
+
+    // Handles shorthand.
+    margins[1] = margins[1] || margins[0];
+    margins[2] = margins[2] || margins[0];
+    margins[3] = margins[3] || margins[1];
+
+    return margins;
+  };
+
+
+  /**
+   * Starts polling for intersection changes if the polling is not already
+   * happening, and if the page's visibility state is visible.
+   * @private
+   */
+  IntersectionObserver.prototype._monitorIntersections = function() {
+    if (!this._monitoringIntersections) {
+      this._monitoringIntersections = true;
+
+      // If a poll interval is set, use polling instead of listening to
+      // resize and scroll events or DOM mutations.
+      if (this.POLL_INTERVAL) {
+        this._monitoringInterval = setInterval(
+            this._checkForIntersections, this.POLL_INTERVAL);
+      }
+      else {
+        addEvent(window, 'resize', this._checkForIntersections, true);
+        addEvent(document, 'scroll', this._checkForIntersections, true);
+
+        if (this.USE_MUTATION_OBSERVER && 'MutationObserver' in window) {
+          this._domObserver = new MutationObserver(this._checkForIntersections);
+          this._domObserver.observe(document, {
+            attributes: true,
+            childList: true,
+            characterData: true,
+            subtree: true
+          });
+        }
+      }
+    }
+  };
+
+
+  /**
+   * Stops polling for intersection changes.
+   * @private
+   */
+  IntersectionObserver.prototype._unmonitorIntersections = function() {
+    if (this._monitoringIntersections) {
+      this._monitoringIntersections = false;
+
+      clearInterval(this._monitoringInterval);
+      this._monitoringInterval = null;
+
+      removeEvent(window, 'resize', this._checkForIntersections, true);
+      removeEvent(document, 'scroll', this._checkForIntersections, true);
+
+      if (this._domObserver) {
+        this._domObserver.disconnect();
+        this._domObserver = null;
+      }
+    }
+  };
+
+
+  /**
+   * Scans each observation target for intersection changes and adds them
+   * to the internal entries queue. If new entries are found, it
+   * schedules the callback to be invoked.
+   * @private
+   */
+  IntersectionObserver.prototype._checkForIntersections = function() {
+    var rootIsInDom = this._rootIsInDom();
+    var rootRect = rootIsInDom ? this._getRootRect() : getEmptyRect();
+
+    this._observationTargets.forEach(function(item) {
+      var target = item.element;
+      var targetRect = getBoundingClientRect(target);
+      var rootContainsTarget = this._rootContainsTarget(target);
+      var oldEntry = item.entry;
+      var intersectionRect = rootIsInDom && rootContainsTarget &&
+          this._computeTargetAndRootIntersection(target, rootRect);
+
+      var newEntry = item.entry = new IntersectionObserverEntry({
+        time: now(),
+        target: target,
+        boundingClientRect: targetRect,
+        rootBounds: rootRect,
+        intersectionRect: intersectionRect
+      });
+
+      if (!oldEntry) {
+        this._queuedEntries.push(newEntry);
+      } else if (rootIsInDom && rootContainsTarget) {
+        // If the new entry intersection ratio has crossed any of the
+        // thresholds, add a new entry.
+        if (this._hasCrossedThreshold(oldEntry, newEntry)) {
+          this._queuedEntries.push(newEntry);
+        }
+      } else {
+        // If the root is not in the DOM or target is not contained within
+        // root but the previous entry for this target had an intersection,
+        // add a new record indicating removal.
+        if (oldEntry && oldEntry.isIntersecting) {
+          this._queuedEntries.push(newEntry);
+        }
+      }
+    }, this);
+
+    if (this._queuedEntries.length) {
+      this._callback(this.takeRecords(), this);
+    }
+  };
+
+
+  /**
+   * Accepts a target and root rect computes the intersection between then
+   * following the algorithm in the spec.
+   * TODO(philipwalton): at this time clip-path is not considered.
+   * https://w3c.github.io/IntersectionObserver/#calculate-intersection-rect-algo
+   * @param {Element} target The target DOM element
+   * @param {Object} rootRect The bounding rect of the root after being
+   *     expanded by the rootMargin value.
+   * @return {?Object} The final intersection rect object or undefined if no
+   *     intersection is found.
+   * @private
+   */
+  IntersectionObserver.prototype._computeTargetAndRootIntersection =
+      function(target, rootRect) {
+
+    // If the element isn't displayed, an intersection can't happen.
+    if (window.getComputedStyle(target).display == 'none') return;
+
+    var targetRect = getBoundingClientRect(target);
+    var intersectionRect = targetRect;
+    var parent = getParentNode(target);
+    var atRoot = false;
+
+    while (!atRoot) {
+      var parentRect = null;
+      var parentComputedStyle = parent.nodeType == 1 ?
+          window.getComputedStyle(parent) : {};
+
+      // If the parent isn't displayed, an intersection can't happen.
+      if (parentComputedStyle.display == 'none') return;
+
+      if (parent == this.root || parent == document) {
+        atRoot = true;
+        parentRect = rootRect;
+      } else {
+        // If the element has a non-visible overflow, and it's not the <body>
+        // or <html> element, update the intersection rect.
+        // Note: <body> and <html> cannot be clipped to a rect that's not also
+        // the document rect, so no need to compute a new intersection.
+        if (parent != document.body &&
+            parent != document.documentElement &&
+            parentComputedStyle.overflow != 'visible') {
+          parentRect = getBoundingClientRect(parent);
+        }
+      }
+
+      // If either of the above conditionals set a new parentRect,
+      // calculate new intersection data.
+      if (parentRect) {
+        intersectionRect = computeRectIntersection(parentRect, intersectionRect);
+
+        if (!intersectionRect) break;
+      }
+      parent = getParentNode(parent);
+    }
+    return intersectionRect;
+  };
+
+
+  /**
+   * Returns the root rect after being expanded by the rootMargin value.
+   * @return {Object} The expanded root rect.
+   * @private
+   */
+  IntersectionObserver.prototype._getRootRect = function() {
+    var rootRect;
+    if (this.root) {
+      rootRect = getBoundingClientRect(this.root);
+    } else {
+      // Use <html>/<body> instead of window since scroll bars affect size.
+      var html = document.documentElement;
+      var body = document.body;
+      rootRect = {
+        top: 0,
+        left: 0,
+        right: html.clientWidth || body.clientWidth,
+        width: html.clientWidth || body.clientWidth,
+        bottom: html.clientHeight || body.clientHeight,
+        height: html.clientHeight || body.clientHeight
+      };
+    }
+    return this._expandRectByRootMargin(rootRect);
+  };
+
+
+  /**
+   * Accepts a rect and expands it by the rootMargin value.
+   * @param {Object} rect The rect object to expand.
+   * @return {Object} The expanded rect.
+   * @private
+   */
+  IntersectionObserver.prototype._expandRectByRootMargin = function(rect) {
+    var margins = this._rootMarginValues.map(function(margin, i) {
+      return margin.unit == 'px' ? margin.value :
+          margin.value * (i % 2 ? rect.width : rect.height) / 100;
+    });
+    var newRect = {
+      top: rect.top - margins[0],
+      right: rect.right + margins[1],
+      bottom: rect.bottom + margins[2],
+      left: rect.left - margins[3]
+    };
+    newRect.width = newRect.right - newRect.left;
+    newRect.height = newRect.bottom - newRect.top;
+
+    return newRect;
+  };
+
+
+  /**
+   * Accepts an old and new entry and returns true if at least one of the
+   * threshold values has been crossed.
+   * @param {?IntersectionObserverEntry} oldEntry The previous entry for a
+   *    particular target element or null if no previous entry exists.
+   * @param {IntersectionObserverEntry} newEntry The current entry for a
+   *    particular target element.
+   * @return {boolean} Returns true if a any threshold has been crossed.
+   * @private
+   */
+  IntersectionObserver.prototype._hasCrossedThreshold =
+      function(oldEntry, newEntry) {
+
+    // To make comparing easier, an entry that has a ratio of 0
+    // but does not actually intersect is given a value of -1
+    var oldRatio = oldEntry && oldEntry.isIntersecting ?
+        oldEntry.intersectionRatio || 0 : -1;
+    var newRatio = newEntry.isIntersecting ?
+        newEntry.intersectionRatio || 0 : -1;
+
+    // Ignore unchanged ratios
+    if (oldRatio === newRatio) return;
+
+    for (var i = 0; i < this.thresholds.length; i++) {
+      var threshold = this.thresholds[i];
+
+      // Return true if an entry matches a threshold or if the new ratio
+      // and the old ratio are on the opposite sides of a threshold.
+      if (threshold == oldRatio || threshold == newRatio ||
+          threshold < oldRatio !== threshold < newRatio) {
+        return true;
+      }
+    }
+  };
+
+
+  /**
+   * Returns whether or not the root element is an element and is in the DOM.
+   * @return {boolean} True if the root element is an element and is in the DOM.
+   * @private
+   */
+  IntersectionObserver.prototype._rootIsInDom = function() {
+    return !this.root || containsDeep(document, this.root);
+  };
+
+
+  /**
+   * Returns whether or not the target element is a child of root.
+   * @param {Element} target The target element to check.
+   * @return {boolean} True if the target element is a child of root.
+   * @private
+   */
+  IntersectionObserver.prototype._rootContainsTarget = function(target) {
+    return containsDeep(this.root || document, target);
+  };
+
+
+  /**
+   * Adds the instance to the global IntersectionObserver registry if it isn't
+   * already present.
+   * @private
+   */
+  IntersectionObserver.prototype._registerInstance = function() {
+  };
+
+
+  /**
+   * Removes the instance from the global IntersectionObserver registry.
+   * @private
+   */
+  IntersectionObserver.prototype._unregisterInstance = function() {
+  };
+
+
+  /**
+   * Returns the result of the performance.now() method or null in browsers
+   * that don't support the API.
+   * @return {number} The elapsed time since the page was requested.
+   */
+  function now() {
+    return window.performance && performance.now && performance.now();
+  }
+
+
+  /**
+   * Throttles a function and delays its execution, so it's only called at most
+   * once within a given time period.
+   * @param {Function} fn The function to throttle.
+   * @param {number} timeout The amount of time that must pass before the
+   *     function can be called again.
+   * @return {Function} The throttled function.
+   */
+  function throttle(fn, timeout) {
+    var timer = null;
+    return function () {
+      if (!timer) {
+        timer = setTimeout(function() {
+          fn();
+          timer = null;
+        }, timeout);
+      }
+    };
+  }
+
+
+  /**
+   * Adds an event handler to a DOM node ensuring cross-browser compatibility.
+   * @param {Node} node The DOM node to add the event handler to.
+   * @param {string} event The event name.
+   * @param {Function} fn The event handler to add.
+   * @param {boolean} opt_useCapture Optionally adds the even to the capture
+   *     phase. Note: this only works in modern browsers.
+   */
+  function addEvent(node, event, fn, opt_useCapture) {
+    if (typeof node.addEventListener == 'function') {
+      node.addEventListener(event, fn, opt_useCapture || false);
+    }
+    else if (typeof node.attachEvent == 'function') {
+      node.attachEvent('on' + event, fn);
+    }
+  }
+
+
+  /**
+   * Removes a previously added event handler from a DOM node.
+   * @param {Node} node The DOM node to remove the event handler from.
+   * @param {string} event The event name.
+   * @param {Function} fn The event handler to remove.
+   * @param {boolean} opt_useCapture If the event handler was added with this
+   *     flag set to true, it should be set to true here in order to remove it.
+   */
+  function removeEvent(node, event, fn, opt_useCapture) {
+    if (typeof node.removeEventListener == 'function') {
+      node.removeEventListener(event, fn, opt_useCapture || false);
+    }
+    else if (typeof node.detatchEvent == 'function') {
+      node.detatchEvent('on' + event, fn);
+    }
+  }
+
+
+  /**
+   * Returns the intersection between two rect objects.
+   * @param {Object} rect1 The first rect.
+   * @param {Object} rect2 The second rect.
+   * @return {?Object} The intersection rect or undefined if no intersection
+   *     is found.
+   */
+  function computeRectIntersection(rect1, rect2) {
+    var top = Math.max(rect1.top, rect2.top);
+    var bottom = Math.min(rect1.bottom, rect2.bottom);
+    var left = Math.max(rect1.left, rect2.left);
+    var right = Math.min(rect1.right, rect2.right);
+    var width = right - left;
+    var height = bottom - top;
+
+    return (width >= 0 && height >= 0) && {
+      top: top,
+      bottom: bottom,
+      left: left,
+      right: right,
+      width: width,
+      height: height
+    };
+  }
+
+
+  /**
+   * Shims the native getBoundingClientRect for compatibility with older IE.
+   * @param {Element} el The element whose bounding rect to get.
+   * @return {Object} The (possibly shimmed) rect of the element.
+   */
+  function getBoundingClientRect(el) {
+    var rect;
+
+    try {
+      rect = el.getBoundingClientRect();
+    } catch (err) {
+      // Ignore Windows 7 IE11 "Unspecified error"
+      // https://github.com/w3c/IntersectionObserver/pull/205
+    }
+
+    if (!rect) return getEmptyRect();
+
+    // Older IE
+    if (!(rect.width && rect.height)) {
+      rect = {
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        left: rect.left,
+        width: rect.right - rect.left,
+        height: rect.bottom - rect.top
+      };
+    }
+    return rect;
+  }
+
+
+  /**
+   * Returns an empty rect object. An empty rect is returned when an element
+   * is not in the DOM.
+   * @return {Object} The empty rect.
+   */
+  function getEmptyRect() {
+    return {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      width: 0,
+      height: 0
+    };
+  }
+
+  /**
+   * Checks to see if a parent element contains a child element (including inside
+   * shadow DOM).
+   * @param {Node} parent The parent element.
+   * @param {Node} child The child element.
+   * @return {boolean} True if the parent node contains the child node.
+   */
+  function containsDeep(parent, child) {
+    var node = child;
+    while (node) {
+      if (node == parent) return true;
+
+      node = getParentNode(node);
+    }
+    return false;
+  }
+
+
+  /**
+   * Gets the parent node of an element or its host element if the parent node
+   * is a shadow root.
+   * @param {Node} node The node whose parent to get.
+   * @return {Node|null} The parent node or null if no parent exists.
+   */
+  function getParentNode(node) {
+    var parent = node.parentNode;
+
+    if (parent && parent.nodeType == 11 && parent.host) {
+      // If the parent is a shadow root, return the host element.
+      return parent.host;
+    }
+    return parent;
+  }
+
+
+  // Exposes the constructors globally.
+  window.IntersectionObserver = IntersectionObserver;
+  window.IntersectionObserverEntry = IntersectionObserverEntry;
+
+  }(window, document));
+
+  // DOM helper functions
+
+  // private
+  function selectionToArray(selection) {
+    const len = selection.length;
+    const result = [];
+    for (let i = 0; i < len; i += 1) {
+      result.push(selection[i]);
+    }
+    return result;
+  }
+
+  // public
+  function select(selector) {
+    if (selector instanceof Element) return selector;
+    else if (typeof selector === 'string')
+      return document.querySelector(selector);
+    return null;
+  }
+
+  function selectAll(selector, parent = document) {
+    if (typeof selector === 'string') {
+      return selectionToArray(parent.querySelectorAll(selector));
+    } else if (selector instanceof Element) {
+      return selectionToArray([selector]);
+    } else if (selector instanceof NodeList) {
+      return selectionToArray(selector);
+    } else if (selector instanceof Array) {
+      return selector;
+    }
+    return [];
+  }
+
+  function getStepId({ id, i }) {
+    return `scrollama__debug-step--${id}-${i}`;
+  }
+
+  function getOffsetId({ id }) {
+    return `scrollama__debug-offset--${id}`;
+  }
+
+  // SETUP
+
+  function setupOffset({ id, offsetVal, stepClass }) {
+    const el = document.createElement('div');
+    el.setAttribute('id', getOffsetId({ id }));
+    el.setAttribute('class', 'scrollama__debug-offset');
+
+    el.style.position = 'fixed';
+    el.style.left = '0';
+    el.style.width = '100%';
+    el.style.height = '0px';
+    el.style.borderTop = '2px dashed black';
+    el.style.zIndex = '9999';
+
+    const text = document.createElement('p');
+    text.innerText = `".${stepClass}" trigger: ${offsetVal}`;
+    text.style.fontSize = '12px';
+    text.style.fontFamily = 'monospace';
+    text.style.color = 'black';
+    text.style.margin = '0';
+    text.style.padding = '6px';
+    el.appendChild(text);
+    document.body.appendChild(el);
+  }
+
+  function setup({ id, offsetVal, stepEl }) {
+    const stepClass = stepEl[0].getAttribute('class');
+    setupOffset({ id, offsetVal, stepClass });
+  }
+
+  // UPDATE
+  function updateOffset({ id, offsetMargin, offsetVal }) {
+    const idVal = getOffsetId({ id });
+    const el = document.querySelector(`#${idVal}`);
+    el.style.top = `${offsetMargin}px`;
+  }
+
+  function update({ id, stepOffsetHeight, offsetMargin, offsetVal }) {
+    updateOffset({ id, offsetMargin });
+  }
+
+  function notifyStep({ id, index, state }) {
+    const idVal = getStepId({ id, i: index });
+    const elA = document.querySelector(`#${idVal}_above`);
+    const elB = document.querySelector(`#${idVal}_below`);
+    const display = state === 'enter' ? 'block' : 'none';
+
+    if (elA) elA.style.display = display;
+    if (elB) elB.style.display = display;
+  }
+
+  function scrollama() {
+    const ZERO_MOE = 1; // zero with some rounding margin of error
+    const callback = {};
+    const io = {};
+
+    let containerEl = null;
+    let graphicEl = null;
+    let stepEl = null;
+
+    let id = null;
+    let offsetVal = 0;
+    let offsetMargin = 0;
+    let vh = 0;
+    let ph = 0;
+    let stepOffsetHeight = null;
+    let stepOffsetTop = null;
+    let bboxGraphic = null;
+
+    let isReady = false;
+    let isEnabled = false;
+    let debugMode = false;
+    let progressMode = false;
+    let progressThreshold = 0;
+    let preserveOrder = false;
+    let triggerOnce = false;
+
+    let stepStates = null;
+    let containerState = null;
+    let previousYOffset = -1;
+    let direction = null;
+
+    const exclude = [];
+
+    // HELPERS
+    function generateId() {
+      const a = 'abcdefghijklmnopqrstuv';
+      const l = a.length;
+      const t = new Date().getTime();
+      const r = [0, 0, 0].map(d => a[Math.floor(Math.random() * l)]).join('');
+      return `${r}${t}`;
+    }
+
+    //www.gomakethings.com/how-to-get-an-elements-distance-from-the-top-of-the-page-with-vanilla-javascript/
+    function getOffsetTop(el) {
+      // Set our distance placeholder
+      let distance = 0;
+
+      // Loop up the DOM
+      if (el.offsetParent) {
+        do {
+          distance += el.offsetTop;
+          el = el.offsetParent;
+        } while (el);
+      }
+
+      // Return our distance
+      return distance < 0 ? 0 : distance;
+    }
+
+    function getPageHeight() {
+      const body = document.body;
+      const html = document.documentElement;
+
+      return Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        html.clientHeight,
+        html.scrollHeight,
+        html.offsetHeight
+      );
+    }
+
+    function getIndex(element) {
+      return +element.getAttribute('data-scrollama-index');
+    }
+
+    function updateDirection() {
+      if (window.pageYOffset > previousYOffset) direction = 'down';
+      else if (window.pageYOffset < previousYOffset) direction = 'up';
+      previousYOffset = window.pageYOffset;
+    }
+
+    function handleResize() {
+      vh = window.innerHeight;
+      ph = getPageHeight();
+
+      bboxGraphic = graphicEl ? graphicEl.getBoundingClientRect() : null;
+
+      offsetMargin = offsetVal * vh;
+
+      stepOffsetHeight = stepEl ? stepEl.map(el => el.offsetHeight) : [];
+
+      stepOffsetTop = stepEl ? stepEl.map(getOffsetTop) : [];
+
+      if (isEnabled && isReady) updateIO();
+
+      if (debugMode)
+        update({ id, stepOffsetHeight, offsetMargin, offsetVal });
+    }
+
+    function handleEnable(enable) {
+      if (enable && !isEnabled) {
+        if (isReady) updateIO();
+        isEnabled = true;
+      } else if (!enable) {
+        if (io.top) io.top.disconnect();
+        if (io.bottom) io.bottom.disconnect();
+        if (io.stepAbove) io.stepAbove.forEach(d => d.disconnect());
+        if (io.stepBelow) io.stepBelow.forEach(d => d.disconnect());
+        if (io.stepProgress) io.stepProgress.forEach(d => d.disconnect());
+        if (io.viewportAbove) io.viewportAbove.forEach(d => d.disconnect());
+        if (io.viewportBelow) io.viewportBelow.forEach(d => d.disconnect());
+        isEnabled = false;
+      }
+    }
+
+    function createThreshold(height) {
+      const count = Math.ceil(height / progressThreshold);
+      const t = [];
+      const ratio = 1 / count;
+      for (let i = 0; i < count; i++) {
+        t.push(i * ratio);
+      }
+      return t;
+    }
+
+    // NOTIFY CALLBACKS
+    function notifyOthers(index, location) {
+      if (location === 'above') {
+        // check if steps above/below were skipped and should be notified first
+        for (let i = 0; i < index; i++) {
+          const ss = stepStates[i];
+          if (ss.state === 'enter') notifyStepExit(stepEl[i], 'down');
+          if (ss.direction === 'up') {
+            notifyStepEnter(stepEl[i], 'down', false);
+            notifyStepExit(stepEl[i], 'down');
+          }
+        }
+      } else if (location === 'below') {
+        for (let i = stepStates.length - 1; i > index; i--) {
+          const ss = stepStates[i];
+          if (ss.state === 'enter') {
+            notifyStepExit(stepEl[i], 'up');
+          }
+          if (ss.direction === 'down') {
+            notifyStepEnter(stepEl[i], 'up', false);
+            notifyStepExit(stepEl[i], 'up');
+          }
+        }
+      }
+    }
+
+    function notifyStepEnter(element, direction, check = true) {
+      const index = getIndex(element);
+      const resp = { element, index, direction };
+
+      // store most recent trigger
+      stepStates[index].direction = direction;
+      stepStates[index].state = 'enter';
+
+      if (preserveOrder && check && direction === 'down')
+        notifyOthers(index, 'above');
+
+      if (preserveOrder && check && direction === 'up')
+        notifyOthers(index, 'below');
+
+      if (
+        callback.stepEnter &&
+        typeof callback.stepEnter === 'function' &&
+        !exclude[index]
+      ) {
+        callback.stepEnter(resp, stepStates);
+        if (debugMode) notifyStep({ id, index, state: 'enter' });
+        if (triggerOnce) exclude[index] = true;
+      }
+
+      if (progressMode) {
+        if (direction === 'down') notifyStepProgress(element, 0);
+        else notifyStepProgress(element, 1);
+      }
+    }
+
+    function notifyStepExit(element, direction) {
+      const index = getIndex(element);
+      const resp = { element, index, direction };
+
+      // store most recent trigger
+      stepStates[index].direction = direction;
+      stepStates[index].state = 'exit';
+
+      if (progressMode) {
+        if (direction === 'down') notifyStepProgress(element, 1);
+        else notifyStepProgress(element, 0);
+      }
+
+      if (callback.stepExit && typeof callback.stepExit === 'function') {
+        callback.stepExit(resp, stepStates);
+        if (debugMode) notifyStep({ id, index, state: 'exit' });
+      }
+    }
+
+    function notifyStepProgress(element, progress) {
+      const index = getIndex(element);
+      const resp = { element, index, progress };
+      if (callback.stepProgress && typeof callback.stepProgress === 'function')
+        callback.stepProgress(resp);
+    }
+
+    function notifyContainerEnter() {
+      const resp = { direction };
+      containerState.direction = direction;
+      containerState.state = 'enter';
+      if (
+        callback.containerEnter &&
+        typeof callback.containerEnter === 'function'
+      )
+        callback.containerEnter(resp);
+    }
+
+    function notifyContainerExit() {
+      const resp = { direction };
+      containerState.direction = direction;
+      containerState.state = 'exit';
+      if (callback.containerExit && typeof callback.containerExit === 'function')
+        callback.containerExit(resp);
+    }
+
+    // OBSERVER - INTERSECT HANDLING
+
+    // if TOP edge of step crosses threshold,
+    // bottom must be > 0 which means it is on "screen" (shifted by offset)
+    function intersectStepAbove(entries) {
+      updateDirection();
+      entries.forEach(entry => {
+        const { isIntersecting, boundingClientRect, target } = entry;
+
+        // bottom is how far bottom edge of el is from top of viewport
+        const { bottom, height } = boundingClientRect;
+        const bottomAdjusted = bottom - offsetMargin;
+        const index = getIndex(target);
+        const ss = stepStates[index];
+
+        if (bottomAdjusted >= -ZERO_MOE) {
+          if (isIntersecting && direction === 'down' && ss.state !== 'enter')
+            notifyStepEnter(target, direction);
+          else if (!isIntersecting && direction === 'up' && ss.state === 'enter')
+            notifyStepExit(target, direction);
+          else if (
+            !isIntersecting &&
+            bottomAdjusted >= height &&
+            direction === 'down' &&
+            ss.state === 'enter'
+          ) {
+            notifyStepExit(target, direction);
+          }
+        }
+      });
+    }
+
+    function intersectStepBelow(entries) {
+      updateDirection();
+      entries.forEach(entry => {
+        const { isIntersecting, boundingClientRect, target } = entry;
+
+        const { bottom, height } = boundingClientRect;
+        const bottomAdjusted = bottom - offsetMargin;
+        const index = getIndex(target);
+        const ss = stepStates[index];
+
+        if (
+          bottomAdjusted >= -ZERO_MOE &&
+          bottomAdjusted < height &&
+          isIntersecting &&
+          direction === 'up' &&
+          ss.state !== 'enter'
+        ) {
+          notifyStepEnter(target, direction);
+        } else if (
+          bottomAdjusted <= ZERO_MOE &&
+          !isIntersecting &&
+          direction === 'down' &&
+          ss.state === 'enter'
+        ) {
+          notifyStepExit(target, direction);
+        }
+      });
+    }
+
+    /*
+  	if there is a scroll event where a step never intersects (therefore
+  	skipping an enter/exit trigger), use this fallback to detect if it is
+  	in view
+  	*/
+    function intersectViewportAbove(entries) {
+      updateDirection();
+      entries.forEach(entry => {
+        const { isIntersecting, target } = entry;
+        const index = getIndex(target);
+        const ss = stepStates[index];
+        if (
+          isIntersecting &&
+          direction === 'down' &&
+          ss.state !== 'enter' &&
+          ss.direction !== 'down'
+        ) {
+          notifyStepEnter(target, 'down');
+          notifyStepExit(target, 'down');
+        }
+      });
+    }
+
+    function intersectViewportBelow(entries) {
+      updateDirection();
+      entries.forEach(entry => {
+        const { isIntersecting, target } = entry;
+        const index = getIndex(target);
+        const ss = stepStates[index];
+        if (
+          isIntersecting &&
+          direction === 'up' &&
+          ss.state !== 'enter' &&
+          ss.direction !== 'up'
+        ) {
+          notifyStepEnter(target, 'up');
+          notifyStepExit(target, 'up');
+        }
+      });
+    }
+
+    function intersectStepProgress(entries) {
+      updateDirection();
+      entries.forEach(
+        ({ isIntersecting, intersectionRatio, boundingClientRect, target }) => {
+          const { bottom } = boundingClientRect;
+          const bottomAdjusted = bottom - offsetMargin;
+
+          if (isIntersecting && bottomAdjusted >= -ZERO_MOE) {
+            notifyStepProgress(target, +intersectionRatio.toFixed(3));
+          }
+        }
+      );
+    }
+
+    function intersectTop(entries) {
+      updateDirection();
+      const { isIntersecting, boundingClientRect } = entries[0];
+      const { top, bottom } = boundingClientRect;
+
+      if (bottom > -ZERO_MOE) {
+        if (isIntersecting) notifyContainerEnter(direction);
+        else if (containerState.state === 'enter') notifyContainerExit(direction);
+      }
+    }
+
+    function intersectBottom(entries) {
+      updateDirection();
+      const { isIntersecting, boundingClientRect } = entries[0];
+      const { top } = boundingClientRect;
+
+      if (top < ZERO_MOE) {
+        if (isIntersecting) notifyContainerEnter(direction);
+        else if (containerState.state === 'enter') notifyContainerExit(direction);
+      }
+    }
+
+    // OBSERVER - CREATION
+
+    function updateTopIO() {
+      if (io.top) io.top.unobserve(containerEl);
+
+      const options = {
+        root: null,
+        rootMargin: `${vh}px 0px -${vh}px 0px`,
+        threshold: 0
+      };
+
+      io.top = new IntersectionObserver(intersectTop, options);
+      io.top.observe(containerEl);
+    }
+
+    function updateBottomIO() {
+      if (io.bottom) io.bottom.unobserve(containerEl);
+      const options = {
+        root: null,
+        rootMargin: `-${bboxGraphic.height}px 0px ${bboxGraphic.height}px 0px`,
+        threshold: 0
+      };
+
+      io.bottom = new IntersectionObserver(intersectBottom, options);
+      io.bottom.observe(containerEl);
+    }
+
+    // top edge
+    function updateStepAboveIO() {
+      if (io.stepAbove) io.stepAbove.forEach(d => d.disconnect());
+
+      io.stepAbove = stepEl.map((el, i) => {
+        const marginTop = stepOffsetHeight[i];
+        const marginBottom = -vh + offsetMargin;
+        const rootMargin = `${marginTop}px 0px ${marginBottom}px 0px`;
+
+        const options = {
+          root: null,
+          rootMargin,
+          threshold: 0
+        };
+
+        const obs = new IntersectionObserver(intersectStepAbove, options);
+        obs.observe(el);
+        return obs;
+      });
+    }
+
+    // bottom edge
+    function updateStepBelowIO() {
+      if (io.stepBelow) io.stepBelow.forEach(d => d.disconnect());
+
+      io.stepBelow = stepEl.map((el, i) => {
+        const marginTop = -offsetMargin;
+        const marginBottom = ph - vh + stepOffsetHeight[i] + offsetMargin;
+        const rootMargin = `${marginTop}px 0px ${marginBottom}px 0px`;
+
+        const options = {
+          root: null,
+          rootMargin,
+          threshold: 0
+        };
+
+        const obs = new IntersectionObserver(intersectStepBelow, options);
+        obs.observe(el);
+        return obs;
+      });
+    }
+
+    // jump into viewport
+    function updateViewportAboveIO() {
+      if (io.viewportAbove) io.viewportAbove.forEach(d => d.disconnect());
+      io.viewportAbove = stepEl.map((el, i) => {
+        const marginTop = stepOffsetTop[i];
+        const marginBottom = -(vh - offsetMargin + stepOffsetHeight[i]);
+        const rootMargin = `${marginTop}px 0px ${marginBottom}px 0px`;
+        const options = {
+          root: null,
+          rootMargin,
+          threshold: 0
+        };
+
+        const obs = new IntersectionObserver(intersectViewportAbove, options);
+        obs.observe(el);
+        return obs;
+      });
+    }
+
+    function updateViewportBelowIO() {
+      if (io.viewportBelow) io.viewportBelow.forEach(d => d.disconnect());
+      io.viewportBelow = stepEl.map((el, i) => {
+        const marginTop = -(offsetMargin + stepOffsetHeight[i]);
+        const marginBottom =
+          ph - stepOffsetTop[i] - stepOffsetHeight[i] - offsetMargin;
+        const rootMargin = `${marginTop}px 0px ${marginBottom}px 0px`;
+        const options = {
+          root: null,
+          rootMargin,
+          threshold: 0
+        };
+
+        const obs = new IntersectionObserver(intersectViewportBelow, options);
+        obs.observe(el);
+        return obs;
+      });
+    }
+
+    // progress progress tracker
+    function updateStepProgressIO() {
+      if (io.stepProgress) io.stepProgress.forEach(d => d.disconnect());
+
+      io.stepProgress = stepEl.map((el, i) => {
+        const marginTop = stepOffsetHeight[i] - offsetMargin;
+        const marginBottom = -vh + offsetMargin;
+        const rootMargin = `${marginTop}px 0px ${marginBottom}px 0px`;
+
+        const threshold = createThreshold(stepOffsetHeight[i]);
+        const options = {
+          root: null,
+          rootMargin,
+          threshold
+        };
+
+        const obs = new IntersectionObserver(intersectStepProgress, options);
+        obs.observe(el);
+        return obs;
+      });
+    }
+
+    function updateIO() {
+      updateViewportAboveIO();
+      updateViewportBelowIO();
+      updateStepAboveIO();
+      updateStepBelowIO();
+
+      if (progressMode) updateStepProgressIO();
+
+      if (containerEl && graphicEl) {
+        updateTopIO();
+        updateBottomIO();
+      }
+    }
+
+    // SETUP FUNCTIONS
+
+    function indexSteps() {
+      stepEl.forEach((el, i) => el.setAttribute('data-scrollama-index', i));
+    }
+
+    function setupStates() {
+      stepStates = stepEl.map(() => ({
+        direction: null,
+        state: null
+      }));
+
+      containerState = { direction: null, state: null };
+    }
+
+    function addDebug() {
+      if (debugMode) setup({ id, stepEl, offsetVal });
+    }
+
+    const S = {};
+
+    S.setup = ({
+      container,
+      graphic,
+      step,
+      offset = 0.5,
+      progress = false,
+      threshold = 4,
+      debug = false,
+      order = true,
+      once = false
+    }) => {
+      id = generateId();
+      // elements
+      stepEl = selectAll(step);
+      containerEl = container ? select(container) : null;
+      graphicEl = graphic ? select(graphic) : null;
+
+      // error if no step selected
+      if (!stepEl.length) {
+        console.error('scrollama error: no step elements');
+        return S;
+      }
+
+      // options
+      debugMode = debug;
+      progressMode = progress;
+      preserveOrder = order;
+      triggerOnce = once;
+
+      S.offsetTrigger(offset);
+      progressThreshold = Math.max(1, +threshold);
+
+      isReady = true;
+
+      // customize
+      addDebug();
+      indexSteps();
+      setupStates();
+      handleResize();
+      handleEnable(true);
+      return S;
+    };
+
+    S.resize = () => {
+      handleResize();
+      return S;
+    };
+
+    S.enable = () => {
+      handleEnable(true);
+      return S;
+    };
+
+    S.disable = () => {
+      handleEnable(false);
+      return S;
+    };
+
+    S.destroy = () => {
+      handleEnable(false);
+      Object.keys(callback).forEach(c => (callback[c] = null));
+      Object.keys(io).forEach(i => (io[i] = null));
+    };
+
+    S.offsetTrigger = function(x) {
+      if (x && !isNaN(x)) {
+        offsetVal = Math.min(Math.max(0, x), 1);
+        return S;
+      }
+      return offsetVal;
+    };
+
+    S.onStepEnter = cb => {
+      callback.stepEnter = cb;
+      return S;
+    };
+
+    S.onStepExit = cb => {
+      callback.stepExit = cb;
+      return S;
+    };
+
+    S.onStepProgress = cb => {
+      callback.stepProgress = cb;
+      return S;
+    };
+
+    S.onContainerEnter = cb => {
+      callback.containerEnter = cb;
+      return S;
+    };
+
+    S.onContainerExit = cb => {
+      callback.containerExit = cb;
+      return S;
+    };
+
+    return S;
+  }
+
+  function zeroAnimation(worldMap) {
+    worldMap.animateSectionStyles({
+      duration: 1000,
+      section: '.non-soviet-country',
+      styles: {
+        opacity: '0.5',
+        'stroke-width': '0.25px'
+      }
+    });
+  }
+
+  function firstAnimation(worldMap) {
+    const zoomParams = {
+      scale: 4,
+      duration: 1000,
+      translateX: -Math.floor(worldMap.width * 0.462),
+      translateY: -Math.floor(worldMap.height * 0.2)
+    };
+    worldMap.animateMapZoom(zoomParams);
+    worldMap.createLabels();
+    worldMap.createPopulationChoropleth();
+    worldMap.animateSectionStyles({
+      duration: 500,
+      section: '.non-soviet-country',
+      styles: {
+        opacity: '0',
+        'stroke-width': '0.175px'
+      }
+    });
+  }
+
+  function secondAnimation(worldMap, barChart) {
+    worldMap.moveMapContainer({
+      duration: 1000,
+      top: Math.floor(window.innerHeight * 0.05)
+    });
+    barChart.fadeTextIn();
+  }
+
+  function thirdAnimation(worldMap, barChart) {
+    barChart.animateBarsIn();
+    barChart.addPopulationLabels(); //
+
+    worldMap.addPointsToMap();
+  }
+
+  function fourthAnimation(worldMap) {
+    worldMap.drawCurves();
+    worldMap.drawArrows();
+  }
+
+  function fifthAnimation(worldMap, barChart) {}
+
+  var animations = {
+    0: zeroAnimation,
+    1: firstAnimation,
+    2: secondAnimation,
+    3: thirdAnimation,
+    4: fourthAnimation,
+    5: fifthAnimation,
+    6: () => {}
+  };
+
+  function setupScrollama(worldMap, barChart) {
+    // response = { element, direction, index }
+    function handleStepEnter(response) {
+      console.warn('SCROLLAMA animation[index]:: ', response.index);
+      const animationIndex = response.index;
+      const animationHandler = animations[animationIndex];
+      animationHandler(worldMap, barChart);
+    }
+
+    function handleContainerEnter(response) {
+      console.warn("Scrollama :: handleContainerEnter");
+    }
+
+    function handleContainerExit(response) {
+      console.warn("Scrollama :: handleContainerExit");
+    }
+
+    scrollama().setup({
+      container: ".scroll",
+      graphic: ".scroll__graphic",
+      text: ".scroll__text",
+      step: ".scroll__text .step",
+      debug: false,
+      offset: 0.9
+    }).onStepEnter(handleStepEnter).onContainerEnter(handleContainerEnter).onContainerExit(handleContainerExit);
+  } // setup resize event -> this is causing issues in mobile when the mobile headers resize
+  // window.addEventListener("resize", handleResize);
+
+  function firstPaint() {
+    // Setup sizes for the graphic and steps
+    var container = d3.select(".scroll");
+    const boundingBox = container.node().getBoundingClientRect();
+    const {
+      width,
+      height
+    } = boundingBox;
+    const text = container.select(".scroll__text");
+    const textWidth = text.node().offsetWidth;
+    const step = text.selectAll(".step");
+    const stepHeight = Math.floor(window.innerHeight * 1);
+    step.style("height", stepHeight + "px");
+    text.selectAll(".step-two").style('height', '200px');
+    const barMarginTop = Math.floor(window.innerHeight * 0.5);
+    d3.select(".data__graphic").style('top', barMarginTop + 'px'); // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
+
+    const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
+    d3.select(".scroll__graphic").style("width", width + "px").style("height", width + "px").style("top", graphicMarginTop + "px"); // Use this to set the distance ofo the first step
+
+    d3.select(".header-container").style("height", 900 + "px");
+    d3.select(".ussr-svg-container").style("width", textWidth + "px");
+    d3.select(".intro-block").style("width", textWidth + "px");
+    d3.select(".name-block").style("width", textWidth + "px");
+    d3.select(".ussr-svg").style("height", 200 + "px");
+    d3.select(".ussr-svg").style("width", 200 + "px");
+  }
+
+  function loadMap() {
+    return new Promise((resolve, reject) => {
+      d3.json("https://yantonsoup.github.io/after-the-ussr/json/110topoworld.json", function (json) {
+        console.warn("loaded 110topoworld.json:", json);
+        resolve(json);
+      });
+    });
+  }
+
+  const sovietCountryIsoCodes = ["ARM", "AZE", "BLR", "EST", "GEO", "KAZ", "KGZ", "LVA", "LTU", "MDA", "RUS", "TJK", "TKM", "UKR", "UZB"];
+  const colors = ["#feedde", "#fdbe85", "#fd8d3c", "#e6550d", "#dd6344", "#feedde", "#fdbe85", "#fd8d3c", "#e6550d", "#feedde", "#fdbe85", "#fd8d3c", "#e6550d", "#dd6344"];
+  const sovietLabelShift = {
+    ARM: {
+      x: -16,
+      y: 3
+    },
+    AZE: {
+      x: -14,
+      y: 7
+    },
+    BLR: {
+      x: -20,
+      y: 2
+    },
+    EST: {
+      x: -13,
+      y: -3
+    },
+    GEO: {
+      x: -18,
+      y: 1
+    },
+    KAZ: {
+      x: 13,
+      y: 15
+    },
+    KGZ: {
+      x: 1,
+      y: 10
+    },
+    LVA: {
+      x: -15,
+      y: -2
+    },
+    LTU: {
+      x: -18,
+      y: 0
+    },
+    MDA: {
+      x: -18,
+      y: 2
+    },
+    RUS: {
+      x: -40,
+      y: 10
+    },
+    TJK: {
+      x: -6,
+      y: 10
+    },
+    TKM: {
+      x: -20,
+      y: 10
+    },
+    UKR: {
+      x: -23,
+      y: 0
+    },
+    UZB: {
+      x: -12,
+      y: 18
+    }
+  };
+  const populationsIn1991 = [{
+    name: 'ARM',
+    population: 3.5
+  }, {
+    name: 'AZE',
+    population: 7.271
+  }, {
+    name: 'BLR',
+    population: 10.19
+  }, {
+    name: 'EST',
+    population: 1.568
+  }, {
+    name: 'GEO',
+    population: 6.653
+  }, {
+    name: 'KAZ',
+    population: 16.45
+  }, {
+    name: 'KGZ',
+    population: 4.464
+  }, {
+    name: 'LVA',
+    population: 2.658
+  }, {
+    name: 'LTU',
+    population: 3.7
+  }, {
+    name: 'MDA',
+    population: 3.7
+  }, {
+    name: 'TJK',
+    population: 5.4
+  }, {
+    name: 'TKM',
+    population: 3.772
+  }, {
+    name: 'UKR',
+    population: 52
+  }, {
+    name: 'UZB',
+    population: 20.95
+  }]; // RUS: 148.6 million
+  //   ARM: 3.5 million,
+  //   AZE: 7.271 million (1991),
+  //   BLR: 10.19 million (1991)
+  //   EST: 1.568 million (1991)
+  //   GEO: 6.653 million (1991)
+  //   KAZ: 16,450,000
+  //   KGZ: 4.464 million (1991),
+  //   LVA: 2.658 million (1991)
+  //   LTU: 3.702 million (1991)
+  //   MDA: 3.7 million,
+  //   RUS: 148.6 million
+  //   TJK: 5.4 million,
+  //   TKM: 3.772 million,
+  //   UKR: 52 million,
+  //   UZB: 20,950,000
+  // }
+
+  const rotate = -20; // so that [-60, 0] becomes initial center of projection
+
+  const maxlat = 83;
+  class WorldMap {
+    constructor(opts) {
+      // load in arguments from config object
+      this.data = opts.data;
+      this.sovietDataPoints = opts.data.filter(country => sovietCountryIsoCodes.includes(country.id));
+      this.element = opts.element; // create the chart
+
+      this.draw();
+    }
+
+    getMercatorBounds(projection) {
+      const yaw = projection.rotate()[0];
+      const xymax = projection([-yaw + 180 - 1e-6, -maxlat]);
+      const xymin = projection([-yaw - 180 + 1e-6, maxlat]);
+      return [xymin, xymax];
+    }
+
+    draw() {
+      const boundingBox = d3.select(this.element).node().getBoundingClientRect();
+      this.height = boundingBox.height;
+      this.width = boundingBox.width; // define width, height and margin
+
+      this.projection = d3.geo.mercator().rotate([rotate, 0]).scale(1) // we'll scale up to match viewport shortly.
+      .translate([this.width / 2, this.height / 2]);
+      const b = this.getMercatorBounds(this.projection);
+      const s = this.width / (b[1][0] - b[0][0]);
+      const scaleExtent = [s, 10 * s];
+      this.projection.scale(scaleExtent[0]);
+      this.path = d3.geo.path().projection(this.projection);
+      const svg = d3.select(this.element).append("svg").attr("width", this.width).attr("height", this.height);
+      this.mapGraphic = svg.append("g").attr("id", "map");
+      this.mapGraphic.selectAll("path").data(this.data).enter().append("path").attr("d", this.path).style("stroke-width", 0.5 + "px").attr("class", "country").attr("id", function (d, i) {
+        return "country" + d.id;
+      }).attr("class", function (datapoint, i) {
+        if (sovietCountryIsoCodes.includes(datapoint.id)) {
+          return "country soviet-country";
+        } else {
+          return "country non-soviet-country";
+        }
+      });
+    }
+
+    animateSectionStyles({
+      duration,
+      section,
+      styles
+    }) {
+      console.warn({
+        duration,
+        section,
+        styles
+      });
+      d3.select(this.element).selectAll(section).transition().duration(duration).style(styles);
+    }
+
+    animateMapZoom({
+      scale,
+      translateX,
+      translateY,
+      duration
+    }) {
+      this.mapGraphic.transition().duration(duration).attr("transform", `scale(${scale})translate(${translateX},${translateY})`);
+    } // TODO: find a better way to shift labels
+
+
+    createLabels() {
+      const centroids = this.sovietDataPoints.map(country => {
+        return this.path.centroid(country);
+      });
+      this.mapGraphic.selectAll(".place-label").data(this.sovietDataPoints).enter().append("text").attr("class", "place-label").attr("transform", d => {
+        const [x, y] = this.path.centroid(d);
+        return `translate(${x},${y})`;
+      }).attr("dx", function ({
+        id
+      }) {
+        const {
+          x
+        } = sovietLabelShift[id];
+        return `${x}px`;
+      }).attr("dy", function ({
+        id
+      }) {
+        const {
+          y
+        } = sovietLabelShift[id];
+        return `${y}px`;
+      }).text(function (d) {
+        return d.properties.name;
+      }).style("font-size", 3 + "px");
+    } // TODO: makethis an actual cloropleth funk
+
+
+    createPopulationChoropleth() {
+      d3.selectAll(".soviet-country").transition().duration(1000).style("fill", function (d, i) {
+        // console.warn('i', i)
+        return colors[i];
+      }).style("stroke-width", 0.25 + "px");
+    }
+
+    moveMapContainer({
+      top,
+      duration
+    }) {
+      d3.select(this.element).transition().duration(duration).style("top", top + "px");
+    }
+
+    addPointsToMap() {
+      const centroids = this.sovietDataPoints.map(country => {
+        return this.path.centroid(country);
+      });
+      this.mapGraphic.selectAll(".centroid").data(centroids).enter().append("circle").attr("fill", "black").attr("r", "0.45px").attr("cx", function (d) {
+        return d[0];
+      }).attr("cy", function (d) {
+        return d[1];
+      });
+      const russiaCoordinates = [235, 110];
+      this.mapGraphic.selectAll(".russia-centroid").data(russiaCoordinates).enter().append("circle").attr("fill", "white").attr("r", "0.25px").attr("cx", function (d) {
+        return d[0];
+      }).attr("cy", function (d) {
+        return d[1];
+      });
+    }
+
+    drawArrows() {
+      const centroidsWithoutRussia = this.sovietDataPoints.filter(({
+        id
+      }) => id !== "RUS").map(country => {
+        return this.path.centroid(country);
+      });
+      console.warn("ayyeee drawing an arrow");
+      this.mapGraphic.selectAll(".centroid").data(centroidsWithoutRussia).enter().append("line").attr("x1", function (d) {
+        return d[0];
+      }).attr("y1", function (d) {
+        return d[1];
+      }).attr("x2", function (d) {
+        return d[0] + 5;
+      }).attr("y2", function (d) {
+        return d[1] + 10;
+      }).attr("stroke", "black").attr("stroke-width", 0.1).attr("marker-end", "url(#arrow)");
+    }
+
+    drawCurves() {
+      const russiaCentroids = this.sovietDataPoints.filter(({
+        id
+      }) => id !== 'RUS').map(country => {
+        return this.path.centroid(country);
+      });
+      const centroidsWithValues = russiaCentroids.map((centroid, index) => ({
+        trade: index,
+        ...centroid
+      }));
+      console.warn("centroidsWithValues", centroidsWithValues);
+      const russiaCoordinates = [235, 110];
+      const arcs = this.mapGraphic.append("g").selectAll("path.datamaps-arc").data(centroidsWithValues);
+      arcs.enter().append("path").attr("class", "arc").attr("d", (datum, index) => {
+        console.warn({
+          datum
+        });
+        const curveoffset = 15;
+        const origin = [datum[0], datum[1]];
+        const dest = russiaCoordinates;
+        const mid = [(origin[0] + dest[0]) / 2, (origin[1] + dest[1]) / 2]; //define handle points for Bezier curves. Higher values for curveoffset will generate more pronounced curves.
+
+        const midcurve = [mid[0], mid[1] - curveoffset]; // move cursor to origin
+        // define the arrowpoint: the destination, minus a scaled tangent vector, minus an orthogonal vector scaled to the datum.trade variable
+        // move cursor to origin
+
+        return "M" + origin[0] + ',' + origin[1] // smooth curve to offset midpoint
+        + "S" + midcurve[0] + "," + midcurve[1] //smooth curve to destination	
+        + "," + dest[0] + "," + dest[1];
+      }).style('fill', 'none').style('stroke-width', '0.5px').style('stroke', (d, i) => colors[i]).style('opacity', '0').transition().duration(1000).style('opacity', '1');
+    }
+
+    animateNetMigration() {}
+
+  }
+
+  const sortedPopulationData = populationsIn1991.sort(function (a, b) {
+    return d3.ascending(a.population, b.population);
+  });
+  class BarChart {
+    constructor(opts) {
+      // load in arguments from config object
+      this.data = opts.data;
+      this.sovietDataPoints = opts.data.filter(country => sovietCountryIsoCodes.includes(country.id));
+      this.element = opts.element; // create the chart
+
+      this.draw();
+    }
+
+    draw() {
+      // define width, height and margin
+      const mapContainer = d3.select(".scroll__graphic");
+      const boundingBox = mapContainer.node().getBoundingClientRect();
+      const {
+        height,
+        width
+      } = boundingBox;
+      this.barMargin = {
+        top: 15,
+        right: 75,
+        bottom: 0,
+        left: 60
+      };
+      const text = d3.select(".scroll").select(".scroll__text");
+      const textWidth = text.node().offsetWidth;
+      this.width = textWidth - this.barMargin.left - this.barMargin.right;
+      this.height = height - 100 - this.barMargin.top - this.barMargin.bottom; // we'll actually be appending to a <g> element
+
+      this.plot = d3.select("#bar-graphic").append("svg").attr("width", this.width + this.barMargin.left + this.barMargin.right).attr("height", this.height + this.barMargin.top + this.barMargin.bottom).append("g").attr("transform", "translate(" + this.barMargin.left + "," + this.barMargin.top + ")").style("opacity", "0"); // create the other stuff
+
+      this.createScales();
+      this.addYAxes();
+    }
+
+    createScales() {
+      this.xScale = d3.scale.linear().range([0, this.width]).domain([0, d3.max(sortedPopulationData, function (d) {
+        return d.population;
+      })]); // y scale
+
+      this.yScale = d3.scale.ordinal().rangeRoundBands([this.height, 0], 0.1).domain(sortedPopulationData.map(function (d) {
+        return d.name;
+      }));
+    }
+
+    addYAxes() {
+      const yAxisStuff = d3.svg.axis().scale(this.yScale) //no tick marks
+      .tickSize(0).orient("left");
+      this.plot.append("g").attr("class", "y-axis").call(yAxisStuff);
+      this.bars = this.plot.selectAll(".bar").data(sortedPopulationData).enter().append("g");
+      this.bars.append("rect").attr("class", "bar").attr("y", d => {
+        return this.yScale(d.name);
+      }).attr("height", () => this.yScale.rangeBand()).attr("x", 0).attr("width", 0);
+    }
+
+    addPopulationLabels() {
+      const barGraphicSvg = d3.select("#bar-graphic").select("svg");
+      barGraphicSvg.select("g").selectAll(".text").data(sortedPopulationData).enter().append("text").attr("class", "label").attr("y", d => {
+        return this.yScale(d.name);
+      }).attr("x", d => {
+        return this.xScale(d.population) + 1;
+      }).attr("dx", ".75em").text(function (d) {
+        return d.population;
+      }).attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")").style("opacity", "0");
+      barGraphicSvg.selectAll('.label').transition().delay(1500).duration(1000).style("opacity", "1");
+    } //   animateSectionStyles({ duration, section, styles }) {
+    //     console.warn({ duration, section, styles });
+    //     d3.select(this.element)
+    //       .selectAll(section)
+    //       .transition()
+    //       .duration(duration)
+    //       .style(styles);
+    //   }
+
+
+    fadeTextIn() {
+      this.plot.transition().delay(1000).duration(500).style("opacity", "1");
+      d3.select(".bar-graphic-header").transition().delay(1000).duration(500).style("opacity", "1").style('color', 'black');
+    }
+
+    animateBarsIn() {
+      d3.selectAll("rect").transition().delay(function (d, i) {
+        return i * 100;
+      }).attr("fill", function (d, i) {
+        return colors[i];
+      }).attr("width", d => {
+        return this.xScale(d.population);
+      });
+    }
+
+  }
+
+  // logs will still point to your original source modules
+
+  console.log('if you have sourcemaps enabled in your devtools, click on main.js:5 -->');
+
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  };
+
+  loadMap().then(json => {
+    firstPaint();
+    const countries = topojson.feature(json, json.objects.subunits);
+    const features = countries.features;
+    const worldMap = new WorldMap({
+      data: features,
+      element: '.scroll__graphic'
+    });
+    const barChart = new BarChart({
+      element: '#bar-graphic',
+      data: features
+    });
+    console.warn('features', features);
+    setupScrollama(worldMap, barChart);
+  });
+
+}());
 //# sourceMappingURL=bundle.js.map
