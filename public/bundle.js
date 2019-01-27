@@ -1707,6 +1707,53 @@
     barChart.repaintChart(netFsuMigrationTwo);
   }
 
+  function seventhAnimation(worldMap, barChart) {
+    const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
+    worldMap.moveMapContainer({
+      duration: 1000,
+      top: graphicMarginTop
+    });
+    barChart.hideAllElements();
+    worldMap.animateSectionStyles({
+      duration: 500,
+      section: '.arc',
+      styles: {
+        opacity: '0'
+      }
+    });
+    worldMap.animateSectionStyles({
+      duration: 500,
+      section: 'circle',
+      styles: {
+        opacity: '0'
+      }
+    });
+    worldMap.animateSectionStyles({
+      duration: 500,
+      section: '.place-label',
+      styles: {
+        opacity: '0'
+      }
+    });
+    const zoomParams = {
+      scale: 2.5,
+      duration: 1000,
+      translateX: -Math.floor(worldMap.width * 0.3),
+      translateY: -Math.floor(worldMap.height * 0.2)
+    };
+    worldMap.animateMapZoom(zoomParams);
+    worldMap.animateSectionStyles({
+      duration: 500,
+      section: '.non-soviet-country',
+      styles: {
+        opacity: '0.25'
+      }
+    });
+  }
+
+  function eightAnimation(worldMap, barChart) {// make the map bigger, stretch vertically
+  }
+
   var animations = {
     0: zeroAnimation,
     1: firstAnimation,
@@ -1714,7 +1761,10 @@
     3: thirdAnimation,
     4: fourthAnimation,
     5: fifthAnimation,
-    6: () => {}
+    6: () => {},
+    7: seventhAnimation,
+    8: eightAnimation,
+    9: () => {}
   };
 
   function setupScrollama(worldMap, barChart) {
@@ -1809,10 +1859,9 @@
 
       this.projection = d3.geo.mercator().rotate([rotate, 0]).scale(1) // we'll scale up to match viewport shortly.
       .translate([this.width / 2, this.height / 2]);
-      const b = this.getMercatorBounds(this.projection);
-      const s = this.width / (b[1][0] - b[0][0]);
-      const scaleExtent = [s, 10 * s];
-      this.projection.scale(scaleExtent[0]);
+      this.initialScale = this.getInitialScale();
+      console.warn('this.initialScale', this.initialScale);
+      this.projection.scale(this.initialScale);
       this.path = d3.geo.path().projection(this.projection);
       const svg = d3.select(this.element).append("svg").attr("width", this.width).attr("height", this.height);
       this.mapGraphic = svg.append("g").attr("id", "map");
@@ -1825,6 +1874,13 @@
           return "country non-soviet-country";
         }
       });
+    }
+
+    getInitialScale() {
+      const b = this.getMercatorBounds(this.projection);
+      const s = this.width / (b[1][0] - b[0][0]);
+      const scaleExtent = [s, 10 * s];
+      return scaleExtent[0];
     }
 
     animateSectionStyles({
@@ -1892,7 +1948,7 @@
       const centroids = this.sovietDataPoints.map(country => {
         return this.path.centroid(country);
       });
-      this.mapGraphic.selectAll(".centroid").data(centroids).enter().append("circle").attr("fill", "black").attr("r", "0.45px").attr("cx", function (d) {
+      this.mapGraphic.selectAll(".centroid").data(centroids).enter().append("circle").attr("class", ".centroid").attr("fill", "black").attr("r", "0.45px").attr("cx", function (d) {
         return d[0];
       }).attr("cy", function (d) {
         return d[1];

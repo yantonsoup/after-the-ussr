@@ -40,11 +40,9 @@ export default class WorldMap {
       .scale(1) // we'll scale up to match viewport shortly.
       .translate([this.width / 2, this.height / 2]);
 
-    const b = this.getMercatorBounds(this.projection);
-    const s = this.width / (b[1][0] - b[0][0]);
-    const scaleExtent = [s, 10 * s];
-
-    this.projection.scale(scaleExtent[0]);
+    this.initialScale = this.getInitialScale();
+    console.warn('this.initialScale', this.initialScale)
+    this.projection.scale(this.initialScale);
     this.path = d3.geo.path().projection(this.projection);
 
     const svg = d3
@@ -73,6 +71,13 @@ export default class WorldMap {
           return "country non-soviet-country";
         }
       });
+  }
+
+  getInitialScale() {
+    const b = this.getMercatorBounds(this.projection);
+    const s = this.width / (b[1][0] - b[0][0]);
+    const scaleExtent = [s, 10 * s];
+    return scaleExtent[0]
   }
 
   animateSectionStyles({ duration, section, styles }) {
@@ -153,6 +158,7 @@ export default class WorldMap {
       .data(centroids)
       .enter()
       .append("circle")
+      .attr("class", ".centroid")
       .attr("fill", "black")
       .attr("r", "0.45px")
       .attr("cx", function(d) {
