@@ -51,8 +51,8 @@ export default class BarChart {
     this.drawTitle();
 
     // create the other stuff
-    this.setXScale(sortedPopulationData);
-    this.setYScale(sortedPopulationData);
+    this.setXScale(this.data);
+    this.setYScale(this.data);
     
     this.bindDataToBars(sortedPopulationData);
     this.paintHiddenBars();

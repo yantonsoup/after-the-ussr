@@ -1987,8 +1987,8 @@
 
       this.drawTitle(); // create the other stuff
 
-      this.setXScale(sortedPopulationData$1);
-      this.setYScale(sortedPopulationData$1);
+      this.setXScale(this.data);
+      this.setYScale(this.data);
       this.bindDataToBars(sortedPopulationData$1);
       this.paintHiddenBars();
       this.addYAxes();
@@ -2094,7 +2094,7 @@
     });
     const barChart = new BarChart({
       element: '.bar-graphic',
-      data: features
+      data: populationsIn1991
     });
     console.warn('features', features);
     setupScrollama(worldMap, barChart);
