@@ -2,6 +2,7 @@ import {
   sovietCountryIsoCodes,
   colors,
   sovietLabelShift,
+  netFsuMigrationOne,
   populationsIn1991
 } from "./constants";
 
@@ -103,8 +104,67 @@ export default class BarChart {
         return this.yScale(d.name);
       })
       .attr("height", () => this.yScale.rangeBand())
+      .attr("fill", function(d, i) {
+        return colors[i];
+      })
       .attr("x", 0)
       .attr("width", 0);
+  }
+
+  animateBarsToMigration() {
+    // const newBars = this.plot
+    //   .selectAll(".bar")
+    //   .data(netFsuMigrationOne)
+    //   .enter()
+    //   .append("g");
+
+    this.xScale = d3.scale
+    .linear()
+    .range([0, this.width])
+    .domain([
+      0,
+      d3.max(netFsuMigrationOne, function(d) {
+        return d.migration;
+      })
+    ]);
+
+    d3.selectAll("rect")
+      .transition()
+      .delay(function(d, i) {
+        return i * 100;
+      })
+      .attr("width", d => {
+        console.warn('d for new width', d)
+        return this.xScale(d.migration);
+      });
+  }
+  
+  drawBars(data) {
+    const newBars = this.plot
+      .selectAll(".bar")
+      .data(data)
+      .enter()
+      .append("g");
+
+    this.xScale = d3.scale
+    .linear()
+    .range([0, this.width])
+    .domain([
+      0,
+      d3.max(data, function(d) {
+        return d.migration;
+      })
+    ]);
+
+    d3.selectAll("rect")
+      .transition()
+      .delay(function(d, i) {
+        return i * 100;
+      })
+      .attr("width", d => {
+        console.warn('d for new width', d)
+        return this.xScale(d.migration);
+      });
   }
 
   addPopulationLabels() {
@@ -172,9 +232,6 @@ export default class BarChart {
       .transition()
       .delay(function(d, i) {
         return i * 100;
-      })
-      .attr("fill", function(d, i) {
-        return colors[i];
       })
       .attr("width", d => {
         return this.xScale(d.population);

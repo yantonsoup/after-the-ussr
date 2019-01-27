@@ -1,5 +1,5 @@
-import "intersection-observer";
-import scrollama from "scrollama";
+import 'intersection-observer';
+import scrollama from 'scrollama';
 
 import animations from "./animations";
 

@@ -1,3 +1,12 @@
+import {
+  sovietCountryIsoCodes,
+  colors,
+  sovietLabelShift,
+  netFsuMigrationOne,
+  netFsuMigrationTwo,
+  populationsIn1991
+} from "./constants";
+
 function zeroAnimation(worldMap) {
   worldMap.animateSectionStyles({ 
     duration: 1000, 
@@ -50,12 +59,15 @@ function thirdAnimation(worldMap, barChart) {
   worldMap.addPointsToMap()
 }
 
-function fourthAnimation(worldMap) {
+function fourthAnimation(worldMap, barChart) {
   worldMap.drawCurves()
+  barChart.drawBars(netFsuMigrationOne)
+
   // worldMap.drawLabelPointer()
 }
 
 function fifthAnimation (worldMap, barChart) {
+  barChart.drawBars(netFsuMigrationTwo)
 }
 
 export default {

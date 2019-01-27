@@ -52,20 +52,20 @@ export const sovietLabelShift = {
 };
 
 export const populationsIn1991 = [
-  { name: 'ARM', population: 3.5 },
-  { name: 'AZE', population: 7.271 },
-  { name: 'BLR', population: 10.19 },
-  { name: 'EST', population: 1.568 },
-  { name: 'GEO', population: 6.653 },
-  { name: 'KAZ', population: 16.45 },
-  { name: 'KGZ', population: 4.464 },
-  { name: 'LVA', population: 2.658 },
-  { name: 'LTU', population: 3.7 },
-  { name: 'MDA', population: 3.7 },
-  { name: 'TJK', population: 5.4 },
-  { name: 'TKM', population: 3.772 },
-  { name: 'UKR', population: 52 },
-  { name: 'UZB', population: 20.95 }
+  { name: 'ARM', population: 3500000 },
+  { name: 'AZE', population: 7271000 },
+  { name: 'BLR', population: 10190000 },
+  { name: 'EST', population: 1568000 },
+  { name: 'GEO', population: 6653000 },
+  { name: 'KAZ', population: 16450000 },
+  { name: 'KGZ', population: 4464000 },
+  { name: 'LVA', population: 2658000 },
+  { name: 'LTU', population: 3700000 },
+  { name: 'MDA', population: 3700000 },
+  { name: 'TJK', population: 5400000 },
+  { name: 'TKM', population: 3772000 },
+  { name: 'UKR', population: 52000000 },
+  { name: 'UZB', population: 20950000 }
 ];
 
 //1991 - 2000 to start
