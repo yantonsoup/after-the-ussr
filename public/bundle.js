@@ -1732,9 +1732,9 @@
 
     scrollama().setup({
       container: ".scroll",
-      graphic: ".scroll__graphic",
-      text: ".scroll__text",
-      step: ".scroll__text .step",
+      graphic: ".scroll-graphic",
+      text: ".scroll-text",
+      step: ".scroll-text .step",
       debug: false,
       offset: 0.9
     }).onStepEnter(handleStepEnter).onContainerEnter(handleContainerEnter).onContainerExit(handleContainerExit);
@@ -1749,17 +1749,17 @@
       width,
       height
     } = boundingBox;
-    const text = container.select(".scroll__text");
+    const text = container.select(".scroll-text");
     const textWidth = text.node().offsetWidth;
     const step = text.selectAll(".step");
     const stepHeight = Math.floor(window.innerHeight * 1);
     step.style("height", stepHeight + "px");
     text.selectAll(".step-two").style('height', '200px'); // make margin top for bar chart the size of the map container
 
-    d3.select(".data__graphic").style('top', width + 'px').style("width", width + "px").style("height", width + "px"); // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
+    d3.select(".bar-graphic-container").style('top', width + 'px').style("width", width + "px").style("height", width + "px"); // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
 
     const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
-    d3.select(".scroll__graphic").style("width", width + "px").style("height", width + "px").style("top", graphicMarginTop + "px"); // Use this to set the distance ofo the first step
+    d3.select(".scroll-graphic").style("width", width + "px").style("height", width + "px").style("top", graphicMarginTop + "px"); // Use this to set the distance ofo the first step
 
     d3.select(".header-container").style("height", 900 + "px");
     d3.select(".ussr-svg-container").style("width", textWidth + "px");
@@ -1973,24 +1973,21 @@
 
     draw() {
       // define width, height and margin
-      const mapContainer = d3.select(".scroll");
-      const boundingBox = mapContainer.node().getBoundingClientRect();
+      const scrollContainer = d3.select(".scroll");
+      const boundingBox = scrollContainer.node().getBoundingClientRect();
       const {
-        height,
         width
       } = boundingBox;
       this.barMargin = {
         top: 15,
         right: 175,
         bottom: 0,
-        left: 40
+        left: 60
       };
-      const text = d3.select(".scroll").select(".scroll__text");
-      const textWidth = text.node().offsetWidth;
       this.width = width - this.barMargin.left - this.barMargin.right;
       this.height = width - this.barMargin.top - this.barMargin.bottom; // we'll actually be appending to a <g> element
 
-      this.plot = d3.select("#bar-graphic").append("svg").attr("width", this.width + this.barMargin.left + this.barMargin.right).attr("height", this.height + this.barMargin.top + this.barMargin.bottom).append("g").attr("transform", "translate(" + this.barMargin.left + "," + this.barMargin.top + ")").style("opacity", "0"); // create the other stuff
+      this.plot = d3.select(".bar-graphic").append("svg").attr("width", this.width + this.barMargin.left + this.barMargin.right).attr("height", this.height + this.barMargin.top + this.barMargin.bottom).append("g").attr("transform", "translate(" + this.barMargin.left + "," + this.barMargin.top + ")").style("opacity", "0"); // create the other stuff
 
       this.setXScale(sortedPopulationData$1);
       this.setYScale(sortedPopulationData$1);
@@ -2083,10 +2080,10 @@
     const features = countries.features;
     const worldMap = new WorldMap({
       data: features,
-      element: '.scroll__graphic'
+      element: '.scroll-graphic'
     });
     const barChart = new BarChart({
-      element: '#bar-graphic',
+      element: '.bar-graphic',
       data: features
     });
     console.warn('features', features);

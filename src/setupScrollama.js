@@ -25,9 +25,9 @@ export default function setupScrollama(worldMap, barChart) {
   scrollama()
     .setup({
       container: ".scroll",
-      graphic: ".scroll__graphic",
-      text: ".scroll__text",
-      step: ".scroll__text .step",
+      graphic: ".scroll-graphic",
+      text: ".scroll-text",
+      step: ".scroll-text .step",
       debug: false,
       offset: 0.9
     })

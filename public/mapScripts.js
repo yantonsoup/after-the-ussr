@@ -11,7 +11,7 @@ var mercatorBounds = function (projection, maxlat) {
   return [xymin,xymax];
 }
 
-var graphicContainer = d3.select(".scroll__graphic");
+var graphicContainer = d3.select(".scroll-graphic");
 var graphicContainerSize = graphicContainer.node().getBoundingClientRect()
 var width = graphicContainerSize.width
 var height = graphicContainerSize.height
@@ -43,7 +43,7 @@ d3.json("110topoworld.json", function(json) {
   var countrySubunits = topojson.feature(json, json.objects.subunits).features
 
   svg = d3
-    .select(".scroll__graphic")
+    .select(".scroll-graphic")
     .append("svg")
     .attr("width", width)
     .attr("height", height)

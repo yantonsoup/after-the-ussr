@@ -5,7 +5,7 @@ export default function firstPaint () {
   const boundingBox = container.node().getBoundingClientRect();
   const { width, height } = boundingBox;
 
-  const text = container.select(".scroll__text");
+  const text = container.select(".scroll-text");
   const textWidth = text.node().offsetWidth;
 
   const step = text.selectAll(".step");
@@ -15,13 +15,13 @@ export default function firstPaint () {
 
   
   // make margin top for bar chart the size of the map container
-  d3.select(".data__graphic").style('top', width + 'px')
+  d3.select(".bar-graphic-container").style('top', width + 'px')
     .style("width", width + "px")
     .style("height", width + "px")
 
   // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
   const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
-  d3.select(".scroll__graphic")
+  d3.select(".scroll-graphic")
     .style("width", width + "px")
     .style("height", width + "px")
     .style("top", graphicMarginTop + "px");

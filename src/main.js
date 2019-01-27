@@ -22,11 +22,11 @@ loadMap().then(json => {
 
   const worldMap = new WorldMap({
     data: features,
-    element: '.scroll__graphic'
+    element: '.scroll-graphic'
   })
 
   const barChart = new BarChart({
-    element: '#bar-graphic',
+    element: '.bar-graphic',
     data: features
   })
 

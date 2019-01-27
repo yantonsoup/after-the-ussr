@@ -23,25 +23,23 @@ export default class BarChart {
 
   draw() {
     // define width, height and margin
-    const mapContainer = d3.select(".scroll");
-    const boundingBox = mapContainer.node().getBoundingClientRect();
-    const { height, width } = boundingBox;
+    const scrollContainer = d3.select(".scroll");
+    const boundingBox = scrollContainer.node().getBoundingClientRect();
+    const { width } = boundingBox;
 
     this.barMargin = {
       top: 15,
       right: 175,
       bottom: 0,
-      left: 40
+      left: 60
     };
-    const text = d3.select(".scroll").select(".scroll__text");
-    const textWidth = text.node().offsetWidth;
 
     this.width = width - this.barMargin.left - this.barMargin.right;
     this.height = width - this.barMargin.top - this.barMargin.bottom;
 
     // we'll actually be appending to a <g> element
     this.plot = d3
-      .select("#bar-graphic")
+      .select(".bar-graphic")
       .append("svg")
       .attr("width", this.width + this.barMargin.left + this.barMargin.right)
       .attr("height", this.height + this.barMargin.top + this.barMargin.bottom)
