@@ -1708,12 +1708,12 @@
   }
 
   function seventhAnimation(worldMap, barChart) {
-    const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
-    worldMap.moveMapContainer({
-      duration: 1000,
-      top: graphicMarginTop
-    });
-    barChart.hideAllElements();
+    const graphicMarginTop = Math.floor(window.innerHeight * 0.25); // worldMap.moveMapContainer({
+    //   duration: 1000,
+    //   top: graphicMarginTop
+    // })
+    // barChart.hideAllElements()
+
     worldMap.animateSectionStyles({
       duration: 500,
       section: '.arc',
@@ -1736,9 +1736,9 @@
       }
     });
     const zoomParams = {
-      scale: 2.5,
+      scale: 2,
       duration: 1000,
-      translateX: -Math.floor(worldMap.width * 0.3),
+      translateX: -Math.floor(worldMap.width * 0.2),
       translateY: -Math.floor(worldMap.height * 0.2)
     };
     worldMap.animateMapZoom(zoomParams);
@@ -1749,6 +1749,9 @@
         opacity: '0.25'
       }
     });
+    worldMap.animateWorldSections();
+    const title = 'Top Recieving Countries of Soviet Immigrants';
+    barChart.drawTitle(title);
   }
 
   function eightAnimation(worldMap, barChart) {// make the map bigger, stretch vertically
@@ -2011,7 +2014,9 @@
       }).style('fill', 'none').style('stroke-width', '0.5px').style('stroke', '#7772a8').style('opacity', '0').transition().duration(1000).style('opacity', '1');
     }
 
-    animateNetMigration() {}
+    animateWorldSections() {
+      this.mapGraphic.select('#countryISR').style('opacity', '1');
+    }
 
   }
 

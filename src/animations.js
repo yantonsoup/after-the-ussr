@@ -78,12 +78,12 @@ function fifthAnimation (worldMap, barChart) {
 
 function seventhAnimation(worldMap, barChart) {
   const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
-  worldMap.moveMapContainer({
-    duration: 1000,
-    top: graphicMarginTop
-  })
+  // worldMap.moveMapContainer({
+  //   duration: 1000,
+  //   top: graphicMarginTop
+  // })
 
-  barChart.hideAllElements()
+  // barChart.hideAllElements()
   worldMap.animateSectionStyles({ 
     duration: 500, 
     section: '.arc', 
@@ -109,9 +109,9 @@ function seventhAnimation(worldMap, barChart) {
   }) 
   
   const zoomParams = {
-    scale: 2.5,
+    scale: 2,
     duration: 1000,
-    translateX: (-Math.floor(worldMap.width * 0.3)),
+    translateX: (-Math.floor(worldMap.width * 0.2)),
     translateY: -Math.floor(worldMap.height * 0.2),
   }
 
@@ -124,6 +124,11 @@ function seventhAnimation(worldMap, barChart) {
       opacity: '0.25',
     }
   })
+
+  worldMap.animateWorldSections() 
+  const title = 'Top Recieving Countries of Soviet Immigrants'
+  barChart.drawTitle(title)
+
 }
 
 function eightAnimation(worldMap, barChart) {

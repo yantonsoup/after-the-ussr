@@ -268,7 +268,10 @@ export default class WorldMap {
       .style('opacity', '1')
   }
 
-  animateNetMigration() {
+  animateWorldSections() {
+    this.mapGraphic
+      .select('#countryISR')
+      .style('opacity', '1')
 
   }
 }
