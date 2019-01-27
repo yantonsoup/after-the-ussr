@@ -54,7 +54,24 @@ export default class BarChart {
     // create the other stuff
     this.setXScale(sortedPopulationData)
     this.setYScale(sortedPopulationData)
+    this.bindDataToBars(sortedPopulationData)
+    this.paintHiddenBars()
     this.addYAxes();
+  }
+
+  paintHiddenBars() {
+    this.bars
+      .append("rect")
+      .attr("class", "bar")
+      .attr("y", d => {
+        return this.yScale(d.name);
+      })
+      .attr("height", () => this.yScale.rangeBand())
+      .attr("fill", function(d, i) {
+        return colors[i];
+      })
+      .attr("x", 0)
+      .attr("width", 0);
   }
 
   setYScale(data) {
@@ -93,41 +110,26 @@ export default class BarChart {
       .attr("class", "y-axis")
       .call(yAxisStuff);
 
-    this.bars = this.plot
-      .selectAll(".bar")
-      .data(sortedPopulationData)
-      .enter()
-      .append("g");
 
-    this.bars
-      .append("rect")
-      .attr("class", "bar")
-      .attr("y", d => {
-        return this.yScale(d.name);
-      })
-      .attr("height", () => this.yScale.rangeBand())
-      .attr("fill", function(d, i) {
-        return colors[i];
-      })
-      .attr("x", 0)
-      .attr("width", 0);
   }
 
   redrawBarsAndLabels(data) {
+    this.bindDataToBars(data)
     this.setXScale(data)
     this.setYScale(data)
     this.redrawBars(data)
     this.redrawLabels(data)
   }
+
+  bindDataToBars(data) {
+    this.bars = this.plot
+    .selectAll(".bar")
+    .data(data)
+    .enter()
+    .append("g");
+  }
   
   redrawBars(data) {
-    const newBars = this.plot
-      .selectAll(".bar")
-      .data(data)
-      .enter()
-      .append("g");
-
-
     d3.selectAll("rect")
       .transition()
       .delay(function(d, i) {

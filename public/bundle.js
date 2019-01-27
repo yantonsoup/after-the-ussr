@@ -1995,7 +1995,17 @@
 
       this.setXScale(sortedPopulationData$1);
       this.setYScale(sortedPopulationData$1);
+      this.bindDataToBars(sortedPopulationData$1);
+      this.paintHiddenBars();
       this.addYAxes();
+    }
+
+    paintHiddenBars() {
+      this.bars.append("rect").attr("class", "bar").attr("y", d => {
+        return this.yScale(d.name);
+      }).attr("height", () => this.yScale.rangeBand()).attr("fill", function (d, i) {
+        return colors[i];
+      }).attr("x", 0).attr("width", 0);
     }
 
     setYScale(data) {
@@ -2014,23 +2024,21 @@
       const yAxisStuff = d3.svg.axis().scale(this.yScale) //no tick marks
       .tickSize(0).orient("left");
       this.plot.append("g").attr("class", "y-axis").call(yAxisStuff);
-      this.bars = this.plot.selectAll(".bar").data(sortedPopulationData$1).enter().append("g");
-      this.bars.append("rect").attr("class", "bar").attr("y", d => {
-        return this.yScale(d.name);
-      }).attr("height", () => this.yScale.rangeBand()).attr("fill", function (d, i) {
-        return colors[i];
-      }).attr("x", 0).attr("width", 0);
     }
 
     redrawBarsAndLabels(data) {
+      this.bindDataToBars(data);
       this.setXScale(data);
       this.setYScale(data);
       this.redrawBars(data);
       this.redrawLabels(data);
     }
 
+    bindDataToBars(data) {
+      this.bars = this.plot.selectAll(".bar").data(data).enter().append("g");
+    }
+
     redrawBars(data) {
-      const newBars = this.plot.selectAll(".bar").data(data).enter().append("g");
       d3.selectAll("rect").transition().delay(function (d, i) {
         return i * 100;
       }).attr("width", d => {
