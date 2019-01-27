@@ -26,6 +26,7 @@ export default class BarChart {
     const scrollContainer = d3.select(".scroll");
     const boundingBox = scrollContainer.node().getBoundingClientRect();
     const { width } = boundingBox;
+    const headerText = "Former Soviet State Populations in 1991"
 
     this.barMargin = {
       top: 15,
@@ -48,7 +49,7 @@ export default class BarChart {
         "translate(" + this.barMargin.left + "," + this.barMargin.top + ")"
       )
     // we'll actually be appending to a <g> element
-    this.drawTitle();
+    this.drawTitle(headerText);
 
     // create the other stuff
     this.setXScale(this.data);
@@ -66,11 +67,9 @@ export default class BarChart {
     this.textHeader.style("opacity", "0");
   }
 
-  drawTitle() {
-    const headerText = "FSU states 1991 population in millions"
-
+  drawTitle(text) {
     this.textHeader = d3.select(".bar-graphic-header")
-    this.textHeader.text(headerText)
+    this.textHeader.text(text)
   }
 
   paintHiddenBars() {
@@ -123,7 +122,7 @@ export default class BarChart {
       .call(yAxisStuff);
   }
 
-  redrawBarsAndLabels(data) {
+  repaintChart(data) {
     this.bindDataToBars(data);
     this.setXScale(data);
     this.setYScale(data);
@@ -193,14 +192,12 @@ export default class BarChart {
   revealBarChart() {
     this.plot
       .transition()
-      .delay(1000)
-      .duration(500)
+      .delay(500)
       .style("opacity", "1");
 
     this.textHeader
       .transition()
-      .delay(1000)
-      .duration(500)
+      .delay(500)
       .style("opacity", "1")
       .style("color", "black");
   }

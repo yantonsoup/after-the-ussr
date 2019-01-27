@@ -1696,11 +1696,15 @@
   function fourthAnimation(worldMap, barChart) {
     worldMap.addPointsToMap();
     worldMap.drawCurves();
-    barChart.redrawBarsAndLabels(netFsuMigrationOne); // worldMap.drawLabelPointer()
+    const title = 'Net Migration into Russia 1991-2000';
+    barChart.drawTitle(title);
+    barChart.repaintChart(netFsuMigrationOne); // worldMap.drawLabelPointer()
   }
 
   function fifthAnimation(worldMap, barChart) {
-    barChart.redrawBarsAndLabels(netFsuMigrationTwo);
+    const title = 'Net Migration into Russia 2001-2010';
+    barChart.drawTitle(title);
+    barChart.repaintChart(netFsuMigrationTwo);
   }
 
   var animations = {
@@ -1975,6 +1979,7 @@
       const {
         width
       } = boundingBox;
+      const headerText = "Former Soviet State Populations in 1991";
       this.barMargin = {
         top: 15,
         right: 175,
@@ -1985,7 +1990,7 @@
       this.height = width - this.barMargin.top - this.barMargin.bottom;
       this.plot = d3.select(".bar-graphic").append("svg").attr("width", this.width + this.barMargin.left + this.barMargin.right).attr("height", this.height + this.barMargin.top + this.barMargin.bottom).append("g").attr("transform", "translate(" + this.barMargin.left + "," + this.barMargin.top + ")"); // we'll actually be appending to a <g> element
 
-      this.drawTitle(); // create the other stuff
+      this.drawTitle(headerText); // create the other stuff
 
       this.setXScale(this.data);
       this.setYScale(this.data);
@@ -2000,10 +2005,9 @@
       this.textHeader.style("opacity", "0");
     }
 
-    drawTitle() {
-      const headerText = "FSU states 1991 population in millions";
+    drawTitle(text) {
       this.textHeader = d3.select(".bar-graphic-header");
-      this.textHeader.text(headerText);
+      this.textHeader.text(text);
     }
 
     paintHiddenBars() {
@@ -2032,7 +2036,7 @@
       this.plot.append("g").attr("class", "y-axis").call(yAxisStuff);
     }
 
-    redrawBarsAndLabels(data) {
+    repaintChart(data) {
       this.bindDataToBars(data);
       this.setXScale(data);
       this.setYScale(data);
@@ -2070,8 +2074,8 @@
     }
 
     revealBarChart() {
-      this.plot.transition().delay(1000).duration(500).style("opacity", "1");
-      this.textHeader.transition().delay(1000).duration(500).style("opacity", "1").style("color", "black");
+      this.plot.transition().delay(500).style("opacity", "1");
+      this.textHeader.transition().delay(500).style("opacity", "1").style("color", "black");
     }
 
   }

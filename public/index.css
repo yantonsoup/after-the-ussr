@@ -280,6 +280,10 @@ font-size: 1rem; */
   text-align: center;
 }
 
+.hidden-step {
+  opacity: 0;
+}
+
 .step-two{
   position: relative;
   z-index: 1000;
