@@ -61,13 +61,13 @@ function thirdAnimation(worldMap, barChart) {
 
 function fourthAnimation(worldMap, barChart) {
   worldMap.drawCurves()
-  barChart.drawBars(netFsuMigrationOne)
+  barChart.redrawBarsAndLabels(netFsuMigrationOne)
 
   // worldMap.drawLabelPointer()
 }
 
 function fifthAnimation (worldMap, barChart) {
-  barChart.drawBars(netFsuMigrationTwo)
+  barChart.redrawBarsAndLabels(netFsuMigrationTwo)
 }
 
 export default {

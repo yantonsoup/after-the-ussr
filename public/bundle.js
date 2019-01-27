@@ -1694,11 +1694,11 @@
 
   function fourthAnimation(worldMap, barChart) {
     worldMap.drawCurves();
-    barChart.drawBars(netFsuMigrationOne); // worldMap.drawLabelPointer()
+    barChart.redrawBarsAndLabels(netFsuMigrationOne); // worldMap.drawLabelPointer()
   }
 
   function fifthAnimation(worldMap, barChart) {
-    barChart.drawBars(netFsuMigrationTwo);
+    barChart.redrawBarsAndLabels(netFsuMigrationTwo);
   }
 
   var animations = {
@@ -2033,7 +2033,12 @@
       });
     }
 
-    drawBars(data) {
+    redrawBarsAndLabels(data) {
+      this.redrawBars(data);
+      this.redrawLabels(data);
+    }
+
+    redrawBars(data) {
       const newBars = this.plot.selectAll(".bar").data(data).enter().append("g");
       this.xScale = d3.scale.linear().range([0, this.width]).domain([0, d3.max(data, function (d) {
         return d.migration;
@@ -2044,6 +2049,16 @@
         console.warn('d for new width', d);
         return this.xScale(d.migration);
       });
+    }
+
+    redrawLabels(data) {
+      this.plot.select("g").selectAll(".text").data(data).enter().append("text").attr("class", "label").attr("y", d => {
+        return this.yScale(d.name);
+      }).attr("x", d => {
+        return this.xScale(d.migration) + 1;
+      }).attr("dx", ".75em").text(function (d) {
+        return d.migration;
+      }).attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
     }
 
     addPopulationLabels() {

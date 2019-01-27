@@ -138,8 +138,13 @@ export default class BarChart {
         return this.xScale(d.migration);
       });
   }
+
+  redrawBarsAndLabels(data) {
+    this.redrawBars(data)
+    this.redrawLabels(data)
+  }
   
-  drawBars(data) {
+  redrawBars(data) {
     const newBars = this.plot
       .selectAll(".bar")
       .data(data)
@@ -166,6 +171,30 @@ export default class BarChart {
         return this.xScale(d.migration);
       });
   }
+
+  redrawLabels(data) {
+    this.plot
+      .select("g")
+      .selectAll(".text")
+      .data(data)
+      .enter()
+      .append("text")
+      .attr("class", "label")
+      .attr("y", d => {
+        return this.yScale(d.name);
+      })
+      .attr("x", d => {
+        return this.xScale(d.migration) + 1;
+      })
+      .attr("dx", ".75em")
+      .text(function(d) {
+        return d.migration;
+      })
+      .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")")
+
+  }
+
+
 
   addPopulationLabels() {
     const barGraphicSvg = d3.select("#bar-graphic").select("svg");
