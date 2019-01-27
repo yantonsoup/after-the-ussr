@@ -1686,7 +1686,7 @@
       duration: 1000,
       top: 0
     });
-    barChart.fadeTextIn();
+    barChart.revealBarChart();
     barChart.redrawBars(sortedPopulationData);
     barChart.addPopulationLabels(sortedPopulationData);
   }
@@ -1847,9 +1847,6 @@
 
 
     createLabels() {
-      const centroids = this.sovietDataPoints.map(country => {
-        return this.path.centroid(country);
-      });
       this.mapGraphic.selectAll(".place-label").data(this.sovietDataPoints).enter().append("text").attr("class", "place-label").attr("transform", d => {
         const [x, y] = this.path.centroid(d);
         return `translate(${x},${y})`;
@@ -1985,15 +1982,28 @@
         left: 60
       };
       this.width = width - this.barMargin.left - this.barMargin.right;
-      this.height = width - this.barMargin.top - this.barMargin.bottom; // we'll actually be appending to a <g> element
+      this.height = width - this.barMargin.top - this.barMargin.bottom;
+      this.plot = d3.select(".bar-graphic").append("svg").attr("width", this.width + this.barMargin.left + this.barMargin.right).attr("height", this.height + this.barMargin.top + this.barMargin.bottom).append("g").attr("transform", "translate(" + this.barMargin.left + "," + this.barMargin.top + ")"); // we'll actually be appending to a <g> element
 
-      this.plot = d3.select(".bar-graphic").append("svg").attr("width", this.width + this.barMargin.left + this.barMargin.right).attr("height", this.height + this.barMargin.top + this.barMargin.bottom).append("g").attr("transform", "translate(" + this.barMargin.left + "," + this.barMargin.top + ")").style("opacity", "0"); // create the other stuff
+      this.drawTitle(); // create the other stuff
 
       this.setXScale(sortedPopulationData$1);
       this.setYScale(sortedPopulationData$1);
       this.bindDataToBars(sortedPopulationData$1);
       this.paintHiddenBars();
       this.addYAxes();
+      this.hideAllElements();
+    }
+
+    hideAllElements() {
+      this.plot.style("opacity", "0");
+      this.textHeader.style("opacity", "0");
+    }
+
+    drawTitle() {
+      const headerText = "FSU states 1991 population in millions";
+      this.textHeader = d3.select(".bar-graphic-header");
+      this.textHeader.text(headerText);
     }
 
     paintHiddenBars() {
@@ -2001,7 +2011,7 @@
         return this.yScale(d.name);
       }).attr("height", () => this.yScale.rangeBand()).attr("fill", function (d, i) {
         return colors[i];
-      }).attr("x", 0).attr("width", 0);
+      });
     }
 
     setYScale(data) {
@@ -2038,13 +2048,13 @@
       d3.selectAll("rect").transition().delay(function (d, i) {
         return i * 100;
       }).attr("width", d => {
-        console.warn('d for new width', d);
+        console.warn("d for new width", d);
         return this.xScale(d.population);
       });
     }
 
     redrawLabels(data) {
-      this.plot.selectAll('.label').transition().duration(500).style("opacity", "0");
+      this.plot.selectAll(".label").transition().duration(500).style("opacity", "0");
       this.plot.select("g").selectAll(".text").data(data).enter().append("text").attr("class", "label").attr("y", d => {
         return this.yScale(d.name);
       }).attr("x", d => {
@@ -2056,12 +2066,12 @@
 
     addPopulationLabels(data) {
       this.redrawLabels(data);
-      this.plot.selectAll('.label').style("opacity", "0").transition().delay(1500).duration(1000).style("opacity", "1");
+      this.plot.selectAll(".label").style("opacity", "0").transition().delay(1500).duration(1000).style("opacity", "1");
     }
 
-    fadeTextIn() {
+    revealBarChart() {
       this.plot.transition().delay(1000).duration(500).style("opacity", "1");
-      d3.select(".bar-graphic-header").transition().delay(1000).duration(500).style("opacity", "1").style('color', 'black');
+      this.textHeader.transition().delay(1000).duration(500).style("opacity", "1").style("color", "black");
     }
 
   }

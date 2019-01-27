@@ -37,7 +37,6 @@ export default class BarChart {
     this.width = width - this.barMargin.left - this.barMargin.right;
     this.height = width - this.barMargin.top - this.barMargin.bottom;
 
-    // we'll actually be appending to a <g> element
     this.plot = d3
       .select(".bar-graphic")
       .append("svg")
@@ -48,13 +47,30 @@ export default class BarChart {
         "transform",
         "translate(" + this.barMargin.left + "," + this.barMargin.top + ")"
       )
-      .style("opacity", "0");
+    // we'll actually be appending to a <g> element
+    this.drawTitle();
+
     // create the other stuff
-    this.setXScale(sortedPopulationData)
-    this.setYScale(sortedPopulationData)
-    this.bindDataToBars(sortedPopulationData)
-    this.paintHiddenBars()
+    this.setXScale(sortedPopulationData);
+    this.setYScale(sortedPopulationData);
+    
+    this.bindDataToBars(sortedPopulationData);
+    this.paintHiddenBars();
     this.addYAxes();
+
+    this.hideAllElements();
+  }
+
+  hideAllElements() {
+    this.plot.style("opacity", "0");
+    this.textHeader.style("opacity", "0");
+  }
+
+  drawTitle() {
+    const headerText = "FSU states 1991 population in millions"
+
+    this.textHeader = d3.select(".bar-graphic-header")
+    this.textHeader.text(headerText)
   }
 
   paintHiddenBars() {
@@ -68,8 +84,6 @@ export default class BarChart {
       .attr("fill", function(d, i) {
         return colors[i];
       })
-      .attr("x", 0)
-      .attr("width", 0);
   }
 
   setYScale(data) {
@@ -110,21 +124,21 @@ export default class BarChart {
   }
 
   redrawBarsAndLabels(data) {
-    this.bindDataToBars(data)
-    this.setXScale(data)
-    this.setYScale(data)
-    this.redrawBars(data)
-    this.redrawLabels(data)
+    this.bindDataToBars(data);
+    this.setXScale(data);
+    this.setYScale(data);
+    this.redrawBars(data);
+    this.redrawLabels(data);
   }
 
   bindDataToBars(data) {
     this.bars = this.plot
-    .selectAll(".bar")
-    .data(data)
-    .enter()
-    .append("g");
+      .selectAll(".bar")
+      .data(data)
+      .enter()
+      .append("g");
   }
-  
+
   redrawBars() {
     d3.selectAll("rect")
       .transition()
@@ -132,17 +146,17 @@ export default class BarChart {
         return i * 100;
       })
       .attr("width", d => {
-        console.warn('d for new width', d)
+        console.warn("d for new width", d);
         return this.xScale(d.population);
       });
   }
 
   redrawLabels(data) {
     this.plot
-    .selectAll('.label')
-    .transition()
-    .duration(500)
-    .style("opacity", "0");
+      .selectAll(".label")
+      .transition()
+      .duration(500)
+      .style("opacity", "0");
 
     this.plot
       .select("g")
@@ -161,14 +175,14 @@ export default class BarChart {
       .text(function(d) {
         return d.population;
       })
-      .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")")
+      .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
   }
 
-  addPopulationLabels (data){
-    this.redrawLabels(data)
+  addPopulationLabels(data) {
+    this.redrawLabels(data);
 
     this.plot
-      .selectAll('.label')
+      .selectAll(".label")
       .style("opacity", "0")
       .transition()
       .delay(1500)
@@ -176,18 +190,18 @@ export default class BarChart {
       .style("opacity", "1");
   }
 
-  fadeTextIn() {
+  revealBarChart() {
     this.plot
-        .transition()
-        .delay(1000)
-        .duration(500)
-        .style("opacity", "1");
+      .transition()
+      .delay(1000)
+      .duration(500)
+      .style("opacity", "1");
 
-    d3.select(".bar-graphic-header")
-        .transition()
-        .delay(1000)
-        .duration(500)
-        .style("opacity", "1")
-        .style('color', 'black')
-    }
+    this.textHeader
+      .transition()
+      .delay(1000)
+      .duration(500)
+      .style("opacity", "1")
+      .style("color", "black");
+  }
 }

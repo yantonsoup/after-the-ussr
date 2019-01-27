@@ -239,9 +239,8 @@ font-size: 1rem; */
 }
 
 .bar-graphic-header {
-  opacity: 0;
   text-align: center;
-  font-weight: 500;
+  color: black;
 }
 
 .data-bar-container {

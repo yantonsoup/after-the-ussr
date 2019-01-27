@@ -97,10 +97,6 @@ export default class WorldMap {
 
   // TODO: find a better way to shift labels
   createLabels() {
-    const centroids = this.sovietDataPoints.map(country => {
-      return this.path.centroid(country);
-    });
-
     this.mapGraphic
       .selectAll(".place-label")
       .data(this.sovietDataPoints)

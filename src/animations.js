@@ -49,7 +49,7 @@ function secondAnimation(worldMap, barChart) {
     duration: 1000,
     top: 0
   })
-  barChart.fadeTextIn()
+  barChart.revealBarChart()
   barChart.redrawBars(sortedPopulationData)
   barChart.addPopulationLabels(sortedPopulationData)
 }
