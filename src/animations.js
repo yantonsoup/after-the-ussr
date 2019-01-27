@@ -44,6 +44,7 @@ function secondAnimation(worldMap, barChart) {
 
 function thirdAnimation(worldMap, barChart) {
   barChart.animateBarsIn()
+
   barChart.addPopulationLabels()
   //
   worldMap.addPointsToMap()
@@ -51,7 +52,7 @@ function thirdAnimation(worldMap, barChart) {
 
 function fourthAnimation(worldMap) {
   worldMap.drawCurves()
-  worldMap.drawArrows()
+  // worldMap.drawLabelPointer()
 }
 
 function fifthAnimation (worldMap, barChart) {

@@ -14,7 +14,7 @@ export default function firstPaint () {
   text.selectAll(".step-two").style('height', '200px');
 
   
-  const barMarginTop = Math.floor(window.innerHeight * 0.5);
+  const barMarginTop = Math.floor(window.innerHeight * 0.6);
   d3.select(".data__graphic").style('top', barMarginTop + 'px')
 
   // console.warn('graphic Width AND, height', graphic.node().offsetWidth)

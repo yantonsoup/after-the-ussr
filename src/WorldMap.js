@@ -182,7 +182,7 @@ export default class WorldMap {
       });
   }
 
-  drawArrows() {
+  drawLabelPointer() {
     const centroidsWithoutRussia = this.sovietDataPoints
       .filter(({ id }) => id !== "RUS")
       .map(country => {

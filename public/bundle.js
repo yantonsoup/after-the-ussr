@@ -1481,8 +1481,7 @@
   }
 
   function fourthAnimation(worldMap) {
-    worldMap.drawCurves();
-    worldMap.drawArrows();
+    worldMap.drawCurves(); // worldMap.drawLabelPointer()
   }
 
   function fifthAnimation(worldMap, barChart) {}
@@ -1539,7 +1538,7 @@
     const stepHeight = Math.floor(window.innerHeight * 1);
     step.style("height", stepHeight + "px");
     text.selectAll(".step-two").style('height', '200px');
-    const barMarginTop = Math.floor(window.innerHeight * 0.5);
+    const barMarginTop = Math.floor(window.innerHeight * 0.6);
     d3.select(".data__graphic").style('top', barMarginTop + 'px'); // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
 
     const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
@@ -1668,7 +1667,7 @@
   }, {
     name: 'UZB',
     population: 20.95
-  }]; // RUS: 148.6 million
+  }]; //1991 - 2000 to start
   //   ARM: 3.5 million,
   //   AZE: 7.271 million (1991),
   //   BLR: 10.19 million (1991)
@@ -1812,7 +1811,7 @@
       });
     }
 
-    drawArrows() {
+    drawLabelPointer() {
       const centroidsWithoutRussia = this.sovietDataPoints.filter(({
         id
       }) => id !== "RUS").map(country => {

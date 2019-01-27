@@ -68,6 +68,40 @@ export const populationsIn1991 = [
   { name: 'UZB', population: 20.95 }
 ];
 
+//1991 - 2000 to start
+export const netFsuMigrationOne = [
+  { name: 'ARM', migration: 200000 },
+  { name: 'AZE', migration:  298900},
+  { name: 'BLR', migration:  26500, net: 'in'},
+  { name: 'EST', migration: 66400},
+  { name: 'GEO', migration:  358700},
+  { name: 'KAZ', migration: 1497400 },
+  { name: 'KGZ', migration:  272900},
+  { name: 'LVA', migration:  109700},
+  { name: 'LTU', migration:  46600},
+  { name: 'MDA', migration:  78500},
+  { name: 'TJK', migration: 314700 },
+  { name: 'TKM', migration:  116100},
+  { name: 'UKR', migration: 341600 },
+  { name: 'UZB', migration: 605000 }
+]
+
+export const netFsuMigrationTwo = [
+  { name: 'ARM', migration:  188700},
+  { name: 'AZE', migration:  120500},
+  { name: 'BLR', migration:  2200},
+  { name: 'EST', migration: 2400},
+  { name: 'GEO', migration:  70900},
+  { name: 'KAZ', migration:  347400},
+  { name: 'KGZ', migration:  179400},
+  { name: 'LVA', migration:  6800},
+  { name: 'LTU', migration:  2900},
+  { name: 'MDA', migration:  106100},
+  { name: 'TJK', migration:  135700},
+  { name: 'TKM', migration:  43200},
+  { name: 'UKR', migration:  261500},
+  { name: 'UZB', migration:  349000}
+]
 // RUS: 148.6 million
 
 //   ARM: 3.5 million,
