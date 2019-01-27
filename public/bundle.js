@@ -1646,6 +1646,10 @@
   //   UZB: 20,950,000
   // }
 
+  const sortedPopulationData = populationsIn1991.sort(function (a, b) {
+    return d3.ascending(a.population, b.population);
+  });
+
   function zeroAnimation(worldMap) {
     worldMap.animateSectionStyles({
       duration: 1000,
@@ -1683,7 +1687,7 @@
       top: 0
     });
     barChart.fadeTextIn();
-    barChart.animateBarsIn();
+    barChart.redrawBars(sortedPopulationData);
     barChart.addPopulationLabels();
   }
 
@@ -1955,7 +1959,7 @@
 
   }
 
-  const sortedPopulationData = populationsIn1991.sort(function (a, b) {
+  const sortedPopulationData$1 = populationsIn1991.sort(function (a, b) {
     return d3.ascending(a.population, b.population);
   });
   class BarChart {
@@ -1989,8 +1993,8 @@
 
       this.plot = d3.select("#bar-graphic").append("svg").attr("width", this.width + this.barMargin.left + this.barMargin.right).attr("height", this.height + this.barMargin.top + this.barMargin.bottom).append("g").attr("transform", "translate(" + this.barMargin.left + "," + this.barMargin.top + ")").style("opacity", "0"); // create the other stuff
 
-      this.setXScale(sortedPopulationData);
-      this.setYScale(sortedPopulationData);
+      this.setXScale(sortedPopulationData$1);
+      this.setYScale(sortedPopulationData$1);
       this.addYAxes();
     }
 
@@ -2010,7 +2014,7 @@
       const yAxisStuff = d3.svg.axis().scale(this.yScale) //no tick marks
       .tickSize(0).orient("left");
       this.plot.append("g").attr("class", "y-axis").call(yAxisStuff);
-      this.bars = this.plot.selectAll(".bar").data(sortedPopulationData).enter().append("g");
+      this.bars = this.plot.selectAll(".bar").data(sortedPopulationData$1).enter().append("g");
       this.bars.append("rect").attr("class", "bar").attr("y", d => {
         return this.yScale(d.name);
       }).attr("height", () => this.yScale.rangeBand()).attr("fill", function (d, i) {
@@ -2018,33 +2022,15 @@
       }).attr("x", 0).attr("width", 0);
     }
 
-    animateBarsToMigration() {
-      // const newBars = this.plot
-      //   .selectAll(".bar")
-      //   .data(netFsuMigrationOne)
-      //   .enter()
-      //   .append("g");
-      this.xScale = d3.scale.linear().range([0, this.width]).domain([0, d3.max(netFsuMigrationOne, function (d) {
-        return d.population;
-      })]);
-      d3.selectAll("rect").transition().delay(function (d, i) {
-        return i * 100;
-      }).attr("width", d => {
-        console.warn('d for new width', d);
-        return this.xScale(d.population);
-      });
-    }
-
     redrawBarsAndLabels(data) {
+      this.setXScale(data);
+      this.setYScale(data);
       this.redrawBars(data);
       this.redrawLabels(data);
     }
 
     redrawBars(data) {
       const newBars = this.plot.selectAll(".bar").data(data).enter().append("g");
-      this.xScale = d3.scale.linear().range([0, this.width]).domain([0, d3.max(data, function (d) {
-        return d.population;
-      })]);
       d3.selectAll("rect").transition().delay(function (d, i) {
         return i * 100;
       }).attr("width", d => {
@@ -2065,7 +2051,7 @@
 
     addPopulationLabels() {
       const barGraphicSvg = d3.select("#bar-graphic").select("svg");
-      barGraphicSvg.select("g").selectAll(".text").data(sortedPopulationData).enter().append("text").attr("class", "label").attr("y", d => {
+      barGraphicSvg.select("g").selectAll(".text").data(sortedPopulationData$1).enter().append("text").attr("class", "label").attr("y", d => {
         return this.yScale(d.name);
       }).attr("x", d => {
         return this.xScale(d.population) + 1;
@@ -2073,27 +2059,11 @@
         return d.population;
       }).attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")").style("opacity", "0");
       barGraphicSvg.selectAll('.label').transition().delay(1500).duration(1000).style("opacity", "1");
-    } //   animateSectionStyles({ duration, section, styles }) {
-    //     console.warn({ duration, section, styles });
-    //     d3.select(this.element)
-    //       .selectAll(section)
-    //       .transition()
-    //       .duration(duration)
-    //       .style(styles);
-    //   }
-
+    }
 
     fadeTextIn() {
       this.plot.transition().delay(1000).duration(500).style("opacity", "1");
       d3.select(".bar-graphic-header").transition().delay(1000).duration(500).style("opacity", "1").style('color', 'black');
-    }
-
-    animateBarsIn() {
-      d3.selectAll("rect").transition().delay(function (d, i) {
-        return i * 100;
-      }).attr("width", d => {
-        return this.xScale(d.population);
-      });
     }
 
   }

@@ -113,35 +113,9 @@ export default class BarChart {
       .attr("width", 0);
   }
 
-  animateBarsToMigration() {
-    // const newBars = this.plot
-    //   .selectAll(".bar")
-    //   .data(netFsuMigrationOne)
-    //   .enter()
-    //   .append("g");
-
-    this.xScale = d3.scale
-    .linear()
-    .range([0, this.width])
-    .domain([
-      0,
-      d3.max(netFsuMigrationOne, function(d) {
-        return d.population;
-      })
-    ]);
-
-    d3.selectAll("rect")
-      .transition()
-      .delay(function(d, i) {
-        return i * 100;
-      })
-      .attr("width", d => {
-        console.warn('d for new width', d)
-        return this.xScale(d.population);
-      });
-  }
-
   redrawBarsAndLabels(data) {
+    this.setXScale(data)
+    this.setYScale(data)
     this.redrawBars(data)
     this.redrawLabels(data)
   }
@@ -153,15 +127,6 @@ export default class BarChart {
       .enter()
       .append("g");
 
-    this.xScale = d3.scale
-    .linear()
-    .range([0, this.width])
-    .domain([
-      0,
-      d3.max(data, function(d) {
-        return d.population;
-      })
-    ]);
 
     d3.selectAll("rect")
       .transition()
@@ -193,10 +158,7 @@ export default class BarChart {
         return d.population;
       })
       .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")")
-
   }
-
-
 
   addPopulationLabels() {
     const barGraphicSvg = d3.select("#bar-graphic").select("svg");
@@ -228,19 +190,7 @@ export default class BarChart {
       .delay(1500)
       .duration(1000)
       .style("opacity", "1");
-
   }
-
-
-//   animateSectionStyles({ duration, section, styles }) {
-//     console.warn({ duration, section, styles });
-
-//     d3.select(this.element)
-//       .selectAll(section)
-//       .transition()
-//       .duration(duration)
-//       .style(styles);
-//   }
 
   fadeTextIn() {
     this.plot
@@ -256,16 +206,4 @@ export default class BarChart {
         .style("opacity", "1")
         .style('color', 'black')
     }
-
-
-  animateBarsIn() {
-    d3.selectAll("rect")
-      .transition()
-      .delay(function(d, i) {
-        return i * 100;
-      })
-      .attr("width", d => {
-        return this.xScale(d.population);
-      });
-  }
 }

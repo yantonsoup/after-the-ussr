@@ -6,7 +6,9 @@ import {
   netFsuMigrationTwo,
   populationsIn1991
 } from "./constants";
-
+const sortedPopulationData = populationsIn1991.sort(function(a, b) {
+  return d3.ascending(a.population, b.population);
+});
 function zeroAnimation(worldMap) {
   worldMap.animateSectionStyles({ 
     duration: 1000, 
@@ -48,7 +50,7 @@ function secondAnimation(worldMap, barChart) {
     top: 0
   })
   barChart.fadeTextIn()
-  barChart.animateBarsIn()
+  barChart.redrawBars(sortedPopulationData)
   barChart.addPopulationLabels()
 }
 
