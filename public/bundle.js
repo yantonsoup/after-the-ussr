@@ -1688,11 +1688,10 @@
     });
     barChart.fadeTextIn();
     barChart.redrawBars(sortedPopulationData);
-    barChart.addPopulationLabels();
+    barChart.addPopulationLabels(sortedPopulationData);
   }
 
-  function thirdAnimation(worldMap, barChart) {//
-  }
+  function thirdAnimation(worldMap, barChart) {}
 
   function fourthAnimation(worldMap, barChart) {
     worldMap.addPointsToMap();
@@ -1984,7 +1983,7 @@
         top: 15,
         right: 75,
         bottom: 0,
-        left: 60
+        left: 20
       };
       const text = d3.select(".scroll").select(".scroll__text");
       const textWidth = text.node().offsetWidth;
@@ -2038,7 +2037,7 @@
       this.bars = this.plot.selectAll(".bar").data(data).enter().append("g");
     }
 
-    redrawBars(data) {
+    redrawBars() {
       d3.selectAll("rect").transition().delay(function (d, i) {
         return i * 100;
       }).attr("width", d => {
@@ -2057,16 +2056,9 @@
       }).attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
     }
 
-    addPopulationLabels() {
-      const barGraphicSvg = d3.select("#bar-graphic").select("svg");
-      barGraphicSvg.select("g").selectAll(".text").data(sortedPopulationData$1).enter().append("text").attr("class", "label").attr("y", d => {
-        return this.yScale(d.name);
-      }).attr("x", d => {
-        return this.xScale(d.population) + 1;
-      }).attr("dx", ".75em").text(function (d) {
-        return d.population;
-      }).attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")").style("opacity", "0");
-      barGraphicSvg.selectAll('.label').transition().delay(1500).duration(1000).style("opacity", "1");
+    addPopulationLabels(data) {
+      this.redrawLabels(data);
+      this.plot.selectAll('.label').style("opacity", "0").transition().delay(1500).duration(1000).style("opacity", "1");
     }
 
     fadeTextIn() {

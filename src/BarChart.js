@@ -31,7 +31,7 @@ export default class BarChart {
       top: 15,
       right: 75,
       bottom: 0,
-      left: 60
+      left: 20
     };
     const text = d3.select(".scroll").select(".scroll__text");
     const textWidth = text.node().offsetWidth;
@@ -109,8 +109,6 @@ export default class BarChart {
       .append("g")
       .attr("class", "y-axis")
       .call(yAxisStuff);
-
-
   }
 
   redrawBarsAndLabels(data) {
@@ -129,7 +127,7 @@ export default class BarChart {
     .append("g");
   }
   
-  redrawBars(data) {
+  redrawBars() {
     d3.selectAll("rect")
       .transition()
       .delay(function(d, i) {
@@ -162,32 +160,12 @@ export default class BarChart {
       .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")")
   }
 
-  addPopulationLabels() {
-    const barGraphicSvg = d3.select("#bar-graphic").select("svg");
+  addPopulationLabels (data){
+    this.redrawLabels(data)
 
-    barGraphicSvg
-      .select("g")
-      .selectAll(".text")
-      .data(sortedPopulationData)
-      .enter()
-      .append("text")
-      .attr("class", "label")
-      .attr("y", d => {
-        return this.yScale(d.name);
-      })
-      .attr("x", d => {
-        return this.xScale(d.population) + 1;
-      })
-      .attr("dx", ".75em")
-      .text(function(d) {
-        return d.population;
-      })
-      .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")")
-      .style("opacity", "0");
-
-
-    barGraphicSvg
+    this.plot
       .selectAll('.label')
+      .style("opacity", "0")
       .transition()
       .delay(1500)
       .duration(1000)

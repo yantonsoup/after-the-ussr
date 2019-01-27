@@ -51,12 +51,11 @@ function secondAnimation(worldMap, barChart) {
   })
   barChart.fadeTextIn()
   barChart.redrawBars(sortedPopulationData)
-  barChart.addPopulationLabels()
+  barChart.addPopulationLabels(sortedPopulationData)
 }
 
 function thirdAnimation(worldMap, barChart) {
 
-  //
 }
 
 function fourthAnimation(worldMap, barChart) {
