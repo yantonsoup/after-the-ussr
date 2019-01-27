@@ -1555,7 +1555,7 @@
 
   function loadMap() {
     return new Promise((resolve, reject) => {
-      d3.json("https://yantonsoup.github.io/after-the-ussr/json/110topoworld.json", function (json) {
+      d3.json("http://aftertheussr.com/json/110topoworld.json", function (json) {
         console.warn("loaded 110topoworld.json:", json);
         resolve(json);
       });
