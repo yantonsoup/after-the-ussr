@@ -1756,7 +1756,7 @@
     step.style("height", stepHeight + "px");
     text.selectAll(".step-two").style('height', '200px'); // make margin top for bar chart the size of the map container
 
-    d3.select(".data__graphic").style('top', width + 'px'); // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
+    d3.select(".data__graphic").style('top', width + 'px').style("width", width + "px").style("height", width + "px"); // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
 
     const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
     d3.select(".scroll__graphic").style("width", width + "px").style("height", width + "px").style("top", graphicMarginTop + "px"); // Use this to set the distance ofo the first step
@@ -1973,7 +1973,7 @@
 
     draw() {
       // define width, height and margin
-      const mapContainer = d3.select(".scroll__graphic");
+      const mapContainer = d3.select(".scroll");
       const boundingBox = mapContainer.node().getBoundingClientRect();
       const {
         height,
@@ -1981,14 +1981,14 @@
       } = boundingBox;
       this.barMargin = {
         top: 15,
-        right: 75,
+        right: 175,
         bottom: 0,
-        left: 20
+        left: 40
       };
       const text = d3.select(".scroll").select(".scroll__text");
       const textWidth = text.node().offsetWidth;
-      this.width = textWidth - this.barMargin.left - this.barMargin.right;
-      this.height = height - 100 - this.barMargin.top - this.barMargin.bottom; // we'll actually be appending to a <g> element
+      this.width = width - this.barMargin.left - this.barMargin.right;
+      this.height = width - this.barMargin.top - this.barMargin.bottom; // we'll actually be appending to a <g> element
 
       this.plot = d3.select("#bar-graphic").append("svg").attr("width", this.width + this.barMargin.left + this.barMargin.right).attr("height", this.height + this.barMargin.top + this.barMargin.bottom).append("g").attr("transform", "translate(" + this.barMargin.left + "," + this.barMargin.top + ")").style("opacity", "0"); // create the other stuff
 
@@ -2047,6 +2047,7 @@
     }
 
     redrawLabels(data) {
+      this.plot.selectAll('.label').transition().duration(500).style("opacity", "0");
       this.plot.select("g").selectAll(".text").data(data).enter().append("text").attr("class", "label").attr("y", d => {
         return this.yScale(d.name);
       }).attr("x", d => {

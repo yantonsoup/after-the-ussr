@@ -23,21 +23,21 @@ export default class BarChart {
 
   draw() {
     // define width, height and margin
-    const mapContainer = d3.select(".scroll__graphic");
+    const mapContainer = d3.select(".scroll");
     const boundingBox = mapContainer.node().getBoundingClientRect();
     const { height, width } = boundingBox;
 
     this.barMargin = {
       top: 15,
-      right: 75,
+      right: 175,
       bottom: 0,
-      left: 20
+      left: 40
     };
     const text = d3.select(".scroll").select(".scroll__text");
     const textWidth = text.node().offsetWidth;
 
-    this.width = textWidth - this.barMargin.left - this.barMargin.right;
-    this.height = height - 100 - this.barMargin.top - this.barMargin.bottom;
+    this.width = width - this.barMargin.left - this.barMargin.right;
+    this.height = width - this.barMargin.top - this.barMargin.bottom;
 
     // we'll actually be appending to a <g> element
     this.plot = d3
@@ -140,6 +140,12 @@ export default class BarChart {
   }
 
   redrawLabels(data) {
+    this.plot
+    .selectAll('.label')
+    .transition()
+    .duration(500)
+    .style("opacity", "0");
+
     this.plot
       .select("g")
       .selectAll(".text")
