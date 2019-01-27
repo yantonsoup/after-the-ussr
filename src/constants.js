@@ -70,37 +70,37 @@ export const populationsIn1991 = [
 
 //1991 - 2000 to start
 export const netFsuMigrationOne = [
-  { name: 'ARM', migration: 200000 },
-  { name: 'AZE', migration:  298900},
-  { name: 'BLR', migration:  26500, net: 'in'},
-  { name: 'EST', migration: 66400},
-  { name: 'GEO', migration:  358700},
-  { name: 'KAZ', migration: 1497400 },
-  { name: 'KGZ', migration:  272900},
-  { name: 'LVA', migration:  109700},
-  { name: 'LTU', migration:  46600},
-  { name: 'MDA', migration:  78500},
-  { name: 'TJK', migration: 314700 },
-  { name: 'TKM', migration:  116100},
-  { name: 'UKR', migration: 341600 },
-  { name: 'UZB', migration: 605000 }
+  { name: 'ARM', population: 200000 },
+  { name: 'AZE', population:  298900},
+  { name: 'BLR', population:  26500, net: 'in'},
+  { name: 'EST', population: 66400},
+  { name: 'GEO', population:  358700},
+  { name: 'KAZ', population: 1497400 },
+  { name: 'KGZ', population:  272900},
+  { name: 'LVA', population:  109700},
+  { name: 'LTU', population:  46600},
+  { name: 'MDA', population:  78500},
+  { name: 'TJK', population: 314700 },
+  { name: 'TKM', population:  116100},
+  { name: 'UKR', population: 341600 },
+  { name: 'UZB', population: 605000 }
 ]
 
 export const netFsuMigrationTwo = [
-  { name: 'ARM', migration:  188700},
-  { name: 'AZE', migration:  120500},
-  { name: 'BLR', migration:  2200},
-  { name: 'EST', migration: 2400},
-  { name: 'GEO', migration:  70900},
-  { name: 'KAZ', migration:  347400},
-  { name: 'KGZ', migration:  179400},
-  { name: 'LVA', migration:  6800},
-  { name: 'LTU', migration:  2900},
-  { name: 'MDA', migration:  106100},
-  { name: 'TJK', migration:  135700},
-  { name: 'TKM', migration:  43200},
-  { name: 'UKR', migration:  261500},
-  { name: 'UZB', migration:  349000}
+  { name: 'ARM', population:  188700},
+  { name: 'AZE', population:  120500},
+  { name: 'BLR', population:  2200},
+  { name: 'EST', population: 2400},
+  { name: 'GEO', population:  70900},
+  { name: 'KAZ', population:  347400},
+  { name: 'KGZ', population:  179400},
+  { name: 'LVA', population:  6800},
+  { name: 'LTU', population:  2900},
+  { name: 'MDA', population:  106100},
+  { name: 'TJK', population:  135700},
+  { name: 'TKM', population:  43200},
+  { name: 'UKR', population:  261500},
+  { name: 'UZB', population:  349000}
 ]
 // RUS: 148.6 million
 

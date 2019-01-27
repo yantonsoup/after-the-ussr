@@ -259,7 +259,7 @@ export default class WorldMap {
       })
       .style('fill', 'none')
       .style('stroke-width', '0.5px')
-      .style('stroke', (d, i) => colors[i])
+      .style('stroke', '#7772a8')
       .style('opacity', '0')
       .transition()
       .duration(1000)

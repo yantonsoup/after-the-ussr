@@ -52,27 +52,29 @@ export default class BarChart {
       )
       .style("opacity", "0");
     // create the other stuff
-    this.createScales();
+    this.setXScale(sortedPopulationData)
+    this.setYScale(sortedPopulationData)
     this.addYAxes();
   }
 
-  createScales() {
+  setYScale(data) {
     this.xScale = d3.scale
       .linear()
       .range([0, this.width])
       .domain([
         0,
-        d3.max(sortedPopulationData, function(d) {
+        d3.max(data, function(d) {
           return d.population;
         })
       ]);
+  }
 
-    // y scale
+  setXScale(data) {
     this.yScale = d3.scale
       .ordinal()
       .rangeRoundBands([this.height, 0], 0.1)
       .domain(
-        sortedPopulationData.map(function(d) {
+        data.map(function(d) {
           return d.name;
         })
       );
@@ -124,7 +126,7 @@ export default class BarChart {
     .domain([
       0,
       d3.max(netFsuMigrationOne, function(d) {
-        return d.migration;
+        return d.population;
       })
     ]);
 
@@ -135,7 +137,7 @@ export default class BarChart {
       })
       .attr("width", d => {
         console.warn('d for new width', d)
-        return this.xScale(d.migration);
+        return this.xScale(d.population);
       });
   }
 
@@ -157,7 +159,7 @@ export default class BarChart {
     .domain([
       0,
       d3.max(data, function(d) {
-        return d.migration;
+        return d.population;
       })
     ]);
 
@@ -168,7 +170,7 @@ export default class BarChart {
       })
       .attr("width", d => {
         console.warn('d for new width', d)
-        return this.xScale(d.migration);
+        return this.xScale(d.population);
       });
   }
 
@@ -184,11 +186,11 @@ export default class BarChart {
         return this.yScale(d.name);
       })
       .attr("x", d => {
-        return this.xScale(d.migration) + 1;
+        return this.xScale(d.population) + 1;
       })
       .attr("dx", ".75em")
       .text(function(d) {
-        return d.migration;
+        return d.population;
       })
       .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")")
 

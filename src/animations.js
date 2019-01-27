@@ -45,21 +45,20 @@ function firstAnimation(worldMap) {
 function secondAnimation(worldMap, barChart) {
   worldMap.moveMapContainer({
     duration: 1000,
-    top: Math.floor(window.innerHeight * 0.05)
+    top: 0
   })
   barChart.fadeTextIn()
-
+  barChart.animateBarsIn()
+  barChart.addPopulationLabels()
 }
 
 function thirdAnimation(worldMap, barChart) {
-  barChart.animateBarsIn()
 
-  barChart.addPopulationLabels()
   //
-  worldMap.addPointsToMap()
 }
 
 function fourthAnimation(worldMap, barChart) {
+  worldMap.addPointsToMap()
   worldMap.drawCurves()
   barChart.redrawBarsAndLabels(netFsuMigrationOne)
 

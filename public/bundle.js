@@ -1544,90 +1544,90 @@
 
   const netFsuMigrationOne = [{
     name: 'ARM',
-    migration: 200000
+    population: 200000
   }, {
     name: 'AZE',
-    migration: 298900
+    population: 298900
   }, {
     name: 'BLR',
-    migration: 26500,
+    population: 26500,
     net: 'in'
   }, {
     name: 'EST',
-    migration: 66400
+    population: 66400
   }, {
     name: 'GEO',
-    migration: 358700
+    population: 358700
   }, {
     name: 'KAZ',
-    migration: 1497400
+    population: 1497400
   }, {
     name: 'KGZ',
-    migration: 272900
+    population: 272900
   }, {
     name: 'LVA',
-    migration: 109700
+    population: 109700
   }, {
     name: 'LTU',
-    migration: 46600
+    population: 46600
   }, {
     name: 'MDA',
-    migration: 78500
+    population: 78500
   }, {
     name: 'TJK',
-    migration: 314700
+    population: 314700
   }, {
     name: 'TKM',
-    migration: 116100
+    population: 116100
   }, {
     name: 'UKR',
-    migration: 341600
+    population: 341600
   }, {
     name: 'UZB',
-    migration: 605000
+    population: 605000
   }];
   const netFsuMigrationTwo = [{
     name: 'ARM',
-    migration: 188700
+    population: 188700
   }, {
     name: 'AZE',
-    migration: 120500
+    population: 120500
   }, {
     name: 'BLR',
-    migration: 2200
+    population: 2200
   }, {
     name: 'EST',
-    migration: 2400
+    population: 2400
   }, {
     name: 'GEO',
-    migration: 70900
+    population: 70900
   }, {
     name: 'KAZ',
-    migration: 347400
+    population: 347400
   }, {
     name: 'KGZ',
-    migration: 179400
+    population: 179400
   }, {
     name: 'LVA',
-    migration: 6800
+    population: 6800
   }, {
     name: 'LTU',
-    migration: 2900
+    population: 2900
   }, {
     name: 'MDA',
-    migration: 106100
+    population: 106100
   }, {
     name: 'TJK',
-    migration: 135700
+    population: 135700
   }, {
     name: 'TKM',
-    migration: 43200
+    population: 43200
   }, {
     name: 'UKR',
-    migration: 261500
+    population: 261500
   }, {
     name: 'UZB',
-    migration: 349000
+    population: 349000
   }]; // RUS: 148.6 million
   //   ARM: 3.5 million,
   //   AZE: 7.271 million (1991),
@@ -1680,19 +1680,18 @@
   function secondAnimation(worldMap, barChart) {
     worldMap.moveMapContainer({
       duration: 1000,
-      top: Math.floor(window.innerHeight * 0.05)
+      top: 0
     });
     barChart.fadeTextIn();
+    barChart.animateBarsIn();
+    barChart.addPopulationLabels();
   }
 
-  function thirdAnimation(worldMap, barChart) {
-    barChart.animateBarsIn();
-    barChart.addPopulationLabels(); //
-
-    worldMap.addPointsToMap();
+  function thirdAnimation(worldMap, barChart) {//
   }
 
   function fourthAnimation(worldMap, barChart) {
+    worldMap.addPointsToMap();
     worldMap.drawCurves();
     barChart.redrawBarsAndLabels(netFsuMigrationOne); // worldMap.drawLabelPointer()
   }
@@ -1752,9 +1751,9 @@
     const step = text.selectAll(".step");
     const stepHeight = Math.floor(window.innerHeight * 1);
     step.style("height", stepHeight + "px");
-    text.selectAll(".step-two").style('height', '200px');
-    const barMarginTop = Math.floor(window.innerHeight * 0.6);
-    d3.select(".data__graphic").style('top', barMarginTop + 'px'); // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
+    text.selectAll(".step-two").style('height', '200px'); // make margin top for bar chart the size of the map container
+
+    d3.select(".data__graphic").style('top', width + 'px'); // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
 
     const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
     d3.select(".scroll__graphic").style("width", width + "px").style("height", width + "px").style("top", graphicMarginTop + "px"); // Use this to set the distance ofo the first step
@@ -1949,7 +1948,7 @@
         return "M" + origin[0] + ',' + origin[1] // smooth curve to offset midpoint
         + "S" + midcurve[0] + "," + midcurve[1] //smooth curve to destination	
         + "," + dest[0] + "," + dest[1];
-      }).style('fill', 'none').style('stroke-width', '0.5px').style('stroke', (d, i) => colors[i]).style('opacity', '0').transition().duration(1000).style('opacity', '1');
+      }).style('fill', 'none').style('stroke-width', '0.5px').style('stroke', '#7772a8').style('opacity', '0').transition().duration(1000).style('opacity', '1');
     }
 
     animateNetMigration() {}
@@ -1990,16 +1989,19 @@
 
       this.plot = d3.select("#bar-graphic").append("svg").attr("width", this.width + this.barMargin.left + this.barMargin.right).attr("height", this.height + this.barMargin.top + this.barMargin.bottom).append("g").attr("transform", "translate(" + this.barMargin.left + "," + this.barMargin.top + ")").style("opacity", "0"); // create the other stuff
 
-      this.createScales();
+      this.setXScale(sortedPopulationData);
+      this.setYScale(sortedPopulationData);
       this.addYAxes();
     }
 
-    createScales() {
-      this.xScale = d3.scale.linear().range([0, this.width]).domain([0, d3.max(sortedPopulationData, function (d) {
+    setYScale(data) {
+      this.xScale = d3.scale.linear().range([0, this.width]).domain([0, d3.max(data, function (d) {
         return d.population;
-      })]); // y scale
+      })]);
+    }
 
-      this.yScale = d3.scale.ordinal().rangeRoundBands([this.height, 0], 0.1).domain(sortedPopulationData.map(function (d) {
+    setXScale(data) {
+      this.yScale = d3.scale.ordinal().rangeRoundBands([this.height, 0], 0.1).domain(data.map(function (d) {
         return d.name;
       }));
     }
@@ -2023,13 +2025,13 @@
       //   .enter()
       //   .append("g");
       this.xScale = d3.scale.linear().range([0, this.width]).domain([0, d3.max(netFsuMigrationOne, function (d) {
-        return d.migration;
+        return d.population;
       })]);
       d3.selectAll("rect").transition().delay(function (d, i) {
         return i * 100;
       }).attr("width", d => {
         console.warn('d for new width', d);
-        return this.xScale(d.migration);
+        return this.xScale(d.population);
       });
     }
 
@@ -2041,13 +2043,13 @@
     redrawBars(data) {
       const newBars = this.plot.selectAll(".bar").data(data).enter().append("g");
       this.xScale = d3.scale.linear().range([0, this.width]).domain([0, d3.max(data, function (d) {
-        return d.migration;
+        return d.population;
       })]);
       d3.selectAll("rect").transition().delay(function (d, i) {
         return i * 100;
       }).attr("width", d => {
         console.warn('d for new width', d);
-        return this.xScale(d.migration);
+        return this.xScale(d.population);
       });
     }
 
@@ -2055,9 +2057,9 @@
       this.plot.select("g").selectAll(".text").data(data).enter().append("text").attr("class", "label").attr("y", d => {
         return this.yScale(d.name);
       }).attr("x", d => {
-        return this.xScale(d.migration) + 1;
+        return this.xScale(d.population) + 1;
       }).attr("dx", ".75em").text(function (d) {
-        return d.migration;
+        return d.population;
       }).attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
     }
 

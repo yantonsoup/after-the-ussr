@@ -14,8 +14,8 @@ export default function firstPaint () {
   text.selectAll(".step-two").style('height', '200px');
 
   
-  const barMarginTop = Math.floor(window.innerHeight * 0.6);
-  d3.select(".data__graphic").style('top', barMarginTop + 'px')
+  // make margin top for bar chart the size of the map container
+  d3.select(".data__graphic").style('top', width + 'px')
 
   // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
   const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
