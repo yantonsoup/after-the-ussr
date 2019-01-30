@@ -172,7 +172,7 @@ export default class BarChart {
       })
       .attr("dx", ".75em")
       .text(function(d) {
-        return d.population;
+        return parsePopulationText(d.population);
       })
       .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
   }
@@ -201,4 +201,11 @@ export default class BarChart {
       .style("opacity", "1")
       .style("color", "black");
   }
+}
+
+function parsePopulationText(population) {
+  const populationText = (population/1000000).toFixed(2) + ' million';
+  console.warn({populationText})
+
+  return populationText
 }

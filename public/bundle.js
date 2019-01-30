@@ -1675,7 +1675,7 @@
       duration: 500,
       section: '.non-soviet-country',
       styles: {
-        opacity: '0',
+        opacity: '0.1',
         'stroke-width': '0.175px'
       }
     });
@@ -2125,7 +2125,7 @@
       }).attr("x", d => {
         return this.xScale(d.population) + 1;
       }).attr("dx", ".75em").text(function (d) {
-        return d.population;
+        return parsePopulationText(d.population);
       }).attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
     }
 
@@ -2139,6 +2139,14 @@
       this.textHeader.transition().delay(500).style("opacity", "1").style("color", "black");
     }
 
+  }
+
+  function parsePopulationText(population) {
+    const populationText = (population / 1000000).toFixed(2) + ' million';
+    console.warn({
+      populationText
+    });
+    return populationText;
   }
 
   // logs will still point to your original source modules

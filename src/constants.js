@@ -68,6 +68,24 @@ export const populationsIn1991 = [
   { name: 'UZB', population: 20950000 }
 ];
 
+// in thousands
+const russiansPerFSUState1989 = [
+  { name: 'ARM', population:  52},
+  { name: 'AZE', population:  392},
+  { name: 'BLR', population:  1432},
+  { name: 'EST', population:  475},
+  { name: 'GEO', population:  341},
+  { name: 'KAZ', population:  6228},
+  { name: 'KGZ', population:  917},
+  { name: 'LVA', population:  906},
+  { name: 'LTU', population:  345},
+  { name: 'MDA', population:  562},
+  { name: 'TJK', population:  389},
+  { name: 'TKM', population:  334},
+  { name: 'UKR', population: 11356},
+  { name: 'UZB', population:  496}
+];
+
 //1991 - 2000 to start
 export const netFsuMigrationOne = [
   { name: 'ARM', population: 200000 },
@@ -102,21 +120,48 @@ export const netFsuMigrationTwo = [
   { name: 'UKR', population:  261500},
   { name: 'UZB', population:  349000}
 ]
-// RUS: 148.6 million
 
-//   ARM: 3.5 million,
-//   AZE: 7.271 million (1991),
-//   BLR: 10.19 million (1991)
-//   EST: 1.568 million (1991)
-//   GEO: 6.653 million (1991)
-//   KAZ: 16,450,000
-//   KGZ: 4.464 million (1991),
-//   LVA: 2.658 million (1991)
-//   LTU: 3.702 million (1991)
-//   MDA: 3.7 million,
-//   RUS: 148.6 million
-//   TJK: 5.4 million,
-//   TKM: 3.772 million,
-//   UKR: 52 million,
-//   UZB: 20,950,000
-// }
+// Three non-FSU countries counries recieve bhe bulk of persons
+// leaving Russia: 
+
+const worldOut1995to2002inPercent = {
+  germany: 59,
+  israel: 25,
+  us: 11,
+
+// migration to the far abroud consisted of 3 groups
+// Germans / Russians / Jews
+
+// 1995 -> 2002,
+// 43% of net migration consisted of germans
+// attracted by the generous resettlement package for the aussiedler 
+// and strong german economy
+
+// Russians
+// 38% of net migrants 
+
+// Jews
+// 10% of net migrants
+
+// Since 1989, Russia has net in migrants from FSU states, with exception of Belarus
+
+// 1989 to 2002 
+// the largest share of Russian immigration was from 3 states that already
+// had the largest Russian diaspora populations: 
+// Ukr: 25%
+// Kazakhstan 25%
+// Uzbekistan: 11%
+
+// overall,
+// Central Asia is 50%
+// 3 states above 15%
+// baltics 4%
+
+// Migration Rates
+// 61,500 1991
+// 612,378 1994
+// 71,120 in 2002
+// 
+
+// 1989 -> 2002, Russians account for 58.6% immigrants to Russia
+// Russia in 1989 was 81.3 percent russians
