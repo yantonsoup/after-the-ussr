@@ -1499,152 +1499,163 @@
     }
   };
   const populationsIn1991 = [{
-    name: 'ARM',
+    name: "ARM",
     population: 3500000
   }, {
-    name: 'AZE',
+    name: "AZE",
     population: 7271000
   }, {
-    name: 'BLR',
+    name: "BLR",
     population: 10190000
   }, {
-    name: 'EST',
+    name: "EST",
     population: 1568000
   }, {
-    name: 'GEO',
+    name: "GEO",
     population: 6653000
   }, {
-    name: 'KAZ',
+    name: "KAZ",
     population: 16450000
   }, {
-    name: 'KGZ',
+    name: "KGZ",
     population: 4464000
   }, {
-    name: 'LVA',
+    name: "LVA",
     population: 2658000
   }, {
-    name: 'LTU',
+    name: "LTU",
     population: 3700000
   }, {
-    name: 'MDA',
+    name: "MDA",
     population: 3700000
   }, {
-    name: 'TJK',
+    name: "TJK",
     population: 5400000
   }, {
-    name: 'TKM',
+    name: "TKM",
     population: 3772000
   }, {
-    name: 'UKR',
+    name: "UKR",
     population: 52000000
   }, {
-    name: 'UZB',
+    name: "UZB",
     population: 20950000
-  }]; //1991 - 2000 to start
+  }]; // in thousands
 
   const netFsuMigrationOne = [{
-    name: 'ARM',
+    name: "ARM",
     population: 200000
   }, {
-    name: 'AZE',
+    name: "AZE",
     population: 298900
   }, {
-    name: 'BLR',
+    name: "BLR",
     population: 26500,
-    net: 'in'
+    net: "in"
   }, {
-    name: 'EST',
+    name: "EST",
     population: 66400
   }, {
-    name: 'GEO',
+    name: "GEO",
     population: 358700
   }, {
-    name: 'KAZ',
+    name: "KAZ",
     population: 1497400
   }, {
-    name: 'KGZ',
+    name: "KGZ",
     population: 272900
   }, {
-    name: 'LVA',
+    name: "LVA",
     population: 109700
   }, {
-    name: 'LTU',
+    name: "LTU",
     population: 46600
   }, {
-    name: 'MDA',
+    name: "MDA",
     population: 78500
   }, {
-    name: 'TJK',
+    name: "TJK",
     population: 314700
   }, {
-    name: 'TKM',
+    name: "TKM",
     population: 116100
   }, {
-    name: 'UKR',
+    name: "UKR",
     population: 341600
   }, {
-    name: 'UZB',
+    name: "UZB",
     population: 605000
   }];
   const netFsuMigrationTwo = [{
-    name: 'ARM',
+    name: "ARM",
     population: 188700
   }, {
-    name: 'AZE',
+    name: "AZE",
     population: 120500
   }, {
-    name: 'BLR',
+    name: "BLR",
     population: 2200
   }, {
-    name: 'EST',
+    name: "EST",
     population: 2400
   }, {
-    name: 'GEO',
+    name: "GEO",
     population: 70900
   }, {
-    name: 'KAZ',
+    name: "KAZ",
     population: 347400
   }, {
-    name: 'KGZ',
+    name: "KGZ",
     population: 179400
   }, {
-    name: 'LVA',
+    name: "LVA",
     population: 6800
   }, {
-    name: 'LTU',
+    name: "LTU",
     population: 2900
   }, {
-    name: 'MDA',
+    name: "MDA",
     population: 106100
   }, {
-    name: 'TJK',
+    name: "TJK",
     population: 135700
   }, {
-    name: 'TKM',
+    name: "TKM",
     population: 43200
   }, {
-    name: 'UKR',
+    name: "UKR",
     population: 261500
   }, {
-    name: 'UZB',
+    name: "UZB",
     population: 349000
-  }]; // RUS: 148.6 million
-  //   ARM: 3.5 million,
-  //   AZE: 7.271 million (1991),
-  //   BLR: 10.19 million (1991)
-  //   EST: 1.568 million (1991)
-  //   GEO: 6.653 million (1991)
-  //   KAZ: 16,450,000
-  //   KGZ: 4.464 million (1991),
-  //   LVA: 2.658 million (1991)
-  //   LTU: 3.702 million (1991)
-  //   MDA: 3.7 million,
-  //   RUS: 148.6 million
-  //   TJK: 5.4 million,
-  //   TKM: 3.772 million,
-  //   UKR: 52 million,
-  //   UZB: 20,950,000
-  // }
+  }]; // Three non-FSU countries counries recieve bhe bulk of persons
+  // Germans / Russians / Jews
+  // 1995 -> 2002,
+  // 43% of net migration consisted of germans
+  // attracted by the generous resettlement package for the aussiedler
+  // and strong german economy
+  // Russians
+  // 38% of net migrants
+  // Jews
+  // 10% of net migrants
+  // Since 1989, Russia has net in migrants from FSU states, with exception of Belarus
+  // 1989 to 2002
+  // the largest share of Russian immigration was from 3 states that already
+  // had the largest Russian diaspora populations:
+  // Ukr: 25%
+  // Kazakhstan 25%
+  // Uzbekistan: 11%
+  // overall,
+  // Central Asia is 50%
+  // 3 states above 15%
+  // baltics 4%
+  // Migration Rates
+  // 61,500 1991
+  // 612,378 1994
+  // 71,120 in 2002
+  //
+  // 1989 -> 2002, Russians account for 58.6% immigrants to Russia
+  // Russia in 1989 was 81.3 percent russians
 
   const sortedPopulationData = populationsIn1991.sort(function (a, b) {
     return d3.ascending(a.population, b.population);
