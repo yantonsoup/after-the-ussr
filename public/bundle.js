@@ -1702,9 +1702,7 @@
     barChart.addPopulationLabels(sortedPopulationData);
   }
 
-  function thirdAnimation(worldMap, barChart) {}
-
-  function fourthAnimation(worldMap, barChart) {
+  function thirdAnimation(worldMap, barChart) {
     worldMap.addPointsToMap();
     worldMap.drawCurves();
     const title = 'Net Migration into Russia 1991-2000';
@@ -1712,11 +1710,13 @@
     barChart.repaintChart(netFsuMigrationOne); // worldMap.drawLabelPointer()
   }
 
-  function fifthAnimation(worldMap, barChart) {
+  function fourthAnimation(worldMap, barChart) {
     const title = 'Net Migration into Russia 2001-2010';
     barChart.drawTitle(title);
     barChart.repaintChart(netFsuMigrationTwo);
   }
+
+  function fifthAnimation(worldMap, barChart) {}
 
   function seventhAnimation(worldMap, barChart) {
     const graphicMarginTop = Math.floor(window.innerHeight * 0.25); // worldMap.moveMapContainer({
@@ -2054,7 +2054,7 @@
       const headerText = "Former Soviet State Populations in 1991";
       this.barMargin = {
         top: 15,
-        right: 175,
+        right: 75,
         bottom: 0,
         left: 60
       };
@@ -2122,7 +2122,7 @@
 
     redrawBars() {
       d3.selectAll("rect").transition().delay(function (d, i) {
-        return i * 100;
+        return i * 50;
       }).attr("width", d => {
         console.warn("d for new width", d);
         return this.xScale(d.population);
@@ -2134,7 +2134,7 @@
       this.plot.select("g").selectAll(".text").data(data).enter().append("text").attr("class", "label").attr("y", d => {
         return this.yScale(d.name);
       }).attr("x", d => {
-        return this.xScale(d.population) + 1;
+        return this.xScale(d.population);
       }).attr("dx", ".75em").text(function (d) {
         return parsePopulationText(d.population);
       }).attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
@@ -2142,7 +2142,7 @@
 
     addPopulationLabels(data) {
       this.redrawLabels(data);
-      this.plot.selectAll(".label").style("opacity", "0").transition().delay(1500).duration(1000).style("opacity", "1");
+      this.plot.selectAll(".label").style("opacity", "0").transition().delay(500).duration(500).style("opacity", "1");
     }
 
     revealBarChart() {
@@ -2153,7 +2153,7 @@
   }
 
   function parsePopulationText(population) {
-    const populationText = (population / 1000000).toFixed(2) + ' million';
+    const populationText = (population / 1000000).toFixed(2) + 'm';
     console.warn({
       populationText
     });

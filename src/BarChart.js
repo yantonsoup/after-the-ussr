@@ -30,7 +30,7 @@ export default class BarChart {
 
     this.barMargin = {
       top: 15,
-      right: 175,
+      right: 75,
       bottom: 0,
       left: 60
     };
@@ -142,7 +142,7 @@ export default class BarChart {
     d3.selectAll("rect")
       .transition()
       .delay(function(d, i) {
-        return i * 100;
+        return i * 50;
       })
       .attr("width", d => {
         console.warn("d for new width", d);
@@ -168,7 +168,7 @@ export default class BarChart {
         return this.yScale(d.name);
       })
       .attr("x", d => {
-        return this.xScale(d.population) + 1;
+        return this.xScale(d.population);
       })
       .attr("dx", ".75em")
       .text(function(d) {
@@ -184,8 +184,8 @@ export default class BarChart {
       .selectAll(".label")
       .style("opacity", "0")
       .transition()
-      .delay(1500)
-      .duration(1000)
+      .delay(500)
+      .duration(500)
       .style("opacity", "1");
   }
 
@@ -204,7 +204,7 @@ export default class BarChart {
 }
 
 function parsePopulationText(population) {
-  const populationText = (population/1000000).toFixed(2) + ' million';
+  const populationText = (population/1000000).toFixed(2) + 'm';
   console.warn({populationText})
 
   return populationText

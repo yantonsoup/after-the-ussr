@@ -56,24 +56,25 @@ function secondAnimation(worldMap, barChart) {
 }
 
 function thirdAnimation(worldMap, barChart) {
-
-}
-
-function fourthAnimation(worldMap, barChart) {
   worldMap.addPointsToMap()
   worldMap.drawCurves()
   const title = 'Net Migration into Russia 1991-2000'
   barChart.drawTitle(title)
   barChart.repaintChart(netFsuMigrationOne)
-
   // worldMap.drawLabelPointer()
+
 }
 
-function fifthAnimation (worldMap, barChart) {
+function fourthAnimation(worldMap, barChart) {
   const title = 'Net Migration into Russia 2001-2010'
   barChart.drawTitle(title)
 
   barChart.repaintChart(netFsuMigrationTwo)
+
+}
+
+function fifthAnimation (worldMap, barChart) {
+
 }
 
 function seventhAnimation(worldMap, barChart) {
