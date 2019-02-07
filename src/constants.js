@@ -71,21 +71,21 @@ export const populationsIn1989 = [
 
 // Step 3
 // in thousands
-const netMigrantsToRussia1989to2002 = [
-  { name: "ARM", population: 34 },
-  { name: "AZE", population: 195 },
-  { name: "BLR", population: 10 },
-  { name: "EST", population: 59 },
-  { name: "GEO", population: 162 },
-  { name: "KAZ", population: 1255 },
-  { name: "KGZ", population: 244 },
-  { name: "LVA", population: 96 },
-  { name: "LTU", population: 46 },
-  { name: "MDA", population: 65 },
-  { name: "TJK", population: 232 },
-  { name: "TKM", population: 98 },
-  { name: "UKR", population: 3341 },
-  { name: "UZB", population: 496 }
+export  const netMigrantsToRussia1989to2002 = [
+  { name: "ARM", population: 34000 },
+  { name: "AZE", population: 195000 },
+  { name: "BLR", population: 10000 },
+  { name: "EST", population: 59000 },
+  { name: "GEO", population: 162000 },
+  { name: "KAZ", population: 1255000 },
+  { name: "KGZ", population: 244000 },
+  { name: "LVA", population: 96000 },
+  { name: "LTU", population: 46000 },
+  { name: "MDA", population: 65000 },
+  { name: "TJK", population: 232000 },
+  { name: "TKM", population: 98000 },
+  { name: "UKR", population: 3341000 },
+  { name: "UZB", population: 496000 }
 ];
 
 // Step 4
@@ -126,7 +126,18 @@ export const populationRussia1989to2002 = [
   { name: "2002", population: 145166731 }
 ];
 
+// Step 9
+export const migrationAbroadEthnicity1995to2002 = [
+  { name: "Germans", population: 43 },
+  { name: "Russians", population: 38 },
+  { name: "Jews", population: 10 },
+];
 
+export const migrationAbroadDestination1995to2002 = [
+  { name: "Germany", population: 59 },
+  { name: "Israel", population: 25 },
+  { name: "United States", population: 11 },
+];
 
 export const populationsIn1991 = [
   { name: "ARM", population: 3500000 },

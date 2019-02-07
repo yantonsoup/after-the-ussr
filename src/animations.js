@@ -1,12 +1,9 @@
 import {
-  netFsuMigrationOne,
+  netMigrantsToRussia1989to2002,
+  percentMigrantsToRussia1989to2002,
   netFsuMigrationTwo,
   populationsIn1989
 } from "./constants";
-
-const sortedPopulationData = populationsIn1989.sort(function(a, b) {
-  return d3.ascending(a.population, b.population);
-});
 
 function zeroAnimation(worldMap) {
   worldMap.animateSectionStyles({ 
@@ -49,30 +46,28 @@ function secondAnimation(worldMap, barChart) {
     top: 0
   })
   barChart.revealBarChart()
-  barChart.redrawBars(sortedPopulationData)
-  barChart.addPopulationLabels(sortedPopulationData)
+  barChart.redrawBars(populationsIn1989)
+  barChart.addPopulationLabels(populationsIn1989)
 }
 
 function thirdAnimation(worldMap, barChart) {
   worldMap.addPointsToMap()
   worldMap.drawCurves()
-  const title = 'Net Migration into Russia 1991-2000'
-  barChart.drawTitle(title)
-  barChart.repaintChart(netFsuMigrationOne)
-  // worldMap.drawLabelPointer()
 
+  const title = 'Net Migration into Russia 1989-2002'
+  barChart.drawTitle(title)
+  barChart.repaintChart(netMigrantsToRussia1989to2002)
+  // worldMap.drawLabelPointer()
 }
 
 function fourthAnimation(worldMap, barChart) {
-  const title = 'Net Migration into Russia 2001-2010'
+  const title = 'Net Migration As a percentage of Russians in each CIS state'
   barChart.drawTitle(title)
-
-  barChart.repaintChart(netFsuMigrationTwo)
-
+  barChart.repaintChart(percentMigrantsToRussia1989to2002)
 }
 
 function fifthAnimation (worldMap, barChart) {
-
+  
 }
 
 function seventhAnimation(worldMap, barChart) {

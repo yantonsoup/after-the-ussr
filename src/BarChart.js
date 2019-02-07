@@ -1,14 +1,8 @@
 import {
   sovietCountryIsoCodes,
   colors,
-  sovietLabelShift,
-  netFsuMigrationOne,
-  populationsIn1991
 } from "./constants";
 
-const sortedPopulationData = populationsIn1991.sort(function(a, b) {
-  return d3.ascending(a.population, b.population);
-});
 export default class BarChart {
   constructor(opts) {
     // load in arguments from config object
@@ -26,12 +20,12 @@ export default class BarChart {
     const scrollContainer = d3.select(".scroll");
     const boundingBox = scrollContainer.node().getBoundingClientRect();
     const { width } = boundingBox;
-    const headerText = "Former Soviet State Populations in 1991"
+    const headerText = "1989 CIS State Populations"
 
     this.barMargin = {
       top: 15,
       right: 75,
-      bottom: 0,
+      bottom: 40,
       left: 60
     };
 
@@ -55,7 +49,7 @@ export default class BarChart {
     this.setXScale(this.data);
     this.setYScale(this.data);
     
-    this.bindDataToBars(sortedPopulationData);
+    this.bindDataToBars(this.data);
     this.paintHiddenBars();
     this.addYAxes();
 
@@ -80,12 +74,10 @@ export default class BarChart {
         return this.yScale(d.name);
       })
       .attr("height", () => this.yScale.rangeBand())
-      .attr("fill", function(d, i) {
-        return colors[i];
-      })
+      .attr("fill", (d, i) => colors[i])
   }
 
-  setYScale(data) {
+  setXScale(data) {
     this.xScale = d3.scale
       .linear()
       .range([0, this.width])
@@ -97,7 +89,7 @@ export default class BarChart {
       ]);
   }
 
-  setXScale(data) {
+  setYScale(data) {
     this.yScale = d3.scale
       .ordinal()
       .rangeRoundBands([this.height, 0], 0.1)
@@ -122,12 +114,28 @@ export default class BarChart {
       .call(yAxisStuff);
   }
 
+  redrawYAxes(data) {
+    const yAxisStuff = d3.svg
+    .axis()
+    .scale(this.yScale)
+    //no tick marks
+    .tickSize(0)
+    .orient("left");
+  
+    this.plot
+      .select(".y-axis")
+      .call(yAxisStuff);
+
+    // .call(yAxisStuff)
+  }
+
   repaintChart(data) {
-    this.bindDataToBars(data);
     this.setXScale(data);
     this.setYScale(data);
+    this.bindDataToBars(data);
     this.redrawBars(data);
     this.redrawLabels(data);
+    this.redrawYAxes(data)
   }
 
   bindDataToBars(data) {
@@ -138,11 +146,12 @@ export default class BarChart {
       .append("g");
   }
 
-  redrawBars() {
+  redrawBars(data) {
     d3.selectAll("rect")
+      .data(data)
       .transition()
       .delay(function(d, i) {
-        return i * 50;
+        return i * 100;
       })
       .attr("width", d => {
         console.warn("d for new width", d);
@@ -171,8 +180,8 @@ export default class BarChart {
         return this.xScale(d.population);
       })
       .attr("dx", ".75em")
-      .text(function(d) {
-        return parsePopulationText(d.population);
+      .text(function(datum) {
+        return parsePopulationText(datum);
       })
       .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
   }
@@ -203,7 +212,8 @@ export default class BarChart {
   }
 }
 
-function parsePopulationText(population) {
+function parsePopulationText(datum) {
+  const { population, name } = datum;
   const populationText = (population/1000000).toFixed(2) + 'm';
   console.warn({populationText})
 
