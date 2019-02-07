@@ -1497,7 +1497,51 @@
       x: -12,
       y: 18
     }
-  };
+  }; // Step 2
+
+  const populationsIn1989 = [{
+    name: "ARM",
+    population: 3031000
+  }, {
+    name: "AZE",
+    population: 6028000
+  }, {
+    name: "BLR",
+    population: 9560000
+  }, {
+    name: "EST",
+    population: 1466000
+  }, {
+    name: "GEO",
+    population: 5015000
+  }, {
+    name: "KAZ",
+    population: 16536511
+  }, {
+    name: "KGZ",
+    population: 3529000
+  }, {
+    name: "LVA",
+    population: 2521000
+  }, {
+    name: "LTU",
+    population: 3398000
+  }, {
+    name: "MDA",
+    population: 3947000
+  }, {
+    name: "TJK",
+    population: 3801000
+  }, {
+    name: "TKM",
+    population: 2759000
+  }, {
+    name: "UKR",
+    population: 51706742
+  }, {
+    name: "UZB",
+    population: 19905158
+  }]; // Step 3
   const populationsIn1991 = [{
     name: "ARM",
     population: 3500000
@@ -1540,7 +1584,7 @@
   }, {
     name: "UZB",
     population: 20950000
-  }]; // in thousands
+  }]; //1991 - 2000 to start
 
   const netFsuMigrationOne = [{
     name: "ARM",
@@ -1657,7 +1701,7 @@
   // 1989 -> 2002, Russians account for 58.6% immigrants to Russia
   // Russia in 1989 was 81.3 percent russians
 
-  const sortedPopulationData = populationsIn1991.sort(function (a, b) {
+  const sortedPopulationData = populationsIn1989.sort(function (a, b) {
     return d3.ascending(a.population, b.population);
   });
 
@@ -1839,7 +1883,7 @@
 
   function loadMap() {
     return new Promise((resolve, reject) => {
-      d3.json("https://aftertheussr.com/json/110topoworld.json", function (json) {
+      d3.json("./json/110topoworld.json", function (json) {
         console.warn("loaded 110topoworld.json:", json);
         resolve(json);
       });

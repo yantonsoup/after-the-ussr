@@ -4,10 +4,6 @@ import loadMap from "./loadMap";
 import WorldMap from './WorldMap.js'
 import BarChart from './BarChart.js'
 import {
-  sovietCountryIsoCodes,
-  colors,
-  sovietLabelShift,
-  netFsuMigrationOne,
   populationsIn1991
 } from "./constants";
 

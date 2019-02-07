@@ -1,16 +1,14 @@
 import {
-  sovietCountryIsoCodes,
-  colors,
-  sovietLabelShift,
   netFsuMigrationOne,
   netFsuMigrationTwo,
-  populationsIn1991
+  populationsIn1989
 } from "./constants";
-const sortedPopulationData = populationsIn1991.sort(function(a, b) {
+
+const sortedPopulationData = populationsIn1989.sort(function(a, b) {
   return d3.ascending(a.population, b.population);
 });
-function zeroAnimation(worldMap) {
 
+function zeroAnimation(worldMap) {
   worldMap.animateSectionStyles({ 
     duration: 1000, 
     section: '.non-soviet-country', 

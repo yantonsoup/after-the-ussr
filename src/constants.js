@@ -51,6 +51,83 @@ export const sovietLabelShift = {
   UZB: { x: -12, y: 18 }
 };
 
+// Step 2
+export const populationsIn1989 = [
+  { name: "ARM", population: 3031000	 },
+  { name: "AZE", population: 6028000 },
+  { name: "BLR", population: 9560000 },
+  { name: "EST", population: 1466000	 },
+  { name: "GEO", population: 5015000 },
+  { name: "KAZ", population: 16536511 },
+  { name: "KGZ", population: 3529000 },
+  { name: "LVA", population: 2521000 },
+  { name: "LTU", population: 3398000 },
+  { name: "MDA", population: 3947000 },
+  { name: "TJK", population: 3801000 },
+  { name: "TKM", population: 2759000 },
+  { name: "UKR", population: 51706742 },
+  { name: "UZB", population: 19905158 }
+];
+
+// Step 3
+// in thousands
+const netMigrantsToRussia1989to2002 = [
+  { name: "ARM", population: 34 },
+  { name: "AZE", population: 195 },
+  { name: "BLR", population: 10 },
+  { name: "EST", population: 59 },
+  { name: "GEO", population: 162 },
+  { name: "KAZ", population: 1255 },
+  { name: "KGZ", population: 244 },
+  { name: "LVA", population: 96 },
+  { name: "LTU", population: 46 },
+  { name: "MDA", population: 65 },
+  { name: "TJK", population: 232 },
+  { name: "TKM", population: 98 },
+  { name: "UKR", population: 3341 },
+  { name: "UZB", population: 496 }
+];
+
+// Step 4
+// in thousands
+export const percentMigrantsToRussia1989to2002 = [
+  { name: "ARM", population: 66 },
+  { name: "AZE", population: 49.8 },
+  { name: "BLR", population: 0.7 },
+  { name: "EST", population: 12.4 },
+  { name: "GEO", population: 47.5 },
+  { name: "KAZ", population: 20.1 },
+  { name: "KGZ", population: 26.7 },
+  { name: "LVA", population: 10.6 },
+  { name: "LTU", population: 13.5 },
+  { name: "MDA", population: 11.5 },
+  { name: "TJK", population: 59.8 },
+  { name: "TKM", population: 29.4 },
+  { name: "UKR", population: 3.1 },
+  { name: "UZB", population: 30 }
+];
+
+// Step 6
+// in thousands
+export const populationRussia1989to2002 = [
+  { name: "1989", population: 147386000 },
+  { name: "1990", population: 148040700 },
+  { name: "1991", population: 148689000 },
+  { name: "1992", population: 148704300	 },
+  { name: "1993", population: 148673000 },
+  { name: "1994", population: 148366000	 },
+  { name: "1995", population: 148249000	 },
+  { name: "1996", population: 147739000 },
+  { name: "1997", population: 147307000 },
+  { name: "1998", population: 146909000 },
+  { name: "1999", population: 146200000	 },
+  { name: "2000", population: 146001200 },
+  { name: "2001", population: 145470000 },
+  { name: "2002", population: 145166731 }
+];
+
+
+
 export const populationsIn1991 = [
   { name: "ARM", population: 3500000 },
   { name: "AZE", population: 7271000 },
@@ -68,23 +145,7 @@ export const populationsIn1991 = [
   { name: "UZB", population: 20950000 }
 ];
 
-// in thousands
-const russiansPerFSUState1989 = [
-  { name: "ARM", population: 52 },
-  { name: "AZE", population: 392 },
-  { name: "BLR", population: 1432 },
-  { name: "EST", population: 475 },
-  { name: "GEO", population: 341 },
-  { name: "KAZ", population: 6228 },
-  { name: "KGZ", population: 917 },
-  { name: "LVA", population: 906 },
-  { name: "LTU", population: 345 },
-  { name: "MDA", population: 562 },
-  { name: "TJK", population: 389 },
-  { name: "TKM", population: 334 },
-  { name: "UKR", population: 11356 },
-  { name: "UZB", population: 496 }
-];
+
 
 //1991 - 2000 to start
 export const netFsuMigrationOne = [
