@@ -63,7 +63,7 @@ function thirdAnimation(worldMap, barChart) {
 function fourthAnimation(worldMap, barChart) {
   const title = 'Net Migration As a percentage of Russians in each CIS state'
   barChart.drawTitle(title)
-  barChart.repaintChart(percentMigrantsToRussia1989to2002)
+  barChart.paintPercentageChart(percentMigrantsToRussia1989to2002)
 }
 
 function fifthAnimation (worldMap, barChart) {

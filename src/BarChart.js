@@ -138,6 +138,22 @@ export default class BarChart {
     this.redrawYAxes(data)
   }
 
+  paintPercentageChart(data) {
+    this.xScale = d3.scale
+    .linear()
+    .range([0, this.width])
+    .domain([
+      0,
+      100
+    ]);
+
+    this.setYScale(data);
+    this.bindDataToBars(data);
+    this.redrawBars(data);
+    this.redrawPercentLabels(data);
+    this.redrawYAxes(data)
+  }
+
   bindDataToBars(data) {
     this.bars = this.plot
       .selectAll(".bar")
@@ -157,6 +173,33 @@ export default class BarChart {
         console.warn("d for new width", d);
         return this.xScale(d.population);
       });
+  }
+
+  redrawPercentLabels(data) {
+    this.plot
+      .selectAll(".label")
+      .transition()
+      .duration(500)
+      .style("opacity", "0");
+
+    this.plot
+      .select("g")
+      .selectAll(".text")
+      .data(data)
+      .enter()
+      .append("text")
+      .attr("class", "label")
+      .attr("y", d => {
+        return this.yScale(d.name);
+      })
+      .attr("x", d => {
+        return this.xScale(d.population);
+      })
+      .attr("dx", ".75em")
+      .text(function(datum) {
+        return datum.population + '%';
+      })
+      .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
   }
 
   redrawLabels(data) {
