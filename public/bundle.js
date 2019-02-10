@@ -1980,7 +1980,7 @@
     }
 
     function handleContainerEnter(response) {
-      console.warn("Scrollama :: handleContainerEnter");
+      console.warn("%c Scrollama :: handleContainerEnter", 'color: green; background-color: white');
     }
 
     function handleContainerExit(response) {
