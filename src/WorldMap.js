@@ -225,7 +225,7 @@ export default class WorldMap {
       ...centroid,
     }))
   
-    console.warn("centroidsWithValues", centroidsWithValues);
+    // console.warn("centroidsWithValues", centroidsWithValues);
     const russiaCoordinates = [235, 110];
 
     const arcs = this.mapGraphic
@@ -238,7 +238,7 @@ export default class WorldMap {
       .append("path")
       .attr("class", "arc")
       .attr("d", (datum, index) => {
-        console.warn({datum})
+        // console.warn({datum})
 
         const curveoffset = 15;
         const origin = [datum[0], datum[1]]

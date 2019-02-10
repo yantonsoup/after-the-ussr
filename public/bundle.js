@@ -1632,6 +1632,178 @@
     name: "UZB",
     population: 30
   }]; // Step 6
+  // in thousands
+
+  const populationRussia1989to2002 = [{
+    name: "1989",
+    population: 147386000
+  }, {
+    name: "1990",
+    population: 148040700
+  }, {
+    name: "1991",
+    population: 148689000
+  }, {
+    name: "1992",
+    population: 148704300
+  }, {
+    name: "1993",
+    population: 148673000
+  }, {
+    name: "1994",
+    population: 148366000
+  }, {
+    name: "1995",
+    population: 148249000
+  }, {
+    name: "1996",
+    population: 147739000
+  }, {
+    name: "1997",
+    population: 147307000
+  }, {
+    name: "1998",
+    population: 146909000
+  }, {
+    name: "1999",
+    population: 146200000
+  }, {
+    name: "2000",
+    population: 146001200
+  }, {
+    name: "2001",
+    population: 145470000
+  }, {
+    name: "2002",
+    population: 145166731
+  }]; // Step 9
+
+  const migrationAbroadEthnicity1995to2002 = [{
+    name: 'a',
+    population: 0
+  }, {
+    name: 'b',
+    population: 0
+  }, {
+    name: 'c',
+    population: 0
+  }, {
+    name: 'd',
+    population: 0
+  }, {
+    name: 'e',
+    population: 0
+  }, {
+    name: 'f',
+    population: 0
+  }, {
+    name: 'g',
+    population: 0
+  }, {
+    name: 'h',
+    population: 0
+  }, {
+    name: 'i',
+    population: 0
+  }, {
+    name: 'j',
+    population: 0
+  }, {
+    name: 'k',
+    population: 0
+  }, {
+    name: "Germans",
+    population: 43
+  }, {
+    name: "Russians",
+    population: 38
+  }, {
+    name: "Jews",
+    population: 10
+  }];
+  const migrationAbroadDestination1995to2002 = [{
+    name: 'a',
+    population: 0
+  }, {
+    name: 'b',
+    population: 0
+  }, {
+    name: 'c',
+    population: 0
+  }, {
+    name: 'd',
+    population: 0
+  }, {
+    name: 'e',
+    population: 0
+  }, {
+    name: 'f',
+    population: 0
+  }, {
+    name: 'g',
+    population: 0
+  }, {
+    name: 'h',
+    population: 0
+  }, {
+    name: 'i',
+    population: 0
+  }, {
+    name: 'j',
+    population: 0
+  }, {
+    name: 'k',
+    population: 0
+  }, {
+    name: "Germany",
+    population: 59
+  }, {
+    name: "Israel",
+    population: 25
+  }, {
+    name: "United States",
+    population: 11
+  }];
+  // export const netFsuMigrationOne = [
+  //   { name: "ARM", population: 200000 },
+  //   { name: "AZE", population: 298900 },
+  //   { name: "BLR", population: 26500, net: "in" },
+  //   { name: "EST", population: 66400 },
+  //   { name: "GEO", population: 358700 },
+  //   { name: "KAZ", population: 1497400 },
+  //   { name: "KGZ", population: 272900 },
+  //   { name: "LVA", population: 109700 },
+  //   { name: "LTU", population: 46600 },
+  //   { name: "MDA", population: 78500 },
+  //   { name: "TJK", population: 314700 },
+  //   { name: "TKM", population: 116100 },
+  //   { name: "UKR", population: 341600 },
+  //   { name: "UZB", population: 605000 }
+  // ];
+  // export const netFsuMigrationTwo = [
+  //   { name: "ARM", population: 188700 },
+  //   { name: "AZE", population: 120500 },
+  //   { name: "BLR", population: 2200 },
+  //   { name: "EST", population: 2400 },
+  //   { name: "GEO", population: 70900 },
+  //   { name: "KAZ", population: 347400 },
+  //   { name: "KGZ", population: 179400 },
+  //   { name: "LVA", population: 6800 },
+  //   { name: "LTU", population: 2900 },
+  //   { name: "MDA", population: 106100 },
+  //   { name: "TJK", population: 135700 },
+  //   { name: "TKM", population: 43200 },
+  //   { name: "UKR", population: 261500 },
+  //   { name: "UZB", population: 349000 }
+  // ];
+  // Three non-FSU countries counries recieve bhe bulk of persons
+  // leaving Russia:
+  // const worldOut1995to2002inPercent = {
+  //   germany: 59,
+  //   israel: 25,
+  //   us: 11
+  // };
+  // migration to the far abroud consisted of 3 groups
   // Germans / Russians / Jews
   // 1995 -> 2002,
   // 43% of net migration consisted of germans
@@ -1710,20 +1882,19 @@
   }
 
   function fourthAnimation(worldMap, barChart) {
-    const title = 'Net Migration As a percentage of Russians in each CIS state';
+    const title = 'Migration as % of Russians per state';
     barChart.drawTitle(title);
     barChart.paintPercentageChart(percentMigrantsToRussia1989to2002);
   }
 
   function fifthAnimation(worldMap, barChart) {}
 
-  function seventhAnimation(worldMap, barChart) {
-    const graphicMarginTop = Math.floor(window.innerHeight * 0.25); // worldMap.moveMapContainer({
+  function sixthAnimation(worldMap, barChart) {
+    // worldMap.moveMapContainer({
     //   duration: 1000,
     //   top: graphicMarginTop
     // })
     // barChart.hideAllElements()
-
     worldMap.animateSectionStyles({
       duration: 500,
       section: '.arc',
@@ -1745,11 +1916,21 @@
         opacity: '0'
       }
     });
+    /* this is the zoom for the germany etc stuff
     const zoomParams = {
       scale: 2,
       duration: 1000,
-      translateX: -Math.floor(worldMap.width * 0.2),
-      translateY: -Math.floor(worldMap.height * 0.2)
+      translateX: (-Math.floor(worldMap.width * 0.2)),
+      translateY: -Math.floor(worldMap.height * 0.2),
+    }
+     worldMap.animateMapZoom(zoomParams)
+    */
+
+    const zoomParams = {
+      scale: 2,
+      duration: 1000,
+      translateX: -Math.floor(worldMap.width * 0.5),
+      translateY: -Math.floor(worldMap.height * 0.1)
     };
     worldMap.animateMapZoom(zoomParams);
     worldMap.animateSectionStyles({
@@ -1759,12 +1940,23 @@
         opacity: '0.25'
       }
     });
-    worldMap.animateWorldSections();
-    const title = 'Top Recieving Countries of Soviet Immigrants';
+    const title = 'Russia Population 1989 - 2002';
     barChart.drawTitle(title);
+    barChart.repaintChart(populationRussia1989to2002);
   }
 
-  function eightAnimation(worldMap, barChart) {// make the map bigger, stretch vertically
+  function seventhAnimation(worldMap, barChart) {}
+
+  function eightAnimation(worldMap, barChart) {
+    const title = 'Ethnic Groups Leaving Russia';
+    barChart.drawTitle(title);
+    barChart.redrawBarsWith3DataPoints(migrationAbroadEthnicity1995to2002);
+  }
+
+  function ninthAnimation(worldMap, barChart) {
+    const title = 'Top Destinations For FSU Immigrants';
+    barChart.drawTitle(title);
+    barChart.redrawBarsWith3DataPoints(migrationAbroadDestination1995to2002);
   }
 
   var animations = {
@@ -1774,10 +1966,10 @@
     3: thirdAnimation,
     4: fourthAnimation,
     5: fifthAnimation,
-    6: () => {},
+    6: sixthAnimation,
     7: seventhAnimation,
     8: eightAnimation,
-    9: () => {}
+    9: ninthAnimation
   };
 
   function setupScrollama(worldMap, barChart) {
@@ -2001,14 +2193,12 @@
       const centroidsWithValues = russiaCentroids.map((centroid, index) => ({
         trade: index,
         ...centroid
-      }));
-      console.warn("centroidsWithValues", centroidsWithValues);
+      })); // console.warn("centroidsWithValues", centroidsWithValues);
+
       const russiaCoordinates = [235, 110];
       const arcs = this.mapGraphic.append("g").selectAll("path.datamaps-arc").data(centroidsWithValues);
       arcs.enter().append("path").attr("class", "arc").attr("d", (datum, index) => {
-        console.warn({
-          datum
-        });
+        // console.warn({datum})
         const curveoffset = 15;
         const origin = [datum[0], datum[1]];
         const dest = russiaCoordinates;
@@ -2050,13 +2240,13 @@
       const headerText = "1989 CIS State Populations";
       this.barMargin = {
         top: 15,
-        right: 75,
+        right: 85,
         bottom: 40,
-        left: 60
+        left: 64
       };
       this.width = width - this.barMargin.left - this.barMargin.right;
       this.height = width - this.barMargin.top - this.barMargin.bottom;
-      this.plot = d3.select(".bar-graphic").append("svg").attr("width", this.width + this.barMargin.left + this.barMargin.right).attr("height", this.height + this.barMargin.top + this.barMargin.bottom).append("g").attr("transform", "translate(" + this.barMargin.left + "," + this.barMargin.top + ")"); // we'll actually be appending to a <g> element
+      this.paintPlot(this.width, this.height, this.barMargin); // we'll actually be appending to a <g> element
 
       this.drawTitle(headerText); // create the other stuff
 
@@ -2066,6 +2256,10 @@
       this.paintHiddenBars();
       this.addYAxes();
       this.hideAllElements();
+    }
+
+    paintPlot(width, height, margins) {
+      this.plot = d3.select(".bar-graphic").append("svg").attr("width", width + margins.left + margins.right).attr("height", height + margins.top + margins.bottom).append("g").attr("transform", "translate(" + margins.left + "," + margins.top + ")");
     }
 
     hideAllElements() {
@@ -2126,6 +2320,15 @@
       this.redrawYAxes(data);
     }
 
+    redrawBarsWith3DataPoints(data) {
+      this.xScale = d3.scale.linear().range([0, this.width]).domain([0, 100]);
+      this.setYScale(data);
+      this.bindDataToBars(data);
+      this.redrawBars(data);
+      this.redrawPercentLabels(data);
+      this.redrawYAxes(data);
+    }
+
     bindDataToBars(data) {
       this.bars = this.plot.selectAll(".bar").data(data).enter().append("g");
     }
@@ -2134,7 +2337,6 @@
       d3.selectAll("rect").data(data).transition().delay(function (d, i) {
         return i * 100;
       }).attr("width", d => {
-        console.warn("d for new width", d);
         return this.xScale(d.population);
       });
     }
@@ -2151,7 +2353,7 @@
     }
 
     redrawLabels(data) {
-      this.plot.selectAll(".label").transition().duration(500).style("opacity", "0");
+      this.plot.selectAll(".label").remove();
       this.plot.select("g").selectAll(".text").data(data).enter().append("text").attr("class", "label").attr("y", d => {
         return this.yScale(d.name);
       }).attr("x", d => {
@@ -2179,9 +2381,6 @@
       name
     } = datum;
     const populationText = (population / 1000000).toFixed(2) + 'm';
-    console.warn({
-      populationText
-    });
     return populationText;
   }
 

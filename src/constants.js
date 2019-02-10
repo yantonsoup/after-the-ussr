@@ -128,12 +128,34 @@ export const populationRussia1989to2002 = [
 
 // Step 9
 export const migrationAbroadEthnicity1995to2002 = [
+  { name: 'a', population: 0},
+  { name: 'b', population: 0},
+  { name: 'c', population: 0},
+  { name: 'd', population: 0},
+  { name: 'e', population: 0},
+  { name: 'f', population: 0},
+  { name: 'g', population: 0},
+  { name: 'h', population: 0},
+  { name: 'i', population: 0},
+  { name: 'j', population: 0},
+  { name: 'k', population: 0},
   { name: "Germans", population: 43 },
   { name: "Russians", population: 38 },
   { name: "Jews", population: 10 },
 ];
 
 export const migrationAbroadDestination1995to2002 = [
+  { name: 'a', population: 0},
+  { name: 'b', population: 0},
+  { name: 'c', population: 0},
+  { name: 'd', population: 0},
+  { name: 'e', population: 0},
+  { name: 'f', population: 0},
+  { name: 'g', population: 0},
+  { name: 'h', population: 0},
+  { name: 'i', population: 0},
+  { name: 'j', population: 0},
+  { name: 'k', population: 0},
   { name: "Germany", population: 59 },
   { name: "Israel", population: 25 },
   { name: "United States", population: 11 },
@@ -156,51 +178,49 @@ export const populationsIn1991 = [
   { name: "UZB", population: 20950000 }
 ];
 
+// //1991 - 2000 to start
+// export const netFsuMigrationOne = [
+//   { name: "ARM", population: 200000 },
+//   { name: "AZE", population: 298900 },
+//   { name: "BLR", population: 26500, net: "in" },
+//   { name: "EST", population: 66400 },
+//   { name: "GEO", population: 358700 },
+//   { name: "KAZ", population: 1497400 },
+//   { name: "KGZ", population: 272900 },
+//   { name: "LVA", population: 109700 },
+//   { name: "LTU", population: 46600 },
+//   { name: "MDA", population: 78500 },
+//   { name: "TJK", population: 314700 },
+//   { name: "TKM", population: 116100 },
+//   { name: "UKR", population: 341600 },
+//   { name: "UZB", population: 605000 }
+// ];
 
-
-//1991 - 2000 to start
-export const netFsuMigrationOne = [
-  { name: "ARM", population: 200000 },
-  { name: "AZE", population: 298900 },
-  { name: "BLR", population: 26500, net: "in" },
-  { name: "EST", population: 66400 },
-  { name: "GEO", population: 358700 },
-  { name: "KAZ", population: 1497400 },
-  { name: "KGZ", population: 272900 },
-  { name: "LVA", population: 109700 },
-  { name: "LTU", population: 46600 },
-  { name: "MDA", population: 78500 },
-  { name: "TJK", population: 314700 },
-  { name: "TKM", population: 116100 },
-  { name: "UKR", population: 341600 },
-  { name: "UZB", population: 605000 }
-];
-
-export const netFsuMigrationTwo = [
-  { name: "ARM", population: 188700 },
-  { name: "AZE", population: 120500 },
-  { name: "BLR", population: 2200 },
-  { name: "EST", population: 2400 },
-  { name: "GEO", population: 70900 },
-  { name: "KAZ", population: 347400 },
-  { name: "KGZ", population: 179400 },
-  { name: "LVA", population: 6800 },
-  { name: "LTU", population: 2900 },
-  { name: "MDA", population: 106100 },
-  { name: "TJK", population: 135700 },
-  { name: "TKM", population: 43200 },
-  { name: "UKR", population: 261500 },
-  { name: "UZB", population: 349000 }
-];
+// export const netFsuMigrationTwo = [
+//   { name: "ARM", population: 188700 },
+//   { name: "AZE", population: 120500 },
+//   { name: "BLR", population: 2200 },
+//   { name: "EST", population: 2400 },
+//   { name: "GEO", population: 70900 },
+//   { name: "KAZ", population: 347400 },
+//   { name: "KGZ", population: 179400 },
+//   { name: "LVA", population: 6800 },
+//   { name: "LTU", population: 2900 },
+//   { name: "MDA", population: 106100 },
+//   { name: "TJK", population: 135700 },
+//   { name: "TKM", population: 43200 },
+//   { name: "UKR", population: 261500 },
+//   { name: "UZB", population: 349000 }
+// ];
 
 // Three non-FSU countries counries recieve bhe bulk of persons
 // leaving Russia:
 
-const worldOut1995to2002inPercent = {
-  germany: 59,
-  israel: 25,
-  us: 11
-};
+// const worldOut1995to2002inPercent = {
+//   germany: 59,
+//   israel: 25,
+//   us: 11
+// };
 // migration to the far abroud consisted of 3 groups
 // Germans / Russians / Jews
 

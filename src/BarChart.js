@@ -24,24 +24,16 @@ export default class BarChart {
 
     this.barMargin = {
       top: 15,
-      right: 75,
+      right: 85,
       bottom: 40,
-      left: 60
+      left: 64
     };
 
     this.width = width - this.barMargin.left - this.barMargin.right;
     this.height = width - this.barMargin.top - this.barMargin.bottom;
 
-    this.plot = d3
-      .select(".bar-graphic")
-      .append("svg")
-      .attr("width", this.width + this.barMargin.left + this.barMargin.right)
-      .attr("height", this.height + this.barMargin.top + this.barMargin.bottom)
-      .append("g")
-      .attr(
-        "transform",
-        "translate(" + this.barMargin.left + "," + this.barMargin.top + ")"
-      )
+    this.paintPlot(this.width, this.height, this.barMargin);
+
     // we'll actually be appending to a <g> element
     this.drawTitle(headerText);
 
@@ -54,6 +46,19 @@ export default class BarChart {
     this.addYAxes();
 
     this.hideAllElements();
+  }
+
+  paintPlot(width, height, margins) {
+    this.plot = d3
+    .select(".bar-graphic")
+    .append("svg")
+    .attr("width", width + margins.left + margins.right)
+    .attr("height", height + margins.top + margins.bottom)
+    .append("g")
+    .attr(
+      "transform",
+      "translate(" + margins.left + "," + margins.top + ")"
+    )
   }
 
   hideAllElements() {
@@ -154,6 +159,22 @@ export default class BarChart {
     this.redrawYAxes(data)
   }
 
+  redrawBarsWith3DataPoints(data) {
+    this.xScale = d3.scale
+    .linear()
+    .range([0, this.width])
+    .domain([
+      0,
+      100
+    ]);
+    
+    this.setYScale(data);
+    this.bindDataToBars(data);
+    this.redrawBars(data);
+    this.redrawPercentLabels(data);
+    this.redrawYAxes(data)
+  }
+
   bindDataToBars(data) {
     this.bars = this.plot
       .selectAll(".bar")
@@ -170,7 +191,6 @@ export default class BarChart {
         return i * 100;
       })
       .attr("width", d => {
-        console.warn("d for new width", d);
         return this.xScale(d.population);
       });
   }
@@ -205,9 +225,7 @@ export default class BarChart {
   redrawLabels(data) {
     this.plot
       .selectAll(".label")
-      .transition()
-      .duration(500)
-      .style("opacity", "0");
+      .remove()
 
     this.plot
       .select("g")
@@ -258,7 +276,6 @@ export default class BarChart {
 function parsePopulationText(datum) {
   const { population, name } = datum;
   const populationText = (population/1000000).toFixed(2) + 'm';
-  console.warn({populationText})
 
   return populationText
 }

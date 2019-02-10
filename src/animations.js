@@ -1,7 +1,9 @@
 import {
   netMigrantsToRussia1989to2002,
   percentMigrantsToRussia1989to2002,
-  netFsuMigrationTwo,
+  migrationAbroadEthnicity1995to2002,
+  migrationAbroadDestination1995to2002,
+  populationRussia1989to2002,
   populationsIn1989
 } from "./constants";
 
@@ -61,7 +63,7 @@ function thirdAnimation(worldMap, barChart) {
 }
 
 function fourthAnimation(worldMap, barChart) {
-  const title = 'Net Migration As a percentage of Russians in each CIS state'
+  const title = 'Migration as % of Russians per state'
   barChart.drawTitle(title)
   barChart.paintPercentageChart(percentMigrantsToRussia1989to2002)
 }
@@ -70,9 +72,8 @@ function fifthAnimation (worldMap, barChart) {
   
 }
 
-function seventhAnimation(worldMap, barChart) {
-  const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
-  // worldMap.moveMapContainer({
+function sixthAnimation (worldMap, barChart) {
+    // worldMap.moveMapContainer({
   //   duration: 1000,
   //   top: graphicMarginTop
   // })
@@ -102,6 +103,7 @@ function seventhAnimation(worldMap, barChart) {
     }
   }) 
   
+  /* this is the zoom for the germany etc stuff
   const zoomParams = {
     scale: 2,
     duration: 1000,
@@ -110,6 +112,15 @@ function seventhAnimation(worldMap, barChart) {
   }
 
   worldMap.animateMapZoom(zoomParams)
+  */
+ const zoomParams = {
+  scale: 2,
+  duration: 1000,
+  translateX: (-Math.floor(worldMap.width * 0.5)),
+  translateY: -Math.floor(worldMap.height * 0.1),
+}
+
+worldMap.animateMapZoom(zoomParams)
 
   worldMap.animateSectionStyles({ 
     duration: 500, 
@@ -119,14 +130,29 @@ function seventhAnimation(worldMap, barChart) {
     }
   })
 
-  worldMap.animateWorldSections() 
-  const title = 'Top Recieving Countries of Soviet Immigrants'
+  const title = 'Russia Population 1989 - 2002'
   barChart.drawTitle(title)
+  barChart.repaintChart(populationRussia1989to2002)
 
 }
 
+function seventhAnimation(worldMap, barChart) {
+}
+
 function eightAnimation(worldMap, barChart) {
-  // make the map bigger, stretch vertically
+
+  const title = 'Ethnic Groups Leaving Russia'
+
+  barChart.drawTitle(title)
+  barChart.redrawBarsWith3DataPoints(migrationAbroadEthnicity1995to2002)
+}
+
+
+function ninthAnimation(worldMap, barChart) {
+  const title = 'Top Destinations For FSU Immigrants'
+
+  barChart.drawTitle(title)
+  barChart.redrawBarsWith3DataPoints(migrationAbroadDestination1995to2002)
 }
 
 export default {
@@ -136,8 +162,8 @@ export default {
   3: thirdAnimation,
   4: fourthAnimation,
   5: fifthAnimation,
-  6: () => {},
+  6: sixthAnimation,
   7: seventhAnimation,
   8: eightAnimation,
-  9: () => {},
+  9: ninthAnimation,
 };
