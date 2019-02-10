@@ -16,6 +16,12 @@ export const sovietCountryIsoCodes = [
   "UZB"
 ];
 
+export const primaryReceivingIsoCodes = [
+  "DEU",
+  "ISR",
+  "USA",
+];
+
 export const colors = [
   "#feedde",
   "#fdbe85",

@@ -1435,6 +1435,7 @@
   }
 
   const sovietCountryIsoCodes = ["ARM", "AZE", "BLR", "EST", "GEO", "KAZ", "KGZ", "LVA", "LTU", "MDA", "RUS", "TJK", "TKM", "UKR", "UZB"];
+  const primaryReceivingIsoCodes = ["DEU", "ISR", "USA"];
   const colors = ["#feedde", "#fdbe85", "#fd8d3c", "#e6550d", "#dd6344", "#feedde", "#fdbe85", "#fd8d3c", "#e6550d", "#feedde", "#fdbe85", "#fd8d3c", "#e6550d", "#dd6344"];
   const sovietLabelShift = {
     ARM: {
@@ -1677,50 +1678,6 @@
     name: "2002",
     population: 145166731
   }]; // Step 9
-
-  const migrationAbroadEthnicity1995to2002 = [{
-    name: 'a',
-    population: 0
-  }, {
-    name: 'b',
-    population: 0
-  }, {
-    name: 'c',
-    population: 0
-  }, {
-    name: 'd',
-    population: 0
-  }, {
-    name: 'e',
-    population: 0
-  }, {
-    name: 'f',
-    population: 0
-  }, {
-    name: 'g',
-    population: 0
-  }, {
-    name: 'h',
-    population: 0
-  }, {
-    name: 'i',
-    population: 0
-  }, {
-    name: 'j',
-    population: 0
-  }, {
-    name: 'k',
-    population: 0
-  }, {
-    name: "Germans",
-    population: 43
-  }, {
-    name: "Russians",
-    population: 38
-  }, {
-    name: "Jews",
-    population: 10
-  }];
   const migrationAbroadDestination1995to2002 = [{
     name: 'a',
     population: 0
@@ -1916,16 +1873,6 @@
         opacity: '0'
       }
     });
-    /* this is the zoom for the germany etc stuff
-    const zoomParams = {
-      scale: 2,
-      duration: 1000,
-      translateX: (-Math.floor(worldMap.width * 0.2)),
-      translateY: -Math.floor(worldMap.height * 0.2),
-    }
-     worldMap.animateMapZoom(zoomParams)
-    */
-
     const zoomParams = {
       scale: 2,
       duration: 1000,
@@ -1940,6 +1887,14 @@
         opacity: '0.25'
       }
     });
+    worldMap.animateCISStyles({
+      duration: 500,
+      section: '.soviet-country',
+      styles: {
+        opacity: '0.5'
+      }
+    }); // fill: '#d0d0d0'
+
     const title = 'Russia Population 1989 - 2002';
     barChart.drawTitle(title);
     barChart.repaintChart(populationRussia1989to2002);
@@ -1947,16 +1902,58 @@
 
   function seventhAnimation(worldMap, barChart) {}
 
-  function eightAnimation(worldMap, barChart) {
-    const title = 'Ethnic Groups Leaving Russia';
-    barChart.drawTitle(title);
-    barChart.redrawBarsWith3DataPoints(migrationAbroadEthnicity1995to2002);
+  function eightAnimation(worldMap, barChart) {// const title = 'Ethnic Groups Leaving Russia'
+    // barChart.drawTitle(title)
+    // barChart.redrawBarsWith3DataPoints(migrationAbroadEthnicity1995to2002)
   }
 
   function ninthAnimation(worldMap, barChart) {
     const title = 'Top Destinations For FSU Immigrants';
     barChart.drawTitle(title);
     barChart.redrawBarsWith3DataPoints(migrationAbroadDestination1995to2002);
+    const zoomParams = {
+      scale: 2,
+      duration: 1000,
+      translateX: -Math.floor(worldMap.width * 0.2),
+      translateY: -Math.floor(worldMap.height * 0.2)
+    };
+    worldMap.animateSectionStyles({
+      duration: 500,
+      section: '.soviet-country',
+      styles: {
+        opacity: '1',
+        fill: '#d0d0d0'
+      }
+    });
+    worldMap.animateMapZoom(zoomParams);
+    worldMap.animateWorldSections(zoomParams);
+  }
+
+  function tenthAnimation(worldMap, barChart) {
+    // Zoom to Germany -> DONE
+    // hide other arcs
+    // animate bars? 
+    const zoomParams = {
+      scale: 4,
+      duration: 1000,
+      translateX: -Math.floor(worldMap.width * 0.4),
+      translateY: -Math.floor(worldMap.height * 0.2)
+    };
+    worldMap.animateMapZoom(zoomParams);
+    worldMap.animateSectionStyles({
+      duration: 1000,
+      section: '.arc',
+      styles: {
+        opacity: '0'
+      }
+    });
+    worldMap.animateSectionStyles({
+      duration: 1000,
+      section: '#arc-DEU',
+      styles: {
+        opacity: '1'
+      }
+    });
   }
 
   var animations = {
@@ -1969,7 +1966,8 @@
     6: sixthAnimation,
     7: seventhAnimation,
     8: eightAnimation,
-    9: ninthAnimation
+    9: ninthAnimation,
+    10: tenthAnimation
   };
 
   function setupScrollama(worldMap, barChart) {
@@ -2069,9 +2067,10 @@
       this.projection.scale(this.initialScale);
       this.path = d3.geo.path().projection(this.projection);
       const svg = d3.select(this.element).append("svg").attr("width", this.width).attr("height", this.height);
-      this.mapGraphic = svg.append("g").attr("id", "map");
+      this.mapGraphic = svg.append("g").attr("id", "map"); // TODO: give russia a seperate handle from others
+
       this.mapGraphic.selectAll("path").data(this.data).enter().append("path").attr("d", this.path).style("stroke-width", 0.5 + "px").attr("class", "country").attr("id", function (d, i) {
-        return "country" + d.id;
+        return d.id;
       }).attr("class", function (datapoint, i) {
         if (sovietCountryIsoCodes.includes(datapoint.id)) {
           return "country soviet-country";
@@ -2099,6 +2098,21 @@
         styles
       });
       d3.select(this.element).selectAll(section).transition().duration(duration).style(styles);
+    }
+
+    animateCISStyles({
+      duration,
+      section,
+      styles
+    }) {
+      console.warn({
+        duration,
+        section,
+        styles
+      });
+      d3.select(this.element).selectAll(section).filter(({
+        id
+      }) => id !== 'RUS').transition().duration(duration).style(styles);
     }
 
     animateMapZoom({
@@ -2132,7 +2146,7 @@
       }).text(function (d) {
         return d.properties.name;
       }).style("font-size", 3 + "px");
-    } // TODO: makethis an actual cloropleth funk
+    } // TODO: makethis an actual choropleth funk
 
 
     createPopulationChoropleth() {
@@ -2185,15 +2199,9 @@
     }
 
     drawCurves() {
-      const russiaCentroids = this.sovietDataPoints.filter(({
+      const centroidsWithValues = this.sovietDataPoints.filter(({
         id
-      }) => id !== 'RUS').map(country => {
-        return this.path.centroid(country);
-      });
-      const centroidsWithValues = russiaCentroids.map((centroid, index) => ({
-        trade: index,
-        ...centroid
-      })); // console.warn("centroidsWithValues", centroidsWithValues);
+      }) => id !== 'RUS').map(country => this.path.centroid(country)); // console.warn("centroidsWithValues", centroidsWithValues);
 
       const russiaCoordinates = [235, 110];
       const arcs = this.mapGraphic.append("g").selectAll("path.datamaps-arc").data(centroidsWithValues);
@@ -2215,7 +2223,41 @@
     }
 
     animateWorldSections() {
-      this.mapGraphic.select('#countryISR').style('opacity', '1');
+      this.mapGraphic.select('#ISR').style('opacity', '1').style('fill', 'pink');
+      this.mapGraphic.select('#DEU').style('opacity', '1').style('fill', 'green');
+      this.mapGraphic.select('#USA').style('opacity', '1').style('fill', 'blue');
+      const russiaCoordinates = [235, 110];
+      const receivingCentroids = this.data.filter(({
+        id
+      }) => primaryReceivingIsoCodes.includes(id)).map(country => {
+        return {
+          id: country.id,
+          centroid: this.path.centroid(country)
+        };
+      });
+      const receivingArcs = this.mapGraphic.append("g").selectAll("path.datamaps-arc").data(receivingCentroids);
+      const curveOffsets = [50, 15, 15]; // 0 => usa
+      // 1 => israel
+      // 2 => germany
+
+      receivingArcs.enter().append("path").attr("class", "arc").attr("id", fulldatum => {
+        return 'arc-' + fulldatum.id;
+      }).attr("d", (fulldatum, index) => {
+        const datum = fulldatum.centroid;
+        console.warn('arc datum', datum);
+        console.warn('arc fulldatum', fulldatum);
+        const origin = [datum[0], datum[1]];
+        const dest = russiaCoordinates;
+        const mid = [(origin[0] + dest[0]) / 2, (origin[1] + dest[1]) / 2]; //define handle points for Bezier curves. Higher values for curveoffset will generate more pronounced curves.
+
+        const midcurve = [mid[0], mid[1] - curveOffsets[index]]; // move cursor to origin
+        // define the arrowpoint: the destination, minus a scaled tangent vector, minus an orthogonal vector scaled to the datum.trade variable
+        // move cursor to origin
+
+        return "M" + origin[0] + ',' + origin[1] // smooth curve to offset midpoint
+        + "S" + midcurve[0] + "," + midcurve[1] //smooth curve to destination	
+        + "," + dest[0] + "," + dest[1];
+      }).style('fill', 'none').style('stroke-width', '0.5px').style('stroke', '#7772a8').style('opacity', '0').transition().duration(1000).style('opacity', '1');
     }
 
   }

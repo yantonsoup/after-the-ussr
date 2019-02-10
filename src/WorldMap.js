@@ -1,4 +1,4 @@
-import { sovietCountryIsoCodes, colors, sovietLabelShift } from "./constants";
+import { sovietCountryIsoCodes, primaryReceivingIsoCodes, colors, sovietLabelShift } from "./constants";
 
 const rotate = -20; // so that [-60, 0] becomes initial center of projection
 const maxlat = 83;
@@ -53,6 +53,7 @@ export default class WorldMap {
 
     this.mapGraphic = svg.append("g").attr("id", "map");
 
+    // TODO: give russia a seperate handle from others
     this.mapGraphic
       .selectAll("path")
       .data(this.data)
@@ -62,7 +63,7 @@ export default class WorldMap {
       .style("stroke-width", 0.5 + "px")
       .attr("class", "country")
       .attr("id", function(d, i) {
-        return "country" + d.id;
+        return d.id;
       })
       .attr("class", function(datapoint, i) {
         if (sovietCountryIsoCodes.includes(datapoint.id)) {
@@ -85,6 +86,17 @@ export default class WorldMap {
 
     d3.select(this.element)
       .selectAll(section)
+      .transition()
+      .duration(duration)
+      .style(styles);
+  }
+
+  animateCISStyles({ duration, section, styles }) {
+    console.warn({ duration, section, styles });
+
+    d3.select(this.element)
+      .selectAll(section)
+      .filter(({id}) => id !== 'RUS')
       .transition()
       .duration(duration)
       .style(styles);
@@ -129,7 +141,7 @@ export default class WorldMap {
       .style("font-size", 3 + "px");
   }
 
-  // TODO: makethis an actual cloropleth funk
+  // TODO: makethis an actual choropleth funk
   createPopulationChoropleth() {
     d3.selectAll(".soviet-country")
       .transition()
@@ -217,13 +229,9 @@ export default class WorldMap {
   }
 
   drawCurves() {
-    const russiaCentroids = this.sovietDataPoints.filter(({id}) => id !== 'RUS').map(country => {
-      return this.path.centroid(country);
-    });
-    const centroidsWithValues = russiaCentroids.map((centroid, index) => ({
-      trade: index,
-      ...centroid,
-    }))
+    const centroidsWithValues = this.sovietDataPoints
+      .filter(({id}) => id !== 'RUS')
+      .map(country => this.path.centroid(country));
   
     // console.warn("centroidsWithValues", centroidsWithValues);
     const russiaCoordinates = [235, 110];
@@ -270,8 +278,78 @@ export default class WorldMap {
 
   animateWorldSections() {
     this.mapGraphic
-      .select('#countryISR')
+      .select('#ISR')
       .style('opacity', '1')
+      .style('fill', 'pink')
 
+    this.mapGraphic
+      .select('#DEU')
+      .style('opacity', '1')
+      .style('fill', 'green')
+
+    this.mapGraphic
+      .select('#USA')
+      .style('opacity', '1')
+      .style('fill', 'blue')
+
+    const russiaCoordinates = [235, 110];
+
+    const receivingCentroids = this.data
+      .filter(({id}) => primaryReceivingIsoCodes.includes(id))
+      .map(country => {
+        return {
+          id: country.id,
+          centroid: this.path.centroid(country)
+        }
+      });
+
+    const receivingArcs = this.mapGraphic
+      .append("g")
+      .selectAll("path.datamaps-arc")
+      .data(receivingCentroids);
+
+    const curveOffsets = [50, 15, 15]
+    // 0 => usa
+    // 1 => israel
+    // 2 => germany
+
+    receivingArcs
+      .enter()
+      .append("path")
+      .attr("class", "arc")
+      .attr("id", (fulldatum) => {
+        return 'arc-' + fulldatum.id
+      })
+      .attr("d", (fulldatum, index) => {
+        const datum = fulldatum.centroid 
+        console.warn('arc datum', datum)
+        console.warn('arc fulldatum', fulldatum)
+
+        const curveoffset = 45;
+        const origin = [datum[0], datum[1]]
+        const dest = russiaCoordinates;
+        const mid = [(origin[0] + dest[0]) / 2, (origin[1] + dest[1]) / 2];
+
+        //define handle points for Bezier curves. Higher values for curveoffset will generate more pronounced curves.
+        const midcurve = [mid[0] , mid[1] - curveOffsets[index]];
+
+        // move cursor to origin
+        // define the arrowpoint: the destination, minus a scaled tangent vector, minus an orthogonal vector scaled to the datum.trade variable
+     
+  
+        // move cursor to origin
+        return "M" + origin[0] + ',' + origin[1] 
+        // smooth curve to offset midpoint
+          + "S" + midcurve[0] + "," + midcurve[1]
+        //smooth curve to destination	
+          + "," + dest[0] + "," + dest[1]
+      })
+      .style('fill', 'none')
+      .style('stroke-width', '0.5px')
+      .style('stroke', '#7772a8')
+      .style('opacity', '0')
+      .transition()
+      .duration(1000)
+      .style('opacity', '1')
   }
 }

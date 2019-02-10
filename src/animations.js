@@ -103,16 +103,6 @@ function sixthAnimation (worldMap, barChart) {
     }
   }) 
   
-  /* this is the zoom for the germany etc stuff
-  const zoomParams = {
-    scale: 2,
-    duration: 1000,
-    translateX: (-Math.floor(worldMap.width * 0.2)),
-    translateY: -Math.floor(worldMap.height * 0.2),
-  }
-
-  worldMap.animateMapZoom(zoomParams)
-  */
  const zoomParams = {
   scale: 2,
   duration: 1000,
@@ -130,6 +120,16 @@ worldMap.animateMapZoom(zoomParams)
     }
   })
 
+
+  worldMap.animateCISStyles({ 
+    duration: 500, 
+    section: '.soviet-country', 
+    styles: { 
+      opacity: '0.5',
+    }
+  })
+      // fill: '#d0d0d0'
+
   const title = 'Russia Population 1989 - 2002'
   barChart.drawTitle(title)
   barChart.repaintChart(populationRussia1989to2002)
@@ -141,10 +141,10 @@ function seventhAnimation(worldMap, barChart) {
 
 function eightAnimation(worldMap, barChart) {
 
-  const title = 'Ethnic Groups Leaving Russia'
+  // const title = 'Ethnic Groups Leaving Russia'
 
-  barChart.drawTitle(title)
-  barChart.redrawBarsWith3DataPoints(migrationAbroadEthnicity1995to2002)
+  // barChart.drawTitle(title)
+  // barChart.redrawBarsWith3DataPoints(migrationAbroadEthnicity1995to2002)
 }
 
 
@@ -153,6 +153,57 @@ function ninthAnimation(worldMap, barChart) {
 
   barChart.drawTitle(title)
   barChart.redrawBarsWith3DataPoints(migrationAbroadDestination1995to2002)
+
+  const zoomParams = {
+    scale: 2,
+    duration: 1000,
+    translateX: (-Math.floor(worldMap.width * 0.2)),
+    translateY: -Math.floor(worldMap.height * 0.2),
+  }
+
+
+  worldMap.animateSectionStyles({ 
+    duration: 500, 
+    section: '.soviet-country', 
+    styles: { 
+      opacity: '1',
+      fill: '#d0d0d0',
+    }
+  })
+
+  worldMap.animateMapZoom(zoomParams)
+  worldMap.animateWorldSections(zoomParams)
+}
+
+
+function tenthAnimation(worldMap, barChart) {
+  // Zoom to Germany -> DONE
+  // hide other arcs
+  // animate bars? 
+  const zoomParams = {
+    scale: 4,
+    duration: 1000,
+    translateX: (-Math.floor(worldMap.width * 0.4)),
+    translateY: -Math.floor(worldMap.height * 0.2),
+  }
+
+  worldMap.animateMapZoom(zoomParams)
+
+  worldMap.animateSectionStyles({ 
+    duration: 1000, 
+    section: '.arc', 
+    styles: { 
+      opacity: '0',
+    }
+  })
+
+  worldMap.animateSectionStyles({ 
+    duration: 1000, 
+    section: '#arc-DEU', 
+    styles: { 
+      opacity: '1',
+    }
+  })
 }
 
 export default {
@@ -166,4 +217,5 @@ export default {
   7: seventhAnimation,
   8: eightAnimation,
   9: ninthAnimation,
+  10: tenthAnimation,
 };
