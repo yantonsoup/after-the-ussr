@@ -1922,7 +1922,7 @@
       section: '.soviet-country',
       styles: {
         opacity: '1',
-        fill: '#d0d0d0'
+        fill: '#fd8d3c'
       }
     });
     worldMap.animateMapZoom(zoomParams);
