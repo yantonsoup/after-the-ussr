@@ -1,7 +1,4 @@
-import {
-  sovietCountryIsoCodes,
-  colors,
-} from "./constants";
+import { sovietCountryIsoCodes, colors } from "./constants";
 
 export default class BarChart {
   constructor(opts) {
@@ -20,7 +17,6 @@ export default class BarChart {
     const scrollContainer = d3.select(".scroll");
     const boundingBox = scrollContainer.node().getBoundingClientRect();
     const { width } = boundingBox;
-    const headerText = "1989 CIS State Populations"
 
     this.barMargin = {
       top: 15,
@@ -34,13 +30,14 @@ export default class BarChart {
 
     this.paintPlot(this.width, this.height, this.barMargin);
 
-    // we'll actually be appending to a <g> element
-    this.drawTitle(headerText);
+    const headerText = "1989 Soviet State Populations";
+
+    this.drawTitle(headerText, "mil");
 
     // create the other stuff
     this.setXScale(this.data);
     this.setYScale(this.data);
-    
+
     this.bindDataToBars(this.data);
     this.paintHiddenBars();
     this.addYAxes();
@@ -50,25 +47,25 @@ export default class BarChart {
 
   paintPlot(width, height, margins) {
     this.plot = d3
-    .select(".bar-graphic")
-    .append("svg")
-    .attr("width", width + margins.left + margins.right)
-    .attr("height", height + margins.top + margins.bottom)
-    .append("g")
-    .attr(
-      "transform",
-      "translate(" + margins.left + "," + margins.top + ")"
-    )
+      .select(".bar-graphic")
+      .append("svg")
+      .attr("width", width + margins.left + margins.right)
+      .attr("height", height + margins.top + margins.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
   }
 
   hideAllElements() {
     this.plot.style("opacity", "0");
-    this.textHeader.style("opacity", "0");
+    d3.select(".bar-graphic-header").style("opacity", "0");
   }
 
-  drawTitle(text) {
-    this.textHeader = d3.select(".bar-graphic-header")
-    this.textHeader.text(text)
+  drawTitle(text, units) {
+    this.textHeader = d3.select(".bar-graphic-header-text");
+    this.textHeader.text(text);
+
+    this.textHeaderUnits = d3.select(".bar-graphic-header-units");
+    this.textHeaderUnits.text(units);
   }
 
   paintHiddenBars() {
@@ -79,7 +76,7 @@ export default class BarChart {
         return this.yScale(d.name);
       })
       .attr("height", () => this.yScale.rangeBand())
-      .attr("fill", (d, i) => colors[i])
+      .attr("fill", (d, i) => colors[i]);
   }
 
   setXScale(data) {
@@ -121,15 +118,13 @@ export default class BarChart {
 
   redrawYAxes(data) {
     const yAxisStuff = d3.svg
-    .axis()
-    .scale(this.yScale)
-    //no tick marks
-    .tickSize(0)
-    .orient("left");
-  
-    this.plot
-      .select(".y-axis")
-      .call(yAxisStuff);
+      .axis()
+      .scale(this.yScale)
+      //no tick marks
+      .tickSize(0)
+      .orient("left");
+
+    this.plot.select(".y-axis").call(yAxisStuff);
 
     // .call(yAxisStuff)
   }
@@ -140,39 +135,33 @@ export default class BarChart {
     this.bindDataToBars(data);
     this.redrawBars(data);
     this.redrawLabels(data);
-    this.redrawYAxes(data)
+    this.redrawYAxes(data);
   }
 
   paintPercentageChart(data) {
     this.xScale = d3.scale
-    .linear()
-    .range([0, this.width])
-    .domain([
-      0,
-      100
-    ]);
+      .linear()
+      .range([0, this.width])
+      .domain([0, 100]);
 
     this.setYScale(data);
     this.bindDataToBars(data);
     this.redrawBars(data);
     this.redrawPercentLabels(data);
-    this.redrawYAxes(data)
+    this.redrawYAxes(data);
   }
 
   redrawBarsWith3DataPoints(data) {
     this.xScale = d3.scale
-    .linear()
-    .range([0, this.width])
-    .domain([
-      0,
-      100
-    ]);
-    
+      .linear()
+      .range([0, this.width])
+      .domain([0, 100]);
+
     this.setYScale(data);
     this.bindDataToBars(data);
     this.redrawBars(data);
     this.redrawPercentLabels(data);
-    this.redrawYAxes(data)
+    this.redrawYAxes(data);
   }
 
   bindDataToBars(data) {
@@ -217,15 +206,13 @@ export default class BarChart {
       })
       .attr("dx", ".75em")
       .text(function(datum) {
-        return datum.population + '%';
+        return datum.population + "%";
       })
       .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
   }
 
   redrawLabels(data) {
-    this.plot
-      .selectAll(".label")
-      .remove()
+    this.plot.selectAll(".label").remove();
 
     this.plot
       .select("g")
@@ -242,8 +229,10 @@ export default class BarChart {
       })
       .attr("dx", ".75em")
       .text(function(datum) {
-        return parsePopulationText(datum);
+        return parseMillionsPopulationText(datum);
       })
+      .style("fill", "lightgoldenrodyellow")
+      .style("font-weight", 600)
       .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
   }
 
@@ -265,7 +254,7 @@ export default class BarChart {
       .delay(500)
       .style("opacity", "1");
 
-    this.textHeader
+    d3.select(".bar-graphic-header")
       .transition()
       .delay(500)
       .style("opacity", "1")
@@ -273,9 +262,15 @@ export default class BarChart {
   }
 }
 
+function parseMillionsPopulationText(datum) {
+  const populationText = datum.population.toFixed(1);
+
+  return `${populationText}`;
+}
+
 function parsePopulationText(datum) {
   const { population, name } = datum;
-  const populationText = (population/1000000).toFixed(2) + 'm';
+  const populationText = (population / 1000000).toFixed(2);
 
-  return populationText
+  return populationText;
 }

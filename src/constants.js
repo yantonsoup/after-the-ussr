@@ -58,22 +58,39 @@ export const sovietLabelShift = {
 };
 
 // Step 2
-export const populationsIn1989 = [
-  { name: "ARM", population: 3031000	 },
-  { name: "AZE", population: 6028000 },
-  { name: "BLR", population: 9560000 },
-  { name: "EST", population: 1466000	 },
-  { name: "GEO", population: 5015000 },
-  { name: "KAZ", population: 16536511 },
-  { name: "KGZ", population: 3529000 },
-  { name: "LVA", population: 2521000 },
-  { name: "LTU", population: 3398000 },
-  { name: "MDA", population: 3947000 },
-  { name: "TJK", population: 3801000 },
-  { name: "TKM", population: 2759000 },
-  { name: "UKR", population: 51706742 },
-  { name: "UZB", population: 19905158 }
+export const populationsIn1989millions = [
+  { name: "ARM", population: 3	 },
+  { name: "AZE", population: 6 },
+  { name: "BLR", population: 9.6 },
+  { name: "EST", population: 14.7	 },
+  { name: "GEO", population: 5 },
+  { name: "KAZ", population: 16.5 },
+  { name: "KGZ", population: 3.5 },
+  { name: "LVA", population: 2.5 },
+  { name: "LTU", population: 3.4 },
+  { name: "MDA", population: 4 },
+  { name: "TJK", population: 3.8 },
+  { name: "TKM", population: 2.8 },
+  { name: "UKR", population: 51.7 },
+  { name: "UZB", population: 19.9 }
 ];
+
+// export const populationsIn1989 = [
+//   { name: "ARM", population: 3031000	 },
+//   { name: "AZE", population: 6028000 },
+//   { name: "BLR", population: 9560000 },
+//   { name: "EST", population: 1466000	 },
+//   { name: "GEO", population: 5015000 },
+//   { name: "KAZ", population: 16536511 },
+//   { name: "KGZ", population: 3529000 },
+//   { name: "LVA", population: 2521000 },
+//   { name: "LTU", population: 3398000 },
+//   { name: "MDA", population: 3947000 },
+//   { name: "TJK", population: 3801000 },
+//   { name: "TKM", population: 2759000 },
+//   { name: "UKR", population: 51706742 },
+//   { name: "UZB", population: 19905158 }
+// ];
 
 // Step 3
 // in thousands

@@ -1500,49 +1500,65 @@
     }
   }; // Step 2
 
-  const populationsIn1989 = [{
+  const populationsIn1989millions = [{
     name: "ARM",
-    population: 3031000
+    population: 3
   }, {
     name: "AZE",
-    population: 6028000
+    population: 6
   }, {
     name: "BLR",
-    population: 9560000
+    population: 9.6
   }, {
     name: "EST",
-    population: 1466000
+    population: 14.7
   }, {
     name: "GEO",
-    population: 5015000
+    population: 5
   }, {
     name: "KAZ",
-    population: 16536511
+    population: 16.5
   }, {
     name: "KGZ",
-    population: 3529000
+    population: 3.5
   }, {
     name: "LVA",
-    population: 2521000
+    population: 2.5
   }, {
     name: "LTU",
-    population: 3398000
+    population: 3.4
   }, {
     name: "MDA",
-    population: 3947000
+    population: 4
   }, {
     name: "TJK",
-    population: 3801000
+    population: 3.8
   }, {
     name: "TKM",
-    population: 2759000
+    population: 2.8
   }, {
     name: "UKR",
-    population: 51706742
+    population: 51.7
   }, {
     name: "UZB",
-    population: 19905158
-  }]; // Step 3
+    population: 19.9
+  }]; // export const populationsIn1989 = [
+  //   { name: "ARM", population: 3031000	 },
+  //   { name: "AZE", population: 6028000 },
+  //   { name: "BLR", population: 9560000 },
+  //   { name: "EST", population: 1466000	 },
+  //   { name: "GEO", population: 5015000 },
+  //   { name: "KAZ", population: 16536511 },
+  //   { name: "KGZ", population: 3529000 },
+  //   { name: "LVA", population: 2521000 },
+  //   { name: "LTU", population: 3398000 },
+  //   { name: "MDA", population: 3947000 },
+  //   { name: "TJK", population: 3801000 },
+  //   { name: "TKM", population: 2759000 },
+  //   { name: "UKR", population: 51706742 },
+  //   { name: "UZB", population: 19905158 }
+  // ];
+  // Step 3
   // in thousands
 
   const netMigrantsToRussia1989to2002 = [{
@@ -1826,15 +1842,15 @@
       top: 0
     });
     barChart.revealBarChart();
-    barChart.redrawBars(populationsIn1989);
-    barChart.addPopulationLabels(populationsIn1989);
+    barChart.redrawBars(populationsIn1989millions);
+    barChart.addPopulationLabels(populationsIn1989millions);
   }
 
   function thirdAnimation(worldMap, barChart) {
     worldMap.addPointsToMap();
     worldMap.drawCurves();
-    const title = 'Net Migration into Russia 1989-2002';
-    barChart.drawTitle(title);
+    const title = 'Net Migration to Russia \'89-\'02';
+    barChart.drawTitle(title, 'mil');
     barChart.repaintChart(netMigrantsToRussia1989to2002); // worldMap.drawLabelPointer()
   }
 
@@ -2315,7 +2331,6 @@
       const {
         width
       } = boundingBox;
-      const headerText = "1989 CIS State Populations";
       this.barMargin = {
         top: 15,
         right: 85,
@@ -2324,9 +2339,9 @@
       };
       this.width = width - this.barMargin.left - this.barMargin.right;
       this.height = width - this.barMargin.top - this.barMargin.bottom;
-      this.paintPlot(this.width, this.height, this.barMargin); // we'll actually be appending to a <g> element
-
-      this.drawTitle(headerText); // create the other stuff
+      this.paintPlot(this.width, this.height, this.barMargin);
+      const headerText = "1989 Soviet State Populations";
+      this.drawTitle(headerText, "mil"); // create the other stuff
 
       this.setXScale(this.data);
       this.setYScale(this.data);
@@ -2342,12 +2357,14 @@
 
     hideAllElements() {
       this.plot.style("opacity", "0");
-      this.textHeader.style("opacity", "0");
+      d3.select(".bar-graphic-header").style("opacity", "0");
     }
 
-    drawTitle(text) {
-      this.textHeader = d3.select(".bar-graphic-header");
+    drawTitle(text, units) {
+      this.textHeader = d3.select(".bar-graphic-header-text");
       this.textHeader.text(text);
+      this.textHeaderUnits = d3.select(".bar-graphic-header-units");
+      this.textHeaderUnits.text(units);
     }
 
     paintHiddenBars() {
@@ -2426,7 +2443,7 @@
       }).attr("x", d => {
         return this.xScale(d.population);
       }).attr("dx", ".75em").text(function (datum) {
-        return datum.population + '%';
+        return datum.population + "%";
       }).attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
     }
 
@@ -2437,8 +2454,8 @@
       }).attr("x", d => {
         return this.xScale(d.population);
       }).attr("dx", ".75em").text(function (datum) {
-        return parsePopulationText(datum);
-      }).attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
+        return parseMillionsPopulationText(datum);
+      }).style("fill", "lightgoldenrodyellow").style("font-weight", 600).attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
     }
 
     addPopulationLabels(data) {
@@ -2448,18 +2465,14 @@
 
     revealBarChart() {
       this.plot.transition().delay(500).style("opacity", "1");
-      this.textHeader.transition().delay(500).style("opacity", "1").style("color", "black");
+      d3.select(".bar-graphic-header").transition().delay(500).style("opacity", "1").style("color", "black");
     }
 
   }
 
-  function parsePopulationText(datum) {
-    const {
-      population,
-      name
-    } = datum;
-    const populationText = (population / 1000000).toFixed(2) + 'm';
-    return populationText;
+  function parseMillionsPopulationText(datum) {
+    const populationText = datum.population.toFixed(1);
+    return `${populationText}`;
   }
 
   // logs will still point to your original source modules
@@ -2480,7 +2493,7 @@
     });
     const barChart = new BarChart({
       element: '.bar-graphic',
-      data: populationsIn1989
+      data: populationsIn1989millions
     });
     console.warn('features', features);
     setupScrollama(worldMap, barChart);

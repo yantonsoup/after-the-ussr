@@ -4,7 +4,7 @@ import loadMap from "./loadMap";
 import WorldMap from './WorldMap.js'
 import BarChart from './BarChart.js'
 import {
-  populationsIn1989,
+  populationsIn1989millions,
 } from "./constants";
 
 // even though Rollup is bundling all your files together, errors and
@@ -30,7 +30,7 @@ loadMap().then(json => {
 
   const barChart = new BarChart({
     element: '.bar-graphic',
-    data: populationsIn1989
+    data: populationsIn1989millions
   })
 
   console.warn('features', features);

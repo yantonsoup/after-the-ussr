@@ -59,8 +59,9 @@ a:hover {
   top: 0;
 }
 
-.smaller-header {
-  
+.emph {
+  font-weight: 600;
+  background-color: #ffec97;
 }
 
 .ussr-svg {
@@ -246,6 +247,10 @@ font-size: 1rem; */
   padding: 4px 0;
   text-align: center;
   color: black;
+}
+
+.bar-graphic-header-units {
+  color: lightgoldenrodyellow
 }
 
 .data-bar-container {
