@@ -1891,10 +1891,10 @@
       duration: 500,
       section: '.soviet-country',
       styles: {
-        opacity: '0.5'
+        opacity: '0.25',
+        fill: '#d0d0d0'
       }
-    }); // fill: '#d0d0d0'
-
+    });
     const title = 'Russia Population 1989 - 2002';
     barChart.drawTitle(title);
     barChart.repaintChart(populationRussia1989to2002);
@@ -1956,6 +1956,25 @@
     });
   }
 
+  function eleventhAnimation(worldMap, barChart) {}
+
+  function twelfthAnimation(worldMap, barChart) {
+    worldMap.animateSectionStyles({
+      duration: 1000,
+      section: '#arc-DEU',
+      styles: {
+        opacity: '0'
+      }
+    });
+    worldMap.animateSectionStyles({
+      duration: 1000,
+      section: '#arc-ISR',
+      styles: {
+        opacity: '1'
+      }
+    });
+  }
+
   var animations = {
     0: zeroAnimation,
     1: firstAnimation,
@@ -1967,7 +1986,9 @@
     7: seventhAnimation,
     8: eightAnimation,
     9: ninthAnimation,
-    10: tenthAnimation
+    10: tenthAnimation,
+    11: eleventhAnimation,
+    12: twelfthAnimation
   };
 
   function setupScrollama(worldMap, barChart) {
@@ -2076,6 +2097,20 @@
           return "country soviet-country";
         } else {
           return "country non-soviet-country";
+        }
+      });
+      this.applyInitialHideAndHighlight();
+    }
+
+    applyInitialHideAndHighlight() {
+      this.mapGraphic.selectAll('.country').style("display", function (datum) {
+        if (datum.id === 'ATA') {
+          console.warn('ATA');
+          return 'none';
+        }
+      }).style('fill', datum => {
+        if (sovietCountryIsoCodes.includes(datum.id)) {
+          return "#fcd116";
         }
       });
     }

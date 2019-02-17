@@ -71,7 +71,26 @@ export default class WorldMap {
         } else {
           return "country non-soviet-country";
         }
-      });
+      })
+
+    this.applyInitialHideAndHighlight()
+  }
+
+  applyInitialHideAndHighlight() {
+    this.mapGraphic
+      .selectAll('.country')
+      .style("display", function(datum) {
+        if (datum.id === 'ATA') {
+          console.warn('ATA')
+          return 'none'
+        }
+      })
+      .style('fill', (datum) => {
+        if (sovietCountryIsoCodes.includes(datum.id)) {
+          return "#fcd116";
+        } 
+      })
+
   }
 
   getInitialScale() {

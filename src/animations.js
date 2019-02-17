@@ -125,10 +125,11 @@ worldMap.animateMapZoom(zoomParams)
     duration: 500, 
     section: '.soviet-country', 
     styles: { 
-      opacity: '0.5',
+      opacity: '0.25',
+      fill: '#d0d0d0'
     }
   })
-      // fill: '#d0d0d0'
+      
 
   const title = 'Russia Population 1989 - 2002'
   barChart.drawTitle(title)
@@ -206,6 +207,32 @@ function tenthAnimation(worldMap, barChart) {
   })
 }
 
+function eleventhAnimation(worldMap, barChart) {
+
+}
+
+
+function twelfthAnimation(worldMap, barChart) {
+
+  worldMap.animateSectionStyles({ 
+    duration: 1000, 
+    section: '#arc-DEU', 
+    styles: { 
+      opacity: '0',
+    }
+  })
+
+
+  worldMap.animateSectionStyles({ 
+    duration: 1000, 
+    section: '#arc-ISR', 
+    styles: { 
+      opacity: '1',
+    }
+  })
+
+}
+
 export default {
   0: zeroAnimation,
   1: firstAnimation,
@@ -218,4 +245,6 @@ export default {
   8: eightAnimation,
   9: ninthAnimation,
   10: tenthAnimation,
+  11: eleventhAnimation,
+  12: twelfthAnimation,
 };
