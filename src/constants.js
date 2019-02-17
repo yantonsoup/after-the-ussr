@@ -61,18 +61,18 @@ export const sovietLabelShift = {
 export const populationsIn1989millions = [
   { name: "ARM", population: 3	 },
   { name: "AZE", population: 6 },
-  { name: "BLR", population: 9.6 },
-  { name: "EST", population: 14.7	 },
+  { name: "BLR", population: 10 },
+  { name: "EST", population: 15	 },
   { name: "GEO", population: 5 },
-  { name: "KAZ", population: 16.5 },
-  { name: "KGZ", population: 3.5 },
-  { name: "LVA", population: 2.5 },
-  { name: "LTU", population: 3.4 },
+  { name: "KAZ", population: 17 },
+  { name: "KGZ", population: 4 },
+  { name: "LVA", population: 3 },
+  { name: "LTU", population: 3 },
   { name: "MDA", population: 4 },
-  { name: "TJK", population: 3.8 },
-  { name: "TKM", population: 2.8 },
-  { name: "UKR", population: 51.7 },
-  { name: "UZB", population: 19.9 }
+  { name: "TJK", population: 4 },
+  { name: "TKM", population: 3 },
+  { name: "UKR", population: 52 },
+  { name: "UZB", population: 20 }
 ];
 
 // export const populationsIn1989 = [

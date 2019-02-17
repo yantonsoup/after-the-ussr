@@ -1508,40 +1508,40 @@
     population: 6
   }, {
     name: "BLR",
-    population: 9.6
+    population: 10
   }, {
     name: "EST",
-    population: 14.7
+    population: 15
   }, {
     name: "GEO",
     population: 5
   }, {
     name: "KAZ",
-    population: 16.5
+    population: 17
   }, {
     name: "KGZ",
-    population: 3.5
+    population: 4
   }, {
     name: "LVA",
-    population: 2.5
+    population: 3
   }, {
     name: "LTU",
-    population: 3.4
+    population: 3
   }, {
     name: "MDA",
     population: 4
   }, {
     name: "TJK",
-    population: 3.8
+    population: 4
   }, {
     name: "TKM",
-    population: 2.8
+    population: 3
   }, {
     name: "UKR",
-    population: 51.7
+    population: 52
   }, {
     name: "UZB",
-    population: 19.9
+    population: 20
   }]; // export const populationsIn1989 = [
   //   { name: "ARM", population: 3031000	 },
   //   { name: "AZE", population: 6028000 },
