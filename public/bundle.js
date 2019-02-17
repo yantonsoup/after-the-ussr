@@ -1508,40 +1508,40 @@
     population: 6
   }, {
     name: "BLR",
-    population: 10
+    population: 9.6
   }, {
     name: "EST",
-    population: 15
+    population: 14.7
   }, {
     name: "GEO",
     population: 5
   }, {
     name: "KAZ",
-    population: 17
+    population: 16.5
   }, {
     name: "KGZ",
-    population: 4
+    population: 3.5
   }, {
     name: "LVA",
-    population: 3
+    population: 2.5
   }, {
     name: "LTU",
-    population: 3
+    population: 3.4
   }, {
     name: "MDA",
     population: 4
   }, {
     name: "TJK",
-    population: 4
+    population: 3.8
   }, {
     name: "TKM",
-    population: 3
+    population: 2.8
   }, {
     name: "UKR",
-    population: 52
+    population: 51.7
   }, {
     name: "UZB",
-    population: 20
+    population: 19.9
   }]; // export const populationsIn1989 = [
   //   { name: "ARM", population: 3031000	 },
   //   { name: "AZE", population: 6028000 },
@@ -1563,46 +1563,46 @@
 
   const netMigrantsToRussia1989to2002 = [{
     name: "ARM",
-    population: 34000
+    population: 34
   }, {
     name: "AZE",
-    population: 195000
+    population: 195
   }, {
     name: "BLR",
-    population: 10000
+    population: 10
   }, {
     name: "EST",
-    population: 59000
+    population: 59
   }, {
     name: "GEO",
-    population: 162000
+    population: 162
   }, {
     name: "KAZ",
-    population: 1255000
+    population: 125
   }, {
     name: "KGZ",
-    population: 244000
+    population: 244
   }, {
     name: "LVA",
-    population: 96000
+    population: 96
   }, {
     name: "LTU",
-    population: 46000
+    population: 46
   }, {
     name: "MDA",
-    population: 65000
+    population: 65
   }, {
     name: "TJK",
-    population: 232000
+    population: 232
   }, {
     name: "TKM",
-    population: 98000
+    population: 98
   }, {
     name: "UKR",
-    population: 3341000
+    population: 3341
   }, {
     name: "UZB",
-    population: 496000
+    population: 496
   }]; // Step 4
   // in thousands
 
@@ -1850,12 +1850,12 @@
     worldMap.addPointsToMap();
     worldMap.drawCurves();
     const title = 'Net Migration to Russia \'89-\'02';
-    barChart.drawTitle(title, 'mil');
+    barChart.drawTitle(title, 'thou');
     barChart.repaintChart(netMigrantsToRussia1989to2002); // worldMap.drawLabelPointer()
   }
 
   function fourthAnimation(worldMap, barChart) {
-    const title = 'Migration as % of Russians per state';
+    const title = 'Migration as % of Russians Per State';
     barChart.drawTitle(title);
     barChart.paintPercentageChart(percentMigrantsToRussia1989to2002);
   }
@@ -2388,7 +2388,11 @@
     addYAxes() {
       const yAxisStuff = d3.svg.axis().scale(this.yScale) //no tick marks
       .tickSize(0).orient("left");
-      this.plot.append("g").attr("class", "y-axis").call(yAxisStuff);
+      this.plot.append("g").attr("class", "y-axis").call(yAxisStuff); // this.plot
+      //   .select('.y-axis')
+      //   .selectAll('.tick')
+      //   .selectAll('text')
+      //   .attr('dx', '1em')
     }
 
     redrawYAxes(data) {
@@ -2471,7 +2475,7 @@
   }
 
   function parseMillionsPopulationText(datum) {
-    const populationText = datum.population.toFixed(1);
+    const populationText = datum.population;
     return `${populationText}`;
   }
 

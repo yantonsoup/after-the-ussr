@@ -57,13 +57,13 @@ function thirdAnimation(worldMap, barChart) {
   worldMap.drawCurves()
 
   const title = 'Net Migration to Russia \'89-\'02'
-  barChart.drawTitle(title, 'mil')
+  barChart.drawTitle(title, 'thou')
   barChart.repaintChart(netMigrantsToRussia1989to2002)
   // worldMap.drawLabelPointer()
 }
 
 function fourthAnimation(worldMap, barChart) {
-  const title = 'Migration as % of Russians per state'
+  const title = 'Migration as % of Russians Per State'
   barChart.drawTitle(title)
   barChart.paintPercentageChart(percentMigrantsToRussia1989to2002)
 }

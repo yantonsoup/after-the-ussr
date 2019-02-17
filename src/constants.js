@@ -61,18 +61,18 @@ export const sovietLabelShift = {
 export const populationsIn1989millions = [
   { name: "ARM", population: 3	 },
   { name: "AZE", population: 6 },
-  { name: "BLR", population: 10 },
-  { name: "EST", population: 15	 },
+  { name: "BLR", population: 9.6 },
+  { name: "EST", population: 14.7	 },
   { name: "GEO", population: 5 },
-  { name: "KAZ", population: 17 },
-  { name: "KGZ", population: 4 },
-  { name: "LVA", population: 3 },
-  { name: "LTU", population: 3 },
+  { name: "KAZ", population: 16.5 },
+  { name: "KGZ", population: 3.5 },
+  { name: "LVA", population: 2.5 },
+  { name: "LTU", population: 3.4 },
   { name: "MDA", population: 4 },
-  { name: "TJK", population: 4 },
-  { name: "TKM", population: 3 },
-  { name: "UKR", population: 52 },
-  { name: "UZB", population: 20 }
+  { name: "TJK", population: 3.8 },
+  { name: "TKM", population: 2.8 },
+  { name: "UKR", population: 51.7 },
+  { name: "UZB", population: 19.9 }
 ];
 
 // export const populationsIn1989 = [
@@ -95,20 +95,20 @@ export const populationsIn1989millions = [
 // Step 3
 // in thousands
 export  const netMigrantsToRussia1989to2002 = [
-  { name: "ARM", population: 34000 },
-  { name: "AZE", population: 195000 },
-  { name: "BLR", population: 10000 },
-  { name: "EST", population: 59000 },
-  { name: "GEO", population: 162000 },
-  { name: "KAZ", population: 1255000 },
-  { name: "KGZ", population: 244000 },
-  { name: "LVA", population: 96000 },
-  { name: "LTU", population: 46000 },
-  { name: "MDA", population: 65000 },
-  { name: "TJK", population: 232000 },
-  { name: "TKM", population: 98000 },
-  { name: "UKR", population: 3341000 },
-  { name: "UZB", population: 496000 }
+  { name: "ARM", population: 34 },
+  { name: "AZE", population: 195 },
+  { name: "BLR", population: 10 },
+  { name: "EST", population: 59 },
+  { name: "GEO", population: 162 },
+  { name: "KAZ", population: 125 },
+  { name: "KGZ", population: 244 },
+  { name: "LVA", population: 96 },
+  { name: "LTU", population: 46 },
+  { name: "MDA", population: 65 },
+  { name: "TJK", population: 232 },
+  { name: "TKM", population: 98 },
+  { name: "UKR", population: 3341 },
+  { name: "UZB", population: 496 }
 ];
 
 // Step 4

@@ -114,6 +114,12 @@ export default class BarChart {
       .append("g")
       .attr("class", "y-axis")
       .call(yAxisStuff);
+
+    // this.plot
+    //   .select('.y-axis')
+    //   .selectAll('.tick')
+    //   .selectAll('text')
+    //   .attr('dx', '1em')
   }
 
   redrawYAxes(data) {
@@ -263,7 +269,7 @@ export default class BarChart {
 }
 
 function parseMillionsPopulationText(datum) {
-  const populationText = datum.population.toFixed(1);
+  const populationText = datum.population;
 
   return `${populationText}`;
 }
