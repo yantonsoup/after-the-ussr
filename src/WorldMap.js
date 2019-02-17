@@ -81,12 +81,13 @@ export default class WorldMap {
     return scaleExtent[0]
   }
 
-  animateSectionStyles({ duration, section, styles }) {
+  animateSectionStyles({ duration, section, styles, delay = 0 } = {}) {
     console.warn({ duration, section, styles });
 
     d3.select(this.element)
       .selectAll(section)
       .transition()
+      .delay(delay)
       .duration(duration)
       .style(styles);
   }

@@ -2090,14 +2090,15 @@
     animateSectionStyles({
       duration,
       section,
-      styles
-    }) {
+      styles,
+      delay = 0
+    } = {}) {
       console.warn({
         duration,
         section,
         styles
       });
-      d3.select(this.element).selectAll(section).transition().duration(duration).style(styles);
+      d3.select(this.element).selectAll(section).transition().delay(delay).duration(duration).style(styles);
     }
 
     animateCISStyles({
