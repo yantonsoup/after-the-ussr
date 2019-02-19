@@ -75,6 +75,23 @@ export const populationsIn1989millions = [
   { name: "UZB", population: 19.9 }
 ];
 
+export const russianPopulationsIn1989thousands = [
+  { name: "ARM", population: 52	 },
+  { name: "AZE", population: 392 },
+  { name: "BLR", population: 1342 },
+  { name: "EST", population: 475	 },
+  { name: "GEO", population: 341 },
+  { name: "KAZ", population: 6228 },
+  { name: "KGZ", population: 917 },
+  { name: "LVA", population: 906 },
+  { name: "LTU", population: 345 },
+  { name: "MDA", population: 562 },
+  { name: "TJK", population: 389 },
+  { name: "TKM", population: 334 },
+  { name: "UKR", population: 11356 },
+  { name: "UZB", population: 1654 }
+];
+
 // export const populationsIn1989 = [
 //   { name: "ARM", population: 3031000	 },
 //   { name: "AZE", population: 6028000 },

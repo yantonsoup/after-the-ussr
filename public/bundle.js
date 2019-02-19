@@ -1542,6 +1542,49 @@
   }, {
     name: "UZB",
     population: 19.9
+  }];
+  const russianPopulationsIn1989thousands = [{
+    name: "ARM",
+    population: 52
+  }, {
+    name: "AZE",
+    population: 392
+  }, {
+    name: "BLR",
+    population: 1342
+  }, {
+    name: "EST",
+    population: 475
+  }, {
+    name: "GEO",
+    population: 341
+  }, {
+    name: "KAZ",
+    population: 6228
+  }, {
+    name: "KGZ",
+    population: 917
+  }, {
+    name: "LVA",
+    population: 906
+  }, {
+    name: "LTU",
+    population: 345
+  }, {
+    name: "MDA",
+    population: 562
+  }, {
+    name: "TJK",
+    population: 389
+  }, {
+    name: "TKM",
+    population: 334
+  }, {
+    name: "UKR",
+    population: 11356
+  }, {
+    name: "UZB",
+    population: 1654
   }]; // export const populationsIn1989 = [
   //   { name: "ARM", population: 3031000	 },
   //   { name: "AZE", population: 6028000 },
@@ -1604,96 +1647,6 @@
     name: "UZB",
     population: 496
   }]; // Step 4
-  // in thousands
-
-  const percentMigrantsToRussia1989to2002 = [{
-    name: "ARM",
-    population: 66
-  }, {
-    name: "AZE",
-    population: 49.8
-  }, {
-    name: "BLR",
-    population: 0.7
-  }, {
-    name: "EST",
-    population: 12.4
-  }, {
-    name: "GEO",
-    population: 47.5
-  }, {
-    name: "KAZ",
-    population: 20.1
-  }, {
-    name: "KGZ",
-    population: 26.7
-  }, {
-    name: "LVA",
-    population: 10.6
-  }, {
-    name: "LTU",
-    population: 13.5
-  }, {
-    name: "MDA",
-    population: 11.5
-  }, {
-    name: "TJK",
-    population: 59.8
-  }, {
-    name: "TKM",
-    population: 29.4
-  }, {
-    name: "UKR",
-    population: 3.1
-  }, {
-    name: "UZB",
-    population: 30
-  }]; // Step 6
-  // in thousands
-
-  const populationRussia1989to2002 = [{
-    name: "1989",
-    population: 147386000
-  }, {
-    name: "1990",
-    population: 148040700
-  }, {
-    name: "1991",
-    population: 148689000
-  }, {
-    name: "1992",
-    population: 148704300
-  }, {
-    name: "1993",
-    population: 148673000
-  }, {
-    name: "1994",
-    population: 148366000
-  }, {
-    name: "1995",
-    population: 148249000
-  }, {
-    name: "1996",
-    population: 147739000
-  }, {
-    name: "1997",
-    population: 147307000
-  }, {
-    name: "1998",
-    population: 146909000
-  }, {
-    name: "1999",
-    population: 146200000
-  }, {
-    name: "2000",
-    population: 146001200
-  }, {
-    name: "2001",
-    population: 145470000
-  }, {
-    name: "2002",
-    population: 145166731
-  }]; // Step 9
   const migrationAbroadDestination1995to2002 = [{
     name: 'a',
     population: 0
@@ -1847,27 +1800,21 @@
   }
 
   function thirdAnimation(worldMap, barChart) {
-    worldMap.addPointsToMap();
-    worldMap.drawCurves();
-    const title = 'Net Migration to Russia \'89-\'02';
+    const title = 'Russians Populations 1989';
     barChart.drawTitle(title, 'thou');
-    barChart.repaintChart(netMigrantsToRussia1989to2002); // worldMap.drawLabelPointer()
+    barChart.repaintChart(russianPopulationsIn1989thousands);
   }
 
   function fourthAnimation(worldMap, barChart) {
-    const title = 'Migration as % of Russians Per State';
-    barChart.drawTitle(title);
-    barChart.paintPercentageChart(percentMigrantsToRussia1989to2002);
+    worldMap.addPointsToMap();
+    worldMap.drawCurves(); // worldMap.drawLabelPointer()
+
+    const title = 'Net Migration to Russia \'89-\'02';
+    barChart.drawTitle(title, 'thou');
+    barChart.repaintChart(netMigrantsToRussia1989to2002);
   }
 
-  function fifthAnimation(worldMap, barChart) {}
-
-  function sixthAnimation(worldMap, barChart) {
-    // worldMap.moveMapContainer({
-    //   duration: 1000,
-    //   top: graphicMarginTop
-    // })
-    // barChart.hideAllElements()
+  function fifthAnimation(worldMap, barChart) {
     worldMap.animateSectionStyles({
       duration: 500,
       section: '.arc',
@@ -1882,6 +1829,15 @@
         opacity: '0'
       }
     });
+    barChart.hideAllElements();
+    const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
+    worldMap.moveMapContainer({
+      duration: 1000,
+      top: graphicMarginTop
+    });
+  }
+
+  function sixthAnimation(worldMap, barChart) {
     worldMap.animateSectionStyles({
       duration: 500,
       section: '.place-label',
@@ -1910,20 +1866,12 @@
         opacity: '0.25',
         fill: '#d0d0d0'
       }
-    });
-    const title = 'Russia Population 1989 - 2002';
-    barChart.drawTitle(title);
-    barChart.repaintChart(populationRussia1989to2002);
-  }
-
-  function seventhAnimation(worldMap, barChart) {}
-
-  function eightAnimation(worldMap, barChart) {// const title = 'Ethnic Groups Leaving Russia'
+    }); // const title = 'Russia Population 1989 - 2002'
     // barChart.drawTitle(title)
-    // barChart.redrawBarsWith3DataPoints(migrationAbroadEthnicity1995to2002)
+    // barChart.repaintChart(populationRussia1989to2002)
   }
 
-  function ninthAnimation(worldMap, barChart) {
+  function seventhAnimation(worldMap, barChart) {
     const title = 'Top Destinations For FSU Immigrants';
     barChart.drawTitle(title);
     barChart.redrawBarsWith3DataPoints(migrationAbroadDestination1995to2002);
@@ -1933,22 +1881,19 @@
       translateX: -Math.floor(worldMap.width * 0.2),
       translateY: -Math.floor(worldMap.height * 0.2)
     };
+    worldMap.animateMapZoom(zoomParams);
     worldMap.animateSectionStyles({
       duration: 500,
       section: '.soviet-country',
       styles: {
         opacity: '1',
-        fill: '#fd8d3c'
+        fill: '#fcd116'
       }
     });
-    worldMap.animateMapZoom(zoomParams);
     worldMap.animateWorldSections(zoomParams);
   }
 
-  function tenthAnimation(worldMap, barChart) {
-    // Zoom to Germany -> DONE
-    // hide other arcs
-    // animate bars? 
+  function eightAnimation(worldMap, barChart) {
     const zoomParams = {
       scale: 4,
       duration: 1000,
@@ -1972,9 +1917,7 @@
     });
   }
 
-  function eleventhAnimation(worldMap, barChart) {}
-
-  function twelfthAnimation(worldMap, barChart) {
+  function ninthAnimation(worldMap, barChart) {
     worldMap.animateSectionStyles({
       duration: 1000,
       section: '#arc-DEU',
@@ -1990,6 +1933,15 @@
       }
     });
   }
+
+  function tenthAnimation(worldMap, barChart) {// Zoom to Germany -> DONE
+    // hide other arcs
+    // animate bars? 
+  }
+
+  function eleventhAnimation(worldMap, barChart) {}
+
+  function twelfthAnimation(worldMap, barChart) {}
 
   var animations = {
     0: zeroAnimation,

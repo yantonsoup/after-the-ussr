@@ -2,6 +2,7 @@ import {
   netMigrantsToRussia1989to2002,
   percentMigrantsToRussia1989to2002,
   migrationAbroadEthnicity1995to2002,
+  russianPopulationsIn1989thousands,
   migrationAbroadDestination1995to2002,
   populationRussia1989to2002,
   populationsIn1989millions
@@ -53,32 +54,24 @@ function secondAnimation(worldMap, barChart) {
 }
 
 function thirdAnimation(worldMap, barChart) {
-  worldMap.addPointsToMap()
-  worldMap.drawCurves()
-
-  const title = 'Net Migration to Russia \'89-\'02'
+  const title = 'Russians Populations 1989'
   barChart.drawTitle(title, 'thou')
-  barChart.repaintChart(netMigrantsToRussia1989to2002)
-  // worldMap.drawLabelPointer()
+  barChart.repaintChart(russianPopulationsIn1989thousands)
 }
 
 function fourthAnimation(worldMap, barChart) {
-  const title = 'Migration as % of Russians Per State'
-  barChart.drawTitle(title)
-  barChart.paintPercentageChart(percentMigrantsToRussia1989to2002)
+  worldMap.addPointsToMap()
+  worldMap.drawCurves()
+
+ 
+  // worldMap.drawLabelPointer()
+  const title = 'Net Migration to Russia \'89-\'02'
+  barChart.drawTitle(title, 'thou')
+  barChart.repaintChart(netMigrantsToRussia1989to2002)
 }
+
 
 function fifthAnimation (worldMap, barChart) {
-  
-}
-
-function sixthAnimation (worldMap, barChart) {
-    // worldMap.moveMapContainer({
-  //   duration: 1000,
-  //   top: graphicMarginTop
-  // })
-
-  // barChart.hideAllElements()
   worldMap.animateSectionStyles({ 
     duration: 500, 
     section: '.arc', 
@@ -94,6 +87,20 @@ function sixthAnimation (worldMap, barChart) {
       opacity: '0',
     }
   }) 
+
+  barChart.hideAllElements()
+
+  const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
+
+  worldMap.moveMapContainer({
+    duration: 1000,
+    top: graphicMarginTop
+  })
+
+}
+
+function sixthAnimation (worldMap, barChart) {
+
 
   worldMap.animateSectionStyles({ 
     duration: 500, 
@@ -131,25 +138,13 @@ worldMap.animateMapZoom(zoomParams)
   })
       
 
-  const title = 'Russia Population 1989 - 2002'
-  barChart.drawTitle(title)
-  barChart.repaintChart(populationRussia1989to2002)
+  // const title = 'Russia Population 1989 - 2002'
+  // barChart.drawTitle(title)
+  // barChart.repaintChart(populationRussia1989to2002)
 
 }
 
 function seventhAnimation(worldMap, barChart) {
-}
-
-function eightAnimation(worldMap, barChart) {
-
-  // const title = 'Ethnic Groups Leaving Russia'
-
-  // barChart.drawTitle(title)
-  // barChart.redrawBarsWith3DataPoints(migrationAbroadEthnicity1995to2002)
-}
-
-
-function ninthAnimation(worldMap, barChart) {
   const title = 'Top Destinations For FSU Immigrants'
 
   barChart.drawTitle(title)
@@ -161,6 +156,7 @@ function ninthAnimation(worldMap, barChart) {
     translateX: (-Math.floor(worldMap.width * 0.2)),
     translateY: -Math.floor(worldMap.height * 0.2),
   }
+  worldMap.animateMapZoom(zoomParams)
 
 
   worldMap.animateSectionStyles({ 
@@ -168,19 +164,14 @@ function ninthAnimation(worldMap, barChart) {
     section: '.soviet-country', 
     styles: { 
       opacity: '1',
-      fill: '#fd8d3c',
+      fill: '#fcd116',
     }
   })
 
-  worldMap.animateMapZoom(zoomParams)
   worldMap.animateWorldSections(zoomParams)
 }
 
-
-function tenthAnimation(worldMap, barChart) {
-  // Zoom to Germany -> DONE
-  // hide other arcs
-  // animate bars? 
+function eightAnimation(worldMap, barChart) {
   const zoomParams = {
     scale: 4,
     duration: 1000,
@@ -205,14 +196,11 @@ function tenthAnimation(worldMap, barChart) {
       opacity: '1',
     }
   })
-}
-
-function eleventhAnimation(worldMap, barChart) {
 
 }
 
 
-function twelfthAnimation(worldMap, barChart) {
+function ninthAnimation(worldMap, barChart) {
 
   worldMap.animateSectionStyles({ 
     duration: 1000, 
@@ -230,6 +218,23 @@ function twelfthAnimation(worldMap, barChart) {
       opacity: '1',
     }
   })
+
+}
+
+
+function tenthAnimation(worldMap, barChart) {
+  // Zoom to Germany -> DONE
+  // hide other arcs
+  // animate bars? 
+
+}
+
+function eleventhAnimation(worldMap, barChart) {
+
+}
+
+
+function twelfthAnimation(worldMap, barChart) {
 
 }
 
