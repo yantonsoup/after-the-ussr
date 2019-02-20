@@ -15,7 +15,7 @@ export default function firstPaint () {
 
   let graphicWidthHeight = width;
 
-  const halfPageHeight = Math.floor(window.innerHeight)/2
+  const halfPageHeight = Math.floor(window.innerHeight/2)
 
   // make margin top for bar chart the size of the map container
   d3.select(".bar-graphic-container")

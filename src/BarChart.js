@@ -24,9 +24,10 @@ export default class BarChart {
       bottom: 40,
       left: 64
     };
+    const halfPageHeight = Math.floor(window.innerHeight)/2
 
     this.width = width - this.barMargin.left - this.barMargin.right;
-    this.height = width - this.barMargin.top - this.barMargin.bottom;
+    this.height = halfPageHeight - this.barMargin.top - this.barMargin.bottom;
 
     this.paintPlot(this.width, this.height, this.barMargin);
 

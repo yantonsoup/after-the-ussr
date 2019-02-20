@@ -126,10 +126,11 @@ a:hover {
   position: sticky;
   color: lightgoldenrodyellow;
   margin: 3rem auto;
+  
 }
 
 .intro-step {
-
+  width: calc(100vw - 64px) ;
 }
 
 

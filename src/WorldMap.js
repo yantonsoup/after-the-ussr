@@ -30,9 +30,6 @@ export default class WorldMap {
       .node()
       .getBoundingClientRect();
 
-      console.warn('scrollwidth')
-    console.warn('getBoundingBOx', boundingBox)
-
     this.height = boundingBox.height;
     this.width = boundingBox.width;
 

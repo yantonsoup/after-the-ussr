@@ -2002,7 +2002,7 @@
     step.style("height", stepHeight + "px");
     text.selectAll(".step-two").style('height', '200px');
     let graphicWidthHeight = width;
-    const halfPageHeight = Math.floor(window.innerHeight) / 2; // make margin top for bar chart the size of the map container
+    const halfPageHeight = Math.floor(window.innerHeight / 2); // make margin top for bar chart the size of the map container
 
     d3.select(".bar-graphic-container").style('top', halfPageHeight + 'px').style("width", graphicWidthHeight + "px").style("height", halfPageHeight + "px"); // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
 
@@ -2049,8 +2049,6 @@
 
     draw() {
       const boundingBox = d3.select(this.element).node().getBoundingClientRect();
-      console.warn('scrollwidth');
-      console.warn('getBoundingBOx', boundingBox);
       this.height = boundingBox.height;
       this.width = boundingBox.width; // define width, height and margin
 
@@ -2294,8 +2292,9 @@
         bottom: 40,
         left: 64
       };
+      const halfPageHeight = Math.floor(window.innerHeight) / 2;
       this.width = width - this.barMargin.left - this.barMargin.right;
-      this.height = width - this.barMargin.top - this.barMargin.bottom;
+      this.height = halfPageHeight - this.barMargin.top - this.barMargin.bottom;
       this.paintPlot(this.width, this.height, this.barMargin);
       const headerText = "1989 Soviet State Populations";
       this.drawTitle(headerText, "mil"); // create the other stuff
