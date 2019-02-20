@@ -25,7 +25,7 @@ loadMap().then(json => {
 
   const worldMap = new WorldMap({
     data: features,
-    element: '.scroll-graphic'
+    element: '.map-graphic-container'
   })
 
   const barChart = new BarChart({

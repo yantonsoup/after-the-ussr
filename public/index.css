@@ -215,12 +215,14 @@ font-size: 1rem; */
   display: none;
 }
 
-.scroll-graphic {
+.map-graphic-container {
   position: -webkit-sticky;
+  max-width: 40rem;
+  max-height: 40rem;
   /* margin-top: 320px; */
   opacity: 1;
   position: sticky;
-  float: right;
+  margin: 0 auto;
   right: 2rem;
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
@@ -261,7 +263,7 @@ font-size: 1rem; */
   fill: transparent;
 }
 
-.scroll-graphic p {
+.map-graphic-container p {
   text-align: center;
   padding: 1rem;
   position: absolute;

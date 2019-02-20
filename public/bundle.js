@@ -1978,7 +1978,7 @@
 
     scrollama().setup({
       container: ".scroll",
-      graphic: ".scroll-graphic",
+      graphic: ".map-graphic-container",
       text: ".scroll-text",
       step: ".scroll-text .step",
       debug: false,
@@ -2000,12 +2000,20 @@
     const step = text.selectAll(".step");
     const stepHeight = Math.floor(window.innerHeight * 1);
     step.style("height", stepHeight + "px");
-    text.selectAll(".step-two").style('height', '200px'); // make margin top for bar chart the size of the map container
+    text.selectAll(".step-two").style('height', '200px');
+    let graphicWidthHeight = width;
+    console.warn({
+      graphicWidthHeight
+    });
+    console.warn({
+      textWidth
+    }); // make margin top for bar chart the size of the map container
 
     d3.select(".bar-graphic-container").style('top', width + 'px').style("width", width + "px").style("height", width + "px"); // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
 
-    const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
-    d3.select(".scroll-graphic").style("width", width + "px").style("height", width + "px").style("top", graphicMarginTop + "px"); // Use this to set the distance ofo the first step
+    const graphicMarginTop = Math.floor(window.innerHeight * 0.25); // scroll graphic is world map container
+
+    d3.select(".map-graphic-container").style("width", graphicWidthHeight + "px").style("height", graphicWidthHeight + "px").style("top", graphicMarginTop + "px"); // Use this to set the distance ofo the first step
 
     d3.select(".header-container").style("height", 900 + "px");
     d3.select(".ussr-svg-container").style("width", textWidth + "px");
@@ -2046,6 +2054,8 @@
 
     draw() {
       const boundingBox = d3.select(this.element).node().getBoundingClientRect();
+      console.warn('scrollwidth');
+      console.warn('getBoundingBOx', boundingBox);
       this.height = boundingBox.height;
       this.width = boundingBox.width; // define width, height and margin
 
@@ -2445,7 +2455,7 @@
     const features = countries.features;
     const worldMap = new WorldMap({
       data: features,
-      element: '.scroll-graphic'
+      element: '.map-graphic-container'
     });
     const barChart = new BarChart({
       element: '.bar-graphic',

@@ -25,7 +25,7 @@ export default function setupScrollama(worldMap, barChart) {
   scrollama()
     .setup({
       container: ".scroll",
-      graphic: ".scroll-graphic",
+      graphic: ".map-graphic-container",
       text: ".scroll-text",
       step: ".scroll-text .step",
       debug: false,
