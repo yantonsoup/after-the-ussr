@@ -124,7 +124,7 @@ a:hover {
   height: 500px;
 }
 
-.intro-block {
+.splash-text-block {
   z-index: -3;
   position: -webkit-sticky;
   position: sticky;
@@ -132,17 +132,20 @@ a:hover {
   margin: 3rem auto;
 }
 
-.intro-step {
-  /* width: calc(100vw - 64px); */
-  position: relative;
-  z-index: 1000;
+.intro-container {
+  margin: 0 auto 5rem;
+  padding: 1rem;
   opacity: 0.9;
-  margin: 0 auto 2rem auto;
-  text-align: center;
+  width: calc(100% - 64px);
   max-width: 30rem;
+  background-color: lightgoldenrodyellow;
 }
 
-.intro-title {
+.intro-step p {
+  text-align: left;
+}
+
+.splash-title {
   font-size: 2rem;
   font-weight: 900;
   letter-spacing: 0.05em;
@@ -150,17 +153,15 @@ a:hover {
   padding: 1rem 0;
 }
 
-.intro-subtitle {
+.splash-hook {
   font-size: 1.4rem;
   padding: 1rem;
   text-align: left;
   margin: 0 auto;
 }
 
-.intro-paragraph {
-  text-align: left;
-  margin: 0 auto;
-  /* height: 100px; */
+.intro-contianer {
+
 }
 
 .triangle-down {

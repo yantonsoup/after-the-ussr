@@ -29,14 +29,14 @@ export default function firstPaint () {
 
   d3.select(".bar-graphic-container")
     .style('top', halfPageHeight + 'px')
-    .style("width", '100%' + "px")
+    .style("width", '100%')
     .style("height", halfPageHeight + "px")
 
   // Use this to set the distance ofo the first step
   d3.select(".splash-container")
     .style("height", Math.floor(window.innerHeight * 1) + "px");
 
-  d3.select(".intro-block").style("width", textWidth + "px");
+  d3.select(".splash-text-block").style("width", textWidth + "px");
   d3.select(".name-block").style("width", textWidth + "px");
  
   
