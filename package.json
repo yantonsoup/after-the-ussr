@@ -24,8 +24,10 @@
   "author": "yantonsoup <ygoldobin@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "d3": "3.5",
     "intersection-observer": "^0.5.1",
     "scrollama": "^1.4.4",
+    "stickyfill": "^1.1.1-strict",
     "topojson": "^1.6.27"
   }
 }
