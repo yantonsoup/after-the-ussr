@@ -22,6 +22,4 @@ export default function setupScrollama(worldMap, barChart) {
       offset: 0.9
     })
     .onStepEnter(handleStepEnter)
-    .onContainerEnter(handleContainerEnter)
-    .onContainerExit(handleContainerExit);
 }

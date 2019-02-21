@@ -1,14 +1,7 @@
 export default function firstPaint () {
   // Setup sizes for the graphic and steps
-  var container = d3.select(".scroll");
 
-  const boundingBox = container.node().getBoundingClientRect();
-  const { width, height } = boundingBox;
-
-  const text = container.select(".scroll-text");
-  const textWidth = text.node().offsetWidth;
-
-  const step = text.selectAll(".step");
+  const textWidth =  d3.select(".scroll-text").node().offsetWidth;
 
   const stepHeight = Math.floor(window.innerHeight);
 
@@ -16,11 +9,9 @@ export default function firstPaint () {
 
   const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
 
-  step.style("height", stepHeight + "px");
-  text.selectAll(".step-two").style('height', '200px');
-
-  let graphicWidthHeight = width;
-
+  d3.selectAll(".step")
+    .style("height", stepHeight + "px");
+  
 // scroll graphic is world map container
   d3.select(".map-graphic-container")
     .style("width", '100%')
@@ -38,6 +29,4 @@ export default function firstPaint () {
 
   d3.select(".splash-text-block").style("width", textWidth + "px");
   d3.select(".name-block").style("width", textWidth + "px");
- 
-  
 } 
