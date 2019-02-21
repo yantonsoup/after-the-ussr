@@ -24,6 +24,7 @@ export default class BarChart {
       bottom: 40,
       left: 64
     };
+
     const halfPageHeight = Math.floor(window.innerHeight)/2
 
     this.width = width - this.barMargin.left - this.barMargin.right;
@@ -115,12 +116,6 @@ export default class BarChart {
       .append("g")
       .attr("class", "y-axis")
       .call(yAxisStuff);
-
-    // this.plot
-    //   .select('.y-axis')
-    //   .selectAll('.tick')
-    //   .selectAll('text')
-    //   .attr('dx', '1em')
   }
 
   redrawYAxes(data) {

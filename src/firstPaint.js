@@ -18,18 +18,20 @@ export default function firstPaint () {
   const halfPageHeight = Math.floor(window.innerHeight/2)
 
   // make margin top for bar chart the size of the map container
-  d3.select(".bar-graphic-container")
-    .style('top', halfPageHeight + 'px')
-    .style("width", graphicWidthHeight + "px")
-    .style("height", halfPageHeight + "px")
+
 
   // console.warn('graphic Width AND, height', graphic.node().offsetWidth)
   const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
-  // scroll graphic is world map container
+// scroll graphic is world map container
   d3.select(".map-graphic-container")
     .style("width", graphicWidthHeight + "px")
     .style("height", halfPageHeight + "px")
     .style("top", graphicMarginTop + "px");
+
+  d3.select(".bar-graphic-container")
+    .style('top', halfPageHeight + 'px')
+    .style("width", graphicWidthHeight + "px")
+    .style("height", halfPageHeight + "px")
 
   // Use this to set the distance ofo the first step
   d3.select(".header-container").style("height", Math.floor(window.innerHeight * 1) + "px");

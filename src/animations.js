@@ -136,7 +136,7 @@ worldMap.animateMapZoom(zoomParams)
       fill: '#d0d0d0'
     }
   })
-      
+
 
   // const title = 'Russia Population 1989 - 2002'
   // barChart.drawTitle(title)
@@ -156,9 +156,8 @@ function seventhAnimation(worldMap, barChart) {
     translateX: (-Math.floor(worldMap.width * 0.2)),
     translateY: -Math.floor(worldMap.height * 0.2),
   }
+
   worldMap.animateMapZoom(zoomParams)
-
-
   worldMap.animateSectionStyles({ 
     duration: 500, 
     section: '.soviet-country', 

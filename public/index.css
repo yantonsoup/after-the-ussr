@@ -79,7 +79,7 @@ a:hover {
   fill: #fcd116;
   width: 10px;
   height: 10px;
-  margin: 0 auto 4px;
+  margin: 2px auto 0px;
 }
 
 .ussr-star-svg {
@@ -130,7 +130,13 @@ a:hover {
 }
 
 .intro-step {
-  width: calc(100vw - 64px) ;
+  /* width: calc(100vw - 64px); */
+  position: relative;
+  z-index: 1000;
+  opacity: 0.9;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+  max-width: 30rem;
 }
 
 
@@ -180,7 +186,6 @@ a:hover {
 
 .intro-paragraph {
   text-align: left;
-  max-width: 30em;
   margin: 0 auto;
   /* height: 100px; */
 }
@@ -219,70 +224,6 @@ font-size: 1rem; */
 
 }
 
-.hide {
-  display: none;
-}
-
-.map-graphic-container {
-  position: -webkit-sticky;
-  /* margin-top: 320px; */
-  opacity: 1;
-  position: sticky;
-  margin: 0 auto;
-  right: 2rem;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  z-index: 5;
-}
-
-.bar-graphic-container {
-  position: -webkit-sticky;
-  /* margin-top: 320px; */
-  opacity: 1;
-  position: sticky;
-  right: 2rem;
-  z-index: 15;
-  height: 300px;
-  background-color: transparent;
-}
-
-.bar-graphic-header {
-  margin: 0 20px;
-  font-size: 20px;
-  font-weight: 600;
-  border-bottom: 2px solid black;
-  padding: 4px 0;
-  text-align: center;
-  color: black;
-}
-
-.bar-graphic-header-units {
-  color: lightgoldenrodyellow
-}
-
-.data-bar-container {
-  height: 20px;
-}
-
-.transparent-ATA {
-  fill: transparent;
-}
-
-.map-graphic-container p {
-  text-align: center;
-  padding: 1rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -moz-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  font-size: 8rem;
-  font-weight: 900;
-  color: #666;
-}
-
 .scroll-text {
   position: relative;
   margin: 135% auto 0;
@@ -291,18 +232,6 @@ font-size: 1rem; */
 }
 
 .step {
-  position: relative;
-  z-index: 1000;
-  opacity: 0.9;
-  margin: 0 auto 2rem auto;
-  text-align: center;
-}
-
-.hidden-step {
-  opacity: 0;
-}
-
-.step-two{
   position: relative;
   z-index: 1000;
   opacity: 0.9;
@@ -327,9 +256,3 @@ font-size: 1rem; */
   text-align: left;
 }
 
-.country,
-.soviet-country {
-  fill: #d0d0d0; /* country colour */
-  stroke: #2a2c39; /* country border colour */
-  stroke-width: 1; /* country border width */
-}
