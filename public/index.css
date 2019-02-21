@@ -36,15 +36,11 @@ a:hover {
   /* border-bottom: 1px solid currentColor; */
 }
 
-#intro {
-  position: relative;
-  z-index: 99;
-  max-width: 40rem;
-  margin: 0 auto;
-  text-align: center;
+#outro {
+  height: 640px;
 }
 
-.header {
+.star-header {
   /* background-color: lightgray; */
   background-color: #a62116;
   /* border: 1px solid #000; */
@@ -56,6 +52,14 @@ a:hover {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+}
+
+.splash-container {
+  position: relative;
+  z-index: 99;
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .story-container {
@@ -70,8 +74,8 @@ a:hover {
 }
 
 .ussr-svg {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   margin: 0 auto;
 }
 
@@ -126,7 +130,6 @@ a:hover {
   position: sticky;
   color: lightgoldenrodyellow;
   margin: 3rem auto;
-  
 }
 
 .intro-step {
@@ -138,7 +141,6 @@ a:hover {
   text-align: center;
   max-width: 30rem;
 }
-
 
 .intro-title {
   font-size: 2rem;
@@ -155,46 +157,13 @@ a:hover {
   margin: 0 auto;
 }
 
-.intro-narrate-container {
-  margin-top: 4rem;
-} 
-
-.intro-image-container {
-  margin: 2rem auto;
-}
-
-.census-image {
-  width: 74vw;
-}
-
-.intro-narrate {
-  color: black;
-  font-size: 1.2rem;
-  padding: 1rem;
-  text-align: left;
-}
-.image-tip {
-  text-align: center;
-  font-size: 0.6rem;
-  margin: 0 auto;
-  padding: 0.25rem 1.5rem;
-}
-.intro-scroll-tip {
-  font-size: 1.4rem;
-  margin: 0 auto;
-}
-
 .intro-paragraph {
   text-align: left;
   margin: 0 auto;
   /* height: 100px; */
 }
-/* background-color: lightgoldenrodyellow;
-border: 1px solid #333;
-padding: 1rem;
-vertical-align: middle;
-font-size: 1rem; */
-#triangle-down {
+
+.triangle-down {
   margin: 0 auto;
   width: 0;
   height: 0;
@@ -203,25 +172,11 @@ font-size: 1rem; */
   border-top: 30px solid lightgoldenrodyellow;
 }
 
-/* demo */
-
-#intro {
-  /* margin-bottom: 320px; */
-}
-
-#outro {
-  height: 640px;
-}
-
-
 /* scrollama */
-
 .scroll {
-  /* top: -5rem; */
   position: relative;
   border-top: 2px solid #a62116;
   border-bottom: 2px solid #a62116;
-
 }
 
 .scroll-text {
@@ -235,16 +190,8 @@ font-size: 1rem; */
   position: relative;
   z-index: 1000;
   opacity: 0.9;
-  margin: 0 auto 2rem auto;
+  margin: 0 auto;
   text-align: center;
-}
-
-.step:last-child {
-  /* border-bottom: 1px solid #333; */
-}
-
-.step.is-active {
-  /* background-color: lightgoldenrodyellow; */
 }
 
 .step p {
@@ -256,3 +203,6 @@ font-size: 1rem; */
   text-align: left;
 }
 
+.step:last-child {
+  /* border-bottom: 1px solid #333; */
+}
