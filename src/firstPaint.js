@@ -1,3 +1,5 @@
+import d3 from 'd3';;l
+
 export default function firstPaint () {
   // Setup sizes for the graphic and steps
   const fullPageHeight = Math.floor(window.innerHeight);

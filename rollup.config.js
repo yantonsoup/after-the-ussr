@@ -13,7 +13,8 @@ export default {
 	output: {
 		file: 'public/bundle.js',
 		format: 'iife', // immediately-invoked function expression — suitable for <script> tags
-		sourcemap: true
+		sourcemap: true,
+		strict: false
 	},
 	
 	plugins: [

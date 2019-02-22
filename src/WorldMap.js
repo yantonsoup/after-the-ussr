@@ -1,3 +1,4 @@
+import d3 from 'd3';;
 import { sovietCountryIsoCodes, primaryReceivingIsoCodes, colors, sovietLabelShift } from "./constants";
 
 const rotate = -20; // so that [-60, 0] becomes initial center of projection

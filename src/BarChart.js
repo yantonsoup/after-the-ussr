@@ -1,3 +1,4 @@
+import d3 from 'd3';
 import { sovietCountryIsoCodes, colors } from "./constants";
 
 export default class BarChart {
