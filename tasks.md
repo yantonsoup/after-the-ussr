@@ -1,1 +1,0 @@
-* Redraw the labels correctly (delete the old nodes or just update the text instead of opcaity to 0 then opacity 1 again)
