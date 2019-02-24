@@ -18,7 +18,8 @@
     "build": "rollup -c",
     "watch": "rollup -c -w",
     "dev": "npm-run-all --parallel start watch",
-    "start": "node index.js"
+    "start": "node index.js",
+    "heroku-postbuild": "yarn build"
   },
   "repository": "https://github.com/yantonsoup/after-the-ussr.git",
   "author": "yantonsoup <ygoldobin@gmail.com>",
