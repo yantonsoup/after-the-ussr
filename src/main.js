@@ -13,7 +13,7 @@ window.onbeforeunload = function() {
 };
 
 loadMap().then(json => {
-  console.warn('Test DEE', features);
+  console.warn('Test DEE');
 
   firstPaint();
 
