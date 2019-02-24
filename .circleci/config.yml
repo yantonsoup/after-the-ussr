@@ -6,10 +6,10 @@ jobs:  # a collection of steps
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
       - run:
-          name: install-packages
+          name: Install packages with NPM
           command: npm install
       - run:
-          name: build-app
+          name: Build the app with NPM
           command: npm run build
 
   deploy:
@@ -18,7 +18,7 @@ jobs:  # a collection of steps
     steps:
       - checkout
       - run:
-          name: Deploy Master Branch to Heroku
+          name: Deploy the "master" branch to Heroku git push force
           command: |
             git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
@@ -27,9 +27,4 @@ workflows:
   build_and_deploy:
     jobs:
       - build
-      # - deploy:
-      #     requires:
-      #       - build
-      #     filters:
-      #       branches:
-      #         only: master
+      - deploy
