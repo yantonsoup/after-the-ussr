@@ -37,7 +37,7 @@ function firstAnimation(worldMap) {
     duration: 500, 
     section: '.non-soviet-country', 
     styles: { 
-      opacity: '0.1',
+      opacity: '0',
       'stroke-width': '0.175px' 
     }
   })

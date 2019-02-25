@@ -1,4 +1,4 @@
-import d3 from 'd3';;l
+import d3 from 'd3';
 
 export default function firstPaint () {
   // Setup sizes for the graphic and steps
@@ -13,13 +13,14 @@ export default function firstPaint () {
   
 // scroll graphic is world map container
   d3.select(".map-graphic-container")
-    .style("width", '100%')
+    .style("width", '50%')
+    // .style("width", halfPageHeight + "px")
     .style("height", halfPageHeight + "px")
     .style("top", quarterPageHeight + "px");
 
   d3.select(".bar-graphic-container")
     .style('top', halfPageHeight + 'px')
-    .style("width", '100%')
+    .style("width", halfPageHeight + "px")
     .style("height", halfPageHeight + "px")
 
   // Use this to set the distance of the first step

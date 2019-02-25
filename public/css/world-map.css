@@ -11,6 +11,12 @@
   z-index: 5;
 }
 
+@media screen and (min-width: 992px) {
+  .map-graphic-container  {
+    margin: 0;
+  }
+}
+
 
 .country,
 .soviet-country {

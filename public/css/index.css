@@ -15,7 +15,7 @@ body {
 body {
   min-height: 1280px;
   font-weight: 300;
-  background-color: #2a2a2a;
+  background-color: #a62116;
 }
 
 p,
@@ -44,7 +44,17 @@ a:hover {
   background-color: #a62116;
   max-width: 40rem;
   margin: 0 auto;
+  /* border-left: 2px dashed lightgoldenrodyellow; */
+  /* border-right: 2px dashed lightgoldenrodyellow; */
 }
+
+@media screen and (min-width: 992px) {
+  .story-container {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+}
+
 
 .emph {
   font-weight: 600;
@@ -121,7 +131,7 @@ a:hover {
   z-index: 99;
   max-width: 40rem;
   text-align: center;
-  margin: 0 2rem;
+  margin: 0 auto;
 }
 
 .splash-title {
@@ -184,6 +194,13 @@ a:hover {
   width: calc(100vw - 64px) ;
 }
 
+@media screen and (min-width: 992px) {
+  .scroll-text {
+    margin: 0 0;
+    right: 0;
+  }
+}
+
 .step {
   position: relative;
   z-index: 1000;
@@ -199,6 +216,12 @@ a:hover {
   vertical-align: middle;
   font-size: 1rem;
   text-align: left;
+}
+
+@media screen and (min-width: 768px) {
+  .step p {
+    font-size: 18px;
+  }
 }
 
 .step:last-child {
