@@ -164,7 +164,7 @@ export default class WorldMap {
 
   moveMapContainer({ top, duration }) {
 
-      if (window.innerWidth > 992) {
+      if (window.innerWidth > 768) {
         d3.select(this.element)
         .transition()
         .duration(duration)

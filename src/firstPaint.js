@@ -14,20 +14,27 @@ export default function firstPaint () {
   
 // scroll graphic is world map container
   d3.select(".map-graphic-container")
-    .style("width", halfPageWidth + "px")
+    .style("width", halfPageHeight + "px")
     .style("height", halfPageHeight + "px")
     .style("top", quarterPageHeight + "px")
-    .style("max-width", 400 + "px");
 
   d3.select(".bar-graphic-container")
     .style('top', halfPageHeight + 'px')
-    .style("width", halfPageWidth + "px")
+    .style("width", halfPageHeight + "px")
     .style("height", halfPageHeight + "px")
-    .style("max-width", 400 + "px")
 
-  if (window.innerWidth > 992) {
+  if (window.innerWidth > 768) {
     d3.select(".bar-graphic-container")
       .style('top', quarterPageHeight + 'px')
+      .style("width", halfPageWidth + "px")
+      .style("height", halfPageHeight + "px")
+      .style("max-width", "50%")
+
+    d3.select(".map-graphic-container")
+    .style("width", halfPageWidth + "px")
+    .style("height", halfPageHeight + "px")
+    .style("top", quarterPageHeight + "px")
+    .style("max-width", "50%")
   }
 
   // Use this to set the distance of the first step

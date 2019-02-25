@@ -203,7 +203,7 @@ a:hover {
   /* border: 1px solid #333; */
   margin: 0 auto;
   padding: 1rem;
-  max-width: 400px;
+  max-width: 384px;
   vertical-align: middle;
   font-size: 1rem;
   text-align: left;
@@ -215,7 +215,7 @@ a:hover {
   }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 768px) {
   .story-container {
     max-width: 800px;
     margin: 0 auto;
