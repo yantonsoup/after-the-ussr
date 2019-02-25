@@ -13,10 +13,8 @@
 }
 
 @media screen and (min-width: 768px) {
-  /* .map-graphic-container  {
-    margin: 0;
-    width: 50%;
-  } */
+  .map-graphic-container  {
+  }
 }
 
 

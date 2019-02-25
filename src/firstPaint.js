@@ -9,10 +9,12 @@ export default function firstPaint () {
 
   const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
 
+  d3.select(".splash-container")
+    .style("height", fullPageHeight + "px");
+    
   d3.selectAll(".step")
     .style("height", fullPageHeight + "px");
   
-// scroll graphic is world map container
   d3.select(".map-graphic-container")
     .style("width", halfPageHeight + "px")
     .style("height", halfPageHeight + "px")
@@ -23,6 +25,7 @@ export default function firstPaint () {
     .style("width", halfPageHeight + "px")
     .style("height", halfPageHeight + "px")
 
+  // Desktop Layout
   if (window.innerWidth > 768) {
     d3.select(".bar-graphic-container")
       .style('top', quarterPageHeight + 'px')
@@ -35,10 +38,9 @@ export default function firstPaint () {
     .style("height", halfPageHeight + "px")
     .style("top", quarterPageHeight + "px")
     .style("max-width", "50%")
+
   }
 
-  // Use this to set the distance of the first step
-  d3.select(".splash-container")
-    .style("height", fullPageHeight + "px");
+
 
 } 
