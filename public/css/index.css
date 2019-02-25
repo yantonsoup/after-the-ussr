@@ -201,7 +201,9 @@ a:hover {
 .step p {
   background-color: lightgoldenrodyellow;
   /* border: 1px solid #333; */
+  margin: 0 auto;
   padding: 1rem;
+  max-width: 400px;
   vertical-align: middle;
   font-size: 1rem;
   text-align: left;
@@ -215,13 +217,13 @@ a:hover {
 
 @media screen and (min-width: 992px) {
   .story-container {
-    max-width: 980px;
+    max-width: 800px;
     margin: 0 auto;
   }
   .scroll-text {
-    margin: 0;
+    /* margin: 0;
     right: 0;
-    float: right;
+    float: right; */
   }
   .splash-container {
     margin: 0 auto;

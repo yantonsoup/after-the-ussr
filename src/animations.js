@@ -128,7 +128,7 @@ worldMap.animateMapZoom(zoomParams)
   })
 
 
-  worldMap.animateCISStyles({ 
+  worldMap.animateSectionStyles({ 
     duration: 500, 
     section: '.soviet-country', 
     styles: { 

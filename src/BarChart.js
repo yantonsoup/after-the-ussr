@@ -16,7 +16,12 @@ export default class BarChart {
   draw() {
     // define width, height and margin
     const scrollContainer = d3.select(".scroll");
-    const boundingBox = scrollContainer.node().getBoundingClientRect();
+    // const boundingBox = scrollContainer.node().getBoundingClientRect();
+    const boundingBox = d3
+      .select(this.element)
+      .node()
+      .getBoundingClientRect();
+
     const { width } = boundingBox;
 
     this.barMargin = {

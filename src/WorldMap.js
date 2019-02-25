@@ -112,17 +112,6 @@ export default class WorldMap {
       .style(styles);
   }
 
-  animateCISStyles({ duration, section, styles }) {
-    console.warn({ duration, section, styles });
-
-    d3.select(this.element)
-      .selectAll(section)
-      .filter(({id}) => id !== 'RUS')
-      .transition()
-      .duration(duration)
-      .style(styles);
-  }
-
   animateMapZoom({ scale, translateX, translateY, duration }) {
     this.mapGraphic
       .transition()
@@ -168,17 +157,27 @@ export default class WorldMap {
       .transition()
       .duration(1000)
       .style("fill", function(d, i) {
-        // console.warn('i', i)
         return colors[i];
       })
       .style("stroke-width", 0.25 + "px");
   }
 
   moveMapContainer({ top, duration }) {
-    d3.select(this.element)
-      .transition()
-      .duration(duration)
-      .style("top", top + "px");
+
+      if (window.innerWidth > 992) {
+        d3.select(this.element)
+        .transition()
+        .duration(duration)
+        .style("right", 0 + "px")
+        .style('margin', '0 0 0 auto');
+  
+      } else {
+        d3.select(this.element)
+        .transition()
+        .duration(duration)
+        .style("top", top + "px")
+      }
+
   }
 
   addPointsToMap() {
@@ -224,7 +223,6 @@ export default class WorldMap {
         return this.path.centroid(country);
       });
 
-    console.warn("ayyeee drawing an arrow");
     const russiaCoordinates = [235, 110];
 
     this.mapGraphic

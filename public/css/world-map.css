@@ -9,14 +9,14 @@
   -moz-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   z-index: 5;
-  width: 100%;
+  /* width: 100%; */
 }
 
 @media screen and (min-width: 992px) {
-  .map-graphic-container  {
+  /* .map-graphic-container  {
     margin: 0;
     width: 50%;
-  }
+  } */
 }
 
 
