@@ -1,8 +1,7 @@
 .map-graphic-container {
   position: -webkit-sticky;
-  /* margin-top: 320px; */
-  opacity: 1;
   position: sticky;
+  opacity: 1;
   margin: 0 auto;
   right: 2rem;
   -webkit-transform: translate3d(0, 0, 0);

@@ -120,6 +120,15 @@ export default class WorldMap {
         "transform",
         `scale(${scale})translate(${translateX},${translateY})`
       );
+
+    // this.projection.center([0, 120]).scale(200)
+      //WorldMap.js:136 id RUS centroid x  464.6156040943559 centroid y 120.52488743508756
+      //WorldMap.js:136 id RUS centroid x  464.6156040943559 centroid y 120.52488743508756
+    // const zoom = d3.behavior.zoom()
+    // const point = this.projection([464, 110])
+    // console.warn('point', point)
+
+
   }
 
   // TODO: find a better way to shift labels
@@ -132,7 +141,7 @@ export default class WorldMap {
       .attr("class", "place-label")
       .attr("transform", d => {
         const [x, y] = this.path.centroid(d);
-
+        console.warn('id', d.id, 'centroid x ', x, 'centroid y', y)
         return `translate(${x},${y})`;
       })
       .attr("dx", function({ id }) {

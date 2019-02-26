@@ -17,6 +17,7 @@ function zeroAnimation(worldMap) {
       "stroke-width": "0.25px"
     }
   });
+
 }
 
 function firstAnimation(worldMap) {
