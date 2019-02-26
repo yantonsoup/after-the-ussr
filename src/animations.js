@@ -37,7 +37,7 @@ function firstAnimation(worldMap) {
     duration: 500,
     section: ".non-soviet-country",
     styles: {
-      opacity: "0",
+      opacity: "0.1",
       "stroke-width": "0.175px"
     }
   });
@@ -48,9 +48,17 @@ function secondAnimation(worldMap, barChart) {
     duration: 1000,
     top: 0
   });
+
   barChart.revealBarChart();
   barChart.redrawBars(populationsIn1989millions);
   barChart.addPopulationLabels(populationsIn1989millions);
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".non-soviet-country",
+    styles: {
+      opacity: "0",
+    }
+  });
 }
 
 function thirdAnimation(worldMap, barChart) {

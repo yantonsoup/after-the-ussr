@@ -25,21 +25,21 @@ export default function firstPaint () {
     .style("width", halfPageHeight + "px")
     .style("height", halfPageHeight + "px")
 
-  // Desktop Layout
-  if (window.innerWidth > 768) {
-    d3.select(".bar-graphic-container")
-      .style('top', quarterPageHeight + 'px')
-      .style("width", halfPageWidth + "px")
-      .style("height", halfPageHeight + "px")
-      .style("max-width", "50%")
+  // // Desktop Layout
+  // if (window.innerWidth > 768) {
+  //   d3.select(".bar-graphic-container")
+  //     .style('top', quarterPageHeight + 'px')
+  //     .style("width", halfPageWidth + "px")
+  //     .style("height", halfPageHeight + "px")
+  //     .style("max-width", "50%")
 
-    d3.select(".map-graphic-container")
-    .style("width", halfPageWidth + "px")
-    .style("height", halfPageHeight + "px")
-    .style("top", quarterPageHeight + "px")
-    .style("max-width", "50%")
+  //   d3.select(".map-graphic-container")
+  //   .style("width", halfPageWidth + "px")
+  //   .style("height", halfPageHeight + "px")
+  //   .style("top", quarterPageHeight + "px")
+  //   .style("max-width", "50%")
 
-  }
+  // }
 
 
 

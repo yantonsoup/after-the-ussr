@@ -164,19 +164,19 @@ export default class WorldMap {
 
   moveMapContainer({ top, duration }) {
 
-      if (window.innerWidth > 768) {
-        d3.select(this.element)
-        .transition()
-        .duration(duration)
-        .style("right", 0 + "px")
-        .style('margin', '0 0 0 auto');
+      // if (window.innerWidth > 768) {
+      //   d3.select(this.element)
+      //   .transition()
+      //   .duration(duration)
+      //   .style("right", 0 + "px")
+      //   .style('margin', '0 0 0 auto');
   
-      } else {
+      // } else {
         d3.select(this.element)
         .transition()
         .duration(duration)
         .style("top", top + "px")
-      }
+      // }
 
   }
 
