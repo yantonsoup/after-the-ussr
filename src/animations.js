@@ -18,6 +18,14 @@ function zeroAnimation(worldMap) {
     }
   });
 
+  const zoomParams = {
+    scale: 1,
+    duration: 1000,
+    translateX: 0,
+    translateY: 0
+  };
+
+  worldMap.animateMapZoom(zoomParams)
 }
 
 function firstAnimation(worldMap) {
@@ -38,7 +46,7 @@ function firstAnimation(worldMap) {
     duration: 500,
     section: ".non-soviet-country",
     styles: {
-      opacity: "0.1",
+      opacity: "0",
       "stroke-width": "0.175px"
     }
   });

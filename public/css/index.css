@@ -125,6 +125,9 @@ a:hover {
   top: 0;
 }
 
+/* *********************************** */
+/* splash page */
+/* *********************************** */
 .splash-container {
   position: relative;
   z-index: 99;
@@ -179,7 +182,9 @@ a:hover {
   border-top: 30px solid lightgoldenrodyellow;
 }
 
+/* *********************************** */
 /* scrollama */
+/* *********************************** */
 .scroll {
   position: relative;
   border-top: 2px solid #a62116;
@@ -205,7 +210,6 @@ a:hover {
   background-color: lightgoldenrodyellow;
   margin: 0 auto;
   padding: 1rem;
-  max-width: 384px;
   vertical-align: middle;
   font-size: 1rem;
   text-align: left;
@@ -218,7 +222,7 @@ a:hover {
 
 @media screen and (min-width: 768px) {
   .step p {
-    font-size: 16px;
+    font-size: 18px;
   }
   /* .story-container {
     max-width: 800px;
@@ -232,4 +236,47 @@ a:hover {
   } */
 }
 
+/* *********************************** */
+/* map graphic */
+/* *********************************** */
+.map-graphic-container {
+  position: -webkit-sticky;
+  position: sticky;
+  margin: 0 auto;
+}
 
+
+.country,
+.soviet-country {
+  fill: #d0d0d0; /* country colour */
+  stroke: #2a2c39; /* country border colour */
+  stroke-width: 1; /* country border width */
+}
+
+/* *********************************** */
+/* bar graphic */
+/* *********************************** */
+.bar-graphic-container {
+  position: -webkit-sticky;
+  /* margin-top: 320px; */
+  opacity: 1;
+  position: sticky;
+  right: 2rem;
+  z-index: 15;
+  height: 300px;
+  background-color: transparent;
+}
+
+.bar-graphic-header {
+  margin: 0 20px;
+  font-size: 20px;
+  font-weight: 600;
+  border-bottom: 2px solid black;
+  padding: 4px 0;
+  text-align: center;
+  color: black;
+}
+
+.bar-graphic-header-units {
+  color: lightgoldenrodyellow
+}

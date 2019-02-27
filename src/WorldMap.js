@@ -77,6 +77,15 @@ export default class WorldMap {
     this.applyInitialHideAndHighlight()
   }
 
+  returnToCenterZoom(){
+    this.animateMapZoom({
+      scale: 1,
+      duration: 1000,
+      translateX: 0,
+      translateY: 0
+    })
+  }
+
   applyInitialHideAndHighlight() {
     this.mapGraphic
       .selectAll('.country')

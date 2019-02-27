@@ -19,10 +19,15 @@ export default function firstPaint () {
     
   d3.selectAll(".step")
     .style("height", fullPageHeight + "px");
+
+  let mapWH = fullPageHeight;
+  if (halfPageHeight >  width) {
+    mapWH  =  width;
+  }
   
   d3.select(".map-graphic-container")
-    .style("width", halfPageHeight + "px")
-    .style("height", halfPageHeight + "px")
+    .style("width", mapWH + "px")
+    .style("height", mapWH + "px")
     .style("top", quarterPageHeight + "px")
 
   d3.select(".bar-graphic-container")
