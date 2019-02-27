@@ -42,7 +42,6 @@ export default class WorldMap {
       .translate([this.width / 2, this.height / 2]);
 
     this.initialScale = this.getInitialScale();
-    console.warn('this.initialScale', this.initialScale)
     this.projection.scale(this.initialScale);
     this.path = d3.geo.path().projection(this.projection);
 
@@ -61,7 +60,7 @@ export default class WorldMap {
       .enter()
       .append("path")
       .attr("d", this.path)
-      .style("stroke-width", 0.5 + "px")
+      .style("stroke-width", 0.35 + "px")
       .attr("class", "country")
       .attr("id", function(d, i) {
         return d.id;
@@ -73,34 +72,23 @@ export default class WorldMap {
           return "country non-soviet-country";
         }
       })
-
-    this.applyInitialHideAndHighlight()
-  }
-
-  returnToCenterZoom(){
-    this.animateMapZoom({
-      scale: 1,
-      duration: 1000,
-      translateX: 0,
-      translateY: 0
-    })
-  }
-
-  applyInitialHideAndHighlight() {
-    this.mapGraphic
-      .selectAll('.country')
       .style("display", function(datum) {
         if (datum.id === 'ATA') {
           console.warn('ATA')
           return 'none'
         }
       })
-      .style('fill', (datum) => {
-        if (sovietCountryIsoCodes.includes(datum.id)) {
-          return "#fcd116";
-        } 
-      })
 
+    this.mapGraphic
+      .selectAll('.soviet-country')
+      .style('fill', '#fcd116')
+
+  }
+
+  applyInitialHighlight() {
+    this.mapGraphic
+      .selectAll('.soviet-country')
+      .style('fill', '#fcd116')
   }
 
   getInitialScale() {
@@ -111,8 +99,6 @@ export default class WorldMap {
   }
 
   animateSectionStyles({ duration, section, styles, delay = 0 } = {}) {
-    console.warn({ duration, section, styles });
-
     d3.select(this.element)
       .selectAll(section)
       .transition()
@@ -129,15 +115,6 @@ export default class WorldMap {
         "transform",
         `scale(${scale})translate(${translateX},${translateY})`
       );
-
-    // this.projection.center([0, 120]).scale(200)
-      //WorldMap.js:136 id RUS centroid x  464.6156040943559 centroid y 120.52488743508756
-      //WorldMap.js:136 id RUS centroid x  464.6156040943559 centroid y 120.52488743508756
-    // const zoom = d3.behavior.zoom()
-    // const point = this.projection([464, 110])
-    // console.warn('point', point)
-
-
   }
 
   // TODO: find a better way to shift labels
@@ -153,12 +130,12 @@ export default class WorldMap {
         console.warn('id', d.id, 'centroid x ', x, 'centroid y', y)
         return `translate(${x},${y})`;
       })
-      .attr("dx", function({ id }) {
+      .attr("x", function({ id }) {
         const { x } = sovietLabelShift[id];
 
         return `${x}px`;
       })
-      .attr("dy", function({ id }) {
+      .attr("y", function({ id }) {
         const { y } = sovietLabelShift[id];
 
         return `${y}px`;
@@ -166,7 +143,8 @@ export default class WorldMap {
       .text(function(d) {
         return d.properties.name;
       })
-      .style("font-size", 3 + "px");
+      .style("font-size", 3 + "px")
+      // .style("fill", "white")
   }
 
   // TODO: makethis an actual choropleth funk
@@ -181,21 +159,10 @@ export default class WorldMap {
   }
 
   moveMapContainer({ top, duration }) {
-
-      // if (window.innerWidth > 768) {
-      //   d3.select(this.element)
-      //   .transition()
-      //   .duration(duration)
-      //   .style("right", 0 + "px")
-      //   .style('margin', '0 0 0 auto');
-  
-      // } else {
         d3.select(this.element)
         .transition()
         .duration(duration)
         .style("top", top + "px")
-      // }
-
   }
 
   addPointsToMap() {

@@ -10,11 +10,27 @@ import {
 
 function zeroAnimation(worldMap) {
   worldMap.animateSectionStyles({
+    duration: 100,
+    section: ".soviet-country",
+    styles: {
+      fill: "fcd116",
+    }
+  });
+
+  worldMap.animateSectionStyles({
     duration: 1000,
     section: ".non-soviet-country",
     styles: {
       opacity: "0.5",
       "stroke-width": "0.25px"
+    }
+  });
+
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".place-label",
+    styles: {
+      opacity: "0"
     }
   });
 
@@ -50,6 +66,14 @@ function firstAnimation(worldMap) {
       "stroke-width": "0.175px"
     }
   });
+
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".place-label",
+    styles: {
+      opacity: "1"
+    }
+  });
 }
 
 function secondAnimation(worldMap, barChart) {
@@ -66,6 +90,14 @@ function secondAnimation(worldMap, barChart) {
     section: ".non-soviet-country",
     styles: {
       opacity: "0",
+    }
+  });
+
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".place-label",
+    styles: {
+      opacity: "1"
     }
   });
 }
