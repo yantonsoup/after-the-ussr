@@ -43,22 +43,6 @@ a:hover {
   height: 640px;
 }
 
-.story-container {
-  background-color: #a62116;
-  max-width: 40rem;
-  margin: 0 auto;
-
-  /* border-left: 2px dashed lightgoldenrodyellow; */
-  /* border-right: 2px dashed lightgoldenrodyellow; */
-}
-
-
-
-
-.emph {
-  font-weight: 600;
-  background-color: #ffec97;
-}
 
 .ussr-svg {
   width: 200px;
@@ -80,35 +64,8 @@ a:hover {
   margin: 0 auto;
 }
 
-.name-link {
-  color: lightgoldenrodyellow;
-}
-
-.name {
-  font-weight: 500;
-  text-decoration: underline;
-}
-
-.name-text-line {
-  line-height: 18px;
-  font-size: 12px;
-}
-
-.published {
-  font-size: 12px;
-}
-
-.name-container {
-  color: lightgoldenrodyellow;
-  margin: 1rem auto 1rem;
-}
-
 .ussr-svg-container {
   margin: 1rem auto;
-}
-
-.header-container {
-  height: 500px;
 }
 
 .star-header {
@@ -124,6 +81,27 @@ a:hover {
   position: sticky;
   top: 0;
 }
+
+.triangle-down {
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid lightgoldenrodyellow;
+}
+
+.story-container {
+  background-color: #a62116;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.emph {
+  font-weight: 600;
+  background-color: #ffec97;
+}
+
 
 /* *********************************** */
 /* splash page */
@@ -166,20 +144,33 @@ a:hover {
 
 .intro-container {
   margin: 5rem auto;
-  padding: 1rem;
   opacity: 0.9;
   width: calc(100% - 64px);
   max-width: 30rem;
   background-color: lightgoldenrodyellow;
 }
 
-.triangle-down {
-  margin: 0 auto;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 30px solid lightgoldenrodyellow;
+.name-container {
+  color: lightgoldenrodyellow;
+  margin: 1rem auto 1rem;
+}
+
+.name-link {
+  color: lightgoldenrodyellow;
+}
+
+.name {
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.name-text-line {
+  line-height: 18px;
+  font-size: 12px;
+}
+
+.published {
+  font-size: 12px;
 }
 
 /* *********************************** */
@@ -204,24 +195,36 @@ a:hover {
   opacity: 0.9;
   margin: 0 auto;
   text-align: center;
+
 }
 
-.step p {
+.step-text {
   background-color: lightgoldenrodyellow;
   margin: 0 auto;
   padding: 1rem;
   vertical-align: middle;
   font-size: 1rem;
   text-align: left;
+  font-weight: 400;
+}
+
+.step-text-spacer {
+  padding-top: 1rem;
+  /* background-color: lightgoldenrodyellow;
+  font-weight: 400;
+  margin: 0 auto;
+  padding: 1rem;
+  vertical-align: middle;
+  font-size: 1rem;
+  text-align: left; */
 }
 
 .last-step {
   background-color: #3F3F3F
 }
 
-
 @media screen and (min-width: 768px) {
-  .step p {
+  .step-text {
     font-size: 18px;
   }
   /* .story-container {
@@ -245,7 +248,6 @@ a:hover {
   margin: 0 auto;
 }
 
-
 .country,
 .soviet-country {
   fill: #d0d0d0; /* country colour */
@@ -258,10 +260,8 @@ a:hover {
 /* *********************************** */
 .bar-graphic-container {
   position: -webkit-sticky;
-  /* margin-top: 320px; */
   opacity: 1;
   position: sticky;
-  right: 2rem;
   z-index: 15;
   height: 300px;
   background-color: transparent;
