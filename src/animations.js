@@ -74,6 +74,12 @@ function firstAnimation(worldMap) {
       opacity: "1"
     }
   });
+
+  const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
+  worldMap.moveMapContainer({
+    duration: 1000,
+    top: quarterPageHeight
+  });
 }
 
 function secondAnimation(worldMap, barChart) {

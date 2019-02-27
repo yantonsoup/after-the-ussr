@@ -9,27 +9,24 @@ export default class BarChart {
       sovietCountryIsoCodes.includes(country.id)
     );
     this.element = opts.element;
-    // create the chart
-    this.draw();
-  }
-
-  draw() {
-    // define width, height and margin
-    const scrollContainer = d3.select(".scroll");
-    // const boundingBox = scrollContainer.node().getBoundingClientRect();
-    const boundingBox = d3
-      .select(this.element)
-      .node()
-      .getBoundingClientRect();
-
-    const { width } = boundingBox;
-
     this.barMargin = {
       top: 15,
       right: 85,
       bottom: 40,
       left: 64
     };
+
+    // create the chart
+    this.draw();
+  }
+
+  draw() {
+    const boundingBox = d3
+      .select(this.element)
+      .node()
+      .getBoundingClientRect();
+
+    const { width } = boundingBox;
 
     const halfPageHeight = Math.floor(window.innerHeight)/2
 
@@ -40,7 +37,7 @@ export default class BarChart {
 
     const headerText = "1989 Soviet State Populations";
 
-    this.drawTitle(headerText, "mil");
+    this.drawTitle(headerText, "m");
 
     // create the other stuff
     this.setXScale(this.data);
