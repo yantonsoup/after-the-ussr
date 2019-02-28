@@ -1,7 +1,15 @@
-import d3 from 'd3';;
-import { sovietCountryIsoCodes, primaryReceivingIsoCodes, colors, sovietLabelShift } from "./constants";
+import d3 from 'd3';
+import chroma from 'chroma-js'
 
-const rotate = -20; // so that [-60, 0] becomes initial center of projection
+import { 
+  sovietCountryIsoCodes, 
+  populationsIn1989millions,
+  primaryReceivingIsoCodes, 
+  colors, 
+  sovietLabelShift
+} from "./constants";
+
+const rotate = -20;
 const maxlat = 83;
 
 export default class WorldMap {
@@ -12,8 +20,6 @@ export default class WorldMap {
       sovietCountryIsoCodes.includes(country.id)
     );
     this.element = opts.element;
-
-    // create the chart
     this.draw();
   }
 
@@ -26,6 +32,33 @@ export default class WorldMap {
   }
 
   draw() {
+    const logDomain = chroma.scale(['yellow', 'red']).domain([1, 60]);
+
+    const populations = populationsIn1989millions.reduce((acc, item) => {
+      return [
+        item.population,
+        ...acc,
+      ]
+    }, [])
+
+    const populationColors = populations.map((pop) => {
+      const populationColor = logDomain(pop).hex()
+      console.log('%c Oh my heavens! ', `background: ${populationColor}; color: ${populationColor}`);
+
+      console.warn({populationColor})
+      return populationColor;
+    })
+    console.warn({populationColors})
+    const classBreaks = chroma.limits(populations, 'e', 14);
+    console.warn({populations})
+    
+    const colorscale = chroma.scale('OrRd').colors(15);
+    
+    console.warn({ colorscale })
+    console.warn('chroma.brewer.OrRd', chroma.brewer.OrRd)
+    const domaindColor = logDomain(58)
+    console.warn({logDomain})
+    console.warn({domaindColor})
     const boundingBox = d3
       .select(this.element)
       .node()
@@ -127,7 +160,6 @@ export default class WorldMap {
       .attr("class", "place-label")
       .attr("transform", d => {
         const [x, y] = this.path.centroid(d);
-        console.warn('id', d.id, 'centroid x ', x, 'centroid y', y)
         return `translate(${x},${y})`;
       })
       .attr("x", function({ id }) {
@@ -148,6 +180,7 @@ export default class WorldMap {
   }
 
   // TODO: makethis an actual choropleth funk
+
   createPopulationChoropleth() {
     d3.selectAll(".soviet-country")
       .transition()
@@ -159,10 +192,10 @@ export default class WorldMap {
   }
 
   moveMapContainer({ top, duration }) {
-        d3.select(this.element)
-        .transition()
-        .duration(duration)
-        .style("top", top + "px")
+    d3.select(this.element)
+      .transition()
+      .duration(duration)
+      .style("top", top + "px")
   }
 
   addPointsToMap() {

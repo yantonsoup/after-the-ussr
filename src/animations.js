@@ -13,7 +13,7 @@ function zeroAnimation(worldMap) {
     duration: 100,
     section: ".soviet-country",
     styles: {
-      fill: "fcd116",
+      fill: "#fcd116",
     }
   });
 
@@ -109,7 +109,7 @@ function secondAnimation(worldMap, barChart) {
 }
 
 function thirdAnimation(worldMap, barChart) {
-  const title = "Russians Populations 1989";
+  const title = "Russian populations 1989";
   barChart.drawTitle(title, "thou");
   barChart.repaintChart(russianPopulationsIn1989thousands);
 }
@@ -119,15 +119,32 @@ function fourthAnimation(worldMap, barChart) {
   worldMap.drawCurves();
 
   // worldMap.drawLabelPointer()
-  const title = "Net Migration to Russia '89-'02";
+  const title = "Net return '89-'02";
   barChart.drawTitle(title, "thou");
   barChart.repaintChart(netMigrantsToRussia1989to2002);
+
+  // worldMap.animateSectionStyles({
+  //   duration: 1000,
+  //   section: ".arc",
+  //   styles: {
+  //     opacity: "0"
+  //   }
+  // });
 }
 
+/* ************ ****** ****** ****** ****** ******  */
 function fifthAnimation(worldMap, barChart) {
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".arc",
+    styles: {
+      opacity: "0"
+    }
+  });
+
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".place-label",
     styles: {
       opacity: "0"
     }
@@ -149,45 +166,47 @@ function fifthAnimation(worldMap, barChart) {
     duration: 1000,
     top: graphicMarginTop
   });
-}
-
-function sixthAnimation(worldMap, barChart) {
-  worldMap.animateSectionStyles({
-    duration: 500,
-    section: ".place-label",
-    styles: {
-      opacity: "0"
-    }
-  });
 
   const zoomParams = {
-    scale: 2,
+    scale: 1,
     duration: 1000,
-    translateX: -Math.floor(worldMap.width * 0.5),
-    translateY: -Math.floor(worldMap.height * 0.1)
+    translateX: 0,
+    translateY: 0
   };
 
   worldMap.animateMapZoom(zoomParams);
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".soviet-country",
+    styles: {
+      opacity: "0.5",
+      fill: "#d0d0d0"
+    }
+  });
+
+
+  worldMap.animateMapZoom(zoomParams);
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: "#RUS",
+    styles: {
+      opacity: "1",
+      fill: "#fcd116"
+    }
+  });
 
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".non-soviet-country",
     styles: {
-      opacity: "0.25"
-    }
-  });
-
-  worldMap.animateSectionStyles({
-    duration: 500,
-    section: ".soviet-country",
-    styles: {
-      opacity: "0.25",
-      fill: "#d0d0d0"
+      fill: '#d0d0d0',
+      opacity: "0.5",
     }
   });
 }
 
-function seventhAnimation(worldMap, barChart) {
+
+function sixthAnimation(worldMap, barChart) {
   const title = "Top Destinations For FSU Immigrants";
 
   barChart.drawTitle(title);
@@ -196,7 +215,7 @@ function seventhAnimation(worldMap, barChart) {
   const zoomParams = {
     scale: 2,
     duration: 1000,
-    translateX: -Math.floor(worldMap.width * 0.2),
+    translateX: -Math.floor(worldMap.width * 0.17),
     translateY: -Math.floor(worldMap.height * 0.2)
   };
 
@@ -211,9 +230,19 @@ function seventhAnimation(worldMap, barChart) {
   });
 
   worldMap.animateWorldSections(zoomParams);
+
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: ".non-soviet-country",
+    styles: {
+      opacity: "0.5",
+      "stroke-width": "0.25px"
+    }
+  });
+
 }
 
-function eightAnimation(worldMap, barChart) {
+function seventhAnimation(worldMap, barChart) {
   const zoomParams = {
     scale: 4,
     duration: 1000,
@@ -256,6 +285,10 @@ function ninthAnimation(worldMap, barChart) {
       opacity: "1"
     }
   });
+}
+
+function eightAnimation(worldMap, barChart) {
+
 }
 
 function tenthAnimation(worldMap, barChart) {

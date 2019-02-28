@@ -118,20 +118,20 @@ export default class BarChart {
     this.plot
       .append("g")
       .attr("class", "y-axis")
-      .call(yAxisStuff);
+      .call(yAxisStuff)
+      .style('fill', 'lightgoldenrodyellow')
+      .style('letter-spacing', '1px')
+      .style('font-weight', '400');
   }
 
   redrawYAxes(data) {
     const yAxisStuff = d3.svg
       .axis()
       .scale(this.yScale)
-      //no tick marks
       .tickSize(0)
       .orient("left");
 
     this.plot.select(".y-axis").call(yAxisStuff);
-
-    // .call(yAxisStuff)
   }
 
   repaintChart(data) {
@@ -236,7 +236,6 @@ export default class BarChart {
       .text(function(datum) {
         return parseMillionsPopulationText(datum);
       })
-      .style("fill", "lightgoldenrodyellow")
       .style("font-weight", 600)
       .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
   }
