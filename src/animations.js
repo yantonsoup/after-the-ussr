@@ -240,6 +240,30 @@ function sixthAnimation(worldMap, barChart) {
     }
   });
 
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: "#USA",
+    styles: {
+      opacity: "1"
+    }
+  });
+
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: "#DEU",
+    styles: {
+      opacity: "1"
+    }
+  });
+
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: "#ISR",
+    styles: {
+      opacity: "1"
+    }
+  });
+
 }
 
 function seventhAnimation(worldMap, barChart) {
@@ -247,7 +271,7 @@ function seventhAnimation(worldMap, barChart) {
     scale: 4,
     duration: 1000,
     translateX: -Math.floor(worldMap.width * 0.4),
-    translateY: -Math.floor(worldMap.height * 0.2)
+    translateY: -Math.floor(worldMap.height * 0.22)
   };
 
   worldMap.animateMapZoom(zoomParams);
@@ -267,9 +291,60 @@ function seventhAnimation(worldMap, barChart) {
       opacity: "1"
     }
   });
+
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: ".non-soviet-country",
+    styles: {
+      "stroke-width": "0.15px"
+    }
+  });
 }
 
+
+function eightAnimation(worldMap, barChart) {
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: "#arc-DEU",
+    styles: {
+      opacity: "0"
+    }
+  });
+
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: "#DEU",
+    styles: {
+      fill: "#d0d0d0",
+      opacity: "0.5"
+    }
+  });
+
+
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: "#arc-ISR",
+    styles: {
+      opacity: "1"
+    }
+  });
+}
+
+
 function ninthAnimation(worldMap, barChart) {
+ 
+}
+
+function tenthAnimation(worldMap, barChart) {
+  const zoomParams = {
+    scale: 2,
+    duration: 1000,
+    translateX: -Math.floor(worldMap.width * 0.17),
+    translateY: -Math.floor(worldMap.height * 0.2)
+  };
+
+  worldMap.animateMapZoom(zoomParams);
+
   worldMap.animateSectionStyles({
     duration: 1000,
     section: "#arc-DEU",
@@ -282,24 +357,57 @@ function ninthAnimation(worldMap, barChart) {
     duration: 1000,
     section: "#arc-ISR",
     styles: {
+      opacity: "0"
+    }
+  });
+
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: "#arc-USA",
+    styles: {
       opacity: "1"
     }
   });
 }
 
-function eightAnimation(worldMap, barChart) {
+function eleventhAnimation(worldMap, barChart) {
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: ".arc",
+    styles: {
+      opacity: "0"
+    }
+  });
 
+  const zoomParams = {
+    scale: 1,
+    duration: 1000,
+    translateX: 0,
+    translateY: 0
+  };
+
+  worldMap.animateMapZoom(zoomParams);
 }
 
-function tenthAnimation(worldMap, barChart) {
-  // Zoom to Germany -> DONE
-  // hide other arcs
-  // animate bars?
+function twelfthAnimation(worldMap, barChart) {
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: ".arc",
+    styles: {
+      opacity: "0"
+    }
+  });
+
+  const zoomParams = {
+    scale: 1,
+    duration: 1000,
+    translateX: 0,
+    translateY: 0
+  };
+
+  worldMap.animateMapZoom(zoomParams);
+  worldMap.createPopulationChoropleth()
 }
-
-function eleventhAnimation(worldMap, barChart) {}
-
-function twelfthAnimation(worldMap, barChart) {}
 
 export default {
   0: zeroAnimation,
