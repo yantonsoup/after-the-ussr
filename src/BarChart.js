@@ -35,9 +35,9 @@ export default class BarChart {
 
     this.paintPlot(this.width, this.height, this.barMargin);
 
-    const headerText = "1989 Soviet State Populations";
+    // const headerText = "1989 Soviet State Populations";
 
-    this.drawTitle(headerText, "m");
+    // this.drawTitle(headerText, "m");
 
     // create the other stuff
     this.setXScale(this.data);

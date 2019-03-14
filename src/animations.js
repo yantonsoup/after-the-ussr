@@ -89,7 +89,11 @@ function secondAnimation(worldMap, barChart) {
   });
 
   barChart.revealBarChart();
-  barChart.redrawBars(populationsIn1989millions);
+  // barChart.redrawBars(populationsIn1989millions);
+  const title = "1898 Soviet State Populations";
+  barChart.drawTitle(title, "m");
+  barChart.repaintChart(populationsIn1989millions);
+
   barChart.addPopulationLabels(populationsIn1989millions);
   worldMap.animateSectionStyles({
     duration: 500,
@@ -112,6 +116,25 @@ function thirdAnimation(worldMap, barChart) {
   const title = "Russian populations 1989";
   barChart.drawTitle(title, "thou");
   barChart.repaintChart(russianPopulationsIn1989thousands);
+
+  
+  
+  // hide curves and dot on way up
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".arc",
+    styles: {
+      opacity: "0"
+    }
+  });
+
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: "circle",
+    styles: {
+      opacity: "0"
+    }
+  });
 }
 
 function fourthAnimation(worldMap, barChart) {
@@ -123,6 +146,15 @@ function fourthAnimation(worldMap, barChart) {
   barChart.drawTitle(title, "thou");
   barChart.repaintChart(netMigrantsToRussia1989to2002);
 
+  // on way up
+  const zoomParams = {
+    scale: 4,
+    duration: 800,
+    translateX: -Math.floor(worldMap.width * 0.462),
+    translateY: -Math.floor(worldMap.height * 0.2)
+  };
+
+  worldMap.animateMapZoom(zoomParams);
   // worldMap.animateSectionStyles({
   //   duration: 1000,
   //   section: ".arc",
@@ -132,8 +164,15 @@ function fourthAnimation(worldMap, barChart) {
   // });
 }
 
-/* ************ ****** ****** ****** ****** ******  */
 function fifthAnimation(worldMap, barChart) {
+  const title = "Percentage return to Russia";
+  barChart.drawTitle(title, "%");
+  barChart.repaintChart(percentMigrantsToRussia1989to2002);
+  
+}
+
+/* ************ ****** ****** ****** ****** ******  */
+function sixthAnimation(worldMap, barChart) {
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".arc",
@@ -163,7 +202,7 @@ function fifthAnimation(worldMap, barChart) {
   const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
 
   worldMap.moveMapContainer({
-    duration: 1000,
+    duration: 750,
     top: graphicMarginTop
   });
 
@@ -206,7 +245,7 @@ function fifthAnimation(worldMap, barChart) {
 }
 
 
-function sixthAnimation(worldMap, barChart) {
+function seventhAnimation(worldMap, barChart) {
   const title = "Top Destinations For FSU Immigrants";
 
   barChart.drawTitle(title);
@@ -266,7 +305,7 @@ function sixthAnimation(worldMap, barChart) {
 
 }
 
-function seventhAnimation(worldMap, barChart) {
+function eightAnimation(worldMap, barChart) {
   const zoomParams = {
     scale: 4,
     duration: 1000,
@@ -302,7 +341,7 @@ function seventhAnimation(worldMap, barChart) {
 }
 
 
-function eightAnimation(worldMap, barChart) {
+function ninthAnimation(worldMap, barChart) {
   worldMap.animateSectionStyles({
     duration: 1000,
     section: "#arc-DEU",
@@ -331,11 +370,11 @@ function eightAnimation(worldMap, barChart) {
 }
 
 
-function ninthAnimation(worldMap, barChart) {
+function tenthAnimation(worldMap, barChart) {
  
 }
 
-function tenthAnimation(worldMap, barChart) {
+function eleventhAnimation(worldMap, barChart) {
   const zoomParams = {
     scale: 2,
     duration: 1000,
@@ -370,7 +409,7 @@ function tenthAnimation(worldMap, barChart) {
   });
 }
 
-function eleventhAnimation(worldMap, barChart) {
+function twelfthAnimation(worldMap, barChart) {
   worldMap.animateSectionStyles({
     duration: 1000,
     section: ".arc",
@@ -389,7 +428,7 @@ function eleventhAnimation(worldMap, barChart) {
   worldMap.animateMapZoom(zoomParams);
 }
 
-function twelfthAnimation(worldMap, barChart) {
+function thirteenthAnimation(worldMap, barChart) {
   worldMap.animateSectionStyles({
     duration: 1000,
     section: ".arc",
@@ -422,5 +461,6 @@ export default {
   9: ninthAnimation,
   10: tenthAnimation,
   11: eleventhAnimation,
-  12: twelfthAnimation
+  12: twelfthAnimation,
+  13: thirteenthAnimation
 };
