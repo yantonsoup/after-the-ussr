@@ -13,8 +13,6 @@ window.onbeforeunload = function() {
 };
 
 loadMap().then(json => {
-  console.warn('Test DEE');
-
   firstPaint();
 
   const countries = topojson.feature(json, json.objects.subunits)

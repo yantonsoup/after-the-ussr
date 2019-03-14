@@ -1,6 +1,8 @@
-import d3 from 'd3';
-import { sovietCountryIsoCodes, colors } from "./constants";
+import d3 from "d3";
+import chroma from "chroma-js";
 
+import { sovietCountryIsoCodes, colors } from "./constants";
+import { createChromaData } from "./utils";
 export default class BarChart {
   constructor(opts) {
     // load in arguments from config object
@@ -28,23 +30,19 @@ export default class BarChart {
 
     const { width } = boundingBox;
 
-    const halfPageHeight = Math.floor(window.innerHeight)/2
+    const halfPageHeight = Math.floor(window.innerHeight) / 2;
 
     this.width = width - this.barMargin.left - this.barMargin.right;
     this.height = halfPageHeight - this.barMargin.top - this.barMargin.bottom;
 
     this.paintPlot(this.width, this.height, this.barMargin);
 
-    // const headerText = "1989 Soviet State Populations";
-
-    // this.drawTitle(headerText, "m");
-
     // create the other stuff
     this.setXScale(this.data);
     this.setYScale(this.data);
 
     this.bindDataToBars(this.data);
-    this.paintHiddenBars();
+    this.paintHiddenBars(this.data);
     this.addYAxes();
 
     this.hideAllElements();
@@ -65,15 +63,9 @@ export default class BarChart {
     d3.select(".bar-graphic-header").style("opacity", "0");
   }
 
-  drawTitle(text, units) {
-    this.textHeader = d3.select(".bar-graphic-header-text");
-    this.textHeader.text(text);
+  paintHiddenBars(data) {
+    const chromaDataCodes = createChromaData(data);
 
-    this.textHeaderUnits = d3.select(".bar-graphic-header-units");
-    this.textHeaderUnits.text(units);
-  }
-
-  paintHiddenBars() {
     this.bars
       .append("rect")
       .attr("class", "bar")
@@ -81,7 +73,7 @@ export default class BarChart {
         return this.yScale(d.name);
       })
       .attr("height", () => this.yScale.rangeBand())
-      .attr("fill", (d, i) => colors[i]);
+      .attr("fill", (d, i) => chromaDataCodes[d.name]);
   }
 
   setXScale(data) {
@@ -119,9 +111,17 @@ export default class BarChart {
       .append("g")
       .attr("class", "y-axis")
       .call(yAxisStuff)
-      .style('fill', 'lightgoldenrodyellow')
-      .style('letter-spacing', '1px')
-      .style('font-weight', '400');
+      .style("fill", "lightgoldenrodyellow")
+      .style("letter-spacing", "1px")
+      .style("font-weight", "400");
+  }
+
+  drawTitle(text, units) {
+    this.textHeader = d3.select(".bar-graphic-header-text");
+    this.textHeader.text(text);
+
+    this.textHeaderUnits = d3.select(".bar-graphic-header-units");
+    this.textHeaderUnits.text(units);
   }
 
   redrawYAxes(data) {
@@ -178,15 +178,18 @@ export default class BarChart {
   }
 
   redrawBars(data) {
+    const chromaDataCodes = createChromaData(data);
+
     d3.selectAll("rect")
       .data(data)
       .transition()
       .delay(function(d, i) {
-        return i * 100;
+        return i * 50;
       })
       .attr("width", d => {
         return this.xScale(d.population);
-      });
+      })
+      .attr("fill", (d, i) => chromaDataCodes[d.name]);
   }
 
   redrawPercentLabels(data) {

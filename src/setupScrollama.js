@@ -3,12 +3,14 @@ import scrollama from 'scrollama';
 import animations from "./animations";
 
 export default function setupScrollama(worldMap, barChart) {
-  // response = { element, direction, index }
   function handleStepEnter(response) {
+    // response = { element, direction, index }
+
     console.warn('SCROLLAMA animation[index]:: ', response.index)
 
-    const animationIndex = response.index
-    const animationHandler = animations[animationIndex]
+    const animationIndex = response.index;
+    const animationHandler = animations[animationIndex];
+
     animationHandler(worldMap, barChart)
   }
 

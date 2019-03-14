@@ -1,5 +1,6 @@
 import d3 from 'd3';
 import chroma from 'chroma-js'
+import {createChromaData} from './utils'
 
 import { 
   sovietCountryIsoCodes, 
@@ -14,7 +15,6 @@ const maxlat = 83;
 
 export default class WorldMap {
   constructor(opts) {
-    // load in arguments from config object
     this.data = opts.data;
     this.sovietDataPoints = opts.data.filter(country =>
       sovietCountryIsoCodes.includes(country.id)
@@ -31,41 +31,15 @@ export default class WorldMap {
     return [xymin, xymax];
   }
 
+
   draw() {
-    const logDomain = chroma.scale(['yellow', 'red']).domain([1, 60]);
-
-    const populations = populationsIn1989millions.reduce((acc, item) => {
-      return [
-        item.population,
-        ...acc,
-      ]
-    }, [])
-
-    const populationColors = populations.map((pop) => {
-      const populationColor = logDomain(pop).hex()
-      console.log('%c Oh my heavens! ', `background: ${populationColor}; color: ${populationColor}`);
-
-      console.warn({populationColor})
-      return populationColor;
-    })
-    console.warn({populationColors})
-    const classBreaks = chroma.limits(populations, 'e', 14);
-    console.warn({populations})
-    
-    const colorscale = chroma.scale('OrRd').colors(15);
-    
-    console.warn({ colorscale })
-    console.warn('chroma.brewer.OrRd', chroma.brewer.OrRd)
-    const domaindColor = logDomain(58)
-    console.warn({logDomain})
-    console.warn({domaindColor})
     const boundingBox = d3
       .select(this.element)
       .node()
       .getBoundingClientRect();
 
+    this.width = boundingBox.width
     this.height = boundingBox.height;
-    this.width = boundingBox.width;
 
     // define width, height and margin
     this.projection = d3.geo
@@ -115,7 +89,6 @@ export default class WorldMap {
     this.mapGraphic
       .selectAll('.soviet-country')
       .style('fill', '#fcd116')
-
   }
 
   applyInitialHighlight() {
@@ -180,13 +153,15 @@ export default class WorldMap {
   }
 
   // TODO: makethis an actual choropleth funk
+  createPopulationChoropleth(populationData) {
+    const chromaDataCodes = createChromaData(populationData)
+    console.warn({chromaDataCodes})
 
-  createPopulationChoropleth() {
     d3.selectAll(".soviet-country")
       .transition()
       .duration(1000)
       .style("fill", function(d, i) {
-        return colors[i];
+        return chromaDataCodes[d.id];
       })
       .style("stroke-width", 0.25 + "px");
   }
