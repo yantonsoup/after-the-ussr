@@ -1,13 +1,13 @@
 import chroma from 'chroma-js'
 
 export function createChromaData(populationDataSet) {
-    console.warn('createChromaData: chroma dataset', populationDataSet)
+    // console.warn('createChromaData: chroma dataset', populationDataSet)
 
     const dataRange = populationDataSet
       .map(country => country.population)
       .sort((a, b) => a - b)
     
-    console.warn('dataRange', dataRange)
+    // console.warn('dataRange', dataRange)
 
     const chromaDomain = chroma.scale(['white', 'orange']).domain(dataRange);
 

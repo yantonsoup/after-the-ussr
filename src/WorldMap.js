@@ -1,12 +1,11 @@
-import d3 from 'd3';
-import chroma from 'chroma-js'
-import {createChromaData} from './utils'
+import d3 from "d3";
+import { createChromaData } from "./utils";
 
-import { 
-  sovietCountryIsoCodes, 
+import {
+  sovietCountryIsoCodes,
   populationsIn1989millions,
-  primaryReceivingIsoCodes, 
-  colors, 
+  primaryReceivingIsoCodes,
+  colors,
   sovietLabelShift
 } from "./constants";
 
@@ -31,14 +30,13 @@ export default class WorldMap {
     return [xymin, xymax];
   }
 
-
   draw() {
     const boundingBox = d3
       .select(this.element)
       .node()
       .getBoundingClientRect();
 
-    this.width = boundingBox.width
+    this.width = boundingBox.width;
     this.height = boundingBox.height;
 
     // define width, height and margin
@@ -73,35 +71,54 @@ export default class WorldMap {
         return d.id;
       })
       .attr("class", function(datapoint, i) {
-        if (sovietCountryIsoCodes.includes(datapoint.id)) {
-          return "country soviet-country";
+        if (datapoint.id === "RUS") {
+          return "soviet-country"
+        } if (sovietCountryIsoCodes.includes(datapoint.id)) {
+          return "soviet-country fsu-state";
         } else {
-          return "country non-soviet-country";
+          return "non-soviet-country";
         }
       })
       .style("display", function(datum) {
-        if (datum.id === 'ATA') {
-          console.warn('ATA')
-          return 'none'
+        if (datum.id === "ATA") {
+          console.warn("ATA");
+          return "none";
         }
-      })
+      });
 
-    this.mapGraphic
-      .selectAll('.soviet-country')
-      .style('fill', '#fcd116')
+    this.applyInitialHighlight()
   }
 
   applyInitialHighlight() {
-    this.mapGraphic
-      .selectAll('.soviet-country')
-      .style('fill', '#fcd116')
+    // this.mapGraphic.selectAll(".soviet-country").style("fill", "#d0d0d0");
+    // this.mapGraphic.selectAll(".soviet-country").style("fill", "lightgoldenrodyellow");
+    // this.mapGraphic.selectAll(".soviet-country").style("fill", "#fcd116");
+
+    this.animateSectionStyles({
+      duration: 500,
+      section: ".soviet-country",
+      styles: {
+        opacity: "1",
+        fill: "#d0d0d0",
+      }
+    });
+
+    this.animateSectionStyles({
+      duration: 500,
+      section: ".non-soviet-country",
+      styles: {
+        opacity: "0.5",
+        fill: "#d0d0d0",
+      }
+    });
+
   }
 
   getInitialScale() {
     const b = this.getMercatorBounds(this.projection);
     const s = this.width / (b[1][0] - b[0][0]);
     const scaleExtent = [s, 10 * s];
-    return scaleExtent[0]
+    return scaleExtent[0];
   }
 
   animateSectionStyles({ duration, section, styles, delay = 0 } = {}) {
@@ -148,16 +165,16 @@ export default class WorldMap {
       .text(function(d) {
         return d.properties.name;
       })
-      .style("font-size", 3 + "px")
-      // .style("fill", "white")
+      .style("font-size", 3 + "px");
+    // .style("fill", "white")
   }
 
   // TODO: makethis an actual choropleth funk
   createPopulationChoropleth(populationData) {
-    const chromaDataCodes = createChromaData(populationData)
-    console.warn({chromaDataCodes})
+    const chromaDataCodes = createChromaData(populationData);
+    console.warn({ chromaDataCodes });
 
-    d3.selectAll(".soviet-country")
+    d3.selectAll(".fsu-state")
       .transition()
       .duration(1000)
       .style("fill", function(d, i) {
@@ -170,7 +187,7 @@ export default class WorldMap {
     d3.select(this.element)
       .transition()
       .duration(duration)
-      .style("top", top + "px")
+      .style("top", top + "px");
   }
 
   addPointsToMap() {
@@ -242,9 +259,9 @@ export default class WorldMap {
 
   drawCurves() {
     const centroidsWithValues = this.sovietDataPoints
-      .filter(({id}) => id !== 'RUS')
+      .filter(({ id }) => id !== "RUS")
       .map(country => this.path.centroid(country));
-  
+
     // console.warn("centroidsWithValues", centroidsWithValues);
     const russiaCoordinates = [235, 110];
 
@@ -261,58 +278,70 @@ export default class WorldMap {
         // console.warn({datum})
 
         const curveoffset = 15;
-        const origin = [datum[0], datum[1]]
+        const origin = [datum[0], datum[1]];
         const dest = russiaCoordinates;
         const mid = [(origin[0] + dest[0]) / 2, (origin[1] + dest[1]) / 2];
 
         //define handle points for Bezier curves. Higher values for curveoffset will generate more pronounced curves.
-        const midcurve = [mid[0] , mid[1] - curveoffset];
+        const midcurve = [mid[0], mid[1] - curveoffset];
 
         // move cursor to origin
         // define the arrowpoint: the destination, minus a scaled tangent vector, minus an orthogonal vector scaled to the datum.trade variable
-     
-  
+
         // move cursor to origin
-        return "M" + origin[0] + ',' + origin[1] 
-        // smooth curve to offset midpoint
-          + "S" + midcurve[0] + "," + midcurve[1]
-        //smooth curve to destination	
-          + "," + dest[0] + "," + dest[1]
+        return (
+          "M" +
+          origin[0] +
+          "," +
+          origin[1] +
+          // smooth curve to offset midpoint
+          "S" +
+          midcurve[0] +
+          "," +
+          midcurve[1] +
+          //smooth curve to destination
+          "," +
+          dest[0] +
+          "," +
+          dest[1]
+        );
       })
-      .style('fill', 'none')
-      .style('stroke-width', '0.5px')
-      .style('stroke', '#7772a8')
-      .style('opacity', '0')
+      .style("fill", "none")
+      .style("stroke-width", "0.5px")
+      .style("stroke", "#7772a8")
+      .style("opacity", "0")
       .transition()
       .duration(1000)
-      .style('opacity', '1')
+      .style("opacity", "1");
+  }
+  
+  highlightInternationalCountries() {
+    this.mapGraphic
+      .select("#ISR")
+      .style("opacity", "1")
+      .style("fill", "blue");
+
+    this.mapGraphic
+      .select("#DEU")
+      .style("opacity", "1")
+      .style("fill", "green");
+
+    this.mapGraphic
+      .select("#USA")
+      .style("opacity", "1")
+      .style("fill", "white");
   }
 
-  animateWorldSections() {
-    this.mapGraphic
-      .select('#ISR')
-      .style('opacity', '1')
-      .style('fill', 'pink')
-
-    this.mapGraphic
-      .select('#DEU')
-      .style('opacity', '1')
-      .style('fill', 'green')
-
-    this.mapGraphic
-      .select('#USA')
-      .style('opacity', '1')
-      .style('fill', 'blue')
-
+  highlightInternationalLines() {
     const russiaCoordinates = [235, 110];
 
     const receivingCentroids = this.data
-      .filter(({id}) => primaryReceivingIsoCodes.includes(id))
+      .filter(({ id }) => primaryReceivingIsoCodes.includes(id))
       .map(country => {
         return {
           id: country.id,
           centroid: this.path.centroid(country)
-        }
+        };
       });
 
     const receivingArcs = this.mapGraphic
@@ -320,7 +349,7 @@ export default class WorldMap {
       .selectAll("path.datamaps-arc")
       .data(receivingCentroids);
 
-    const curveOffsets = [50, 15, 15]
+    const curveOffsets = [50, 15, 15];
     // 0 => usa
     // 1 => israel
     // 2 => germany
@@ -329,39 +358,49 @@ export default class WorldMap {
       .enter()
       .append("path")
       .attr("class", "arc")
-      .attr("id", (fulldatum) => {
-        return 'arc-' + fulldatum.id
+      .attr("id", fulldatum => {
+        return "arc-" + fulldatum.id;
       })
       .attr("d", (fulldatum, index) => {
-        const datum = fulldatum.centroid 
-        console.warn('arc datum', datum)
-        console.warn('arc fulldatum', fulldatum)
+        const datum = fulldatum.centroid;
+        console.warn("arc datum", datum);
+        console.warn("arc fulldatum", fulldatum);
 
         const curveoffset = 45;
-        const origin = [datum[0], datum[1]]
+        const origin = [datum[0], datum[1]];
         const dest = russiaCoordinates;
         const mid = [(origin[0] + dest[0]) / 2, (origin[1] + dest[1]) / 2];
 
         //define handle points for Bezier curves. Higher values for curveoffset will generate more pronounced curves.
-        const midcurve = [mid[0] , mid[1] - curveOffsets[index]];
+        const midcurve = [mid[0], mid[1] - curveOffsets[index]];
 
         // move cursor to origin
         // define the arrowpoint: the destination, minus a scaled tangent vector, minus an orthogonal vector scaled to the datum.trade variable
-     
-  
+
         // move cursor to origin
-        return "M" + origin[0] + ',' + origin[1] 
-        // smooth curve to offset midpoint
-          + "S" + midcurve[0] + "," + midcurve[1]
-        //smooth curve to destination	
-          + "," + dest[0] + "," + dest[1]
+        return (
+          "M" +
+          origin[0] +
+          "," +
+          origin[1] +
+          // smooth curve to offset midpoint
+          "S" +
+          midcurve[0] +
+          "," +
+          midcurve[1] +
+          //smooth curve to destination
+          "," +
+          dest[0] +
+          "," +
+          dest[1]
+        );
       })
-      .style('fill', 'none')
-      .style('stroke-width', '0.5px')
-      .style('stroke', '#7772a8')
-      .style('opacity', '0')
+      .style("fill", "none")
+      .style("stroke-width", "0.5px")
+      .style("stroke", "#7772a8")
+      .style("opacity", "0")
       .transition()
       .duration(1000)
-      .style('opacity', '1')
+      .style("opacity", "1");
   }
 }
