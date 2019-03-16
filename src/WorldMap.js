@@ -99,7 +99,7 @@ export default class WorldMap {
       section: ".soviet-country",
       styles: {
         opacity: "1",
-        fill: "#d0d0d0",
+        fill: "lightgoldenrodyellow",
       }
     });
 
@@ -169,10 +169,11 @@ export default class WorldMap {
     // .style("fill", "white")
   }
 
-  // TODO: makethis an actual choropleth funk
   createPopulationChoropleth(populationData) {
     const chromaDataCodes = createChromaData(populationData);
-    console.warn({ chromaDataCodes });
+
+    console.warn('WORLDMAP', { chromaDataCodes });
+    Object.values(chromaDataCodes).forEach(color => console.log('%ccolor code',  `background: ${color}; color: ${color};`))
 
     d3.selectAll(".fsu-state")
       .transition()

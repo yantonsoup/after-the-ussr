@@ -185,20 +185,20 @@ export const migrationAbroadEthnicity1995to2002 = [
 ];
 
 export const migrationAbroadDestination1995to2002 = [
-  { name: 'a', population: 0},
-  { name: 'b', population: 0},
-  { name: 'c', population: 0},
-  { name: 'd', population: 0},
-  { name: 'e', population: 0},
-  { name: 'f', population: 0},
-  { name: 'g', population: 0},
-  { name: 'h', population: 0},
-  { name: 'i', population: 0},
-  { name: 'j', population: 0},
-  { name: 'k', population: 0},
-  { name: "Germany", population: 59 },
-  { name: "Israel", population: 25 },
-  { name: "United States", population: 11 },
+  // { name: '', population: 0},
+  // { name: '', population: 0},
+  // { name: '', population: 0},
+  // { name: '', population: 0},
+  // { name: '', population: 0},
+  // { name: '', population: 0},
+  // { name: '', population: 0},
+  // { name: '', population: 0},
+  // { name: '', population: 0},
+  // { name: '', population: 0},
+  // { name: '', population: 0},
+  { name: "DEU", population: 59 },
+  { name: "ISR", population: 25 },
+  { name: "USA", population: 11 },
 ];
 
 export const populationsIn1991 = [
@@ -225,7 +225,7 @@ export const populationsIn1991 = [
 //   { name: "BLR", population: 26500, net: "in" },
 //   { name: "EST", population: 66400 },
 //   { name: "GEO", population: 358700 },
-//   { name: "KAZ", population: 1497400 },
+//   { name: "KAZ", population: 1497400 },s
 //   { name: "KGZ", population: 272900 },
 //   { name: "LVA", population: 109700 },
 //   { name: "LTU", population: 46600 },

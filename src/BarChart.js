@@ -58,35 +58,26 @@ export default class BarChart {
       .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
   }
 
-  hideAllElements() {
-    this.plot.style("opacity", "0");
-    d3.select(".bar-graphic-header").style("opacity", "0");
+
+
+  drawTitle(text, units) {
+    this.textHeader = d3.select(".bar-graphic-header-text");
+    this.textHeader.text(text);
+
+    this.textHeaderUnits = d3.select(".bar-graphic-header-units");
+    this.textHeaderUnits.text(units);
   }
 
-  paintHiddenBars(data) {
-    const chromaDataCodes = createChromaData(data);
+  redrawYAxes() {
+    const yAxisStuff = d3.svg
+      .axis()
+      .scale(this.yScale)
+      .tickSize(0)
+      .orient("left");
 
-    this.bars
-      .append("rect")
-      .attr("class", "bar")
-      .attr("y", d => {
-        return this.yScale(d.name);
-      })
-      .attr("height", () => this.yScale.rangeBand())
-      .attr("fill", (d, i) => chromaDataCodes[d.name]);
+    this.plot.select(".y-axis").call(yAxisStuff);
   }
 
-  setXScale(data) {
-    this.xScale = d3.scale
-      .linear()
-      .range([0, this.width])
-      .domain([
-        0,
-        d3.max(data, function(d) {
-          return d.population;
-        })
-      ]);
-  }
 
   setYScale(data) {
     this.yScale = d3.scale
@@ -116,23 +107,6 @@ export default class BarChart {
       .style("font-weight", "400");
   }
 
-  drawTitle(text, units) {
-    this.textHeader = d3.select(".bar-graphic-header-text");
-    this.textHeader.text(text);
-
-    this.textHeaderUnits = d3.select(".bar-graphic-header-units");
-    this.textHeaderUnits.text(units);
-  }
-
-  redrawYAxes(data) {
-    const yAxisStuff = d3.svg
-      .axis()
-      .scale(this.yScale)
-      .tickSize(0)
-      .orient("left");
-
-    this.plot.select(".y-axis").call(yAxisStuff);
-  }
 
   repaintChart(data) {
     this.setXScale(data);
@@ -143,30 +117,88 @@ export default class BarChart {
     this.redrawYAxes(data);
   }
 
-  paintPercentageChart(data) {
-    this.xScale = d3.scale
-      .linear()
-      .range([0, this.width])
-      .domain([0, 100]);
+  // paintPercentageChart(data) {
+  //   this.xScale = d3.scale
+  //     .linear()
+  //     .range([0, this.width])
+  //     .domain([0, 100]);
 
-    this.setYScale(data);
-    this.bindDataToBars(data);
-    this.redrawBars(data);
-    this.redrawPercentLabels(data);
-    this.redrawYAxes(data);
+  //   this.setYScale(data);
+  //   this.bindDataToBars(data);
+  //   this.redrawBars(data);
+  //   this.redrawPercentLabels(data);
+  //   this.redrawYAxes(data);
+  // }
+
+  paintHiddenBars(data) {
+    const chromaDataCodes = createChromaData(data);
+
+    this.bars
+      .append("rect")
+      .attr("class", "bar")
+      .attr("y", d => {
+        return this.yScale(d.name);
+      })
+      .attr("height", () => this.yScale.rangeBand())
+      .attr("fill", (d, i) => chromaDataCodes[d.name]);
   }
 
+  setXScale(data) {
+    this.xScale = d3.scale
+      .linear()
+      .range([0, this.width])
+      .domain([
+        0,
+        d3.max(data, function(d) {
+          return d.population;
+        })
+      ]);
+  }
+
+  clearBars() {
+    this.plot
+      .selectAll("rect")
+      .remove()
+  }
+
+
   redrawBarsWith3DataPoints(data) {
+    this.clearBars()
+
+    this.bindDataToBars(data);
+
     this.xScale = d3.scale
       .linear()
       .range([0, this.width])
       .domain([0, 100]);
 
-    this.setYScale(data);
-    this.bindDataToBars(data);
-    this.redrawBars(data);
-    this.redrawPercentLabels(data);
+
+    this.yScale = d3.scale
+      .ordinal()
+      .rangeRoundBands([this.height/4, 0], 0.1)
+      .domain(
+        data.map(function(d) {
+          return d.name;
+        })
+      );
+
+    const chromaDataCodes = createChromaData(data);
+
+    this.bars
+      .append("rect")
+      .attr("class", "bar")
+      .attr("y", d => {
+        return this.yScale(d.name);
+      })
+      .attr("height", () => this.yScale.rangeBand())
+      .attr("width", d => {
+        return this.xScale(d.population);
+      })
+      .attr("fill", (d, i) => chromaDataCodes[d.name]);
+    
     this.redrawYAxes(data);
+
+    this.redrawPercentLabels(data);
   }
 
   bindDataToBars(data) {
@@ -253,6 +285,19 @@ export default class BarChart {
       .delay(500)
       .duration(500)
       .style("opacity", "1");
+  }
+
+
+  hideAllElements() {
+    this.plot
+    .transition()
+    .delay(500)
+    .style("opacity", "0");
+
+    d3.select(".bar-graphic-header")
+      .transition()
+      .delay(500)
+      .style("opacity", "0")
   }
 
   revealBarChart() {
