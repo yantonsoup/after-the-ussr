@@ -6,10 +6,12 @@ export function createChromaData(populationDataSet) {
     const dataRange = populationDataSet
       .map(country => country.population)
       .sort((a, b) => a - b)
-    
+      // #F0DF7E
     // console.warn('dataRange', dataRange)
-
-    const chromaDomain = chroma.scale(['white', 'orange']).domain(dataRange);
+    // const blueSet = ['#9E8CFF', '#8CF3FF'];
+    const redSet = ['white', 'orange'];
+    const yellowSet = ['#F0DF7E', 'orange'];
+    const chromaDomain = chroma.scale(redSet).domain(dataRange);
 
     const countryColorCodes = populationDataSet.reduce((countryColorsById, country) => {
       // console.warn('country', country)

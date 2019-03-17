@@ -17,6 +17,15 @@ function zeroAnimation(worldMap) {
     }
   });
 
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".non-soviet-country",
+    styles: {
+      opacity: "0.5",
+      fill: "#d0d0d0",
+    }
+  });
+
   const zoomParams = {
     scale: 1,
     duration: 750,
@@ -258,8 +267,8 @@ function sixthAnimation(worldMap, barChart) {
     duration: 500,
     section: "#RUS",
     styles: {
-      opacity: "0.9",
-      fill: "lightgoldenrodyellow"
+      opacity: "1",
+        fill: "#BAB4AC",
     }
   });
 
@@ -284,36 +293,40 @@ function seventhAnimation(worldMap, barChart) {
 function eightAnimation(worldMap, barChart) {
   barChart.revealBarChart();
 
-  // const zoomParams = {
-  //   scale: 2,
-  //   duration: 1000,
-  //   translateX: -Math.floor(worldMap.width * 0.17),
-  //   translateY: -Math.floor(worldMap.height * 0.2)
-  // };
+  const zoomParams = {
+    scale: 1,
+    duration: 750,
+    translateX: 0,
+    translateY: 0
+  };
 
-  // worldMap.animateMapZoom(zoomParams);
+  worldMap.animateMapZoom(zoomParams);
+
+ 
+
+  worldMap.highlightInternationalCountries(migrationAbroadDestination1995to2002);
+  worldMap.applyInitialHighlight();
+  // worldMap.animateSectionStyles({
+  //   duration: 1000,
+  //   section: ".non-soviet-country",
+  //   styles: {
+  //     opacity: "0.5",
+  //     "stroke-width": "0.25px"
+  //   }
+  // });
   worldMap.animateSectionStyles({
     duration: 500,
-    section: ".soviet-country",
+    section: ".fsu-state",
     styles: {
-      opacity: "0.9",
-      fill: "lightgoldenrodyellow"
+      // 'stroke-opacity': "0.9",
+      "stroke-width": "0px",
+      "stroke": "#BAB4AC",
+      "fill": "#BAB4AC",
+      "fill": "#BAB4AC"
     }
   });
-
-  worldMap.highlightInternationalCountries();
-
   worldMap.animateSectionStyles({
-    duration: 1000,
-    section: ".non-soviet-country",
-    styles: {
-      opacity: "0.5",
-      "stroke-width": "0.25px"
-    }
-  });
-
-  worldMap.animateSectionStyles({
-    duration: 1000,
+    duration: 500,
     section: "#USA",
     styles: {
       opacity: "1"
@@ -321,7 +334,7 @@ function eightAnimation(worldMap, barChart) {
   });
 
   worldMap.animateSectionStyles({
-    duration: 1000,
+    duration: 500,
     section: "#DEU",
     styles: {
       opacity: "1"
@@ -329,7 +342,7 @@ function eightAnimation(worldMap, barChart) {
   });
 
   worldMap.animateSectionStyles({
-    duration: 1000,
+    duration: 500,
     section: "#ISR",
     styles: {
       opacity: "1"
@@ -338,18 +351,20 @@ function eightAnimation(worldMap, barChart) {
 }
 
 function ninthAnimation(worldMap, barChart) {
+
+
   const zoomParams = {
     scale: 4,
-    duration: 1000,
+    duration: 750,
     translateX: -Math.floor(worldMap.width * 0.4),
     translateY: -Math.floor(worldMap.height * 0.22)
   };
-  worldMap.highlightInternationalLines(zoomParams);
+  worldMap.highlightInternationalLines();
 
   worldMap.animateMapZoom(zoomParams);
 
   worldMap.animateSectionStyles({
-    duration: 1000,
+    duration: 500,
     section: ".arc",
     styles: {
       opacity: "0"
@@ -357,15 +372,15 @@ function ninthAnimation(worldMap, barChart) {
   });
 
   worldMap.animateSectionStyles({
-    duration: 1000,
+    duration: 500,
     section: "#arc-DEU",
     styles: {
-      opacity: "1"
+      opacity: "1",
     }
   });
 
   worldMap.animateSectionStyles({
-    duration: 1000,
+    duration: 500,
     section: ".non-soviet-country",
     styles: {
       "stroke-width": "0.15px"
@@ -398,16 +413,26 @@ function tenthAnimation(worldMap, barChart) {
       opacity: "1"
     }
   });
+
+    
+  const zoomParams = {
+    scale: 15,
+    duration: 1000,
+    translateX: -Math.floor(worldMap.width * 0.5),
+    translateY: -Math.floor(worldMap.height * 0.38)
+  };
+
+  worldMap.animateMapZoom(zoomParams);
 }
 
 // function tenthAnimation(worldMap, barChart) {}
 
 function eleventhAnimation(worldMap, barChart) {
   const zoomParams = {
-    scale: 2,
-    duration: 1000,
-    translateX: -Math.floor(worldMap.width * 0.17),
-    translateY: -Math.floor(worldMap.height * 0.2)
+    scale: 5,
+    duration: 750,
+    translateX: -Math.floor(worldMap.width * 0.08),
+    translateY: -Math.floor(worldMap.height * 0.3)
   };
 
   worldMap.animateMapZoom(zoomParams);
@@ -473,7 +498,6 @@ function thirteenthAnimation(worldMap, barChart) {
   };
 
   worldMap.animateMapZoom(zoomParams);
-  worldMap.createPopulationChoropleth();
 }
 
 export default {

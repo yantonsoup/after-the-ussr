@@ -45,16 +45,16 @@ export const sovietLabelShift = {
   BLR: { x: -20, y: 2 },
   EST: { x: -13, y: -3 },
   GEO: { x: -18, y: 1 },
-  KAZ: { x: 13, y: 15 },
-  KGZ: { x: 1, y: 10 },
+  KAZ: { x: -3, y: 0 },
+  KGZ: { x: 3, y: 5 },
   LVA: { x: -15, y: -2 },
   LTU: { x: -18, y: 0 },
   MDA: { x: -18, y: 2 },
   RUS: { x: -40, y: 10 },
-  TJK: { x: -6, y: 10 },
-  TKM: { x: -20, y: 10 },
+  TJK: { x: 2, y: 6 },
+  TKM: { x: -8, y: 10 },
   UKR: { x: -23, y: 0 },
-  UZB: { x: -12, y: 18 }
+  UZB: { x: -6, y: -1 }
 };
 
 // Step 2

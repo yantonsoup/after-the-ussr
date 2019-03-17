@@ -99,7 +99,7 @@ export default class WorldMap {
       section: ".soviet-country",
       styles: {
         opacity: "1",
-        fill: "lightgoldenrodyellow",
+        fill: "#BAB4AC",
       }
     });
 
@@ -147,7 +147,8 @@ export default class WorldMap {
       .data(this.sovietDataPoints)
       .enter()
       .append("text")
-      .attr("class", "place-label")
+      .attr("class", 'place-label')
+      // .attr("class", d => `${d.id}-place-label` )
       .attr("transform", d => {
         const [x, y] = this.path.centroid(d);
         return `translate(${x},${y})`;
@@ -165,7 +166,8 @@ export default class WorldMap {
       .text(function(d) {
         return d.properties.name;
       })
-      .style("font-size", 3 + "px");
+      .style("font-size", 3.5 + "px")
+      // .style("color", 'lightgoldenrodyellow');
     // .style("fill", "white")
   }
 
@@ -173,7 +175,7 @@ export default class WorldMap {
     const chromaDataCodes = createChromaData(populationData);
 
     console.warn('WORLDMAP', { chromaDataCodes });
-    Object.values(chromaDataCodes).forEach(color => console.log('%ccolor code',  `background: ${color}; color: ${color};`))
+    Object.values(chromaDataCodes).forEach(color => console.log('%ccolor code',  `background: ${color}; color: ${color}`))
 
     d3.selectAll(".fsu-state")
       .transition()
@@ -316,25 +318,27 @@ export default class WorldMap {
       .style("opacity", "1");
   }
   
-  highlightInternationalCountries() {
+  highlightInternationalCountries(migrationAbroadDestination1995to2002) {
+    const chromaDataCodes = createChromaData(migrationAbroadDestination1995to2002);
+    console.warn('highlightInternationalCountries, chromaDataCodes', chromaDataCodes)
     this.mapGraphic
       .select("#ISR")
       .style("opacity", "1")
-      .style("fill", "blue");
+      .style("fill", `${chromaDataCodes['ISR']}`);
 
     this.mapGraphic
       .select("#DEU")
       .style("opacity", "1")
-      .style("fill", "green");
+      .style("fill", `${chromaDataCodes['DEU']}`);
 
     this.mapGraphic
       .select("#USA")
       .style("opacity", "1")
-      .style("fill", "white");
+      .style("fill", `${chromaDataCodes['USA']}`);
   }
 
   highlightInternationalLines() {
-    const russiaCoordinates = [235, 110];
+    const russiaCoordinates = [215, 110];
 
     const receivingCentroids = this.data
       .filter(({ id }) => primaryReceivingIsoCodes.includes(id))
@@ -350,7 +354,7 @@ export default class WorldMap {
       .selectAll("path.datamaps-arc")
       .data(receivingCentroids);
 
-    const curveOffsets = [50, 15, 15];
+    const curveOffsets = [50, 25, 15];
     // 0 => usa
     // 1 => israel
     // 2 => germany
