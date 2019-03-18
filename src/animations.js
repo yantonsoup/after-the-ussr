@@ -500,6 +500,10 @@ function thirteenthAnimation(worldMap, barChart) {
   worldMap.animateMapZoom(zoomParams);
 }
 
+function fourteenthAnimation (worldMap, barChart) {
+
+}
+
 export default {
   0: zeroAnimation,
   1: firstAnimation,
@@ -514,5 +518,6 @@ export default {
   10: tenthAnimation,
   11: eleventhAnimation,
   12: twelfthAnimation,
-  13: thirteenthAnimation
+  13: thirteenthAnimation,
+  14: fourteenthAnimation,
 };
