@@ -36,6 +36,11 @@ export default function firstPaint () {
     .style("width", width + "px")
     .style("height", halfPageHeight + "px")
 
+  d3.select(".line-graphic-container")
+    .style('top', halfPageHeight + 'px')
+    .style("width", width + "px")
+    .style("height", halfPageHeight + "px")
+
   // // Desktop Layout
   // if (window.innerWidth > 768) {
   //   d3.select(".bar-graphic-container")

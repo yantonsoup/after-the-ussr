@@ -285,3 +285,34 @@ a:hover {
   color: lightgoldenrodyellow;
   letter-spacing: 1px;
 }
+
+/* *********************************** */
+/* bar graphic */
+/* *********************************** */
+.line-graphic-container {
+  position: -webkit-sticky;
+  opacity: 1;
+  position: sticky;
+  z-index: 15;
+  height: 300px;
+  background-color: transparent;
+}
+
+.line-graphic-header {
+  margin: 0 20px;
+  font-size: 20px;
+  font-weight: 500;
+  border-bottom: 2px solid lightgoldenrodyellow;
+  padding: 4px 0;
+  text-align: center;
+  color: lightgoldenrodyellow;
+}
+
+.line-graphic-header-units {
+  color: black;
+}
+
+.line-graphic-header-text {
+  color: lightgoldenrodyellow;
+  letter-spacing: 1px;
+}

@@ -4,6 +4,7 @@ import loadMap from "./loadMap";
 import topojson from 'topojson';
 import WorldMap from './WorldMap.js'
 import BarChart from './BarChart.js'
+import LineChart from './LineChart.js'
 import {
   populationsIn1989millions,
 } from "./constants";
@@ -23,6 +24,11 @@ loadMap().then(json => {
     element: '.map-graphic-container'
   })
 
+  const lineChart = new LineChart({
+    data: populationsIn1989millions,
+    element: '.line-graphic'
+  })
+
   const barChart = new BarChart({
     element: '.bar-graphic',
     data: populationsIn1989millions
@@ -30,5 +36,5 @@ loadMap().then(json => {
 
   console.warn('features', features);
 
-  setupScrollama(worldMap, barChart);
+  setupScrollama(worldMap, barChart, lineChart);
 });
