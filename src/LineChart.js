@@ -3,7 +3,7 @@ import chroma from "chroma-js";
 
 import { sovietCountryIsoCodes, colors } from "./constants";
 import { createChromaData } from "./utils";
-export default class BarChart {
+export default class LineChart {
   constructor(opts) {
     // load in arguments from config object
     this.data = opts.data;
@@ -13,7 +13,7 @@ export default class BarChart {
     this.element = opts.element;
     this.margins = {
       top: 15,
-      right: 85,
+      right: 40,
       bottom: 60,
       left: 64
     };
@@ -84,7 +84,7 @@ export default class BarChart {
     this.line = d3.svg.line()
       .interpolate("basis")
       .x(function(d) { return this.xScale(d.date); })
-      .y(function(d) { return this.yScale(d.price); });
+      .y(function(d) { return this.yScale(d.population); })
   }
 
   appendContainer() {
@@ -99,32 +99,37 @@ export default class BarChart {
 
 
   paintIt() {
-    const parseDate = d3.time.format("%Y-%m-%d").parse;
-    const color = d3.scale.category10();
+    const parseDate = d3.time.format("%Y").parse;
 
+    // "%Y-%m-%d" 
+    const color = d3.scale.category10();
+    console.warn({color})
+  
     d3.tsv("./data.tsv", (error, data) => {
       console.warn('data', data)
       color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
     
       data.forEach(function(d) {
         d.date = parseDate(d.date);
+        console.warn('parsed data', d.date)
       });
     
       const companies = color.domain().map(function(name) {
+        console.warn('name', name)
         return {
-          name: name,
           values: data.map(function(d) {
-            return {date: d.date, price: +d[name]};
+            // console.warn('d', d)
+            return {date: d.date, population: +d[name]};
           })
         };
       });
-    
+      console.warn('companies', companies)
     
       this.xScale.domain(d3.extent(data, function(d) { return d.date; }));
     
       this.yScale.domain([
-        d3.min(companies, function(c) { return d3.min(c.values, function(v) { return v.price; }); }),
-        d3.max(companies, function(c) { return d3.max(c.values, function(v) { return v.price; }); })
+        d3.min(companies, function(c) { return d3.min(c.values, function(v) { return v.population; }); }),
+        d3.max(companies, function(c) { return d3.max(c.values, function(v) { return v.population; }); })
       ]);
     
       this.svg.append("g")
@@ -145,27 +150,27 @@ export default class BarChart {
                 "x2" : this.width,
                 "y1" : this.yScale(0),
                 "y2" : this.yScale(0),
-                "fill" : "none",
-                "shape-rendering" : "crispEdges",
-                "stroke" : "black",
-                "stroke-width" : "1px",
-                "stroke-dasharray": ("3, 3")
-            });
+            })
     
     
       const company = this.svg.selectAll(".company")
           .data(companies)
-        .enter().append("g")
+          .enter().append("g")
           .attr("class", "company");
     
     
       this.path = this.svg.selectAll(".company").append("path")
           .attr("class", "line")
           .attr("d", (d) => { return this.line(d.values); })
-          .style("stroke", function(d) { if (d.name == "Airbus") 
-                                             {return "rgb(000,255,000)"}
-                                          else {return "#000";}
-                                             });
+          .attr( {
+            "fill" : "none",
+            // "shape-rendering" : "crispEdges",
+            "stroke" : "white",
+            // "stroke-width" : "2px",
+            // "stroke-dasharray": ("3, 3")
+        })
+        .style("stroke", function(d) { return "rgb(000,255,000)" })
+
     
     
     
@@ -178,7 +183,7 @@ export default class BarChart {
     */
     const totalLength = [this.path[0][0].getTotalLength(), this.path[0][1].getTotalLength()];
     
-    console.log(totalLength);
+    console.warn('totalLength', totalLength);
     
     
        d3.select(this.path[0][0])
