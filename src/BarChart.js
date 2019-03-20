@@ -107,7 +107,6 @@ export default class BarChart {
       .style("font-weight", "400");
   }
 
-
   repaintChart(data) {
     this.setXScale(data);
     this.setYScale(data);
@@ -171,7 +170,6 @@ export default class BarChart {
       .linear()
       .range([0, this.width])
       .domain([0, 100]);
-
 
     this.yScale = d3.scale
       .ordinal()
