@@ -8,6 +8,7 @@ export default class LineChart {
     this.data = opts.data;
     // load in arguments from config object
     this.element = opts.element;
+    this.headerElement = opts.headerElement;
     this.margins = {
       top: 15,
       right: 40,
@@ -20,14 +21,14 @@ export default class LineChart {
   }
 
   draw() {
+    const halfPageHeight = Math.floor(window.innerHeight) / 2;
+
     const boundingBox = d3
       .select(this.element)
       .node()
       .getBoundingClientRect();
 
     const { width } = boundingBox;
-
-    const halfPageHeight = Math.floor(window.innerHeight) / 2;
 
     this.width = width - this.margins.left - this.margins.right;
     this.height = halfPageHeight - this.margins.top - this.margins.bottom;
@@ -41,9 +42,19 @@ export default class LineChart {
     this.makeLine();
     this.appendContainer();
 
-    this.paintIt(this.data);
-
+    this.paintIt();
+    this.hideIt();
     // this.hideAllElements();
+  }
+
+  hideIt() {
+    d3.select(this.element).style('opacity', 0)
+    d3.select(this.headerElement).style('opacity', 0)
+  }
+
+  revealIt() {
+    d3.select(this.element).transition().duration(500).style('opacity', 1)
+    d3.select(this.headerElement).transition().duration(500).style('opacity', 1)
   }
 
   setYScale() {
@@ -104,7 +115,8 @@ export default class LineChart {
       );
   }
 
-  paintIt(data) {
+  paintIt() {
+    const data = this.data
       console.warn("data", data);
 
       const parseDate = d3.time.format("%Y").parse;

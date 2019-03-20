@@ -37,9 +37,9 @@ function zeroAnimation(worldMap) {
   worldMap.createPopulationChoropleth(populationsIn1989millions);
 }
 
-function firstAnimation(worldMap) {
+function firstAnimation(worldMap, barChart, lineChart) {
   const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
- 
+
   worldMap.moveMapContainer({
     duration: 750,
     top: quarterPageHeight
@@ -182,6 +182,30 @@ function fourthAnimation(worldMap, barChart) {
 }
 
 function fifthAnimation(worldMap, barChart) {
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".arc",
+    styles: {
+      opacity: "1"
+    }
+  });
+
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".place-label",
+    styles: {
+      opacity: "1"
+    }
+  });
+
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: "circle",
+    styles: {
+      opacity: "1"
+    }
+  });
+
   const title = "Percentage return to Russia";
 
   barChart.drawTitle(title, "%");
@@ -194,6 +218,7 @@ function fifthAnimation(worldMap, barChart) {
   //     opacity: "1"
   //   }
   // });
+  
 
 
   const zoomParams = {
@@ -210,7 +235,12 @@ function fifthAnimation(worldMap, barChart) {
 }
 
 /* ************ ****** ****** ****** ****** ******  */
-function sixthAnimation(worldMap, barChart) {
+function sixthAnimation(worldMap, barChart, lineChart) {
+
+  barChart.hideAllElements();
+
+  lineChart.revealIt()
+
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".arc",
@@ -235,34 +265,16 @@ function sixthAnimation(worldMap, barChart) {
     }
   });
 
-  barChart.hideAllElements();
 
-  // const graphicMarginTop = Math.floor(window.innerHeight * 0.25);
+  // const zoomParams = {
+  //   scale: 1,
+  //   duration: 1000,
+  //   translateX: 0,
+  //   translateY: 0
+  // };
 
-  // worldMap.moveMapContainer({
-  //   duration: 750,
-  //   top: graphicMarginTop
-  // });
+  // worldMap.animateMapZoom(zoomParams);
 
-  const zoomParams = {
-    scale: 1,
-    duration: 1000,
-    translateX: 0,
-    translateY: 0
-  };
-
-  worldMap.animateMapZoom(zoomParams);
-  // worldMap.animateSectionStyles({
-  //   duration: 500,
-  //   section: ".soviet-country",
-  //   styles: {
-  //     opacity: "0.5",
-  //     fill: "#d0d0d0",
-  //     "stroke-width": '0'
-  //   }
-  // });
-
-  worldMap.animateMapZoom(zoomParams);
   worldMap.animateSectionStyles({
     duration: 500,
     section: "#RUS",
@@ -272,14 +284,24 @@ function sixthAnimation(worldMap, barChart) {
     }
   });
 
-  worldMap.animateSectionStyles({
-    duration: 500,
-    section: ".non-soviet-country",
-    styles: {
-      fill: "#d0d0d0",
-      opacity: "0.5"
-    }
-  });
+  // worldMap.animateSectionStyles({
+  //   duration: 500,
+  //   section: ".non-soviet-country",
+  //   styles: {
+  //     fill: "#d0d0d0",
+  //     opacity: "0.5"
+  //   }
+  // });
+
+    // worldMap.animateSectionStyles({
+  //   duration: 500,
+  //   section: ".soviet-country",
+  //   styles: {
+  //     opacity: "0.5",
+  //     fill: "#d0d0d0",
+  //     "stroke-width": '0'
+  //   }
+  // });
 }
 
 function seventhAnimation(worldMap, barChart) {

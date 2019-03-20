@@ -19,7 +19,6 @@ export default function firstPaint () {
     
   d3.selectAll(".step")
     .style("height", fullPageHeight + "px");
-
   
   let mapWH = fullPageHeight;
   if (halfPageHeight >  width) {

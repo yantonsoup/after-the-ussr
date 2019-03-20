@@ -2,16 +2,15 @@ import 'intersection-observer';
 import scrollama from 'scrollama';
 import animations from "./animations";
 
-export default function setupScrollama(worldMap, barChart) {
+export default function setupScrollama(worldMap, barChart, lineChart) {
   function handleStepEnter(response) {
-    // response = { element, direction, index }
 
     console.warn('SCROLLAMA animation[index]:: ', response.index)
 
     const animationIndex = response.index;
     const animationHandler = animations[animationIndex];
 
-    animationHandler(worldMap, barChart)
+    animationHandler(worldMap, barChart, lineChart)
   }
 
   scrollama()
