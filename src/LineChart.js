@@ -5,6 +5,7 @@ import { sovietCountryIsoCodes, colors } from "./constants";
 import { createChromaData } from "./utils";
 export default class LineChart {
   constructor(opts) {
+    this.data = opts.data;
     // load in arguments from config object
     this.element = opts.element;
     this.margins = {
@@ -103,8 +104,7 @@ export default class LineChart {
       );
   }
 
-  paintIt() {
-    d3.tsv("./russia.tsv", (error, data) => {
+  paintIt(data) {
       console.warn("data", data);
 
       const parseDate = d3.time.format("%Y").parse;
@@ -183,40 +183,5 @@ export default class LineChart {
           "stroke-width" : "3px",
           "stroke-dasharray": ("3, 3")
         })
-
-    });
   }
 }
-
-/*
-
-
-      var totalLength = this.path.node().getTotalLength();
-      console.log(this.path);
-      console.log(this.path.node());
-      console.log(this.path[0][0]);
-      console.log(this.path[0][1]);
-      
-      const totalLength = [
-        this.path[0][0].getTotalLength(),
-        this.path[0][1].getTotalLength()
-      ];
-
-      console.warn("totalLength", totalLength);
-
-      d3.select(this.path[0][0])
-        .attr("stroke-dasharray", totalLength[0] + " " + totalLength[0])
-        .attr("stroke-dashoffset", totalLength[0])
-        .transition()
-        .duration(5000)
-        .ease("linear")
-        .attr("stroke-dashoffset", 0);
-
-      d3.select(this.path[0][1])
-        .attr("stroke-dasharray", totalLength[1] + " " + totalLength[1])
-        .attr("stroke-dashoffset", totalLength[1])
-        .transition()
-        .duration(5000)
-        .ease("linear")
-        .attr("stroke-dashoffset", 0);
-*/
