@@ -316,3 +316,23 @@ a:hover {
   color: lightgoldenrodyellow;
   letter-spacing: 1px;
 }
+
+.axis text {
+  color: lightgoldenrodyellow;
+  font: 16px sans-serif;
+}
+ 
+.axis path {
+  stroke: #000;
+  stroke-width: 2.5px;
+  shape-rendering: crispEdges;
+}
+ .axis line {
+  stroke: #000;
+  stroke-width: 1.6px;
+}
+
+.axis .minor {
+  stroke: red;
+  stroke-width: 0.4px;
+}

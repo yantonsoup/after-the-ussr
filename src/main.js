@@ -1,3 +1,5 @@
+import d3 from 'd3';
+import * as d3Fetch from 'd3-fetch'
 import setupScrollama from './setupScrollama.js';
 import firstPaint from './firstPaint';
 import loadMap from "./loadMap";
@@ -13,8 +15,23 @@ window.onbeforeunload = function() {
   window.scrollTo(0, 0);
 };
 
+// async function loadMapTopography () {
+//   let response = await d3.json("./json/110topoworld.json");
+
+//   return response
+// }
+firstPaint();
+
+async function initializeGraphics () {
+  const response = await d3Fetch.json("./json/110topoworld.json")
+
+  console.warn('dddd response', response)
+}
+
+initializeGraphics()
+
 loadMap().then(json => {
-  firstPaint();
+  console.warn({json})
 
   const countries = topojson.feature(json, json.objects.subunits)
   const features = countries.features;
