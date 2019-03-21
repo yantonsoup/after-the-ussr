@@ -208,11 +208,11 @@ function fifthAnimation(worldMap, barChart) {
 
 /* ************ ****** ****** ****** ****** ******  */
 function sixthAnimation(worldMap, barChart, lineChart) {
-  lineChart.drawLine("population", [130000000, 150000000]);
-
-  lineChart.revealIt()
   barChart.hideAllElements();
 
+  lineChart.clearPreviousLineAndAxis();
+  lineChart.drawLine("population", [130000000, 150000000]);
+  lineChart.revealIt()
 
   worldMap.animateSectionStyles({
     duration: 500,
@@ -241,9 +241,12 @@ function sixthAnimation(worldMap, barChart, lineChart) {
 }
 
 function seventhAnimation(worldMap, barChart, lineChart) {
-  lineChart.fadeOutPreviousLine();
-  lineChart.drawLine('mortality', [0, 20])
-  lineChart.drawLine('fertility', [0, 20])
+  lineChart.clearPreviousLineAndAxis();
+  
+  lineChart.drawLine('mortality', [0, 30])
+  lineChart.drawLine('fertility', [0, 30])
+
+  lineChart.drawTitle('Russia Birth/Death Rates', 'per 1000')
 
   const title = "Top Destinations For FSU Immigrants";
 
@@ -251,7 +254,11 @@ function seventhAnimation(worldMap, barChart, lineChart) {
   barChart.redrawBarsWith3DataPoints(migrationAbroadDestination1995to2002);
 }
 
-function eightAnimation(worldMap, barChart, lineChart) {
+function eightAnimation() {
+
+}
+
+function ninthAnimation(worldMap, barChart, lineChart) {
   barChart.revealBarChart();
 
   const zoomParams = {
@@ -302,7 +309,7 @@ function eightAnimation(worldMap, barChart, lineChart) {
   });
 }
 
-function ninthAnimation(worldMap, barChart) {
+function tenthAnimation(worldMap, barChart) {
 
 
   const zoomParams = {
@@ -340,7 +347,7 @@ function ninthAnimation(worldMap, barChart) {
   });
 }
 
-function tenthAnimation(worldMap, barChart) {
+function eleventhAnimation(worldMap, barChart) {
   worldMap.animateSectionStyles({
     duration: 1000,
     section: "#arc-DEU",
@@ -379,7 +386,7 @@ function tenthAnimation(worldMap, barChart) {
 
 // function tenthAnimation(worldMap, barChart) {}
 
-function eleventhAnimation(worldMap, barChart) {
+function twelfthAnimation(worldMap, barChart) {
   const zoomParams = {
     scale: 5,
     duration: 750,
@@ -414,25 +421,6 @@ function eleventhAnimation(worldMap, barChart) {
   });
 }
 
-function twelfthAnimation(worldMap, barChart) {
-  worldMap.animateSectionStyles({
-    duration: 1000,
-    section: ".arc",
-    styles: {
-      opacity: "0"
-    }
-  });
-
-  const zoomParams = {
-    scale: 1,
-    duration: 1000,
-    translateX: 0,
-    translateY: 0
-  };
-
-  worldMap.animateMapZoom(zoomParams);
-}
-
 function thirteenthAnimation(worldMap, barChart) {
   worldMap.animateSectionStyles({
     duration: 1000,
@@ -452,7 +440,26 @@ function thirteenthAnimation(worldMap, barChart) {
   worldMap.animateMapZoom(zoomParams);
 }
 
-function fourteenthAnimation (worldMap, barChart) {
+function fourteenthAnimation(worldMap, barChart) {
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: ".arc",
+    styles: {
+      opacity: "0"
+    }
+  });
+
+  const zoomParams = {
+    scale: 1,
+    duration: 1000,
+    translateX: 0,
+    translateY: 0
+  };
+
+  worldMap.animateMapZoom(zoomParams);
+}
+
+function fifteenthAnimation() {
 
 }
 
@@ -472,4 +479,5 @@ export default {
   12: twelfthAnimation,
   13: thirteenthAnimation,
   14: fourteenthAnimation,
+  14: fifteenthAnimation,
 };

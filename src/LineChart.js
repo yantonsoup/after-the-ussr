@@ -1,12 +1,8 @@
 import d3 from "d3";
-import chroma from "chroma-js";
 
-import { sovietCountryIsoCodes, colors } from "./constants";
-import { createChromaData } from "./utils";
 export default class LineChart {
   constructor(opts) {
     this.data = opts.data;
-    // load in arguments from config object
     this.element = opts.element;
     this.headerElement = opts.headerElement;
     this.margins = {
@@ -16,18 +12,15 @@ export default class LineChart {
       left: 64
     };
 
-    // create the chart
     this.draw();
   }
 
   draw() {
     const halfPageHeight = Math.floor(window.innerHeight) / 2;
-
     const boundingBox = d3
       .select(this.element)
       .node()
       .getBoundingClientRect();
-
     const { width } = boundingBox;
 
     this.width = width - this.margins.left - this.margins.right;
@@ -38,7 +31,6 @@ export default class LineChart {
     this.setXAxis();
     this.setYAxis();
 
-    this.makeLine();
     this.appendContainer();
 
     this.paintIt();
@@ -53,12 +45,19 @@ export default class LineChart {
   revealIt() {
     d3.select(this.element)
       .transition()
+      .delay(500)
       .duration(500)
       .style("opacity", 1);
+
     d3.select(this.headerElement)
       .transition()
-      .duration(500)
+      .delay(500)
       .style("opacity", 1);
+  }
+
+  drawTitle(text, units) {
+    d3.select(".line-graphic-header-text").text(text);
+    d3.select(".line-graphic-header-units").text(units);
   }
 
   setYScale() {
@@ -83,13 +82,17 @@ export default class LineChart {
     this.yAxis = d3.svg
       .axis()
       .scale(this.yScale)
-      // .tickFormat(function(population) {
-      //   console.warn({ population });
-      //   const millionsDigits = Math.floor(population / 1000000).toString();
-      //   return millionsDigits;
-      // })
       .ticks(10)
-      // .innerTickSize(15)
+      .innerTickSize(15)
+      .tickFormat(function(yValue) {
+        console.warn({ yValue });
+        if (yValue > 10000) {
+          const millionsDigits = Math.floor(yValue / 1000000).toString();
+          return millionsDigits;
+        }
+
+        return yValue
+      })
       .outerTickSize(0)
       .orient("left");
   }
@@ -102,7 +105,7 @@ export default class LineChart {
         return this.xScale(d.date);
       })
       .y(function(d) {
-        console.warn("makeLine d", d[property]);
+        // console.warn("makeLine d", d[property]);
         return this.yScale(d[property]);
       });
   }
@@ -170,25 +173,17 @@ export default class LineChart {
       .append("g")
       .attr("class", "property-line");
 
-    // this.drawLine('mortality', [0, 20])
-    // this.drawLine('fertility', [0, 20])
   }
 
-  fadeOutPreviousLine() {
+  clearPreviousLineAndAxis() {
     this.svg
-      .select(".y-axis")
-      .transition()
-      .duration(500)
-      .style("opacity", "0");
+      .select(".y axis")
+      .remove()
 
     this.svg
-      .select(".property-line")
+      .selectAll(".line")
       .remove()
-    
-    this.path.remove()
-      // .transition()
-      // .duration(500)
-      // .style("opacity", "0");
+ 
   }
 
   drawLine(property, domain) {
@@ -196,7 +191,8 @@ export default class LineChart {
 
     this.svg
       .append("g")
-      .attr("class", "y-axis")
+      .attr("class", "axis")
+      .attr("class", "y axis")
       .attr("fill", "lightgoldenrodyellow")
       .call(this.yAxis)
       .transition()
@@ -216,7 +212,6 @@ export default class LineChart {
       .append("path")
       .attr("class", "line")
       .attr("d", d => {
-        console.warn("making line path d", d);
         this.makeLine(property);
         return this.line(d.values);
       })
@@ -230,5 +225,9 @@ export default class LineChart {
       // .transition()
       // .duration(500)
       // .style("opacity", "1");
+  }
+  
+  repaintLine() {
+
   }
 }
