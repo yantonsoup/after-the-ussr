@@ -175,7 +175,7 @@ export default class WorldMap {
     const chromaDataCodes = createChromaData(populationData);
 
     console.warn('WORLDMAP', { chromaDataCodes });
-    Object.values(chromaDataCodes).forEach(color => console.log('%ccolor code',  `background: ${color}; color: ${color}`))
+    // Object.values(chromaDataCodes).forEach(color => console.log('%ccolor code',  `background: ${color}; color: ${color}`))
 
     d3.selectAll(".fsu-state")
       .transition()

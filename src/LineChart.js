@@ -90,7 +90,7 @@ export default class LineChart {
       .orient("left");
   }
 
-  makeLine() {
+  makeLine(property) {
     this.line = d3.svg
       .line()
       .interpolate("basis")
@@ -98,7 +98,8 @@ export default class LineChart {
         return this.xScale(d.date);
       })
       .y(function(d) {
-        return this.yScale(d.population);
+        console.warn('makeLine d', d[property])
+        return this.yScale(d[property]);
       });
   }
 
@@ -116,44 +117,40 @@ export default class LineChart {
   }
 
   paintIt() {
-    const data = this.data
-      console.warn("data", data);
-
+      const color = d3.scale.category10();
       const parseDate = d3.time.format("%Y").parse;
 
-      data.forEach(function(d) {
+      console.warn("this.data", this.data);
+
+      this.data.forEach(function(d) {
         d.date = parseDate(d.date);
         d.population = +d.pop
         d.fertility = +d.fertility;
         d.mortality = +d.mortality;
       });
 
-      const color = d3.scale.category10();
-
       color.domain(
-        d3.keys(data[0]).filter(function(key) {
+        d3.keys(this.data[0]).filter(function(key) {
           return key !== "date";
         })
       );
       
-      const propertyLines = color.domain().map(function(name) {
+      this.propertyLines = color.domain().map((name) => {
         console.warn('name', name)
         return {
           name,
-          values: data
+          values: this.data
         }
       });
 
-      console.warn("propertyLines", propertyLines);
+      console.warn("propertyLines", this.propertyLines);
 
       // set scales according to data
       this.xScale.domain(
-        d3.extent(data, function(d) {
+        d3.extent(this.data, function(d) {
           return d.date;
         })
       );
-
-      this.yScale.domain([130000000, 150000000]);
 
       this.svg
         .append("g")
@@ -161,6 +158,20 @@ export default class LineChart {
         .attr("fill", 'lightgoldenrodyellow')
         .attr("transform", "translate(0," + this.height + ")")
         .call(this.xAxis);
+
+      this.svg
+        .selectAll(".population")
+        .data(this.propertyLines)
+        .enter()
+        .append("g")
+        .attr("class", "population");
+
+      this.drawLine('population', [130000000, 150000000])
+  }
+
+  drawLine(property, domain) {
+    console.warn('hi')
+      this.yScale.domain(domain);
 
       this.svg
         .append("g")
@@ -176,19 +187,13 @@ export default class LineChart {
         y2: this.yScale(0)
       });
 
-      this.svg
-        .selectAll(".population")
-        .data(propertyLines)
-        .enter()
-        .append("g")
-        .attr("class", "population");
-
       this.path = this.svg
         .selectAll(".population")
         .append("path")
         .attr("class", "line")
         .attr("d", d => {
           console.warn('making line path d', d)
+          this.makeLine(property)
           return this.line(d.values);
         })
         .attr({
