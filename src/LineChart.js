@@ -123,6 +123,9 @@ export default class LineChart {
 
       data.forEach(function(d) {
         d.date = parseDate(d.date);
+        d.population = +d.pop
+        d.fertility = +d.fertility;
+        d.mortality = +d.mortality;
       });
 
       const color = d3.scale.category10();
@@ -133,16 +136,15 @@ export default class LineChart {
         })
       );
       
-      const populations = color.domain().map(function(name) {
+      const propertyLines = color.domain().map(function(name) {
         console.warn('name', name)
         return {
-          values: data.map(function(d) {
-            return { date: d.date, population: +d[name] };
-          })
-        };
+          name,
+          values: data
+        }
       });
 
-      console.warn("populations", populations);
+      console.warn("propertyLines", propertyLines);
 
       // set scales according to data
       this.xScale.domain(
@@ -174,24 +176,25 @@ export default class LineChart {
         y2: this.yScale(0)
       });
 
-      const company = this.svg
-        .selectAll(".company")
-        .data(populations)
+      this.svg
+        .selectAll(".population")
+        .data(propertyLines)
         .enter()
         .append("g")
-        .attr("class", "company");
+        .attr("class", "population");
 
       this.path = this.svg
-        .selectAll(".company")
+        .selectAll(".population")
         .append("path")
         .attr("class", "line")
         .attr("d", d => {
+          console.warn('making line path d', d)
           return this.line(d.values);
         })
         .attr({
           fill: "none",
           "shape-rendering" : "crispEdges",
-          stroke: "lightgoldenrodyellow",
+          stroke: "#BAB4AC",
           "stroke-width" : "3px",
           "stroke-dasharray": ("3, 3")
         })

@@ -251,29 +251,11 @@ function sixthAnimation(worldMap, barChart, lineChart) {
 
   worldMap.animateSectionStyles({
     duration: 500,
-    section: ".place-label",
-    styles: {
-      opacity: "0"
-    }
-  });
-
-  worldMap.animateSectionStyles({
-    duration: 500,
     section: "circle",
     styles: {
       opacity: "0"
     }
   });
-
-
-  // const zoomParams = {
-  //   scale: 1,
-  //   duration: 1000,
-  //   translateX: 0,
-  //   translateY: 0
-  // };
-
-  // worldMap.animateMapZoom(zoomParams);
 
   worldMap.animateSectionStyles({
     duration: 500,

@@ -33,7 +33,7 @@ async function initializeGraphics () {
     data: populationsIn1989millions
   })
 
-  const russiaPopulationOverTime = await d3Fetch.tsv("./russia.tsv")
+  const russiaPopulationOverTime = await d3Fetch.tsv("./russia-demographics.tsv")
 
   console.warn({russiaPopulationOverTime})
 
