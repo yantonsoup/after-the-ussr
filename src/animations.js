@@ -117,16 +117,6 @@ function secondAnimation(worldMap, barChart) {
 }
 
 function thirdAnimation(worldMap, barChart) {
-
-  // worldMap.animateSectionStyles({
-  //   duration: 500,
-  //   section: "#RUS",
-  //   styles: {
-  //     fill: "#d0d0d0"
-  //   }
-  // });
-
-
   const title = "Russian populations 1989";
 
   worldMap.createPopulationChoropleth(russianPopulationsIn1989thousands);
@@ -171,14 +161,6 @@ function fourthAnimation(worldMap, barChart) {
   worldMap.createPopulationChoropleth(netMigrantsToRussia1989to2002);
   worldMap.addPointsToMap();
   worldMap.drawCurves();
-
-  // worldMap.animateSectionStyles({
-  //   duration: 1000,
-  //   section: ".arc",
-  //   styles: {
-  //     opacity: "0"
-  //   }
-  // });
 }
 
 function fifthAnimation(worldMap, barChart) {
@@ -206,21 +188,6 @@ function fifthAnimation(worldMap, barChart) {
     }
   });
 
-  const title = "Percentage return to Russia";
-
-  barChart.drawTitle(title, "%");
-  barChart.repaintChart(percentMigrantsToRussia1989to2002);
-  // // up
-  // worldMap.animateSectionStyles({
-  //   duration: 500,
-  //   section: ".soviet-country",
-  //   styles: {
-  //     opacity: "1"
-  //   }
-  // });
-  
-
-
   const zoomParams = {
     scale: 4,
     duration: 800,
@@ -230,16 +197,22 @@ function fifthAnimation(worldMap, barChart) {
 
   worldMap.animateMapZoom(zoomParams);
   worldMap.createPopulationChoropleth(percentMigrantsToRussia1989to2002);
+  
+  const title = "Percentage return to Russia";
+
   barChart.revealBarChart();
+  barChart.drawTitle(title, "%");
+  barChart.repaintChart(percentMigrantsToRussia1989to2002);
 
 }
 
 /* ************ ****** ****** ****** ****** ******  */
 function sixthAnimation(worldMap, barChart, lineChart) {
-
-  barChart.hideAllElements();
+  lineChart.drawLine("population", [130000000, 150000000]);
 
   lineChart.revealIt()
+  barChart.hideAllElements();
+
 
   worldMap.animateSectionStyles({
     duration: 500,
@@ -265,36 +238,20 @@ function sixthAnimation(worldMap, barChart, lineChart) {
         fill: "#BAB4AC",
     }
   });
-
-  // worldMap.animateSectionStyles({
-  //   duration: 500,
-  //   section: ".non-soviet-country",
-  //   styles: {
-  //     fill: "#d0d0d0",
-  //     opacity: "0.5"
-  //   }
-  // });
-
-    // worldMap.animateSectionStyles({
-  //   duration: 500,
-  //   section: ".soviet-country",
-  //   styles: {
-  //     opacity: "0.5",
-  //     fill: "#d0d0d0",
-  //     "stroke-width": '0'
-  //   }
-  // });
 }
 
-function seventhAnimation(worldMap, barChart) {
+function seventhAnimation(worldMap, barChart, lineChart) {
+  lineChart.fadeOutPreviousLine();
+  lineChart.drawLine('mortality', [0, 20])
+  lineChart.drawLine('fertility', [0, 20])
+
   const title = "Top Destinations For FSU Immigrants";
 
   barChart.drawTitle(title, '1995-2002');
   barChart.redrawBarsWith3DataPoints(migrationAbroadDestination1995to2002);
-
 }
 
-function eightAnimation(worldMap, barChart) {
+function eightAnimation(worldMap, barChart, lineChart) {
   barChart.revealBarChart();
 
   const zoomParams = {
@@ -306,18 +263,9 @@ function eightAnimation(worldMap, barChart) {
 
   worldMap.animateMapZoom(zoomParams);
 
- 
-
   worldMap.highlightInternationalCountries(migrationAbroadDestination1995to2002);
   worldMap.applyInitialHighlight();
-  // worldMap.animateSectionStyles({
-  //   duration: 1000,
-  //   section: ".non-soviet-country",
-  //   styles: {
-  //     opacity: "0.5",
-  //     "stroke-width": "0.25px"
-  //   }
-  // });
+
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".fsu-state",
