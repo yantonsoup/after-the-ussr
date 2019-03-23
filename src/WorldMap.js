@@ -177,7 +177,7 @@ export default class WorldMap {
     console.warn('WORLDMAP', { chromaDataCodes });
     // Object.values(chromaDataCodes).forEach(color => console.log('%ccolor code',  `background: ${color}; color: ${color}`))
 
-    d3.selectAll(".fsu-state")
+    d3.selectAll(".soviet-country")
       .transition()
       .duration(1000)
       .style("fill", function(d, i) {

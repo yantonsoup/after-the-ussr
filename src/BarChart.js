@@ -107,12 +107,12 @@ export default class BarChart {
       .style("font-weight", "400");
   }
 
-  repaintChart(data) {
+  repaintChart(data, units) {
     this.setXScale(data);
     this.setYScale(data);
     this.bindDataToBars(data);
     this.redrawBars(data);
-    this.redrawLabels(data);
+    this.redrawLabels(data, units);
     this.redrawYAxes(data);
   }
 
@@ -128,19 +128,50 @@ export default class BarChart {
   //   this.redrawPercentLabels(data);
   //   this.redrawYAxes(data);
   // }
+  revealBarChart() {
+    this.plot
+      .transition()
+      .delay(500)
+      .style("opacity", "1");
 
-  paintHiddenBars(data) {
-    const chromaDataCodes = createChromaData(data);
-
-    this.bars
-      .append("rect")
-      .attr("class", "bar")
-      .attr("y", d => {
-        return this.yScale(d.name);
-      })
-      .attr("height", () => this.yScale.rangeBand())
-      .attr("fill", (d, i) => chromaDataCodes[d.name]);
+    d3.select(".bar-graphic-header")
+      .transition()
+      .delay(500)
+      .style("opacity", "1")
+      .style("color", "black");
   }
+
+    paintHiddenBars(data) {
+      const chromaDataCodes = createChromaData(data);
+
+      this.bars
+        .append("rect")
+        .attr("class", "bar")
+        .attr("y", d => {
+          return this.yScale(d.name);
+        })
+        .attr("height", () => this.yScale.rangeBand())
+        .attr("fill", (d, i) => chromaDataCodes[d.name]);
+    }
+
+    redrawBars(data) {
+      const chromaDataCodes = createChromaData(data);
+
+      d3.selectAll("rect")
+        .data(data)
+        .transition()
+        .delay(function(d, i) {
+          return i * 50;
+        })
+        .attr("y", d => {
+          return this.yScale(d.name);
+        })
+        .attr("width", d => {
+          return this.xScale(d.population);
+        })
+        .attr("height", () => this.yScale.rangeBand())
+        .attr("fill", (d, i) => chromaDataCodes[d.name]);
+    }
 
   setXScale(data) {
     this.xScale = d3.scale
@@ -207,20 +238,7 @@ export default class BarChart {
       .append("g");
   }
 
-  redrawBars(data) {
-    const chromaDataCodes = createChromaData(data);
 
-    d3.selectAll("rect")
-      .data(data)
-      .transition()
-      .delay(function(d, i) {
-        return i * 50;
-      })
-      .attr("width", d => {
-        return this.xScale(d.population);
-      })
-      .attr("fill", (d, i) => chromaDataCodes[d.name]);
-  }
 
   redrawPercentLabels(data) {
     this.plot
@@ -249,7 +267,7 @@ export default class BarChart {
       .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
   }
 
-  redrawLabels(data) {
+  redrawLabels(data, units) {
     this.plot.selectAll(".label").remove();
 
     this.plot
@@ -267,24 +285,11 @@ export default class BarChart {
       })
       .attr("dx", ".75em")
       .text(function(datum) {
-        return parseMillionsPopulationText(datum);
+        return `${datum.population}${units}`;
       })
       .style("font-weight", 600)
       .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
   }
-
-  addPopulationLabels(data) {
-    this.redrawLabels(data);
-
-    this.plot
-      .selectAll(".label")
-      .style("opacity", "0")
-      .transition()
-      .delay(500)
-      .duration(500)
-      .style("opacity", "1");
-  }
-
 
   hideAllElements() {
     this.plot
@@ -298,18 +303,7 @@ export default class BarChart {
       .style("opacity", "0")
   }
 
-  revealBarChart() {
-    this.plot
-      .transition()
-      .delay(500)
-      .style("opacity", "1");
 
-    d3.select(".bar-graphic-header")
-      .transition()
-      .delay(500)
-      .style("opacity", "1")
-      .style("color", "black");
-  }
 }
 
 function parseMillionsPopulationText(datum) {

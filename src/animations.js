@@ -2,7 +2,7 @@ import {
   netMigrantsToRussia1989to2002,
   percentMigrantsToRussia1989to2002,
   migrationAbroadEthnicity1995to2002,
-  russianPopulationsIn1989thousands,
+  russianPopulationsIn198millions,
   migrationAbroadDestination1995to2002,
   populationRussia1989to2002,
   populationsIn1989millions
@@ -94,9 +94,8 @@ function secondAnimation(worldMap, barChart) {
   // barChart.redrawBars(populationsIn1989millions);
   const title = "1898 Soviet State Populations";
   barChart.drawTitle(title, "m");
-  barChart.repaintChart(populationsIn1989millions);
+  barChart.repaintChart(populationsIn1989millions, "m");
 
-  barChart.addPopulationLabels(populationsIn1989millions);
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".non-soviet-country",
@@ -117,14 +116,22 @@ function secondAnimation(worldMap, barChart) {
 }
 
 function thirdAnimation(worldMap, barChart) {
+  barChart.clearBars()
+  barChart.bindDataToBars(russianPopulationsIn198millions)
+
+  barChart.paintHiddenBars(russianPopulationsIn198millions)
+  // delete the bars
+  // add them
+  // paint them
   const title = "Russian populations 1989";
 
-  worldMap.createPopulationChoropleth(russianPopulationsIn1989thousands);
-
-  barChart.drawTitle(title, "thou");
-  barChart.repaintChart(russianPopulationsIn1989thousands);
+  barChart.drawTitle(title, "m");
+  barChart.repaintChart(russianPopulationsIn198millions, "m");
+  barChart.revealBarChart();
 
   // hide curves and dot on way up
+  worldMap.createPopulationChoropleth(russianPopulationsIn198millions);
+
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".arc",
@@ -147,7 +154,7 @@ function fourthAnimation(worldMap, barChart) {
 
   // worldMap.drawLabelPointer()
   barChart.drawTitle(title, "thou");
-  barChart.repaintChart(netMigrantsToRussia1989to2002);
+  barChart.repaintChart(netMigrantsToRussia1989to2002, "thou");
 
   // on way up
   const zoomParams = {
@@ -171,8 +178,7 @@ function fifthAnimation(worldMap, barChart) {
     translateY: -Math.floor(worldMap.height * 0.2)
   };
   worldMap.animateMapZoom(zoomParams);
-  
-  worldMap.createPopulationChoropleth(percentMigrantsToRussia1989to2002);
+  worldMap.createPopulationChoropleth(percentMigrantsToRussia1989to2002, "%");
   
   worldMap.animateSectionStyles({
     duration: 500,
@@ -196,10 +202,9 @@ function fifthAnimation(worldMap, barChart) {
     }
   });
 
-  const title = "Percentage return to Russia";
-
+  // barChart.clearBars();
   barChart.revealBarChart();
-  barChart.drawTitle(title, "%");
+  barChart.drawTitle("Percentage return to Russia", "%");
   barChart.repaintChart(percentMigrantsToRussia1989to2002);
 
 }

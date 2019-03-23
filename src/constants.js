@@ -72,24 +72,25 @@ export const populationsIn1989millions = [
   { name: "TJK", population: 3.8 },
   { name: "TKM", population: 2.8 },
   { name: "UKR", population: 51.7 },
-  { name: "UZB", population: 19.9 }
+  { name: "UZB", population: 19.9 },
+  { name: "RUS", population: 147 }
 ];
 
-export const russianPopulationsIn1989thousands = [
-  { name: "ARM", population: 52	 },
-  { name: "AZE", population: 392 },
-  { name: "BLR", population: 1342 },
-  { name: "EST", population: 475	 },
-  { name: "GEO", population: 341 },
-  { name: "KAZ", population: 6228 },
-  { name: "KGZ", population: 917 },
-  { name: "LVA", population: 906 },
-  { name: "LTU", population: 345 },
-  { name: "MDA", population: 562 },
-  { name: "TJK", population: 389 },
-  { name: "TKM", population: 334 },
-  { name: "UKR", population: 11356 },
-  { name: "UZB", population: 1654 }
+export const russianPopulationsIn198millions = [
+  { name: "ARM", population: 0.05	 },
+  { name: "AZE", population: 0.4 },
+  { name: "BLR", population: 1.3 },
+  { name: "EST", population: 0.5	 },
+  { name: "GEO", population: 0.3 },
+  { name: "KAZ", population: 6.2 },
+  { name: "KGZ", population: 0.9 },
+  { name: "LVA", population: 0.9 },
+  { name: "LTU", population: 0.3 },
+  { name: "MDA", population: 0.6 },
+  { name: "TJK", population: 0.4 },
+  { name: "TKM", population: 0.3 },
+  { name: "UKR", population: 11.4 },
+  { name: "UZB", population: 1.7 }
 ];
 
 // export const populationsIn1989 = [
