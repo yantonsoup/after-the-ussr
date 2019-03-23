@@ -13,16 +13,12 @@ window.onbeforeunload = function() {
   window.scrollTo(0, 0);
 };
 
-firstPaint();
-
 async function initializeGraphics () {
   const worldTopo = await d3Fetch.json("./json/110topoworld.json")
-  
-  console.warn({worldTopo})
-
   const countries = topojson.feature(worldTopo, worldTopo.objects.subunits)
   const features = countries.features;
 
+  console.warn({worldTopo})
   const worldMap = new WorldMap({
     data: features,
     element: '.map-graphic-container'
@@ -34,7 +30,6 @@ async function initializeGraphics () {
   })
 
   const russiaPopulationOverTime = await d3Fetch.tsv("./russia-demographics.tsv")
-
   console.warn({russiaPopulationOverTime})
 
   const lineChart = new LineChart({
@@ -43,10 +38,12 @@ async function initializeGraphics () {
     headerElement: '.line-graphic-header'
   })
 
-
   console.warn('features', features);
 
   setupScrollama(worldMap, barChart, lineChart);
 }
 
-initializeGraphics()
+
+firstPaint();
+
+initializeGraphics();

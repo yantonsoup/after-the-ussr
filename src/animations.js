@@ -164,6 +164,16 @@ function fourthAnimation(worldMap, barChart) {
 }
 
 function fifthAnimation(worldMap, barChart) {
+  const zoomParams = {
+    scale: 4,
+    duration: 800,
+    translateX: -Math.floor(worldMap.width * 0.462),
+    translateY: -Math.floor(worldMap.height * 0.2)
+  };
+  worldMap.animateMapZoom(zoomParams);
+  
+  worldMap.createPopulationChoropleth(percentMigrantsToRussia1989to2002);
+  
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".arc",
@@ -171,7 +181,6 @@ function fifthAnimation(worldMap, barChart) {
       opacity: "1"
     }
   });
-
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".place-label",
@@ -179,7 +188,6 @@ function fifthAnimation(worldMap, barChart) {
       opacity: "1"
     }
   });
-
   worldMap.animateSectionStyles({
     duration: 500,
     section: "circle",
@@ -188,16 +196,6 @@ function fifthAnimation(worldMap, barChart) {
     }
   });
 
-  const zoomParams = {
-    scale: 4,
-    duration: 800,
-    translateX: -Math.floor(worldMap.width * 0.462),
-    translateY: -Math.floor(worldMap.height * 0.2)
-  };
-
-  worldMap.animateMapZoom(zoomParams);
-  worldMap.createPopulationChoropleth(percentMigrantsToRussia1989to2002);
-  
   const title = "Percentage return to Russia";
 
   barChart.revealBarChart();
@@ -210,7 +208,8 @@ function fifthAnimation(worldMap, barChart) {
 function sixthAnimation(worldMap, barChart, lineChart) {
   barChart.hideAllElements();
 
-  lineChart.clearPreviousLineAndAxis();
+  lineChart.clearPreviousLineAndAxis('fertility');
+  lineChart.clearPreviousLineAndAxis('mortality');
   lineChart.drawLine("population", [130000000, 150000000]);
   lineChart.revealIt()
 
@@ -235,21 +234,21 @@ function sixthAnimation(worldMap, barChart, lineChart) {
     section: "#RUS",
     styles: {
       opacity: "1",
+        // fill: "#c7eae5",
         fill: "#BAB4AC",
     }
   });
 }
 
 function seventhAnimation(worldMap, barChart, lineChart) {
-  lineChart.clearPreviousLineAndAxis();
-  
-  lineChart.drawLine('mortality', [0, 30])
-  lineChart.drawLine('fertility', [0, 30])
 
+  lineChart.clearPreviousLineAndAxis('population');
+  lineChart.drawLine('fertility', [0, 30])
+  lineChart.drawLine('mortality', [0, 30])
   lineChart.drawTitle('Russia Birth/Death Rates', 'per 1000')
 
-  const title = "Top Destinations For FSU Immigrants";
 
+  const title = "Top Destinations For FSU Immigrants";
   barChart.drawTitle(title, '1995-2002');
   barChart.redrawBarsWith3DataPoints(migrationAbroadDestination1995to2002);
 }

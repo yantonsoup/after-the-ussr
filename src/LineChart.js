@@ -91,7 +91,7 @@ export default class LineChart {
           return millionsDigits;
         }
 
-        return yValue
+        return yValue;
       })
       .outerTickSize(0)
       .orient("left");
@@ -161,7 +161,7 @@ export default class LineChart {
 
     this.svg
       .append("g")
-      .attr("class", "x axis")
+      .attr("class", "axis x-axis")
       .attr("fill", "lightgoldenrodyellow")
       .attr("transform", "translate(0," + this.height + ")")
       .call(this.xAxis);
@@ -172,27 +172,29 @@ export default class LineChart {
       .enter()
       .append("g")
       .attr("class", "property-line");
-
   }
 
-  clearPreviousLineAndAxis() {
-    this.svg
-      .select(".y axis")
-      .remove()
+  clearPreviousLineAndAxis(property) {
+    const yAx = this.svg.select(".y-axis");
+    const propertylines = this.svg.selectAll(".property-line")
+    const lineLabels = this.svg.selectAll(".line-label")
+    console.warn({ yAx });
+    console.warn({ propertylines });
+    console.warn({ lineLabels });
 
-    this.svg
-      .selectAll(".line")
-      .remove()
- 
+    this.svg.select(".y-axis").remove();
+    this.svg.selectAll(`.${property}-line`).remove();
+    this.svg.selectAll(".line-label").remove();
+
   }
 
   drawLine(property, domain) {
     this.yScale.domain(domain);
+    const { fill } = getLineStylesFromProperty(property)
 
     this.svg
       .append("g")
-      .attr("class", "axis")
-      .attr("class", "y axis")
+      .attr("class", "axis y-axis")
       .attr("fill", "lightgoldenrodyellow")
       .call(this.yAxis)
       .transition()
@@ -211,23 +213,85 @@ export default class LineChart {
       .selectAll(".property-line")
       .append("path")
       .attr("class", "line")
+      .attr("class", `${property}-line`)
       .attr("d", d => {
         this.makeLine(property);
         return this.line(d.values);
       })
       .attr({
         fill: "none",
-        stroke: "#BAB4AC",
+        stroke: fill,
         "stroke-width": "3px",
         "stroke-dasharray": "3, 3",
         "shape-rendering": "crispEdges"
       });
-      // .transition()
-      // .duration(500)
-      // .style("opacity", "1");
+
+    var totalLength = [
+      this.path[0][0].getTotalLength(),
+      this.path[0][1].getTotalLength()
+    ];
+
+    d3.select(this.path[0][0])
+      .attr("stroke-dasharray", totalLength[0] + " " + totalLength[0])
+      .attr("stroke-dashoffset", totalLength[0])
+      .transition()
+      .duration(2500)
+      .ease("linear")
+      .attr("stroke-dashoffset", 0);
+
+    d3.select(this.path[0][1])
+      .attr("stroke-dasharray", totalLength[1] + " " + totalLength[1])
+      .attr("stroke-dashoffset", totalLength[1])
+      .transition()
+      .duration(2500)
+      .ease("linear")
+      .attr("stroke-dashoffset", 0);
+
+    this.labelLine(property);
   }
-  
-  repaintLine() {
+
+
+  labelLine(property) {
+    console.warn('property', property)
+    console.warn('prohis.data[0][property]', this.data[0][property])
+    console.warn('this.yScale(this.data[0][property]', this.yScale(this.data[0][property]))
+    const translateX = this.width-25
+    const translateY = this.yScale(this.data[0][property])
+
+    console.warn('translateX', translateX)
+    console.warn('translateY', translateY)
+
+    const { fill } = getLineStylesFromProperty(property)
+    
+    this.svg.append("text")
+    .attr(
+      "transform",
+      `translate(${translateX},${translateY})`
+    )
+    .attr("dy", ".35em")
+    .attr("text-anchor", "start")
+    .attr('class', "line-label")
+    .style("fill", fill)
+    .text(property);
+  }
+}
+
+function getLineStylesFromProperty(property) {
+  switch (property) {
+    case 'population':
+      return {
+        fill: 'blue'
+      }
+    case 'fertility':
+      return {
+        fill: 'green'
+      }
+    case 'mortality':
+      return {
+        fill: 'black'
+      }
+    default:
+      return 
 
   }
 }
