@@ -1,6 +1,10 @@
 import chroma from 'chroma-js'
 
-export function createChromaData(populationDataSet) {
+const redSet = ['white', 'orange'];
+const orangeSet = ['#ffffb2', '#fd8d3c'];
+const blueSet = ['#ffffcc', '#a1dab4', '#41b6c4']
+
+export function createChromaData(populationDataSet, scale=redSet ) {
     // console.warn('createChromaData: chroma dataset', populationDataSet)
 
     const dataRange = populationDataSet
@@ -9,9 +13,8 @@ export function createChromaData(populationDataSet) {
       // #F0DF7E
     // console.warn('dataRange', dataRange)
     // const blueSet = ['#9E8CFF', '#8CF3FF'];
-    const redSet = ['white', 'orange'];
     const yellowSet = ['#F0DF7E', 'orange'];
-    const chromaDomain = chroma.scale(redSet).domain(dataRange);
+    const chromaDomain = chroma.scale(scale).domain(dataRange);
 
     const countryColorCodes = populationDataSet.reduce((countryColorsById, country) => {
       // console.warn('country', country)

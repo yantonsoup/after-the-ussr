@@ -34,7 +34,7 @@ function zeroAnimation(worldMap) {
   };
 
   worldMap.animateMapZoom(zoomParams);
-  worldMap.createPopulationChoropleth(populationsIn1989millions);
+  worldMap.createPopulationChoropleth(populationsIn1989millions, '.soviet-country');
 }
 
 function firstAnimation(worldMap, barChart, lineChart) {
@@ -91,9 +91,13 @@ function secondAnimation(worldMap, barChart) {
   });
 
   barChart.revealBarChart();
+
+  barChart.clearBars()
+  barChart.bindDataToBars(populationsIn1989millions);
+  barChart.paintHiddenBars(populationsIn1989millions)
+
   // barChart.redrawBars(populationsIn1989millions);
-  const title = "1898 Soviet State Populations";
-  barChart.drawTitle(title, "m");
+  barChart.drawTitle("1898 Soviet State Populations");
   barChart.repaintChart(populationsIn1989millions, "m");
 
   worldMap.animateSectionStyles({
@@ -112,7 +116,7 @@ function secondAnimation(worldMap, barChart) {
     }
   });
 
-  worldMap.createPopulationChoropleth(populationsIn1989millions);
+  worldMap.createPopulationChoropleth(populationsIn1989millions, '.fsu-state');
 }
 
 function thirdAnimation(worldMap, barChart) {
@@ -130,7 +134,7 @@ function thirdAnimation(worldMap, barChart) {
   barChart.revealBarChart();
 
   // hide curves and dot on way up
-  worldMap.createPopulationChoropleth(russianPopulationsIn198millions);
+  worldMap.createPopulationChoropleth(russianPopulationsIn198millions, '.fsu-state');
 
   worldMap.animateSectionStyles({
     duration: 500,
@@ -145,6 +149,15 @@ function thirdAnimation(worldMap, barChart) {
     section: "circle",
     styles: {
       opacity: "0"
+    }
+  });
+
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: "#RUS",
+    styles: {
+      opacity: "1",
+        fill: "#BAB4AC",
     }
   });
 }
@@ -165,7 +178,7 @@ function fourthAnimation(worldMap, barChart) {
   };
 
   worldMap.animateMapZoom(zoomParams);
-  worldMap.createPopulationChoropleth(netMigrantsToRussia1989to2002);
+  worldMap.createPopulationChoropleth(netMigrantsToRussia1989to2002, '.fsu-state');
   worldMap.addPointsToMap();
   worldMap.drawCurves();
 }
@@ -178,7 +191,7 @@ function fifthAnimation(worldMap, barChart) {
     translateY: -Math.floor(worldMap.height * 0.2)
   };
   worldMap.animateMapZoom(zoomParams);
-  worldMap.createPopulationChoropleth(percentMigrantsToRussia1989to2002, "%");
+  worldMap.createPopulationChoropleth(percentMigrantsToRussia1989to2002, '.fsu-state');
   
   worldMap.animateSectionStyles({
     duration: 500,
@@ -205,7 +218,7 @@ function fifthAnimation(worldMap, barChart) {
   // barChart.clearBars();
   barChart.revealBarChart();
   barChart.drawTitle("Percentage return to Russia", "%");
-  barChart.repaintChart(percentMigrantsToRussia1989to2002);
+  barChart.repaintChart(percentMigrantsToRussia1989to2002, '%');
 
 }
 
@@ -218,6 +231,7 @@ function sixthAnimation(worldMap, barChart, lineChart) {
   lineChart.drawLine("population", [130000000, 150000000]);
   lineChart.revealIt()
 
+  worldMap.createPopulationChoropleth(populationsIn1989millions, '.soviet-country');
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".arc",
@@ -231,16 +245,6 @@ function sixthAnimation(worldMap, barChart, lineChart) {
     section: "circle",
     styles: {
       opacity: "0"
-    }
-  });
-
-  worldMap.animateSectionStyles({
-    duration: 500,
-    section: "#RUS",
-    styles: {
-      opacity: "1",
-        // fill: "#c7eae5",
-        fill: "#BAB4AC",
     }
   });
 }

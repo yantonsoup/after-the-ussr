@@ -171,13 +171,13 @@ export default class WorldMap {
     // .style("fill", "white")
   }
 
-  createPopulationChoropleth(populationData) {
-    const chromaDataCodes = createChromaData(populationData);
+  createPopulationChoropleth(populationData, selection, colorRangeOverride) {
+    const chromaDataCodes = createChromaData(populationData, colorRangeOverride);
 
     console.warn('WORLDMAP', { chromaDataCodes });
     // Object.values(chromaDataCodes).forEach(color => console.log('%ccolor code',  `background: ${color}; color: ${color}`))
 
-    d3.selectAll(".soviet-country")
+    d3.selectAll(selection)
       .transition()
       .duration(1000)
       .style("fill", function(d, i) {

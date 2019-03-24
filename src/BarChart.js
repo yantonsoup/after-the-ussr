@@ -64,8 +64,8 @@ export default class BarChart {
     this.textHeader = d3.select(".bar-graphic-header-text");
     this.textHeader.text(text);
 
-    this.textHeaderUnits = d3.select(".bar-graphic-header-units");
-    this.textHeaderUnits.text(units);
+    // this.textHeaderUnits = d3.select(".bar-graphic-header-units");
+    // this.textHeaderUnits.text(units);
   }
 
   redrawYAxes() {
@@ -142,7 +142,9 @@ export default class BarChart {
   }
 
     paintHiddenBars(data) {
-      const chromaDataCodes = createChromaData(data);
+      const colorRangeOverride = ['white', 'orange'];
+
+      const chromaDataCodes = createChromaData(data, colorRangeOverride);
 
       this.bars
         .append("rect")
@@ -227,7 +229,7 @@ export default class BarChart {
     
     this.redrawYAxes(data);
 
-    this.redrawPercentLabels(data);
+    this.redrawLabels(data, '%');
   }
 
   bindDataToBars(data) {
@@ -236,35 +238,6 @@ export default class BarChart {
       .data(data)
       .enter()
       .append("g");
-  }
-
-
-
-  redrawPercentLabels(data) {
-    this.plot
-      .selectAll(".label")
-      .transition()
-      .duration(500)
-      .style("opacity", "0");
-
-    this.plot
-      .select("g")
-      .selectAll(".text")
-      .data(data)
-      .enter()
-      .append("text")
-      .attr("class", "label")
-      .attr("y", d => {
-        return this.yScale(d.name);
-      })
-      .attr("x", d => {
-        return this.xScale(d.population);
-      })
-      .attr("dx", ".75em")
-      .text(function(datum) {
-        return datum.population + "%";
-      })
-      .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
   }
 
   redrawLabels(data, units) {

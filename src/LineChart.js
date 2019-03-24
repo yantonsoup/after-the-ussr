@@ -280,7 +280,7 @@ function getLineStylesFromProperty(property) {
   switch (property) {
     case 'population':
       return {
-        fill: 'blue'
+        fill: 'orange'
       }
     case 'fertility':
       return {
