@@ -370,7 +370,7 @@ function tenthAnimation(worldMap, barChart, lineChart) {
   lineChart.clearPreviousLineAndAxis('fertility');
   lineChart.clearPreviousLineAndAxis('mortality');
   lineChart.drawLine('germanFsuToGermany', [0, 220])
-  lineChart.drawTitle('Emigration Abroad', '(000\'s)')
+  lineChart.drawTitle('Soviet German Migr.', '000\'s')
 
   lineChart.revealIt()
 
@@ -420,12 +420,21 @@ function tenthAnimation(worldMap, barChart, lineChart) {
 }
 
 function eleventhAnimation(worldMap, barChart, lineChart) {
-  lineChart.drawLine('jewishFsuToGermany', [0, 220])
-
+  // lineChart.drawLine('jewishFsuToGermany', [0, 220])
 }
 
 function twelfthAnimation(worldMap, barChart, lineChart) {
+  lineChart.clearPreviousLineAndAxis('germanFsuToGermany');
+  lineChart.drawTitle('Soviet Jewish Migr.', '000\'s')
   lineChart.drawLine('jewishFsuToIsrael', [0, 220])
+
+  const zoomParams = {
+    scale: 17,
+    duration: 750,
+    translateX: -Math.floor(worldMap.width * 0.5),
+    translateY: -Math.floor(worldMap.height * 0.38)
+  };
+  worldMap.animateMapZoom(zoomParams);
 
   worldMap.animateSectionStyles({
     duration: 500,
@@ -433,36 +442,39 @@ function twelfthAnimation(worldMap, barChart, lineChart) {
     styles: {
       opacity: "1",
       stroke: 'black',
-      "stroke-width": '0.3px'
+      "stroke-width": '0.15px'
+    }
+  });
+}
+
+function thirteenthAnimation(worldMap, barChart) {
+
+}
+
+function fourteenthAnimation(worldMap, barChart, lineChart) {
+  lineChart.drawLine('jewishFsuToGermany', [0, 220])
+  lineChart.drawLine('jewishFsuToUsa', [0, 220])
+
+  console.warn('entered fourteenth')
+  // worldMap.animateMapZoom(zoomParams);
+
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: "#arc-USA",
+    styles: {
+      opacity: "1",
+      stroke: 'black',
+      "stroke-width": "1px"
     }
   });
 
-    
-  // const zoomParams = {
-  //   scale: 15,
-  //   duration: 500,
-  //   translateX: -Math.floor(worldMap.width * 0.5),
-  //   translateY: -Math.floor(worldMap.height * 0.38)
-  // };
-
-  // worldMap.animateMapZoom(zoomParams);
-}
-
-
-function thirteenthAnimation(worldMap, barChart) {
-  // const zoomParams = {
-  //   scale: 5,
-  //   duration: 750,
-  //   translateX: -Math.floor(worldMap.width * 0.08),
-  //   translateY: -Math.floor(worldMap.height * 0.3)
-  // };
-
-  // worldMap.animateMapZoom(zoomParams);
   worldMap.animateSectionStyles({
     duration: 500,
     section: "#arc-DEU",
     styles: {
-      opacity: "0"
+      opacity: "1",
+      stroke: 'black',
+      "stroke-width": "1px"
     }
   });
 
@@ -470,29 +482,9 @@ function thirteenthAnimation(worldMap, barChart) {
     duration: 500,
     section: "#arc-ISR",
     styles: {
-      opacity: "0"
-    }
-  });
-
-  worldMap.animateSectionStyles({
-    duration: 500,
-    section: "#arc-USA",
-    styles: {
-      opacity: "1"
-    }
-  });
-}
-
-// function thirteenthAnimation () {
-
-// }
-
-function fourteenthAnimation(worldMap, barChart) {
-  worldMap.animateSectionStyles({
-    duration: 1000,
-    section: ".arc",
-    styles: {
-      opacity: "0"
+      opacity: "1",
+      stroke: 'black',
+      "stroke-width": "1px"
     }
   });
 
@@ -506,7 +498,22 @@ function fourteenthAnimation(worldMap, barChart) {
   worldMap.animateMapZoom(zoomParams);
 }
 
-function fifteenthAnimation(worldMap, barChart) {
+function fifteenthAnimation(worldMap, barChart, lineChart) {
+  lineChart.clearPreviousLineAndAxis('jewishFsuToIsrael');
+  lineChart.clearPreviousLineAndAxis('jewishFsuToGermany');
+  lineChart.clearPreviousLineAndAxis('jewishFsuToUsa');
+
+  lineChart.drawTitle('Soviet American Migr.', '000\'s')
+  lineChart.drawLine('americanFsuToUsa', [0, 220])
+
+  const zoomParams = {
+    scale: 5,
+    duration: 750,
+    translateX: -Math.floor(worldMap.width * 0.08),
+    translateY: -Math.floor(worldMap.height * 0.3)
+  };
+  worldMap.animateMapZoom(zoomParams);
+
   worldMap.animateSectionStyles({
     duration: 1000,
     section: ".arc",
@@ -514,22 +521,37 @@ function fifteenthAnimation(worldMap, barChart) {
       opacity: "0"
     }
   });
-
-  const zoomParams = {
-    scale: 1,
-    duration: 1000,
-    translateX: 0,
-    translateY: 0
-  };
-
-  worldMap.animateMapZoom(zoomParams);
 }
 
 function sixteeteenthAnimation() {
 
 }
 
-function seventeenthAnimation() {
+function seventeenthAnimation(worldMap, barChart, lineChart) {
+  lineChart.hideIt()
+  const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
+
+  worldMap.moveMapContainer({
+    duration: 750,
+    top: quarterPageHeight
+  });
+  
+  const zoomParams = {
+    scale: 1,
+    duration: 1000,
+    translateX: 0,
+    translateY: 0
+  };
+
+  worldMap.animateMapZoom(zoomParams);
+  worldMap.createPopulationChoropleth(populationsIn1989millions, '.soviet-country');
+}
+
+function eighteenthAnimation () {
+
+}
+
+function nineteenthAnimation () {
 
 }
 
@@ -549,8 +571,9 @@ export default {
   12: twelfthAnimation,
   13: thirteenthAnimation,
   14: fourteenthAnimation,
-  14: fifteenthAnimation,
   15: fifteenthAnimation,
-  14: sixteeteenthAnimation,
-  14: seventeenthAnimation,
+  16: sixteeteenthAnimation,
+  17: seventeenthAnimation,
+  18: eighteenthAnimation,
+  19: nineteenthAnimation,
 };

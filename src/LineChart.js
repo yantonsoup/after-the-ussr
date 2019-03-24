@@ -39,10 +39,14 @@ export default class LineChart {
   }
 
   hideIt() {
-    d3.select(this.element).transition()
-    .duration(1000).style("opacity", 0);
-    d3.select(this.headerElement).transition()
-    .duration(1000).style("opacity", 0);
+    d3.select(this.element)
+      .transition()
+      .duration(1000)
+      .style("opacity", 0);
+    d3.select(this.headerElement)
+      .transition()
+      .duration(1000)
+      .style("opacity", 0);
   }
 
   revealIt() {
@@ -140,6 +144,7 @@ export default class LineChart {
       d.jewishFsuToIsrael = +d.jewishFsuToIsrael;
       d.jewishFsuToGermany = +d.jewishFsuToGermany;
       d.jewishFsuToUsa = +d.jewishFsuToUsa;
+      d.americanFsuToUsa = +d.americanFsuToUsa;
     });
 
     color.domain(
@@ -182,8 +187,8 @@ export default class LineChart {
 
   clearPreviousLineAndAxis(property) {
     const yAx = this.svg.select(".y-axis");
-    const propertylines = this.svg.selectAll(".property-line")
-    const lineLabels = this.svg.selectAll(".line-label")
+    const propertylines = this.svg.selectAll(".property-line");
+    const lineLabels = this.svg.selectAll(".line-label");
     console.warn({ yAx });
     console.warn({ propertylines });
     console.warn({ lineLabels });
@@ -191,12 +196,11 @@ export default class LineChart {
     this.svg.select(".y-axis").remove();
     this.svg.selectAll(`.${property}-line`).remove();
     this.svg.selectAll(".line-label").remove();
-
   }
 
   drawLine(property, domain) {
     this.yScale.domain(domain);
-    const { fill } = getLineStylesFromProperty(property)
+    const { fill } = getLineStylesFromProperty(property);
 
     this.svg
       .append("g")
@@ -256,65 +260,69 @@ export default class LineChart {
     this.labelLine(property);
   }
 
-
   labelLine(property) {
-    console.warn('property', property)
-    console.warn('prohis.data[0][property]', this.data[0][property])
-    console.warn('this.yScale(this.data[0][property]', this.yScale(this.data[0][property]))
-    const translateX = this.width-100
-    const translateY = this.yScale(this.data[0][property])
+    console.warn("property", property);
+    console.warn("prohis.data[0][property]", this.data[0][property]);
+    console.warn(
+      "this.yScale(this.data[0][property]",
+      this.yScale(this.data[0][property])
+    );
+    const translateX = this.width - 100;
+    const translateY = this.yScale(this.data[0][property]);
 
-    console.warn('translateX', translateX)
-    console.warn('translateY', translateY)
+    console.warn("translateX", translateX);
+    console.warn("translateY", translateY);
 
-    const { fill } = getLineStylesFromProperty(property)
-    
-    this.svg.append("text")
-    .attr(
-      "transform",
-      `translate(${translateX},${translateY})`
-    )
-    .attr("dy", ".35em")
-    .attr("text-anchor", "start")
-    .attr('class', "line-label")
-    .style("fill", fill)
-    .text(property);
+    const { fill } = getLineStylesFromProperty(property);
+
+    this.svg
+      .append("text")
+      .attr("transform", `translate(${translateX},${translateY})`)
+      .attr("dy", ".35em")
+      .attr("text-anchor", "start")
+      .attr("class", "line-label")
+      .style("fill", fill)
+      .text(property);
   }
 }
 
 function getLineStylesFromProperty(property) {
   switch (property) {
-    case 'population':
+    case "population":
       return {
-        fill: 'orange'
-      }
-    case 'fertility':
+        fill: "orange"
+      };
+    case "fertility":
       return {
-        fill: 'green'
-      }
-    case 'mortality':
+        fill: "green"
+      };
+    case "mortality":
       return {
-        fill: 'black'
-      }
-    case 'germanFsuToGermany':
+        fill: "black"
+      };
+    case "germanFsuToGermany":
       return {
-        fill: '#41b6c4'
-      }
-    case 'jewishFsuToGermany':
+        fill: "#41b6c4"
+      };
+    case "jewishFsuToGermany":
       return {
-        fill: '#41b6c4'
-      }
-    case 'jewishFsuToIsrael':
+        fill: "#41b6c4"
+      };
+    case "jewishFsuToIsrael":
       return {
-        fill: '#a1dab4'
-      }
-    case 'jewishFsuToUsa':
+        fill: "#a1dab4"
+      };
+    case "jewishFsuToUsa":
       return {
-        fill: '#ffffb2'
-      }
+        fill: "#ffffb2"
+      };
+    case "americanFsuToUsa":
+      return {
+        fill: "#ffffb2"
+      };
     default:
       return {
-        fill: 'black'
-      } 
+        fill: "black"
+      };
   }
 }
