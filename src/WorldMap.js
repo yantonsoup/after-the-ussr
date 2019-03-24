@@ -90,16 +90,13 @@ export default class WorldMap {
   }
 
   applyInitialHighlight() {
-    // this.mapGraphic.selectAll(".soviet-country").style("fill", "#d0d0d0");
-    // this.mapGraphic.selectAll(".soviet-country").style("fill", "lightgoldenrodyellow");
-    // this.mapGraphic.selectAll(".soviet-country").style("fill", "#fcd116");
-
     this.animateSectionStyles({
       duration: 500,
       section: ".soviet-country",
       styles: {
         opacity: "1",
         fill: "#BAB4AC",
+        "stroke": 'none'
       }
     });
 
@@ -111,7 +108,6 @@ export default class WorldMap {
         fill: "#d0d0d0",
       }
     });
-
   }
 
   getInitialScale() {
@@ -318,7 +314,7 @@ export default class WorldMap {
   }
   
   highlightInternationalCountries(migrationAbroadDestination1995to2002) {
-    const chromaDataCodes = createChromaData(migrationAbroadDestination1995to2002);
+    const chromaDataCodes = createChromaData(migrationAbroadDestination1995to2002, ['#ffffb2', '#a1dab4', '#41b6c4']);
     console.warn('highlightInternationalCountries, chromaDataCodes', chromaDataCodes)
     this.mapGraphic
       .select("#ISR")

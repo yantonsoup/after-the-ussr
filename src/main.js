@@ -29,14 +29,13 @@ async function initializeGraphics () {
     data: populationsIn1989millions
   })
 
-  const russiaPopulationOverTime = await d3Fetch.tsv("./russia-demographics.tsv")
+  const russiaPopulationOverTime = await d3Fetch.tsv("./russia-demographics-1.tsv")
   const internationalEmigrationOverTime = await d3Fetch.tsv("./international.tsv")
 
   console.warn({russiaPopulationOverTime})
 
   const lineChart = new LineChart({
     data: russiaPopulationOverTime,
-    internationalData: internationalEmigrationOverTime,
     element: '.line-graphic',
     headerElement: '.line-graphic-header'
   })

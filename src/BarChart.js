@@ -213,7 +213,7 @@ export default class BarChart {
         })
       );
 
-    const chromaDataCodes = createChromaData(data);
+    const chromaDataCodes = createChromaData(data, ['#ffffb2', '#a1dab4', '#41b6c4']);
 
     this.bars
       .append("rect")

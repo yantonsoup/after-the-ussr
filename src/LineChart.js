@@ -3,7 +3,7 @@ import d3 from "d3";
 export default class LineChart {
   constructor(opts) {
     this.data = opts.data;
-    this.internationalData = opts.internationalData
+    // this.internationalData = opts.internationalData
     this.element = opts.element;
     this.headerElement = opts.headerElement;
     this.margins = {
@@ -136,7 +136,10 @@ export default class LineChart {
       d.date = parseDate(d.date);
       d.population = +d.pop;
       d.fertility = +d.fertility;
-      d.mortality = +d.mortality;
+      d.germanFsuToGermany = +d.germanFsuToGermany;
+      d.jewishFsuToIsrael = +d.jewishFsuToIsrael;
+      d.jewishFsuToGermany = +d.jewishFsuToGermany;
+      d.jewishFsuToUsa = +d.jewishFsuToUsa;
     });
 
     color.domain(
@@ -258,7 +261,7 @@ export default class LineChart {
     console.warn('property', property)
     console.warn('prohis.data[0][property]', this.data[0][property])
     console.warn('this.yScale(this.data[0][property]', this.yScale(this.data[0][property]))
-    const translateX = this.width-25
+    const translateX = this.width-100
     const translateY = this.yScale(this.data[0][property])
 
     console.warn('translateX', translateX)
@@ -293,8 +296,25 @@ function getLineStylesFromProperty(property) {
       return {
         fill: 'black'
       }
+    case 'germanFsuToGermany':
+      return {
+        fill: '#41b6c4'
+      }
+    case 'jewishFsuToGermany':
+      return {
+        fill: '#41b6c4'
+      }
+    case 'jewishFsuToIsrael':
+      return {
+        fill: '#a1dab4'
+      }
+    case 'jewishFsuToUsa':
+      return {
+        fill: '#ffffb2'
+      }
     default:
-      return 
-
+      return {
+        fill: 'black'
+      } 
   }
 }
