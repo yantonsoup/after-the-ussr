@@ -3,6 +3,7 @@ import d3 from "d3";
 export default class LineChart {
   constructor(opts) {
     this.data = opts.data;
+    this.internationalData = opts.internationalData
     this.element = opts.element;
     this.headerElement = opts.headerElement;
     this.margins = {
@@ -38,8 +39,10 @@ export default class LineChart {
   }
 
   hideIt() {
-    d3.select(this.element).style("opacity", 0);
-    d3.select(this.headerElement).style("opacity", 0);
+    d3.select(this.element).transition()
+    .duration(1000).style("opacity", 0);
+    d3.select(this.headerElement).transition()
+    .duration(1000).style("opacity", 0);
   }
 
   revealIt() {

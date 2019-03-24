@@ -147,8 +147,7 @@ export default class WorldMap {
       .data(this.sovietDataPoints)
       .enter()
       .append("text")
-      .attr("class", 'place-label')
-      // .attr("class", d => `${d.id}-place-label` )
+      .attr("class", d => `place-label ${d.id}-place-label`)
       .attr("transform", d => {
         const [x, y] = this.path.centroid(d);
         return `translate(${x},${y})`;

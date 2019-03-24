@@ -48,8 +48,8 @@ function firstAnimation(worldMap, barChart, lineChart) {
   const zoomParams = {
     scale: 4,
     duration: 1000,
-    translateX: -Math.floor(worldMap.width * 0.462),
-    translateY: -Math.floor(worldMap.height * 0.2)
+    translateX: -Math.floor(worldMap.width * 0.46),
+    translateY: -Math.floor(worldMap.height * 0.22)
   };
 
   worldMap.animateMapZoom(zoomParams);
@@ -120,9 +120,9 @@ function secondAnimation(worldMap, barChart) {
 }
 
 function thirdAnimation(worldMap, barChart) {
+
   barChart.clearBars()
   barChart.bindDataToBars(russianPopulationsIn198millions)
-
   barChart.paintHiddenBars(russianPopulationsIn198millions)
   // delete the bars
   // add them
@@ -131,7 +131,8 @@ function thirdAnimation(worldMap, barChart) {
 
   barChart.drawTitle(title, "m");
   barChart.repaintChart(russianPopulationsIn198millions, "m");
-  barChart.revealBarChart();
+
+  // barChart.revealBarChart();
 
   // hide curves and dot on way up
   worldMap.createPopulationChoropleth(russianPopulationsIn198millions, '.fsu-state');
@@ -172,9 +173,9 @@ function fourthAnimation(worldMap, barChart) {
   // on way up
   const zoomParams = {
     scale: 4,
-    duration: 800,
-    translateX: -Math.floor(worldMap.width * 0.462),
-    translateY: -Math.floor(worldMap.height * 0.2)
+    duration: 1000,
+    translateX: -Math.floor(worldMap.width * 0.46),
+    translateY: -Math.floor(worldMap.height * 0.22)
   };
 
   worldMap.animateMapZoom(zoomParams);
@@ -184,11 +185,12 @@ function fourthAnimation(worldMap, barChart) {
 }
 
 function fifthAnimation(worldMap, barChart) {
+  // on way up
   const zoomParams = {
     scale: 4,
-    duration: 800,
-    translateX: -Math.floor(worldMap.width * 0.462),
-    translateY: -Math.floor(worldMap.height * 0.2)
+    duration: 1000,
+    translateX: -Math.floor(worldMap.width * 0.46),
+    translateY: -Math.floor(worldMap.height * 0.22)
   };
   worldMap.animateMapZoom(zoomParams);
   worldMap.createPopulationChoropleth(percentMigrantsToRussia1989to2002, '.fsu-state');
@@ -239,7 +241,6 @@ function sixthAnimation(worldMap, barChart, lineChart) {
       opacity: "0"
     }
   });
-
   worldMap.animateSectionStyles({
     duration: 500,
     section: "circle",
@@ -247,13 +248,27 @@ function sixthAnimation(worldMap, barChart, lineChart) {
       opacity: "0"
     }
   });
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".place-label",
+    styles: {
+      opacity: "0"
+    }
+  });
+  worldMap.animateSectionStyles({
+    duration: 1000,
+    section: ".RUS-place-label",
+    styles: {
+      opacity: "1"
+    }
+  });
 }
 
 function seventhAnimation(worldMap, barChart, lineChart) {
 
   lineChart.clearPreviousLineAndAxis('population');
-  lineChart.drawLine('fertility', [0, 30])
-  lineChart.drawLine('mortality', [0, 30])
+  lineChart.drawLine('fertility', [0, 20])
+  lineChart.drawLine('mortality', [0, 20])
   lineChart.drawTitle('Russia Birth/Death Rates', 'per 1000')
 
 
@@ -262,11 +277,22 @@ function seventhAnimation(worldMap, barChart, lineChart) {
   barChart.redrawBarsWith3DataPoints(migrationAbroadDestination1995to2002);
 }
 
-function eightAnimation() {
+function eightAnimation(worldMap, barChart, lineChart) {
+  lineChart.hideIt()
+  const zoomParams = {
+    scale: 1,
+    duration: 750,
+    translateX: 0,
+    translateY: 0
+  };
+  worldMap.animateMapZoom(zoomParams);
 
+  worldMap.highlightInternationalCountries(migrationAbroadDestination1995to2002);
+  worldMap.applyInitialHighlight();
 }
 
 function ninthAnimation(worldMap, barChart, lineChart) {
+  // Don't reveal the bar chart until final step
   barChart.revealBarChart();
 
   const zoomParams = {
@@ -275,12 +301,11 @@ function ninthAnimation(worldMap, barChart, lineChart) {
     translateX: 0,
     translateY: 0
   };
-
   worldMap.animateMapZoom(zoomParams);
 
   worldMap.highlightInternationalCountries(migrationAbroadDestination1995to2002);
   worldMap.applyInitialHighlight();
-
+  
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".fsu-state",
@@ -289,9 +314,17 @@ function ninthAnimation(worldMap, barChart, lineChart) {
       "stroke-width": "0px",
       "stroke": "#BAB4AC",
       "fill": "#BAB4AC",
-      "fill": "#BAB4AC"
     }
   });
+
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".place-label",
+    styles: {
+      opacity: "0"
+    }
+  });
+
   worldMap.animateSectionStyles({
     duration: 500,
     section: "#USA",

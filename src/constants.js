@@ -46,7 +46,7 @@ export const sovietLabelShift = {
   EST: { x: -13, y: -3 },
   GEO: { x: -18, y: 1 },
   KAZ: { x: -3, y: 0 },
-  KGZ: { x: 3, y: 5 },
+  KGZ: { x: 1, y: 4 },
   LVA: { x: -15, y: -2 },
   LTU: { x: -18, y: 0 },
   MDA: { x: -18, y: 2 },
@@ -118,14 +118,14 @@ export  const netMigrantsToRussia1989to2002 = [
   { name: "BLR", population: 10 },
   { name: "EST", population: 59 },
   { name: "GEO", population: 162 },
-  { name: "KAZ", population: 125 },
+  { name: "KAZ", population: 1255 },
   { name: "KGZ", population: 244 },
   { name: "LVA", population: 96 },
   { name: "LTU", population: 46 },
   { name: "MDA", population: 65 },
   { name: "TJK", population: 232 },
   { name: "TKM", population: 98 },
-  { name: "UKR", population: 3341 },
+  { name: "UKR", population: 348 },
   { name: "UZB", population: 496 }
 ];
 
