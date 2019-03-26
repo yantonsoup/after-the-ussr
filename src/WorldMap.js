@@ -174,11 +174,11 @@ export default class WorldMap {
     console.warn({ countryData });
 
     this.mapGraphic
-      .selectAll(`.place-label`)
+      .selectAll(`${countryId}-place-label`)
       .data(countryData)
       .enter()
       .append("text")
-      .attr("class", d => `place-label ${d.id}-place-label`)
+      .attr("class", `place-label ${countryId}-place-label`)
       .attr("transform", d => {
         console.warn('transform', d)
         const [x, y] = this.path.centroid(d);

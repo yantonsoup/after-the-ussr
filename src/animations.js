@@ -365,7 +365,7 @@ function ninthAnimation(worldMap, barChart, lineChart) {
 }
 
 function tenthAnimation(worldMap, barChart, lineChart) {
-  worldMap.createCountryLabel('DEU')
+  
 
   barChart.hideAllElements()
 
@@ -419,9 +419,12 @@ function tenthAnimation(worldMap, barChart, lineChart) {
       "stroke": "none"
     }
   });
+
+  worldMap.createCountryLabel('DEU', [-8, 8]);
 }
 
 function eleventhAnimation(worldMap, barChart, lineChart) {
+ 
   // lineChart.drawLine('jewishFsuToGermany', [0, 220])
 }
 
