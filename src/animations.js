@@ -336,7 +336,7 @@ function ninthAnimation(worldMap, barChart, lineChart) {
 
   worldMap.animateSectionStyles({
     duration: 500,
-    section: "#USA",
+    section: "#USA #DEU #ISR",
     styles: {
       // fill: '',
       opacity: "1"
@@ -365,6 +365,8 @@ function ninthAnimation(worldMap, barChart, lineChart) {
 }
 
 function tenthAnimation(worldMap, barChart, lineChart) {
+  worldMap.createCountryLabel('DEU')
+
   barChart.hideAllElements()
 
   lineChart.clearPreviousLineAndAxis('fertility');

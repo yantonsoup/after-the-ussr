@@ -92,7 +92,7 @@ export default class LineChart {
       .ticks(10)
       .innerTickSize(15)
       .tickFormat(function(yValue) {
-        console.warn({ yValue });
+        // console.warn({ yValue });
         if (yValue > 10000) {
           const millionsDigits = Math.floor(yValue / 1000000).toString();
           return millionsDigits;

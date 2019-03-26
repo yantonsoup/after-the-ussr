@@ -72,8 +72,9 @@ export default class WorldMap {
       })
       .attr("class", function(datapoint, i) {
         if (datapoint.id === "RUS") {
-          return "soviet-country"
-        } if (sovietCountryIsoCodes.includes(datapoint.id)) {
+          return "soviet-country";
+        }
+        if (sovietCountryIsoCodes.includes(datapoint.id)) {
           return "soviet-country fsu-state";
         } else {
           return "non-soviet-country";
@@ -86,7 +87,7 @@ export default class WorldMap {
         }
       });
 
-    this.applyInitialHighlight()
+    this.applyInitialHighlight();
   }
 
   applyInitialHighlight() {
@@ -96,7 +97,7 @@ export default class WorldMap {
       styles: {
         opacity: "1",
         fill: "#BAB4AC",
-        "stroke": 'none'
+        stroke: "none"
       }
     });
 
@@ -105,7 +106,7 @@ export default class WorldMap {
       section: ".non-soviet-country",
       styles: {
         opacity: "0.5",
-        fill: "#d0d0d0",
+        fill: "#d0d0d0"
       }
     });
   }
@@ -161,15 +162,46 @@ export default class WorldMap {
       .text(function(d) {
         return d.properties.name;
       })
-      .style("font-size", 3.5 + "px")
-      // .style("color", 'lightgoldenrodyellow');
+      .style("font-size", 3.5 + "px");
+    // .style("color", 'lightgoldenrodyellow');
+    // .style("fill", "white")
+  }
+
+  createCountryLabel(countryId, labelShift = [0, 0]) {
+    console.warn({ countryId });
+
+    const countryData = this.data.filter(country => country.id === countryId);
+    console.warn({ countryData });
+
+    this.mapGraphic
+      .selectAll(`.place-label`)
+      .data(countryData)
+      .enter()
+      .append("text")
+      .attr("class", d => `place-label ${d.id}-place-label`)
+      .attr("transform", d => {
+        console.warn('transform', d)
+        const [x, y] = this.path.centroid(d);
+        return `translate(${x},${y})`;
+      })
+      .attr("x", labelShift[0])
+      .attr("y", labelShift[1])
+      .text(d => {
+        console.warn("d", d);
+        return d.properties.name;
+      })
+      .style("font-size", 3.5 + "px");
+    // .style("color", 'lightgoldenrodyellow');
     // .style("fill", "white")
   }
 
   createPopulationChoropleth(populationData, selection, colorRangeOverride) {
-    const chromaDataCodes = createChromaData(populationData, colorRangeOverride);
+    const chromaDataCodes = createChromaData(
+      populationData,
+      colorRangeOverride
+    );
 
-    console.warn('WORLDMAP', { chromaDataCodes });
+    console.warn("WORLDMAP", { chromaDataCodes });
     // Object.values(chromaDataCodes).forEach(color => console.log('%ccolor code',  `background: ${color}; color: ${color}`))
 
     d3.selectAll(selection)
@@ -312,24 +344,30 @@ export default class WorldMap {
       .duration(1000)
       .style("opacity", "1");
   }
-  
+
   highlightInternationalCountries(migrationAbroadDestination1995to2002) {
-    const chromaDataCodes = createChromaData(migrationAbroadDestination1995to2002, ['#ffffb2', '#a1dab4', '#41b6c4']);
-    console.warn('highlightInternationalCountries, chromaDataCodes', chromaDataCodes)
+    const chromaDataCodes = createChromaData(
+      migrationAbroadDestination1995to2002,
+      ["#ffffb2", "#a1dab4", "#41b6c4"]
+    );
+    console.warn(
+      "highlightInternationalCountries, chromaDataCodes",
+      chromaDataCodes
+    );
     this.mapGraphic
       .select("#ISR")
       .style("opacity", "1")
-      .style("fill", `${chromaDataCodes['ISR']}`);
+      .style("fill", `${chromaDataCodes["ISR"]}`);
 
     this.mapGraphic
       .select("#DEU")
       .style("opacity", "1")
-      .style("fill", `${chromaDataCodes['DEU']}`);
+      .style("fill", `${chromaDataCodes["DEU"]}`);
 
     this.mapGraphic
       .select("#USA")
       .style("opacity", "1")
-      .style("fill", `${chromaDataCodes['USA']}`);
+      .style("fill", `${chromaDataCodes["USA"]}`);
   }
 
   highlightInternationalLines() {
