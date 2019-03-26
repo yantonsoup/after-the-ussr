@@ -450,6 +450,8 @@ function twelfthAnimation(worldMap, barChart, lineChart) {
       "stroke-width": '0.15px'
     }
   });
+  worldMap.createCountryLabel('ISR', [-8, 8]);
+
 }
 
 function thirteenthAnimation(worldMap, barChart) {
@@ -462,6 +464,7 @@ function fourteenthAnimation(worldMap, barChart, lineChart) {
 
   console.warn('entered fourteenth')
   // worldMap.animateMapZoom(zoomParams);
+  worldMap.createCountryLabel('USA', [-8, 8]);
 
   worldMap.animateSectionStyles({
     duration: 500,

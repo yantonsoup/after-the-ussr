@@ -168,10 +168,12 @@ export default class WorldMap {
   }
 
   createCountryLabel(countryId, labelShift = [0, 0]) {
-    console.warn({ countryId });
-
     const countryData = this.data.filter(country => country.id === countryId);
+
+    console.warn('///creating country label///')
+    console.warn({ countryId });
     console.warn({ countryData });
+    console.warn('///----------------------///')
 
     this.mapGraphic
       .selectAll(`${countryId}-place-label`)
