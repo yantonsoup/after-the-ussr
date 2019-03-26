@@ -10,7 +10,7 @@ import {
 } from "./constants";
 
 window.onbeforeunload = function() {
-  window.scrollTo(0, 10000);
+  window.scrollTo(0, 0);
 };
 
 async function initializeGraphics () {

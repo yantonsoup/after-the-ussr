@@ -17,6 +17,8 @@ function zeroAnimation(worldMap) {
     }
   });
 
+  worldMap.animateArrowFromTo()
+
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".non-soviet-country",

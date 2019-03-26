@@ -12,6 +12,8 @@ import {
 const rotate = -20;
 const maxlat = 83;
 
+const internationalOriginIdList = ["DEU", "ISR", "USA"];
+
 export default class WorldMap {
   constructor(opts) {
     this.data = opts.data;
@@ -170,10 +172,10 @@ export default class WorldMap {
   createCountryLabel(countryId, labelShift = [0, 0]) {
     const countryData = this.data.filter(country => country.id === countryId);
 
-    console.warn('///creating country label///')
+    console.warn("///creating country label///");
     console.warn({ countryId });
     console.warn({ countryData });
-    console.warn('///----------------------///')
+    console.warn("///----------------------///");
 
     this.mapGraphic
       .selectAll(`${countryId}-place-label`)
@@ -182,7 +184,7 @@ export default class WorldMap {
       .append("text")
       .attr("class", `place-label ${countryId}-place-label`)
       .attr("transform", d => {
-        console.warn('transform', d)
+        console.warn("transform", d);
         const [x, y] = this.path.centroid(d);
         return `translate(${x},${y})`;
       })
@@ -372,8 +374,89 @@ export default class WorldMap {
       .style("fill", `${chromaDataCodes["USA"]}`);
   }
 
+  animateArrowFromTo(originId = "DEU", destinationId = "USA") {
+    const originDataPoint = this.data.find(country => country.id === originId);
+    const destinationDataPoint = this.data.find(
+      country => country.id === destinationId
+    );
+
+    let origin = this.path.centroid(originDataPoint);
+    let destination = this.path.centroid(destinationDataPoint);
+    const russiaCoordinates = [215, 110];
+
+    if (originId === "RUS") {
+      origin = russiaCoordinates;
+    } else if (destinationId === "RUS") {
+      destination = russiaCoordinates;
+    }
+
+    console.warn("from", originId, "at", origin);
+    console.warn("to", destinationId, "at", destination);
+
+    const arcData = [
+      {
+        origin,
+        destination
+      }
+    ];
+
+    const arcStyles = {
+      fill: "none",
+      "stroke-width": "0.5px",
+      stroke: "black",
+      opacity: "1"
+    };
+
+    const arc = this.mapGraphic
+      .append("g")
+      .selectAll("path.datamaps-arc")
+      .data(arcData);
+
+    arc
+      .enter()
+      .append("path")
+      .attr("class", "arc")
+      .attr("id", origin => `arc-${origin.id}`)
+      .attr("d", ({ origin, destination }) => {
+        // const origin = [datum[0], datum[1]];
+        console.warn("origin lat lon", origin);
+        console.warn("destination lat lon", origin);
+
+        const mid = [
+          (origin[0] + destination[0]) / 2,
+          (origin[1] + destination[1]) / 2
+        ];
+        console.warn("mid", mid);
+
+        // define handle points for Bezier curves. Higher values for curveoffset will generate more pronounced curves.
+        const curveoffset = 45;
+        const midcurve = [mid[0], mid[1] - curveoffset];
+        console.warn("midcurve", midcurve);
+
+        const linePath =
+          "M" +
+          origin[0] +
+          "," +
+          origin[1] +
+          // smooth curve to offset midpoint
+          "S" +
+          midcurve[0] +
+          "," +
+          midcurve[1] +
+          //smooth curve to destination
+          "," +
+          destination[0] +
+          "," +
+          destination[1];
+        return linePath;
+      })
+      .style(arcStyles);
+  }
+
   highlightInternationalLines() {
     const russiaCoordinates = [215, 110];
+
+    const destination = russiaCoordinates;
 
     const receivingCentroids = this.data
       .filter(({ id }) => primaryReceivingIsoCodes.includes(id))
