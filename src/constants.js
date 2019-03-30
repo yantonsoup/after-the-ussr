@@ -186,17 +186,6 @@ export const migrationAbroadEthnicity1995to2002 = [
 ];
 
 export const migrationAbroadDestination1995to2002 = [
-  // { name: '', population: 0},
-  // { name: '', population: 0},
-  // { name: '', population: 0},
-  // { name: '', population: 0},
-  // { name: '', population: 0},
-  // { name: '', population: 0},
-  // { name: '', population: 0},
-  // { name: '', population: 0},
-  // { name: '', population: 0},
-  // { name: '', population: 0},
-  // { name: '', population: 0},
   { name: "DEU", population: 59 },
   { name: "ISR", population: 25 },
   { name: "USA", population: 11 },
