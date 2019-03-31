@@ -15,7 +15,8 @@ body {
 body {
   min-height: 1280px;
   font-weight: 300;
-  background-color: #951C13;
+  background-color: rgb(40, 45, 52);
+  /* background-color: #951C13; */
   /* -moz-box-shadow:    inset 0 0 10px #000000;
   -webkit-box-shadow: inset 0 0 10px #000000;
   box-shadow:         inset 0 0 10px #000000; */
@@ -186,7 +187,7 @@ a:hover {
   position: relative;
   margin: 135% auto 0;
   max-width: 30rem;
-  width: calc(100vw - 64px) ;
+  width: calc(100% - 64px);
 }
 
 .step {
@@ -222,21 +223,7 @@ a:hover {
   background-color: #3F3F3F
 }
 
-@media screen and (min-width: 768px) {
-  .step-text {
-    font-size: 18px;
-  }
-  /* .story-container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  .scroll-text {
-    margin: 50% auto 0;
-  }
-  .splash-container {
-    margin: 0 auto;
-  } */
-}
+
 
 /* *********************************** */
 /* map graphic */
@@ -335,3 +322,22 @@ a:hover {
   stroke: red;
   stroke-width: 0.4px;
 }
+
+/* *********************************** */
+/* desktop swaps */
+/* *********************************** */
+/* @media screen and (min-width: 768px) {
+  .step-text {
+    font-size: 18px;
+  }
+  .story-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .scroll-text {
+    margin: 50% auto 0;
+  }
+  .splash-container {
+    margin: 0 auto;
+  }
+} */

@@ -49,9 +49,25 @@ export default function firstPaint () {
   //     .style("max-width", "50%")
 
     d3.select(".map-graphic-container")
-    .style("width", halfPageHeight + "px")
-    .style("height", halfPageHeight + "px")
-    .style("top", quarterPageHeight + "px")
+      .style("width", halfPageHeight + "px")
+      .style("height", halfPageHeight + "px")
+
+
+    d3.select(".bar-graphic-container")
+      .style('top', halfPageHeight + 'px')
+      .style("width", halfPageHeight + "px")
+      .style("height", halfPageHeight + "px")
+
+    d3.select(".line-graphic-container")
+      .style('top', halfPageHeight + 'px')
+      .style("width", halfPageHeight + "px")
+      .style("height", halfPageHeight + "px")
+
+    d3.select('.story-container')
+      .style("max-width", halfPageHeight + "px")
+
+    d3.selectAll('.step')
+      .style("max-width", halfPageHeight + "px")
 
   }
   // max width === 640
