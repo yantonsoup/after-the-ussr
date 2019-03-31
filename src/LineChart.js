@@ -310,7 +310,7 @@ function getLineStylesFromProperty(property) {
     case "germanFsuToGermany":
       return {
         fill: "#41b6c4",
-        label: 'To germany'
+        label: 'To Germany'
       };
     case "jewishFsuToGermany":
       return {

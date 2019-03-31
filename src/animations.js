@@ -418,14 +418,14 @@ function fourteenthAnimation(worldMap, barChart, lineChart) {
   lineChart.drawTitle("Soviet American Migr.", "000's");
   lineChart.drawLine("americanFsuToUsa", [0, 220], {x: 130, y:240});
 
-  worldMap.animateArrowFromTo("RUS", "ISR", 'black', 0.15);
+  worldMap.animateArrowFromTo("RUS", "USA", 'black', 0.3);
   worldMap.createCountryLabel("USA", [-22, 18], 3);
 
   worldMap.clearArrows();
   worldMap.animateMapZoom({
     scale: 5,
     duration: 750,
-    translateX: -Math.floor(worldMap.width * 0.06),
+    translateX: -Math.floor(worldMap.width * 0.07),
     translateY: -Math.floor(worldMap.height * 0.3)
   });
 }
@@ -446,7 +446,7 @@ function sixteeteenthAnimation(worldMap, barChart, lineChart) {
   worldMap.animateMapZoom({
     scale: 5,
     duration: 750,
-    translateX: -Math.floor(worldMap.width * 0.08),
+    translateX: -Math.floor(worldMap.width * 0.07),
     translateY: -Math.floor(worldMap.height * 0.3)
   });
 
@@ -456,7 +456,7 @@ function sixteeteenthAnimation(worldMap, barChart, lineChart) {
 
 // /////////////////////////////////////////////////////////
 function seventeenthAnimation(worldMap, barChart, lineChart) {
-  worldMap.clearLabels()
+  worldMap.removeLabels()
   lineChart.hideIt();
   const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
 
