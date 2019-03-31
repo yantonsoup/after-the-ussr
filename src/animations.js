@@ -221,7 +221,7 @@ function fifthAnimation(worldMap, barChart, lineChart, direction) {
 
   worldMap.animateMapZoom({
     scale: 4,
-    duration: 1000,
+    duration: 500,
     translateX: -Math.floor(worldMap.width * 0.46),
     translateY: -Math.floor(worldMap.height * 0.22)
   });

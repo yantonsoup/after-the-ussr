@@ -31,12 +31,12 @@ export default function firstPaint () {
     .style("top", quarterPageHeight + "px")
 
   d3.select(".bar-graphic-container")
-    .style('top', halfPageHeight + 'px')
+    .style('top', width + 'px')
     .style("width", width + "px")
     .style("height", halfPageHeight + "px")
 
   d3.select(".line-graphic-container")
-    .style('top', halfPageHeight + 'px')
+    .style('top', width + 'px')
     .style("width", width + "px")
     .style("height", halfPageHeight + "px")
 
@@ -54,7 +54,7 @@ export default function firstPaint () {
 
 
     d3.select(".bar-graphic-container")
-      .style('top', halfPageHeight + 'px')
+      .style('top', halfPageHeight + "px")
       .style("width", halfPageHeight + "px")
       .style("height", halfPageHeight + "px")
 
