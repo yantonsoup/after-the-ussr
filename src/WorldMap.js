@@ -81,7 +81,7 @@ export default class WorldMap {
         }
         if (sovietCountryIsoCodes.includes(datapoint.id)) {
           return "soviet-country fsu-state country";
-        } 
+        }
         return "non-soviet-country country";
       })
       .style("display", function(datum) {
@@ -161,8 +161,7 @@ export default class WorldMap {
   // }
 
   removeLabels() {
-    this.mapGraphic
-      .selectAll(".place-label").remove()
+    this.mapGraphic.selectAll(".place-label").remove();
   }
 
   // TODO: find a better way to shift labels
@@ -195,7 +194,7 @@ export default class WorldMap {
     // .style("fill", "white")
   }
 
-  createCountryLabel(countryId, labelShift = [0, 0], fontSize=3.5) {
+  createCountryLabel(countryId, labelShift = [0, 0], fontSize = 3.5) {
     const countryData = this.data.filter(country => country.id === countryId);
 
     console.warn("///creating country label///");
@@ -234,7 +233,7 @@ export default class WorldMap {
     d3.selectAll(selection)
       .transition()
       .duration(1000)
-      .style('opacity', '1')
+      .style("opacity", "1")
       .style("fill", d => chromaDataCodes[d.id])
       .style("stroke-width", 0.25 + "px");
   }
@@ -291,10 +290,15 @@ export default class WorldMap {
       }
     });
 
-    this.mapGraphic.selectAll('.arc').remove()
+    this.mapGraphic.selectAll(".arc").remove();
   }
 
-  animateArrowFromTo(originId = "USA", destinationId = "RUS", arrowColor="#7772a8", arrowWidth=0.5) {
+  animateArrowFromTo(
+    originId = "USA",
+    destinationId = "RUS",
+    arrowColor = "#7772a8",
+    arrowWidth = 0.5
+  ) {
     const originDataPoint = this.data.find(country => country.id === originId);
     const destinationDataPoint = this.data.find(
       country => country.id === destinationId
@@ -304,23 +308,15 @@ export default class WorldMap {
     let destination = this.path.centroid(destinationDataPoint);
 
     if (originId === "RUS") {
-      //scoot centroid left and down
       origin[0] -= 40;
       origin[1] += 11;
-
-      // if (altRusOrigin) {
-      //   origin[0] -= 20;
-      //   origin[1] += 5;
-      // }
     } else if (destinationId === "RUS") {
-      //scoot centroid left and down
       destination[0] -= 40;
       destination[1] += 11;
     }
 
-    console.warn("from", originId, "at", origin);
-    console.warn("to", destinationId, "at", destination);
-
+    // console.warn("from", originId, "at", origin);
+    // console.warn("to", destinationId, "at", destination);
     const arcData = [
       {
         origin,
@@ -370,16 +366,19 @@ export default class WorldMap {
           destination[0] +
           "," +
           destination[1];
-  
+
         return linePath;
       })
       .style(arcStyles);
 
-      const arcPath = arc.node();
-      const totalLength = arcPath.getTotalLength();
+    const arcPath = arc.node();
+    const totalLength = arcPath.getTotalLength();
 
-      arc.transition(5000).attrTween("stroke-dasharray",function(){
-        return d3.interpolateString("0," + totalLength,totalLength + "," + totalLength);
-      });
+    arc.transition(5000).attrTween("stroke-dasharray", function() {
+      return d3.interpolateString(
+        "0," + totalLength,
+        totalLength + "," + totalLength
+      );
+    });
   }
 }
