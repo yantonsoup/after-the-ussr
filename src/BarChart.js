@@ -194,7 +194,7 @@ export default class BarChart {
   }
 
 
-  redrawBarsWith3DataPoints(data) {
+  redrawBarsFromScratch(data) {
     this.clearBars()
 
     this.bindDataToBars(data);
