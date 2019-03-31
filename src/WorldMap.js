@@ -100,7 +100,7 @@ export default class WorldMap {
       section: ".soviet-country",
       styles: {
         opacity: "1",
-        fill: "#BAB4AC",
+        fill: "#d0d0d0",
         stroke: "none"
       }
     });
@@ -234,6 +234,7 @@ export default class WorldMap {
     d3.selectAll(selection)
       .transition()
       .duration(1000)
+      .style('opacity', '1')
       .style("fill", d => chromaDataCodes[d.id])
       .style("stroke-width", 0.25 + "px");
   }
@@ -282,18 +283,18 @@ export default class WorldMap {
   }
 
   clearArrows() {
-    this.mapGraphic.selectAll('.arc').remove()
-
     this.animateSectionStyles({
-      duration: 500,
+      duration: 100,
       section: "circle",
       styles: {
         opacity: "0"
       }
     });
+
+    this.mapGraphic.selectAll('.arc').remove()
   }
 
-  animateArrowFromTo(originId = "USA", destinationId = "RUS") {
+  animateArrowFromTo(originId = "USA", destinationId = "RUS", arrowColor="#7772a8", arrowWidth=0.5) {
     const originDataPoint = this.data.find(country => country.id === originId);
     const destinationDataPoint = this.data.find(
       country => country.id === destinationId
@@ -301,12 +302,20 @@ export default class WorldMap {
 
     let origin = this.path.centroid(originDataPoint);
     let destination = this.path.centroid(destinationDataPoint);
-    const russiaCoordinates = [235, 110];
 
     if (originId === "RUS") {
-      origin = russiaCoordinates;
+      //scoot centroid left and down
+      origin[0] -= 40;
+      origin[1] += 11;
+
+      // if (altRusOrigin) {
+      //   origin[0] -= 20;
+      //   origin[1] += 5;
+      // }
     } else if (destinationId === "RUS") {
-      destination = russiaCoordinates;
+      //scoot centroid left and down
+      destination[0] -= 40;
+      destination[1] += 11;
     }
 
     console.warn("from", originId, "at", origin);
@@ -321,8 +330,8 @@ export default class WorldMap {
 
     const arcStyles = {
       fill: "none",
-      "stroke-width": "0.5px",
-      stroke: "#7772a8",
+      "stroke-width": arrowWidth + "px",
+      stroke: arrowColor,
       opacity: "1"
     };
 
@@ -361,15 +370,16 @@ export default class WorldMap {
           destination[0] +
           "," +
           destination[1];
+  
         return linePath;
       })
       .style(arcStyles);
 
-    const arcPath = arc.node();
-    const totalLength = arcPath.getTotalLength();
+      const arcPath = arc.node();
+      const totalLength = arcPath.getTotalLength();
 
-    arc.transition(5000).attrTween("stroke-dasharray",function(){
-      return d3.interpolateString("0," + totalLength,totalLength + "," + totalLength);
-    });
+      arc.transition(5000).attrTween("stroke-dasharray",function(){
+        return d3.interpolateString("0," + totalLength,totalLength + "," + totalLength);
+      });
   }
 }

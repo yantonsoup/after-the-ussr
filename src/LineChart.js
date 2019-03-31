@@ -64,7 +64,6 @@ export default class LineChart {
 
   drawTitle(text, units) {
     d3.select(".line-graphic-header-text").text(text);
-    d3.select(".line-graphic-header-units").text(units);
   }
 
   setYScale() {
@@ -198,7 +197,7 @@ export default class LineChart {
     this.svg.selectAll(".line-label").remove();
   }
 
-  drawLine(property, domain) {
+  drawLine(property, domain, labelShift) {
     this.yScale.domain(domain);
     const { fill } = getLineStylesFromProperty(property);
 
@@ -245,7 +244,7 @@ export default class LineChart {
       .attr("stroke-dasharray", totalLength[0] + " " + totalLength[0])
       .attr("stroke-dashoffset", totalLength[0])
       .transition()
-      .duration(2500)
+      .duration(3000)
       .ease("linear")
       .attr("stroke-dashoffset", 0);
 
@@ -253,36 +252,41 @@ export default class LineChart {
       .attr("stroke-dasharray", totalLength[1] + " " + totalLength[1])
       .attr("stroke-dashoffset", totalLength[1])
       .transition()
-      .duration(2500)
+      .duration(3000)
       .ease("linear")
       .attr("stroke-dashoffset", 0);
 
-    this.labelLine(property);
+    this.labelLine(property, labelShift);
   }
 
-  labelLine(property) {
-    console.warn("property", property);
-    console.warn("prohis.data[0][property]", this.data[0][property]);
-    console.warn(
-      "this.yScale(this.data[0][property]",
-      this.yScale(this.data[0][property])
-    );
-    const translateX = this.width - 100;
-    const translateY = this.yScale(this.data[0][property]);
+  labelLine(property, labelShift = { x: 160, y: 70 }) {
+    console.warn("line property:", property);
+    console.warn("line labelShift", labelShift);
+    const { x, y } = labelShift;
+    // console.warn("property", property);
+    // console.warn("prohis.data[0][property]", this.data[0][property]);
+    // console.warn(
+    //   "this.yScale(this.data[0][property]",
+    //   this.yScale(this.data[0][property])
+    // );
+    // const translateX = this.width + 3;
+    // const translateY = this.yScale(this.data[0][property]);
 
-    console.warn("translateX", translateX);
-    console.warn("translateY", translateY);
+    // console.warn("translateX", translateX);
+    // console.warn("translateY", translateY);
 
-    const { fill } = getLineStylesFromProperty(property);
+    
+
+    const { fill, label } = getLineStylesFromProperty(property);
 
     this.svg
       .append("text")
-      .attr("transform", `translate(${translateX},${translateY})`)
+      .attr("transform", `translate(${x},${y})`)
       .attr("dy", ".35em")
       .attr("text-anchor", "start")
       .attr("class", "line-label")
       .style("fill", fill)
-      .text(property);
+      .text(label);
   }
 }
 
@@ -290,35 +294,43 @@ function getLineStylesFromProperty(property) {
   switch (property) {
     case "population":
       return {
-        fill: "orange"
+        fill: "orange",
+        label: 'population'
       };
     case "fertility":
       return {
-        fill: "green"
+        fill: "blue",
+        label: 'fertility'
       };
     case "mortality":
       return {
-        fill: "black"
+        fill: "black",
+        label: 'mortality'
       };
     case "germanFsuToGermany":
       return {
-        fill: "#41b6c4"
+        fill: "#41b6c4",
+        label: 'To germany'
       };
     case "jewishFsuToGermany":
       return {
-        fill: "#41b6c4"
+        fill: "#41b6c4",
+        label: 'To Germany'
       };
     case "jewishFsuToIsrael":
       return {
-        fill: "#a1dab4"
+        fill: "#a1dab4",
+        label: 'To Israel'
       };
     case "jewishFsuToUsa":
       return {
-        fill: "#ffffb2"
+        fill: "#ffffb2",
+        label: 'to usa'
       };
     case "americanFsuToUsa":
       return {
-        fill: "#ffffb2"
+        fill: "#ffffb2",
+        label: 'To USA'
       };
     default:
       return {
