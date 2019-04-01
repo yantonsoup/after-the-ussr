@@ -291,6 +291,7 @@ export default class WorldMap {
     });
 
     this.mapGraphic.selectAll(".arc").remove();
+    this.mapGraphic.selectAll(".arrow-head").remove();
   }
 
   animateArrowFromTo(
@@ -332,13 +333,6 @@ export default class WorldMap {
       }
     ];
 
-    const arcStyles = {
-      fill: "none",
-      "stroke-width": arrowWidth + "px",
-      stroke: arrowColor,
-      opacity: "1"
-    };
-
     const arc = this.mapGraphic
       .append("g")
       .selectAll("path.datamaps-arc")
@@ -377,16 +371,64 @@ export default class WorldMap {
 
         return linePath;
       })
-      .style(arcStyles);
+      .style({
+        fill: "none",
+        "stroke-width": arrowWidth + "px",
+        stroke: arrowColor,
+        opacity: "1"
+      });
 
     const arcPath = arc.node();
     const totalLength = arcPath.getTotalLength();
 
-    arc.transition(5000).attrTween("stroke-dasharray", function() {
-      return d3.interpolateString(
-        "0," + totalLength,
-        totalLength + "," + totalLength
-      );
-    });
+    arc
+      .transition()
+      .duration(2000)
+      .ease("linear")
+      .attrTween("stroke-dasharray", function() {
+        return d3.interpolateString(
+          "0," + totalLength,
+          totalLength + "," + totalLength
+        );
+      });
+
+    this.animateArrowHead(arc);
+  }
+
+  animateArrowHead(path) {
+    var arrow = this.mapGraphic
+      .append("svg:path")
+      .attr('class', 'arrow-head')
+      .attr(
+        "d",
+        d3.svg
+          .symbol()
+          .type("triangle-down")
+          .size(5)
+      )
+      .attr("fill", "#7772a8");
+
+    arrow
+      .transition()
+      .duration(2000)
+      .ease("linear")
+      .attrTween("transform", this.translateAlong(path.node()));
+    //.each("end", transition);
+  }
+
+  translateAlong(path) {
+    var l = path.getTotalLength();
+    var ps = path.getPointAtLength(0);
+    var pe = path.getPointAtLength(l);
+    var angl = Math.atan2(pe.y - ps.y, pe.x - ps.x) * (180 / Math.PI) - 90;
+    var rot_tran = "rotate(" + angl + ")";
+    return function(d, i, a) {
+      console.log(d);
+
+      return function(t) {
+        var p = path.getPointAtLength(t * l);
+        return "translate(" + p.x + "," + p.y + ") " + rot_tran;
+      };
+    };
   }
 }
