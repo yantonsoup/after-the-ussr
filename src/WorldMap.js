@@ -94,7 +94,8 @@ export default class WorldMap {
         styles: {
           opacity: "1",
           fill: "#d0d0d0",
-          stroke: "none"
+          stroke: "#d0d0d0",
+          'stroke-opacity': "0.7"
         }
       });
   

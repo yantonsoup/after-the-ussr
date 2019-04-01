@@ -91,20 +91,20 @@ export const russianPopulationsIn198millions = [
 // Step 3
 // in thousands
 export  const netMigrantsToRussia1989to2002 = [
-  { name: "ARM", population: 34 },
-  { name: "AZE", population: 195 },
-  { name: "BLR", population: 10 },
-  { name: "EST", population: 59 },
-  { name: "GEO", population: 162 },
-  { name: "KAZ", population: 1255 },
-  { name: "KGZ", population: 244 },
-  { name: "LVA", population: 96 },
-  { name: "LTU", population: 46 },
-  { name: "MDA", population: 65 },
-  { name: "TJK", population: 232 },
-  { name: "TKM", population: 98 },
-  { name: "UKR", population: 348 },
-  { name: "UZB", population: 496 }
+  { name: "ARM", population: .03 },
+  { name: "AZE", population: .20 },
+  { name: "BLR", population: .01 },
+  { name: "EST", population: .06 },
+  { name: "GEO", population: .16 },
+  { name: "KAZ", population: 1.3 },
+  { name: "KGZ", population: .24 },
+  { name: "LVA", population: .10 },
+  { name: "LTU", population: .05 },
+  { name: "MDA", population: .07 },
+  { name: "TJK", population: .23 },
+  { name: "TKM", population: .10 },
+  { name: "UKR", population: .35 },
+  { name: "UZB", population: .50 }
 ];
 
 // Step 4

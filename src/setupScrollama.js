@@ -25,4 +25,23 @@ export default function setupScrollama(worldMap, barChart, lineChart) {
       offset: 0.9
     })
     .onStepEnter(handleStepEnter)
+    .onContainerEnter((response) => {
+      console.warn('onContainerEnter', response)
+
+      // animations[0](worldMap, barChart, lineChart, response.direction)
+    })
+    .onContainerExit((response) => {
+
+      // zero animation up
+      worldMap.animateSectionStyles({
+        duration: 500,
+        section: ".soviet-country",
+        styles: {
+          opacity: "1",
+          fill: "#d0d0d0",
+          stroke: "#d0d0d0",
+          'stroke-opacity': "0.7"
+        }
+      });
+    })
 }
