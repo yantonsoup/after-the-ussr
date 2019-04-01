@@ -28,7 +28,6 @@ const sovietCountryIsoCodes = [
 
 // /////////////////////////////////////////////////////////
 function zeroAnimation(worldMap, barChart, lineChart, direction) {
- 
   worldMap.createPopulationChoropleth(
     populationsIn1989millions,
     ".soviet-country"
@@ -44,6 +43,16 @@ function zeroAnimation(worldMap, barChart, lineChart, direction) {
       stroke: "none"
     }
   });
+
+  // worldMap.animateSectionStyles({
+  //   duration: 500,
+  //   section: ".soviet-country",
+  //   styles: {
+  //     stroke: "black",
+  //     "stroke-width": "0.1px"
+  //   }
+  // });
+
   worldMap.animateMapZoom({
     scale: 1,
     duration: 750,
@@ -58,21 +67,21 @@ function firstAnimation(worldMap, barChart, lineChart, direction) {
   const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
 
   worldMap.moveMapContainer({
-    duration: 750,
+    duration: 1000,
     top: quarterPageHeight
   });
 
   worldMap.animateMapZoom({
     scale: 4,
-    duration: 1000,
+    duration: 500,
     translateX: -Math.floor(worldMap.width * 0.46),
     translateY: -Math.floor(worldMap.height * 0.22)
   });
 
   Object.keys(sovietLabels).forEach(countryId => {
-    const countryShift = sovietLabels[countryId]
+    const countryShift = sovietLabels[countryId];
     worldMap.createCountryLabel(countryId, countryShift, 3.5);
-  })
+  });
 
   worldMap.animateSectionStyles({
     duration: 500,
@@ -120,12 +129,19 @@ function secondAnimation(worldMap, barChart) {
   });
 
   Object.keys(sovietLabels).forEach(countryId => {
-    const countryShift = sovietLabels[countryId]
+    const countryShift = sovietLabels[countryId];
     worldMap.createCountryLabel(countryId, countryShift, 3.5);
-  })
-  
+  });
 
   worldMap.createPopulationChoropleth(populationsIn1989millions, ".fsu-state");
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".soviet-country",
+    styles: {
+      stroke: "black",
+      "stroke-width": "0.1px"
+    }
+  });
 }
 // /////////////////////////////////////////////////////////
 
@@ -147,6 +163,15 @@ function thirdAnimation(worldMap, barChart) {
     russianPopulationsIn198millions,
     ".fsu-state"
   );
+
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".fsu-state",
+    styles: {
+      stroke: "black",
+      "stroke-width": "0.1px"
+    }
+  });
 
   worldMap.animateSectionStyles({
     duration: 500,
@@ -177,10 +202,20 @@ function fourthAnimation(worldMap, barChart) {
   };
 
   worldMap.animateMapZoom(zoomParams);
+
   worldMap.createPopulationChoropleth(
     netMigrantsToRussia1989to2002,
     ".fsu-state"
   );
+
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".fsu-state",
+    styles: {
+      stroke: "black",
+      "stroke-width": "0.1px"
+    }
+  });
   // worldMap.addPointsToMap();
   // worldMap.drawCurves();
 
@@ -193,46 +228,47 @@ function fourthAnimation(worldMap, barChart) {
 
 // /////////////////////////////////////////////////////////
 function fifthAnimation(worldMap, barChart, lineChart, direction) {
-  if (direction === "up") {
-    lineChart.hideIt();
-    barChart.redrawBarsFromScratch(percentMigrantsToRussia1989to2002);
-    worldMap.removeLabels();
+  worldMap.createPopulationChoropleth(
+    percentMigrantsToRussia1989to2002,
+    ".fsu-state"
+  );
 
-    worldMap.animateSectionStyles({
-      duration: 500,
-      section: ".non-soviet-country,.intl-country",
-      styles: {
-        opacity: "0"
-      }
-    });
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".fsu-state",
+    styles: {
+      stroke: "black",
+      "stroke-width": "0.1px"
+    }
+  });
+  // worldMap.addPointsToMap();
+  // worldMap.drawCurves();
 
-    Object.keys(sovietLabels).forEach(countryId => {
-      const countryShift = sovietLabels[countryId]
-      worldMap.createCountryLabel(countryId, countryShift, 3.5);
-    })
+  ///
+  sovietCountryIsoCodes.forEach(country => {
+    worldMap.animateArrowFromTo(country, "RUS");
+  });
 
-    worldMap.animateSectionStyles({
-      duration: 500,
-      section: "#RUS",
-      styles: {
-        opacity: "1",
-        fill: "#BAB4AC"
-      }
-    });
+  lineChart.hideIt();
+  barChart.redrawBarsFromScratch(percentMigrantsToRussia1989to2002);
+  worldMap.removeLabels();
 
-    worldMap.animateSectionStyles({
-      duration: 500,
-      section: ".fsu-state",
-      styles: {
-        stroke: "black",
-        "stroke-width": "0.1px"
-      }
-    });
+  Object.keys(sovietLabels).forEach(countryId => {
+    const countryShift = sovietLabels[countryId];
+    worldMap.createCountryLabel(countryId, countryShift, 3.5);
+  });
 
-    sovietCountryIsoCodes.forEach(countryId => {
-      worldMap.animateArrowFromTo(countryId, "RUS");
-    });
-  }
+  worldMap.animateSectionStyles({
+    duration: 500,
+    section: ".non-soviet-country,.intl-country",
+    styles: {
+      opacity: "0"
+    }
+  });
+
+  // sovietCountryIsoCodes.forEach(countryId => {
+  //   worldMap.animateArrowFromTo(countryId, "RUS");
+  // });
 
   worldMap.animateMapZoom({
     scale: 4,
@@ -240,11 +276,6 @@ function fifthAnimation(worldMap, barChart, lineChart, direction) {
     translateX: -Math.floor(worldMap.width * 0.46),
     translateY: -Math.floor(worldMap.height * 0.22)
   });
-
-  worldMap.createPopulationChoropleth(
-    percentMigrantsToRussia1989to2002,
-    ".fsu-state"
-  );
 
   barChart.bindDataToBars(percentMigrantsToRussia1989to2002);
   barChart.repaintChart(percentMigrantsToRussia1989to2002, "%");
@@ -267,7 +298,7 @@ function sixthAnimation(worldMap, barChart, lineChart, direction) {
 
   worldMap.animateMapZoom({
     scale: 1,
-    duration: 750,
+    duration: 500,
     translateX: 0,
     translateY: 0
   });
@@ -284,7 +315,8 @@ function sixthAnimation(worldMap, barChart, lineChart, direction) {
   });
 
   worldMap.animateSectionStyles({
-    duration: 1000,
+    duration: 500,
+    duration: 500,
     section: "#RUS",
     styles: {
       fill: "rgb(255, 165, 0)",
@@ -297,7 +329,7 @@ function sixthAnimation(worldMap, barChart, lineChart, direction) {
   lineChart.drawLine("population", [130000000, 150000000], { x: 200, y: 20 });
   lineChart.drawTitle("Russia Population");
 
-  worldMap.createCountryLabel("RUS", [-15, 5], 10);
+  worldMap.createCountryLabel("RUS", [-15, 5], 11);
 }
 
 function seventhAnimation(worldMap, barChart, lineChart, direction) {
@@ -412,7 +444,14 @@ function tenthAnimation(worldMap, barChart, lineChart, direction) {
     const arrowWidth = 0.25;
     const arrowHeadSize = 1;
     const curveOffset = 5;
-    worldMap.animateArrowFromTo("RUS", "DEU", "black", arrowWidth, arrowHeadSize, curveOffset);
+    worldMap.animateArrowFromTo(
+      "RUS",
+      "DEU",
+      "black",
+      arrowWidth,
+      arrowHeadSize,
+      curveOffset
+    );
 
     worldMap.createCountryLabel("DEU", [-7, 11], 2.5);
   }
@@ -440,7 +479,14 @@ function eleventhAnimation(worldMap, barChart, lineChart, direction) {
     const arrowWidth = 0.25;
     const arrowHeadSize = 1;
     const curveOffset = 5;
-    worldMap.animateArrowFromTo("RUS", "DEU", "black", arrowWidth, arrowHeadSize, curveOffset);
+    worldMap.animateArrowFromTo(
+      "RUS",
+      "DEU",
+      "black",
+      arrowWidth,
+      arrowHeadSize,
+      curveOffset
+    );
 
     worldMap.createCountryLabel("DEU", [-7, 11], 2.5);
     worldMap.animateMapZoom({
@@ -460,7 +506,13 @@ function twelfthAnimation(worldMap, barChart, lineChart, direction) {
 
     const arrowWidth = 0.15;
     const arrowHeadSize = 0.6;
-    worldMap.animateArrowFromTo("RUS", "ISR", "black", arrowWidth, arrowHeadSize);
+    worldMap.animateArrowFromTo(
+      "RUS",
+      "ISR",
+      "black",
+      arrowWidth,
+      arrowHeadSize
+    );
 
     worldMap.createCountryLabel("ISR", [-2, 3], 1.5);
     worldMap.animateMapZoom({
@@ -482,11 +534,17 @@ function thirteenthAnimation(worldMap, barChart, lineChart, direction) {
     worldMap.clearArrows();
     lineChart.clearPreviousLineAndAxis("americanFsuToUsa");
     worldMap.removeLabels();
-    
-     const arrowWidth = 0.15;
+
+    const arrowWidth = 0.15;
     const arrowHeadSize = 0.6;
-    worldMap.animateArrowFromTo("RUS", "ISR", "black", arrowWidth, arrowHeadSize);
-    
+    worldMap.animateArrowFromTo(
+      "RUS",
+      "ISR",
+      "black",
+      arrowWidth,
+      arrowHeadSize
+    );
+
     worldMap.createCountryLabel("ISR", [-2, 3], 1.5);
     worldMap.animateMapZoom({
       scale: 15,
@@ -500,15 +558,14 @@ function thirteenthAnimation(worldMap, barChart, lineChart, direction) {
 
 // /////////////////////////////////////////////////////////
 function fourteenthAnimation(worldMap, barChart, lineChart, direction) {
-  if (direction === 'down') {
+  if (direction === "down") {
     worldMap.clearArrows();
     worldMap.animateArrowFromTo("RUS", "USA", "black");
-  
+
     worldMap.createCountryLabel("USA", [-22, 18], 3);
   }
   // lineChart.clearPreviousLineAndAxis("jewishFsuToIsrael");
   // worldMap.clearArrows();
-
 
   lineChart.drawTitle("Soviet Migration To America 000's");
   lineChart.drawLine("americanFsuToUsa", [0, 220], { x: 130, y: 240 });
@@ -523,9 +580,7 @@ function fourteenthAnimation(worldMap, barChart, lineChart, direction) {
 // /////////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////////
-function fifteenthAnimation(worldMap, barChart, lineChart) {
-
-}
+function fifteenthAnimation(worldMap, barChart, lineChart) {}
 // /////////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////////

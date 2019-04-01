@@ -179,6 +179,7 @@ export default class WorldMap {
       .duration(1000)
       .style("opacity", "1")
       .style("fill", d => chromaDataCodes[d.id])
+      .style("stroke", d => chromaDataCodes[d.id])
       .style("stroke-width", 0.25 + "px");
   }
 
