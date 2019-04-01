@@ -256,7 +256,7 @@ export default class WorldMap {
       .enter()
       .append("circle")
       .attr("class", ".centroid")
-      .attr("fill", "black")
+      .attr("fill", "#7772a8")
       .attr("r", "0.45px")
       .attr("cx", function(d) {
         return d[0];
@@ -315,8 +315,16 @@ export default class WorldMap {
       destination[1] += 11;
     }
 
-    // console.warn("from", originId, "at", origin);
-    // console.warn("to", destinationId, "at", destination);
+    if (originId === "USA") {
+      origin[0] -= 9;
+      origin[1] += 14;
+    } else if (destinationId === "USA") {
+      destination[0] -= 9;
+      destination[1] += 14;
+    }
+
+    console.warn("from", originId, "at", origin);
+    console.warn("to", destinationId, "at", destination);
     const arcData = [
       {
         origin,

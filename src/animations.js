@@ -387,6 +387,28 @@ function ninthAnimation(worldMap, barChart, lineChart, direction) {
 
 // /////////////////////////////////////////////////////////
 function tenthAnimation(worldMap, barChart, lineChart, direction) {
+  if (direction === "down") {
+    worldMap.animateSectionStyles({
+      duration: 500,
+      section: ".non-soviet-country,.soviet-country",
+      styles: {
+        "stroke-width": "0.15px",
+        stroke: "none"
+      }
+    });
+
+    worldMap.animateMapZoom({
+      scale: 7,
+      duration: 750,
+      translateX: -Math.floor(worldMap.width * 0.4),
+      translateY: -Math.floor(worldMap.height * 0.27)
+    });
+
+    worldMap.clearArrows();
+    worldMap.animateArrowFromTo("RUS", "DEU", "black", 0.25);
+    worldMap.createCountryLabel("DEU", [-7, 11], 2.5);
+  }
+
   barChart.hideAllElements();
 
   lineChart.clearPreviousLineAndAxis("fertility");
@@ -398,25 +420,6 @@ function tenthAnimation(worldMap, barChart, lineChart, direction) {
   lineChart.drawTitle("Soviet Migration To Germany 000's");
 
   // worldMap.highlightInternationalLines();
-  worldMap.animateSectionStyles({
-    duration: 500,
-    section: ".non-soviet-country,.soviet-country",
-    styles: {
-      "stroke-width": "0.15px",
-      stroke: "none"
-    }
-  });
-
-  worldMap.animateMapZoom({
-    scale: 7,
-    duration: 750,
-    translateX: -Math.floor(worldMap.width * 0.4),
-    translateY: -Math.floor(worldMap.height * 0.27)
-  });
-
-  worldMap.clearArrows();
-  worldMap.animateArrowFromTo("RUS", "DEU", "black", 0.25);
-  worldMap.createCountryLabel("DEU", [-7, 11], 2.5);
 }
 // /////////////////////////////////////////////////////////
 
@@ -424,23 +427,32 @@ function tenthAnimation(worldMap, barChart, lineChart, direction) {
 function eleventhAnimation(worldMap, barChart, lineChart, direction) {
   if (direction === "up") {
     lineChart.clearPreviousLineAndAxis("jewishFsuToIsrael");
-    tenthAnimation(worldMap, barChart, lineChart);
+    worldMap.clearArrows();
+    worldMap.animateArrowFromTo("RUS", "DEU", "black", 0.25);
+    worldMap.createCountryLabel("DEU", [-7, 11], 2.5);
+    worldMap.animateMapZoom({
+      scale: 7,
+      duration: 750,
+      translateX: -Math.floor(worldMap.width * 0.4),
+      translateY: -Math.floor(worldMap.height * 0.27)
+    });
   }
 }
 // /////////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////////
-function twelfthAnimation(worldMap, barChart, lineChart) {
-  worldMap.clearArrows();
-  worldMap.animateArrowFromTo("RUS", "ISR", "black", 0.15);
-  worldMap.createCountryLabel("ISR", [-2, 3], 1.5);
-  worldMap.animateMapZoom({
-    scale: 15,
-    duration: 750,
-    translateX: -Math.floor(worldMap.width * 0.51),
-    translateY: -Math.floor(worldMap.height * 0.382)
-  });
-
+function twelfthAnimation(worldMap, barChart, lineChart, direction) {
+  if (direction === "down") {
+    worldMap.clearArrows();
+    worldMap.animateArrowFromTo("RUS", "ISR", "black", 0.15);
+    worldMap.createCountryLabel("ISR", [-2, 3], 1.5);
+    worldMap.animateMapZoom({
+      scale: 15,
+      duration: 750,
+      translateX: -Math.floor(worldMap.width * 0.51),
+      translateY: -Math.floor(worldMap.height * 0.382)
+    });
+  }
   // lineChart.clearPreviousLineAndAxis("germanFsuToGermany");
   lineChart.drawTitle("Soviet Migration To Israel 000's");
   lineChart.drawLine("jewishFsuToIsrael", [0, 220], { x: 130, y: 195 });
@@ -450,24 +462,36 @@ function twelfthAnimation(worldMap, barChart, lineChart) {
 // /////////////////////////////////////////////////////////
 function thirteenthAnimation(worldMap, barChart, lineChart, direction) {
   if (direction === "up") {
+    worldMap.clearArrows();
     lineChart.clearPreviousLineAndAxis("americanFsuToUsa");
     worldMap.removeLabels();
-    twelfthAnimation(worldMap, barChart, lineChart);
+    worldMap.animateArrowFromTo("RUS", "ISR", "black", 0.15);
+    worldMap.createCountryLabel("ISR", [-2, 3], 1.5);
+    worldMap.animateMapZoom({
+      scale: 15,
+      duration: 750,
+      translateX: -Math.floor(worldMap.width * 0.51),
+      translateY: -Math.floor(worldMap.height * 0.382)
+    });
   }
 }
 // /////////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////////
-function fourteenthAnimation(worldMap, barChart, lineChart) {
+function fourteenthAnimation(worldMap, barChart, lineChart, direction) {
+  if (direction === 'down') {
+    worldMap.clearArrows();
+    worldMap.animateArrowFromTo("RUS", "USA", "black");
+  
+    worldMap.createCountryLabel("USA", [-22, 18], 3);
+  }
   // lineChart.clearPreviousLineAndAxis("jewishFsuToIsrael");
   // worldMap.clearArrows();
-  worldMap.animateArrowFromTo("RUS", "USA", "black", 5);
-  worldMap.createCountryLabel("USA", [-22, 18], 3);
+
 
   lineChart.drawTitle("Soviet Migration To America 000's");
   lineChart.drawLine("americanFsuToUsa", [0, 220], { x: 130, y: 240 });
 
-  worldMap.clearArrows();
   worldMap.animateMapZoom({
     scale: 5,
     duration: 500,
@@ -478,7 +502,9 @@ function fourteenthAnimation(worldMap, barChart, lineChart) {
 // /////////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////////
-function fifteenthAnimation(worldMap, barChart, lineChart) {}
+function fifteenthAnimation(worldMap, barChart, lineChart) {
+
+}
 // /////////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////////
@@ -491,19 +517,23 @@ function sixteeteenthAnimation(worldMap, barChart, lineChart, direction) {
 
     worldMap.animateMapZoom({
       scale: 5,
-      duration: 1000,
+      duration: 500,
       translateX: -Math.floor(worldMap.width * 0.07),
       translateY: -Math.floor(worldMap.height * 0.3)
     });
 
     lineChart.revealIt();
     worldMap.createCountryLabel("USA", [-22, 18], 3);
+
+    worldMap.clearArrows();
+    worldMap.animateArrowFromTo("RUS", "USA", "black");
   }
 }
 // /////////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////////
 function seventeenthAnimation(worldMap, barChart, lineChart) {
+  worldMap.clearArrows();
   worldMap.removeLabels();
   lineChart.hideIt();
   const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
@@ -513,14 +543,12 @@ function seventeenthAnimation(worldMap, barChart, lineChart) {
     top: quarterPageHeight
   });
 
-  const zoomParams = {
+  worldMap.animateMapZoom({
     scale: 1,
-    duration: 1000,
+    duration: 500,
     translateX: 0,
     translateY: 0
-  };
-
-  worldMap.animateMapZoom(zoomParams);
+  });
   worldMap.createPopulationChoropleth(
     populationsIn1989millions,
     ".soviet-country"
