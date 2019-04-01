@@ -5,6 +5,8 @@ import {
   russianPopulationsIn198millions,
   migrationAbroadDestination1995to2002,
   populationRussia1989to2002,
+  sovietLabelShift,
+  sovietLabels,
   populationsIn1989millions
 } from "./constants";
 
@@ -69,7 +71,10 @@ function firstAnimation(worldMap, barChart, lineChart, direction) {
     translateY: -Math.floor(worldMap.height * 0.22)
   });
 
-  worldMap.createLabels();
+  Object.keys(sovietLabels).forEach(countryId => {
+    const countryShift = sovietLabels[countryId]
+    worldMap.createCountryLabel(countryId, countryShift, 3.5);
+  })
 
   worldMap.animateSectionStyles({
     duration: 500,
@@ -116,7 +121,11 @@ function secondAnimation(worldMap, barChart) {
     }
   });
 
-  worldMap.createLabels();
+  Object.keys(sovietLabels).forEach(countryId => {
+    const countryShift = sovietLabels[countryId]
+    worldMap.createCountryLabel(countryId, countryShift, 3.5);
+  })
+  
 
   worldMap.createPopulationChoropleth(populationsIn1989millions, ".fsu-state");
 }
@@ -174,7 +183,7 @@ function fourthAnimation(worldMap, barChart) {
     netMigrantsToRussia1989to2002,
     ".fsu-state"
   );
-  worldMap.addPointsToMap();
+  // worldMap.addPointsToMap();
   // worldMap.drawCurves();
 
   ///
@@ -198,7 +207,11 @@ function fifthAnimation(worldMap, barChart, lineChart, direction) {
         opacity: "0"
       }
     });
-    worldMap.createLabels();
+
+    Object.keys(sovietLabels).forEach(countryId => {
+      const countryShift = sovietLabels[countryId]
+      worldMap.createCountryLabel(countryId, countryShift, 3.5);
+    })
 
     worldMap.animateSectionStyles({
       duration: 500,
@@ -234,15 +247,6 @@ function fifthAnimation(worldMap, barChart, lineChart, direction) {
     percentMigrantsToRussia1989to2002,
     ".fsu-state"
   );
-
-  worldMap.animateSectionStyles({
-    duration: 500,
-    section: "circle",
-    styles: {
-      opacity: "1"
-    }
-  });
-
 
   barChart.bindDataToBars(percentMigrantsToRussia1989to2002);
   barChart.repaintChart(percentMigrantsToRussia1989to2002, "%");
@@ -295,7 +299,7 @@ function sixthAnimation(worldMap, barChart, lineChart, direction) {
   lineChart.drawLine("population", [130000000, 150000000], { x: 200, y: 20 });
   lineChart.drawTitle("Russia Population");
 
-  worldMap.createCountryLabel("RUS", [-8, 8], 12);
+  worldMap.createCountryLabel("RUS", [-15, 5], 10);
 }
 
 function seventhAnimation(worldMap, barChart, lineChart, direction) {
@@ -406,7 +410,12 @@ function tenthAnimation(worldMap, barChart, lineChart, direction) {
     });
 
     worldMap.clearArrows();
-    worldMap.animateArrowFromTo("RUS", "DEU", "black", 0.25);
+
+    const arrowWidth = 0.25;
+    const arrowHeadSize = 1;
+    const curveOffset = 5;
+    worldMap.animateArrowFromTo("RUS", "DEU", "black", arrowWidth, arrowHeadSize, curveOffset);
+
     worldMap.createCountryLabel("DEU", [-7, 11], 2.5);
   }
 
@@ -428,8 +437,13 @@ function tenthAnimation(worldMap, barChart, lineChart, direction) {
 function eleventhAnimation(worldMap, barChart, lineChart, direction) {
   if (direction === "up") {
     lineChart.clearPreviousLineAndAxis("jewishFsuToIsrael");
+
     worldMap.clearArrows();
-    worldMap.animateArrowFromTo("RUS", "DEU", "black", 0.25);
+    const arrowWidth = 0.25;
+    const arrowHeadSize = 1;
+    const curveOffset = 5;
+    worldMap.animateArrowFromTo("RUS", "DEU", "black", arrowWidth, arrowHeadSize, curveOffset);
+
     worldMap.createCountryLabel("DEU", [-7, 11], 2.5);
     worldMap.animateMapZoom({
       scale: 7,
@@ -445,7 +459,11 @@ function eleventhAnimation(worldMap, barChart, lineChart, direction) {
 function twelfthAnimation(worldMap, barChart, lineChart, direction) {
   if (direction === "down") {
     worldMap.clearArrows();
-    worldMap.animateArrowFromTo("RUS", "ISR", "black", 0.15);
+
+    const arrowWidth = 0.15;
+    const arrowHeadSize = 0.6;
+    worldMap.animateArrowFromTo("RUS", "ISR", "black", arrowWidth, arrowHeadSize);
+
     worldMap.createCountryLabel("ISR", [-2, 3], 1.5);
     worldMap.animateMapZoom({
       scale: 15,
@@ -466,7 +484,11 @@ function thirteenthAnimation(worldMap, barChart, lineChart, direction) {
     worldMap.clearArrows();
     lineChart.clearPreviousLineAndAxis("americanFsuToUsa");
     worldMap.removeLabels();
-    worldMap.animateArrowFromTo("RUS", "ISR", "black", 0.15);
+    
+     const arrowWidth = 0.15;
+    const arrowHeadSize = 0.6;
+    worldMap.animateArrowFromTo("RUS", "ISR", "black", arrowWidth, arrowHeadSize);
+    
     worldMap.createCountryLabel("ISR", [-2, 3], 1.5);
     worldMap.animateMapZoom({
       scale: 15,

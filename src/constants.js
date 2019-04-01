@@ -57,6 +57,25 @@ export const sovietLabelShift = {
   UZB: { x: -6, y: -1 }
 };
 
+export const sovietLabels = {
+  ARM: [-16,  3 ],
+  AZE: [-14,  7 ],
+  BLR: [ -20, 2 ],
+  EST: [ -13, -3 ],
+  GEO: [ -18, 1 ],
+  KAZ: [ -3, 0 ],
+  KGZ: [ 1, 4 ],
+  LVA: [ -15, -2 ],
+  LTU: [ -18, 0 ],
+  MDA: [ -18, 2 ],
+  RUS: [ -40, 10 ],
+  TJK: [ 2, 6 ],
+  TKM: [ -8, 10 ],
+  UKR: [ -23, 0 ],
+  UZB: [-6, -1 ]
+};
+
+
 // Step 2
 export const populationsIn1989millions = [
   { name: "ARM", population: 3	 },

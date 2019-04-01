@@ -3,10 +3,6 @@ import { createChromaData } from "./utils";
 
 import {
   sovietCountryIsoCodes,
-  populationsIn1989millions,
-  primaryReceivingIsoCodes,
-  colors,
-  sovietLabelShift
 } from "./constants";
 
 const rotate = -20;
@@ -91,29 +87,26 @@ export default class WorldMap {
         }
       });
 
-    this.applyInitialHighlight();
-  }
-
-  applyInitialHighlight() {
-    this.animateSectionStyles({
-      duration: 500,
-      section: ".soviet-country",
-      styles: {
-        opacity: "1",
-        fill: "#d0d0d0",
-        stroke: "none"
-      }
-    });
-
-    this.animateSectionStyles({
-      duration: 500,
-      section: ".non-soviet-country,.intl-country",
-      styles: {
-        opacity: "0.5",
-        fill: "#d0d0d0",
-        stroke: "none"
-      }
-    });
+    
+      this.animateSectionStyles({
+        duration: 500,
+        section: ".soviet-country",
+        styles: {
+          opacity: "1",
+          fill: "#d0d0d0",
+          stroke: "none"
+        }
+      });
+  
+      this.animateSectionStyles({
+        duration: 500,
+        section: ".non-soviet-country,.intl-country",
+        styles: {
+          opacity: "0.5",
+          fill: "#d0d0d0",
+          stroke: "none"
+        }
+      });
   }
 
   getInitialScale() {
@@ -142,56 +135,8 @@ export default class WorldMap {
       );
   }
 
-  hideLabels() {
-    this.animateSectionStyles({
-      duration: 500,
-      section: ".place-label",
-      styles: {
-        opacity: 0
-      }
-    });
-  }
-
-  // revealLabels() {
-  //   this.animateSectionStyles({
-  //     duration: 500,
-  //     section: ".place-label",
-  //     styles: {
-  //   });
-  // }
-
   removeLabels() {
     this.mapGraphic.selectAll(".place-label").remove();
-  }
-
-  // TODO: find a better way to shift labels
-  createLabels() {
-    this.mapGraphic
-      .selectAll(".place-label")
-      .data(this.sovietDataPoints)
-      .enter()
-      .append("text")
-      .attr("class", d => `place-label ${d.id}-place-label`)
-      .attr("transform", d => {
-        const [x, y] = this.path.centroid(d);
-        return `translate(${x},${y})`;
-      })
-      .attr("x", function({ id }) {
-        const { x } = sovietLabelShift[id];
-
-        return `${x}px`;
-      })
-      .attr("y", function({ id }) {
-        const { y } = sovietLabelShift[id];
-
-        return `${y}px`;
-      })
-      .text(function(d) {
-        return d.properties.name;
-      })
-      .style("font-size", 3.5 + "px");
-    // .style("color", 'lightgoldenrodyellow');
-    // .style("fill", "white")
   }
 
   createCountryLabel(countryId, labelShift = [0, 0], fontSize = 3.5) {
@@ -220,8 +165,6 @@ export default class WorldMap {
         return d.properties.name;
       })
       .style("font-size", fontSize + "px");
-    // .style("color", 'lightgoldenrodyellow');
-    // .style("fill", "white")
   }
 
   createPopulationChoropleth(populationData, selection, colorRangeOverride) {
@@ -245,36 +188,8 @@ export default class WorldMap {
       .style("top", top + "px");
   }
 
-  addPointsToMap() {
-    const centroids = this.sovietDataPoints.map(country => {
-      return this.path.centroid(country);
-    });
-
-    this.mapGraphic
-      .selectAll(".centroid")
-      .data(centroids)
-      .enter()
-      .append("circle")
-      .attr("class", ".centroid")
-      .attr("fill", "#000")
-      .attr("r", "0.3px")
-      .attr("cx", function(d) {
-        return d[0];
-      })
-      .attr("cy", function(d) {
-        return d[1];
-      });
-  }
-
   clearArrows() {
-    this.animateSectionStyles({
-      duration: 100,
-      section: "circle",
-      styles: {
-        opacity: "0"
-      }
-    });
-
+    this.mapGraphic.selectAll(".centroid").remove();
     this.mapGraphic.selectAll(".arc").remove();
     this.mapGraphic.selectAll(".arrow-head").remove();
   }
@@ -283,7 +198,9 @@ export default class WorldMap {
     originId = "USA",
     destinationId = "RUS",
     arrowColor = "#000",
-    arrowWidth = 0.3
+    arrowWidth = 0.3,
+    arrowHeadSize = 3,
+    curveoffset = 15,
   ) {
     const originDataPoint = this.data.find(country => country.id === originId);
     const destinationDataPoint = this.data.find(
@@ -302,11 +219,11 @@ export default class WorldMap {
     }
 
     if (originId === "USA") {
-      origin[0] -= 9;
-      origin[1] += 14;
+      origin[0] += 15;
+      origin[1] += 15;
     } else if (destinationId === "USA") {
-      destination[0] -= 9;
-      destination[1] += 14;
+      destination[0] += 15;
+      destination[1] += 15;
     }
 
     console.warn("from", originId, "at", origin);
@@ -317,6 +234,23 @@ export default class WorldMap {
         destination
       }
     ];
+
+    // create circle
+      this.mapGraphic
+        .selectAll("centroid")
+        .data(arcData)
+        .enter()
+        .append("circle")
+        .attr("class", "centroid")
+        .attr("fill", "#000")
+        .attr("r", "0.3px")
+        .attr("cx", function({origin}) {
+          return origin[0];
+        })
+        .attr("cy", function({origin}) {
+          return origin[1];
+        });
+    //
 
     const arc = this.mapGraphic
       .append("g")
@@ -335,7 +269,6 @@ export default class WorldMap {
         ];
 
         // define handle points for Bezier curves. Higher values for curveoffset will generate more pronounced curves.
-        const curveoffset = 15;
         const midcurve = [mid[0], mid[1] - curveoffset];
 
         const linePath =
@@ -377,10 +310,10 @@ export default class WorldMap {
         );
       });
 
-    this.animateArrowHead(arc, arrowColor);
+    this.animateArrowHead(arc, arrowColor, arrowHeadSize);
   }
 
-  animateArrowHead(path, arrowColor, arrowHeadSize = 3) {
+  animateArrowHead(path, arrowColor, arrowHeadSize) {
     var arrow = this.mapGraphic
       .append("svg:path")
       .attr('class', 'arrow-head')
