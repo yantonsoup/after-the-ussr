@@ -217,6 +217,10 @@ function fifthAnimation(worldMap, barChart, lineChart, direction) {
         "stroke-width": "0.1px"
       }
     });
+
+    sovietCountryIsoCodes.forEach(countryId => {
+      worldMap.animateArrowFromTo(countryId, "RUS");
+    });
   }
 
   worldMap.animateMapZoom({
@@ -239,9 +243,6 @@ function fifthAnimation(worldMap, barChart, lineChart, direction) {
     }
   });
 
-  sovietCountryIsoCodes.forEach(country => {
-    worldMap.animateArrowFromTo(country, "RUS");
-  });
 
   barChart.bindDataToBars(percentMigrantsToRussia1989to2002);
   barChart.repaintChart(percentMigrantsToRussia1989to2002, "%");

@@ -256,23 +256,8 @@ export default class WorldMap {
       .enter()
       .append("circle")
       .attr("class", ".centroid")
-      .attr("fill", "#7772a8")
-      .attr("r", "0.45px")
-      .attr("cx", function(d) {
-        return d[0];
-      })
-      .attr("cy", function(d) {
-        return d[1];
-      });
-
-    const russiaCoordinates = [235, 110];
-    this.mapGraphic
-      .selectAll(".russia-centroid")
-      .data(russiaCoordinates)
-      .enter()
-      .append("circle")
-      .attr("fill", "white")
-      .attr("r", "0.25px")
+      .attr("fill", "#000")
+      .attr("r", "0.3px")
       .attr("cx", function(d) {
         return d[0];
       })
@@ -297,8 +282,8 @@ export default class WorldMap {
   animateArrowFromTo(
     originId = "USA",
     destinationId = "RUS",
-    arrowColor = "#7772a8",
-    arrowWidth = 0.5
+    arrowColor = "#000",
+    arrowWidth = 0.3
   ) {
     const originDataPoint = this.data.find(country => country.id === originId);
     const destinationDataPoint = this.data.find(
@@ -392,10 +377,10 @@ export default class WorldMap {
         );
       });
 
-    this.animateArrowHead(arc);
+    this.animateArrowHead(arc, arrowColor);
   }
 
-  animateArrowHead(path) {
+  animateArrowHead(path, arrowColor, arrowHeadSize = 3) {
     var arrow = this.mapGraphic
       .append("svg:path")
       .attr('class', 'arrow-head')
@@ -404,9 +389,9 @@ export default class WorldMap {
         d3.svg
           .symbol()
           .type("triangle-down")
-          .size(5)
+          .size(arrowHeadSize)
       )
-      .attr("fill", "#7772a8");
+      .attr("fill", arrowColor);
 
     arrow
       .transition()
