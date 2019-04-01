@@ -16,47 +16,6 @@ export const sovietCountryIsoCodes = [
   "UZB"
 ];
 
-export const primaryReceivingIsoCodes = [
-  "DEU",
-  "ISR",
-  "USA",
-];
-
-export const colors = [
-  "#feedde",
-  "#fdbe85",
-  "#fd8d3c",
-  "#e6550d",
-  "#dd6344",
-  "#feedde",
-  "#fdbe85",
-  "#fd8d3c",
-  "#e6550d",
-  "#feedde",
-  "#fdbe85",
-  "#fd8d3c",
-  "#e6550d",
-  "#dd6344"
-];
-
-export const sovietLabelShift = {
-  ARM: { x: -16, y: 3 },
-  AZE: { x: -14, y: 7 },
-  BLR: { x: -20, y: 2 },
-  EST: { x: -13, y: -3 },
-  GEO: { x: -18, y: 1 },
-  KAZ: { x: -3, y: 0 },
-  KGZ: { x: 1, y: 4 },
-  LVA: { x: -15, y: -2 },
-  LTU: { x: -18, y: 0 },
-  MDA: { x: -18, y: 2 },
-  RUS: { x: -40, y: 10 },
-  TJK: { x: 2, y: 6 },
-  TKM: { x: -8, y: 10 },
-  UKR: { x: -23, y: 0 },
-  UZB: { x: -6, y: -1 }
-};
-
 export const sovietLabels = {
   ARM: [-16,  3 ],
   AZE: [-14,  7 ],

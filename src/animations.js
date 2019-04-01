@@ -5,7 +5,6 @@ import {
   russianPopulationsIn198millions,
   migrationAbroadDestination1995to2002,
   populationRussia1989to2002,
-  sovietLabelShift,
   sovietLabels,
   populationsIn1989millions
 } from "./constants";

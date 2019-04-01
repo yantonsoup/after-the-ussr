@@ -1,7 +1,7 @@
 import d3 from "d3";
 import chroma from "chroma-js";
 
-import { sovietCountryIsoCodes, colors } from "./constants";
+import { sovietCountryIsoCodes } from "./constants";
 import { createChromaData } from "./utils";
 export default class BarChart {
   constructor(opts) {
