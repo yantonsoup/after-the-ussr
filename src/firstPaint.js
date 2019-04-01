@@ -42,16 +42,9 @@ export default function firstPaint () {
 
   // // Desktop Layout
   if (window.innerWidth > 400) {
-  //   d3.select(".bar-graphic-container")
-  //     .style('top', quarterPageHeight + 'px')
-  //     .style("width", halfPageWidth + "px")
-  //     .style("height", halfPageHeight + "px")
-  //     .style("max-width", "50%")
-
     d3.select(".map-graphic-container")
       .style("width", halfPageHeight + "px")
       .style("height", halfPageHeight + "px")
-
 
     d3.select(".bar-graphic-container")
       .style('top', halfPageHeight + "px")
@@ -66,18 +59,30 @@ export default function firstPaint () {
     d3.select('.story-container')
       .style("max-width", halfPageHeight + "px")
 
+    d3.select('.overlay-section')
+      .style("max-width", halfPageHeight + "px")
+
     d3.selectAll('.step')
       .style("max-width", halfPageHeight + "px")
 
   }
-  // max width === 640
 
-  // min height for this would have to be 1280
-  // width = 640 = height = 640
+  // click handlers
+  d3.select(".about-button").on('click', () => {
+    d3.select(".about-section").style({
+      display: "flex",
+    })
+    d3.select(".about-section").transition().duration(500).style({
+      opacity: 1,
+    })
+  })
 
-  // map over 
-
-  // half pag
-
-  // at large screen heights make the max height the same as the width of the story-container
+  d3.select(".sources-button").on('click', () => {
+    d3.select(".sources-section").style({
+      display: "flex",
+    })
+    d3.select(".sources-section").transition().duration(500).style({
+      opacity: 1,
+    })
+  })
 } 
