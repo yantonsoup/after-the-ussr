@@ -193,6 +193,10 @@ li {
   border-bottom: 1px solid lightgoldenrodyellow;
 }
 
+.about-button,.sources-button {
+  cursor: pointer;
+}
+
 /* *********************************** */
 /* footer  */
 /* *********************************** */
@@ -202,13 +206,6 @@ li {
   padding: 2rem;
   color: lightgoldenrodyellow;
 }
-
-.outro-button {
-  cursor: pointer;
-}
-
-
-
 
 /* *********************************** */
 /* splash page */
