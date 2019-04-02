@@ -189,6 +189,7 @@ li {
   text-align: center;
   color: lightgoldenrodyellow;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .close-overlay-button:hover {

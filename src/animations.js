@@ -316,7 +316,6 @@ function sixthAnimation(worldMap, barChart, lineChart, direction) {
 
   worldMap.animateSectionStyles({
     duration: 500,
-    duration: 500,
     section: "#RUS",
     styles: {
       fill: "rgb(255, 165, 0)",
