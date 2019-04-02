@@ -32,18 +32,16 @@ a {
   font-weight: 400;
 }
 
-a,
+a {
+  text-decoration: none;
+}
+
 a:visited,
 a:hover {
   color: lightgoldenrodyellow;
-  text-decoration: none;
+  text-decoration: underline;
   /* border-bottom: 1px solid currentColor; */
 }
-
-#outro {
-  height: 640px;
-}
-
 
 .ussr-svg {
   width: 200px;
@@ -75,7 +73,7 @@ a:hover {
   /* border: 1px solid #000; */
   display: flex;
   background: transparent;
-  padding: 0.5rem 0;
+  padding: 20px 0 10px;
   margin: 0;
   z-index: -10;
   font-size: 1.4rem;
@@ -84,31 +82,17 @@ a:hover {
   top: 0;
 }
 
-.star-header-link {
-  color: lightgoldenrodyellow;
-  margin: auto 0;
-  background-color: #951C13;
-  padding: 4px 8px 6px;
-  border-radius: 3px;
-}
-
-
 .star-header-link:hover {
   border-bottom: 1px solid lightgoldenrodyellow;
 }
 
-.overlay-section {
-  display: none;
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  max-width: 40rem;
-  margin: 0 auto;
+.star-header-link {
+  color: lightgoldenrodyellow;
+  cursor: pointer;
+  margin-top: auto;
   background-color: #951C13;
-  z-index: 100;
-  padding: 2rem;
+  padding: 4px 8px 6px;
+  border-radius: 3px;
 }
 
 .triangle-down {
@@ -130,6 +114,100 @@ a:hover {
   font-weight: 600;
   /* background-color: #ffec97; */
 }
+
+.yellow {
+  color: #fcd116;
+}
+
+.spaced {
+  letter-spacing: 1.5px;
+}
+
+
+/* *********************************** */
+/* overlays  */
+/* *********************************** */
+.overlay-section {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  max-width: 40rem;
+  margin: 0 auto;
+  background-color: #951C13;
+  z-index: 100;
+  padding: 2rem;
+}
+
+.overlay-text-container {
+  margin: 2rem 0;
+  padding: 0 1rem;
+  font-size: 16px;
+  color: lightgoldenrodyellow;
+  line-height: 24px;
+}
+
+ol {
+  list-style: none;
+  counter-reset: my-awesome-counter;
+  padding-inline-start: 0px;
+}
+
+ol li {
+  counter-increment: my-awesome-counter;
+}
+
+li::before {
+  color: #fcd116;
+  content: '[' counter(my-awesome-counter) ']';
+  letter-spacing: 1.5px;
+}
+
+li {
+  cursor: pointer;
+}
+
+.overlay-text {
+  margin-top: 1rem;
+}
+
+.overlay-button-container {
+  width: 100%;
+}
+
+.close-overlay-button {
+  background-color: #a62116;
+  width: 70px;
+  margin-left: auto;
+  font-size: 1.4rem;
+  padding: 18px;
+  text-align: center;
+  color: lightgoldenrodyellow;
+  border-radius: 3px;
+}
+
+.close-overlay-button:hover {
+  border-bottom: 1px solid lightgoldenrodyellow;
+}
+
+/* *********************************** */
+/* footer  */
+/* *********************************** */
+.outro {
+  background-color: #951C13; 
+  height: 50vh;
+  padding: 2rem;
+  color: lightgoldenrodyellow;
+}
+
+.outro-button {
+  cursor: pointer;
+}
+
+
 
 
 /* *********************************** */
