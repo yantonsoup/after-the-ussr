@@ -72,6 +72,8 @@ a:hover {
   background-color: #a62116;
   /* border: 1px solid #000; */
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   background: transparent;
   padding: 20px 0 10px;
   margin: 0;
@@ -195,6 +197,10 @@ li {
 
 .about-button,.sources-button {
   cursor: pointer;
+}
+
+.about-button {
+  /* margin-left: 19px; */
 }
 
 /* *********************************** */
