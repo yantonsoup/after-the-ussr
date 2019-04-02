@@ -28,6 +28,7 @@ const sovietCountryIsoCodes = [
 
 // /////////////////////////////////////////////////////////
 function zeroAnimation(worldMap, barChart, lineChart, direction) {
+  console.warn('zero anim zcrollot', window.scrollY)
   worldMap.createPopulationChoropleth(
     populationsIn1989millions,
     ".soviet-country"
@@ -189,7 +190,7 @@ function thirdAnimation(worldMap, barChart) {
 // /////////////////////////////////////////////////////////
 function fourthAnimation(worldMap, barChart) {
   const title = "Russian return rate '89-'02";
-
+  
   barChart.drawTitle(title, "Russian return rate '89-'02");
   barChart.repaintChart(netMigrantsToRussia1989to2002, "m");
 
