@@ -122,8 +122,8 @@ export default function firstPaint() {
   var scrollable = d3.select(".scroll");
 
   d3.select(".section-one-scroller").on("click", function() {
-
-    var scrollheight = scrollable.property("scrollHeight");
+    // window.scrollTo(0, 10187)
+    // var scrollheight = scrollable.property("scrollHeight");
 
     console.warn("sction one scroller fired", scrollheight);
     

@@ -102,7 +102,7 @@ export default class BarChart {
       .append("g")
       .attr("class", "y-axis")
       .call(yAxisStuff)
-      .style("fill", "lightgoldenrodyellow")
+      .style("fill", "black")
       .style("letter-spacing", "1px")
       .style("font-weight", "400");
   }
@@ -261,6 +261,7 @@ export default class BarChart {
         return `${datum.population}${units}`;
       })
       .style("font-weight", 600)
+      .style("fill", "lightgoldenrodyellow")
       .attr("transform", "translate(" + 0 + "," + this.barMargin.top + ")");
   }
 

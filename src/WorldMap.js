@@ -208,7 +208,7 @@ export default class WorldMap {
     arrowColor = "#000",
     arrowWidth = 0.3,
     arrowHeadSize = 3,
-    curveoffset = 15
+    curveoffset = 15,
   ) {
     const originDataPoint = this.data.find(country => country.id === originId);
     const destinationDataPoint = this.data.find(
@@ -226,12 +226,19 @@ export default class WorldMap {
       destination[1] += 11;
     }
 
-    if (originId === "USA") {
-      origin[0] += 15;
-      origin[1] += 15;
-    } else if (destinationId === "USA") {
+    if (destinationId === "USA") {
       destination[0] += 15;
       destination[1] += 15;
+    }
+
+    if (destinationId === "ISR") {
+      destination[0] += 1;
+      destination[1] -= 2;
+    }
+
+    if (destinationId === "DEU") {
+      destination[0] += 2;
+      destination[1] -= 2;
     }
 
     console.warn("from", originId, "at", origin);
