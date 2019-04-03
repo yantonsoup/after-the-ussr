@@ -31,7 +31,17 @@ export default function setupScrollama(worldMap, barChart, lineChart) {
       // animations[0](worldMap, barChart, lineChart, response.direction)
     })
     .onContainerExit((response) => {
-
+      console.warn('onContainerExit', response)
+    
+      worldMap.animateSectionStyles({
+        duration: 500,
+        section: ".non-soviet-country,.intl-country",
+        styles: {
+          opacity: "0.5",
+          fill: "#d0d0d0",
+          stroke: "none"
+        }
+      });
       // zero animation up
       worldMap.animateSectionStyles({
         duration: 500,

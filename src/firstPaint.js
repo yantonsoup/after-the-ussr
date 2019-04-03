@@ -93,6 +93,8 @@ export default function firstPaint() {
         opacity: 1
       });
 
+      d3.selectAll(".sources-section").style("top", window.scrollY + "px");
+
     //preventBodySCroll
     d3.select("body").style("overflow", "hidden");
   });
@@ -139,9 +141,7 @@ export default function firstPaint() {
     //     };
     //   };
     // }
-    window.scrollTo(0, 10182) 
-
-
+    // window.scrollTo(0, 10182) 
     
   });
 
