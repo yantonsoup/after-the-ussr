@@ -50,7 +50,6 @@ export default function setupScrollama(worldMap, barChart, lineChart) {
           opacity: "1",
           fill: "#d0d0d0",
           stroke: "#d0d0d0",
-          'stroke-opacity': "0.7"
         }
       });
     })

@@ -28,13 +28,13 @@ const sovietCountryIsoCodes = [
 
 // /////////////////////////////////////////////////////////
 function zeroAnimation(worldMap, barChart, lineChart, direction) {
-  console.warn('zero anim zcrollot', window.scrollY)
+  worldMap.removeLabels();
+
   worldMap.createPopulationChoropleth(
     populationsIn1989millions,
     ".soviet-country"
   );
 
-  worldMap.removeLabels();
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".non-soviet-country,.intl-country",
@@ -44,15 +44,6 @@ function zeroAnimation(worldMap, barChart, lineChart, direction) {
       stroke: "none"
     }
   });
-
-  // worldMap.animateSectionStyles({
-  //   duration: 500,
-  //   section: ".soviet-country",
-  //   styles: {
-  //     stroke: "black",
-  //     "stroke-width": "0.1px"
-  //   }
-  // });
 
   worldMap.animateMapZoom({
     scale: 1,
@@ -68,7 +59,7 @@ function firstAnimation(worldMap, barChart, lineChart, direction) {
   const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
 
   worldMap.moveMapContainer({
-    duration: 1000,
+    duration: 750,
     top: quarterPageHeight
   });
 
@@ -105,9 +96,9 @@ function firstAnimation(worldMap, barChart, lineChart, direction) {
 // /////////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////////
-function secondAnimation(worldMap, barChart) {
+function secondAnimation(worldMap, barChart, lineChart, direction) {
   worldMap.moveMapContainer({
-    duration: 1000,
+    duration: 500,
     top: 0
   });
 
@@ -137,6 +128,7 @@ function secondAnimation(worldMap, barChart) {
   worldMap.createPopulationChoropleth(populationsIn1989millions, ".fsu-state");
   worldMap.animateSectionStyles({
     duration: 500,
+    delay: 500,
     section: ".soviet-country",
     styles: {
       stroke: "black",
@@ -162,20 +154,23 @@ function thirdAnimation(worldMap, barChart) {
   // hide curves and dot on way up
   worldMap.createPopulationChoropleth(
     russianPopulationsIn198millions,
-    ".fsu-state"
+    ".fsu-state",
+    undefined,
+    'black'
   );
 
-  worldMap.animateSectionStyles({
-    duration: 500,
-    section: ".fsu-state",
-    styles: {
-      stroke: "black",
-      "stroke-width": "0.1px"
-    }
-  });
+  // worldMap.animateSectionStyles({
+  //   duration: 500,
+  //   section: ".fsu-state",
+  //   styles: {
+  //     stroke: "black",
+  //     "stroke-width": "0.1px"
+  //   }
+  // });
 
   worldMap.animateSectionStyles({
     duration: 500,
+    delay: 500,
     section: "#RUS",
     styles: {
       opacity: "1",
@@ -189,38 +184,25 @@ function thirdAnimation(worldMap, barChart) {
 
 // /////////////////////////////////////////////////////////
 function fourthAnimation(worldMap, barChart) {
-  const title = "Russian return rate '89-'02";
-  
-  barChart.drawTitle(title, "Russian return rate '89-'02");
+  barChart.drawTitle("Russian return rate '89-'02");
   barChart.repaintChart(netMigrantsToRussia1989to2002, "m");
 
   // on way up
-  const zoomParams = {
+  worldMap.animateMapZoom({
     scale: 4,
-    duration: 1000,
+    duration: 500,
     translateX: -Math.floor(worldMap.width * 0.46),
     translateY: -Math.floor(worldMap.height * 0.22)
-  };
+  });
 
-  worldMap.animateMapZoom(zoomParams);
 
   worldMap.createPopulationChoropleth(
     netMigrantsToRussia1989to2002,
-    ".fsu-state"
+    ".fsu-state",
+    undefined,
+    'black'
   );
 
-  worldMap.animateSectionStyles({
-    duration: 500,
-    section: ".fsu-state",
-    styles: {
-      stroke: "black",
-      "stroke-width": "0.1px"
-    }
-  });
-  // worldMap.addPointsToMap();
-  // worldMap.drawCurves();
-
-  ///
   sovietCountryIsoCodes.forEach(country => {
     worldMap.animateArrowFromTo(country, "RUS");
   });
@@ -229,29 +211,33 @@ function fourthAnimation(worldMap, barChart) {
 
 // /////////////////////////////////////////////////////////
 function fifthAnimation(worldMap, barChart, lineChart, direction) {
+  if (direction === 'up') {
+    sovietCountryIsoCodes.forEach(country => {
+      worldMap.animateArrowFromTo(country, "RUS");
+    });
+
+    barChart.redrawBarsFromScratch(percentMigrantsToRussia1989to2002);
+    barChart.repaintChart(netMigrantsToRussia1989to2002, "m");
+
+    worldMap.animateSectionStyles({
+      duration: 500,
+      delay: 500,
+      section: "#RUS",
+      styles: {
+        opacity: "1",
+        fill: "#BAB4AC"
+      }
+    });
+  }
+
   worldMap.createPopulationChoropleth(
     percentMigrantsToRussia1989to2002,
-    ".fsu-state"
+    ".fsu-state",
+    undefined,
+    'black'
   );
 
-  worldMap.animateSectionStyles({
-    duration: 500,
-    section: ".fsu-state",
-    styles: {
-      stroke: "black",
-      "stroke-width": "0.1px"
-    }
-  });
-  // worldMap.addPointsToMap();
-  // worldMap.drawCurves();
-
-  ///
-  sovietCountryIsoCodes.forEach(country => {
-    worldMap.animateArrowFromTo(country, "RUS");
-  });
-
   lineChart.hideIt();
-  barChart.redrawBarsFromScratch(percentMigrantsToRussia1989to2002);
   worldMap.removeLabels();
 
   Object.keys(sovietLabels).forEach(countryId => {
@@ -290,6 +276,8 @@ function sixthAnimation(worldMap, barChart, lineChart, direction) {
   if (direction === "up") {
     lineChart.clearPreviousLineAndAxis("fertility");
     lineChart.clearPreviousLineAndAxis("mortality");
+
+    
   }
 
   barChart.hideAllElements();
@@ -320,7 +308,9 @@ function sixthAnimation(worldMap, barChart, lineChart, direction) {
     section: "#RUS",
     styles: {
       fill: "rgb(255, 165, 0)",
-      opacity: "1"
+      opacity: "1",
+      stroke: "rgb(255, 165, 0)",
+      "stroke-opacity": 0.5
     }
   });
 
@@ -378,13 +368,15 @@ function eightAnimation(worldMap, barChart, lineChart, direction) {
     translateY: 0
   });
 
+  
   worldMap.animateSectionStyles({
-    duration: 1000,
+    duration: 500,
     section: ".soviet-country",
     styles: {
       fill: "#d0d0d0",
       opacity: "1",
-      stroke: "#d0d0d0"
+      stroke: "#d0d0d0",
+      "stroke-width": "1px"
     }
   });
 
@@ -393,17 +385,19 @@ function eightAnimation(worldMap, barChart, lineChart, direction) {
     ".intl-country",
     ["#ffffb2", "#a1dab4", "#41b6c4"]
   );
-}
-// /////////////////////////////////////////////////////////
 
-// ////////////////////////////////x/////////////////////////
-function ninthAnimation(worldMap, barChart, lineChart, direction) {
   barChart.drawTitle(
     "Top Destinations For Soviet Immigrants '95 - '02",
     "1995-2002"
   );
   barChart.redrawBarsFromScratch(migrationAbroadDestination1995to2002);
   barChart.revealBarChart();
+}
+// /////////////////////////////////////////////////////////
+
+// ////////////////////////////////x/////////////////////////
+function ninthAnimation(worldMap, barChart, lineChart, direction) {
+
 
   if (direction === "up") {
     lineChart.hideIt();
@@ -415,6 +409,15 @@ function ninthAnimation(worldMap, barChart, lineChart, direction) {
       duration: 500,
       translateX: 0,
       translateY: 0
+    });
+
+    worldMap.animateSectionStyles({
+      duration: 500,
+      section: ".soviet-country",
+      styles: {
+        stroke: "#d0d0d0",
+        "stroke-width": "1px"
+      }
     });
   }
 }

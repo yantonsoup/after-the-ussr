@@ -1,9 +1,7 @@
 import d3 from "d3";
 import { createChromaData } from "./utils";
 
-import {
-  sovietCountryIsoCodes,
-} from "./constants";
+import { sovietCountryIsoCodes } from "./constants";
 
 const rotate = -20;
 const maxlat = 83;
@@ -87,27 +85,26 @@ export default class WorldMap {
         }
       });
 
-    
-      this.animateSectionStyles({
-        duration: 500,
-        section: ".soviet-country",
-        styles: {
-          opacity: "1",
-          fill: "#d0d0d0",
-          stroke: "#d0d0d0",
-          'stroke-opacity': "0.7"
-        }
-      });
-  
-      this.animateSectionStyles({
-        duration: 500,
-        section: ".non-soviet-country,.intl-country",
-        styles: {
-          opacity: "0.5",
-          fill: "#d0d0d0",
-          stroke: "none"
-        }
-      });
+    this.animateSectionStyles({
+      duration: 500,
+      section: ".soviet-country",
+      styles: {
+        opacity: "1",
+        fill: "#d0d0d0",
+        stroke: "#d0d0d0",
+        "stroke-width": "1"
+      }
+    });
+
+    this.animateSectionStyles({
+      duration: 500,
+      section: ".non-soviet-country,.intl-country",
+      styles: {
+        opacity: "0.5",
+        fill: "#d0d0d0",
+        stroke: "none"
+      }
+    });
   }
 
   getInitialScale() {
@@ -143,10 +140,10 @@ export default class WorldMap {
   createCountryLabel(countryId, labelShift = [0, 0], fontSize = 3.5) {
     const countryData = this.data.filter(country => country.id === countryId);
 
-    console.warn("///creating country label///");
-    console.warn({ countryId });
-    console.warn({ countryData });
-    console.warn("///----------------------///");
+    // console.warn("///creating country label///");
+    // console.warn({ countryId });
+    // console.warn({ countryData });
+    // console.warn("///----------------------///");
 
     this.mapGraphic
       .selectAll(`${countryId}-place-label`)
@@ -162,13 +159,17 @@ export default class WorldMap {
       .attr("x", labelShift[0])
       .attr("y", labelShift[1])
       .text(d => {
-        console.warn("d", d);
         return d.properties.name;
       })
       .style("font-size", fontSize + "px");
   }
 
-  createPopulationChoropleth(populationData, selection, colorRangeOverride) {
+  createPopulationChoropleth(
+    populationData,
+    selection,
+    colorRangeOverride,
+    strokeOverride
+  ) {
     const chromaDataCodes = createChromaData(
       populationData,
       colorRangeOverride
@@ -176,11 +177,16 @@ export default class WorldMap {
 
     d3.selectAll(selection)
       .transition()
-      .duration(1000)
+      .duration(500)
       .style("opacity", "1")
       .style("fill", d => chromaDataCodes[d.id])
-      .style("stroke", d => chromaDataCodes[d.id])
-      .style("stroke-width", 0.25 + "px");
+      .style("stroke", d => {
+        if (strokeOverride) {
+          return strokeOverride;
+        }
+        return chromaDataCodes[d.id];
+      })
+      .style("stroke-width", 0.1 + "px");
   }
 
   moveMapContainer({ top, duration }) {
@@ -202,7 +208,7 @@ export default class WorldMap {
     arrowColor = "#000",
     arrowWidth = 0.3,
     arrowHeadSize = 3,
-    curveoffset = 15,
+    curveoffset = 15
   ) {
     const originDataPoint = this.data.find(country => country.id === originId);
     const destinationDataPoint = this.data.find(
@@ -238,20 +244,20 @@ export default class WorldMap {
     ];
 
     // create circle
-      this.mapGraphic
-        .selectAll("centroid")
-        .data(arcData)
-        .enter()
-        .append("circle")
-        .attr("class", "centroid")
-        .attr("fill", "#000")
-        .attr("r", "0.3px")
-        .attr("cx", function({origin}) {
-          return origin[0];
-        })
-        .attr("cy", function({origin}) {
-          return origin[1];
-        });
+    this.mapGraphic
+      .selectAll("centroid")
+      .data(arcData)
+      .enter()
+      .append("circle")
+      .attr("class", "centroid")
+      .attr("fill", "#000")
+      .attr("r", "0.3px")
+      .attr("cx", function({ origin }) {
+        return origin[0];
+      })
+      .attr("cy", function({ origin }) {
+        return origin[1];
+      });
     //
 
     const arc = this.mapGraphic
@@ -303,7 +309,7 @@ export default class WorldMap {
 
     arc
       .transition()
-      .duration(2000)
+      .duration(1000)
       .ease("linear")
       .attrTween("stroke-dasharray", function() {
         return d3.interpolateString(
@@ -318,7 +324,7 @@ export default class WorldMap {
   animateArrowHead(path, arrowColor, arrowHeadSize) {
     var arrow = this.mapGraphic
       .append("svg:path")
-      .attr('class', 'arrow-head')
+      .attr("class", "arrow-head")
       .attr(
         "d",
         d3.svg
@@ -330,7 +336,7 @@ export default class WorldMap {
 
     arrow
       .transition()
-      .duration(2000)
+      .duration(1000)
       .ease("linear")
       .attrTween("transform", this.translateAlong(path.node()));
     //.each("end", transition);

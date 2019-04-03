@@ -163,7 +163,7 @@ export default class BarChart {
         .data(data)
         .transition()
         .delay(function(d, i) {
-          return i * 50;
+          return i * 40;
         })
         .attr("y", d => {
           return this.yScale(d.name);
