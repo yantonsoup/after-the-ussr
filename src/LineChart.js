@@ -299,7 +299,7 @@ function getLineStylesFromProperty(property) {
       };
     case "fertility":
       return {
-        fill: "blue",
+        fill: "white",
         label: 'fertility'
       };
     case "mortality":

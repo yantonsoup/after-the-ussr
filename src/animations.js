@@ -191,7 +191,7 @@ function thirdAnimation(worldMap, barChart) {
 
 // /////////////////////////////////////////////////////////
 function fourthAnimation(worldMap, barChart) {
-  barChart.drawTitle("Russian return rate '89-'02");
+  barChart.drawTitle("Net return to Russia per Country");
   barChart.repaintChart(netMigrantsToRussia1989to2002, "m");
 
   // on way up
@@ -336,8 +336,8 @@ function sixthAnimation(worldMap, barChart, lineChart, direction) {
 
 function seventhAnimation(worldMap, barChart, lineChart, direction) {
   lineChart.clearPreviousLineAndAxis("population");
-  lineChart.drawLine("fertility", [0, 20], { x: 160, y: 150 });
-  lineChart.drawLine("mortality", [0, 20], { x: 150, y: 76 });
+  lineChart.drawLine("fertility", [0, 20], { x: 160, y: 140 });
+  lineChart.drawLine("mortality", [0, 20], { x: 150, y: 68 });
   lineChart.drawTitle("Russia fertility & mortality per 1000 persons");
 
   if (direction === "up") {
@@ -541,7 +541,7 @@ function twelfthAnimation(worldMap, barChart, lineChart, direction) {
   }
   // lineChart.clearPreviousLineAndAxis("germanFsuToGermany");
   lineChart.drawTitle("Soviet Migration To Israel 000's");
-  lineChart.drawLine("jewishFsuToIsrael", [0, 220], { x: 130, y: 195 });
+  lineChart.drawLine("jewishFsuToIsrael", [0, 220], { x: 130, y: 185 });
 }
 // /////////////////////////////////////////////////////////
 
