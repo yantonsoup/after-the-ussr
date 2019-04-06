@@ -20,11 +20,6 @@ export default function firstPaint() {
 
   d3.selectAll(".step").style("height", fullPageHeight + "px");
 
-  let mapWH = fullPageHeight;
-  if (halfPageHeight > width) {
-    mapWH = width;
-  }
-
   d3.select(".map-graphic-container")
     .style("width", width + "px")
     .style("height", width + "px")
@@ -57,9 +52,8 @@ export default function firstPaint() {
       .style("height", halfPageHeight + "px");
 
     d3.select(".story-container").style("max-width", halfPageHeight + "px");
-
     d3.selectAll(".overlay-section").style("max-width", halfPageHeight + "px");
-
+    
     d3.selectAll(".step").style("max-width", halfPageHeight + "px");
   }
 
