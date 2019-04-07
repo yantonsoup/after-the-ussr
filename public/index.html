@@ -9,7 +9,22 @@
     <link rel="shortcut icon" type="image/png" href="/red-star.png" />
     <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/index.css" />
-    <style></style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-137777961-1"
+    ></script>
+    <script>
+      if (document.location.hostname !== "localhost") {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+
+        gtag("config", "UA-137777961-1");
+      }
+    </script>
   </head>
 
   <body>
@@ -17,14 +32,18 @@
       <div class="overlay-section about-section">
         <div class="about-buttons-container">
           <div>
-            <a href="https://github.com/yantonsoup"><img class="overlay-button" src="./svg/github.svg" /></a>
-            <a href="https://twitter.com/yantonsoup"> <img class="overlay-button" src="./svg/twitter.svg" /></a>
+            <a href="https://github.com/yantonsoup"
+              ><img class="overlay-button" src="./svg/github.svg"
+            /></a>
+            <a href="https://twitter.com/yantonsoup">
+              <img class="overlay-button" src="./svg/twitter.svg"
+            /></a>
           </div>
           <div>
-          <img
-            class="overlay-button close-overlay-button"
-            src="./svg/close_icon.svg"
-          />
+            <img
+              class="overlay-button close-overlay-button"
+              src="./svg/close_icon.svg"
+            />
           </div>
         </div>
 
