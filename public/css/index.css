@@ -170,16 +170,23 @@ ol {
 
 ol li {
   counter-increment: my-awesome-counter;
+  line-height: 18px;
+  padding: 4px 8px;
+  cursor: pointer;
 }
 
 li::before {
   color: #fcd116;
-  content: counter(my-awesome-counter);
+  content: counter(my-awesome-counter) ". ";
   letter-spacing: 1.5px;
 }
 
 li {
   cursor: pointer;
+}
+
+.sources-header {
+  margin: 1rem 0;
 }
 
 .overlay-text {
