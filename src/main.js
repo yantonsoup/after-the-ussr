@@ -18,7 +18,7 @@ async function initializeGraphics () {
   const countries = topojson.feature(worldTopo, worldTopo.objects.subunits)
   const features = countries.features;
 
-  console.warn({worldTopo})
+  // console.warn({worldTopo})
   const worldMap = new WorldMap({
     data: features,
     element: '.map-graphic-container'
@@ -32,7 +32,7 @@ async function initializeGraphics () {
   const russiaPopulationOverTime = await d3Fetch.tsv("./soviet-immigration-over-time.tsv")
   const internationalEmigrationOverTime = await d3Fetch.tsv("./international.tsv")
 
-  console.warn({russiaPopulationOverTime})
+  // console.warn({russiaPopulationOverTime})
 
   const lineChart = new LineChart({
     data: russiaPopulationOverTime,
@@ -40,7 +40,7 @@ async function initializeGraphics () {
     headerElement: '.line-graphic-header'
   })
 
-  console.warn('features', features);
+  // console.warn('features', features);
 
   setupScrollama(worldMap, barChart, lineChart);
 }

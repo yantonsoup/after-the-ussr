@@ -80,7 +80,6 @@ export default class WorldMap {
       })
       .style("display", function(datum) {
         if (datum.id === "ATA") {
-          console.warn("ATA");
           return "none";
         }
       });
@@ -152,7 +151,7 @@ export default class WorldMap {
       .append("text")
       .attr("class", `place-label ${countryId}-place-label`)
       .attr("transform", d => {
-        console.warn("transform", d);
+        // console.warn("transform", d);
         const [x, y] = this.path.centroid(d);
         return `translate(${x},${y})`;
       })
@@ -241,8 +240,8 @@ export default class WorldMap {
       destination[1] -= 2;
     }
 
-    console.warn("from", originId, "at", origin);
-    console.warn("to", destinationId, "at", destination);
+    // console.warn("from", originId, "at", origin);
+    // console.warn("to", destinationId, "at", destination);
     const arcData = [
       {
         origin,

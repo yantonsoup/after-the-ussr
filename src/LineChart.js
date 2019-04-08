@@ -153,7 +153,6 @@ export default class LineChart {
     );
 
     this.propertyLines = color.domain().map(name => {
-      console.warn("name", name);
       return {
         name,
         values: this.data

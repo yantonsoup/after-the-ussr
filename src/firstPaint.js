@@ -3,7 +3,7 @@ import d3 from "d3";
 export default function firstPaint() {
   // Setup sizes for the graphic and steps
   const fullPageHeight = Math.floor(window.innerHeight);
-  console.warn("fullPageHeight", fullPageHeight);
+  // console.warn("fullPageHeight", fullPageHeight);
   const halfPageHeight = Math.floor(window.innerHeight / 2);
   const halfPageWidth = Math.floor(window.innerWidth / 2);
 
@@ -11,7 +11,7 @@ export default function firstPaint() {
     .select(".story-container")
     .node()
     .getBoundingClientRect();
-  console.warn("storyContainerDimentions", storyContDims);
+  // console.warn("storyContainerDimentions", storyContDims);
   const width = storyContDims.width;
 
   const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
@@ -69,7 +69,7 @@ export default function firstPaint() {
         opacity: 1
       });
 
-    console.warn("about button click", window.scrollY);
+    // console.warn("about button click", window.scrollY);
     d3.selectAll(".about-section").style("top", window.scrollY + "px");
 
     //preventBodySCroll
@@ -119,7 +119,7 @@ export default function firstPaint() {
     // window.scrollTo(0, 10187)
     // var scrollheight = scrollable.property("scrollHeight");
 
-    console.warn("sction one scroller fired", scrollheight);
+    // console.warn("sction one scroller fired", scrollheight);
     
     // d3.select(".scroll")
     //   .transition()
