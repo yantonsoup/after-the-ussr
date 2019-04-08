@@ -151,7 +151,7 @@ function thirdAnimation(worldMap, barChart) {
   barChart.bindDataToBars(russianPopulationsIn198millions);
   barChart.paintHiddenBars(russianPopulationsIn198millions);
 
-  const title = "Russian populations / state 1989";
+  const title = "1989 Russian Population per State";
 
   barChart.drawTitle(title, "m");
   barChart.repaintChart(russianPopulationsIn198millions, "m");
@@ -191,7 +191,7 @@ function thirdAnimation(worldMap, barChart) {
 
 // /////////////////////////////////////////////////////////
 function fourthAnimation(worldMap, barChart) {
-  barChart.drawTitle("Net return to Russia per Country");
+  barChart.drawTitle("Net Return to Russia per Country");
   barChart.repaintChart(netMigrantsToRussia1989to2002, "m");
 
   // on way up
@@ -279,7 +279,7 @@ function fifthAnimation(worldMap, barChart, lineChart, direction) {
   barChart.bindDataToBars(percentMigrantsToRussia1989to2002);
   barChart.repaintChart(percentMigrantsToRussia1989to2002, "%");
   barChart.revealBarChart();
-  barChart.drawTitle("Percentage return to Russia", "%");
+  barChart.drawTitle("Russian Diaspora Percent Return per State", "%");
 }
 // /////////////////////////////////////////////////////////
 
@@ -329,7 +329,7 @@ function sixthAnimation(worldMap, barChart, lineChart, direction) {
   lineChart.revealIt();
 
   lineChart.drawLine("population", [130000000, 150000000], { x: 200, y: 20 });
-  lineChart.drawTitle("Russia Population");
+  lineChart.drawTitle("Russia Population 1989 to 2002");
 
   worldMap.createCountryLabel("RUS", [-15, 5], 11);
 }
@@ -338,7 +338,7 @@ function seventhAnimation(worldMap, barChart, lineChart, direction) {
   lineChart.clearPreviousLineAndAxis("population");
   lineChart.drawLine("fertility", [0, 20], { x: 160, y: 140 });
   lineChart.drawLine("mortality", [0, 20], { x: 150, y: 68 });
-  lineChart.drawTitle("Russia fertility & mortality per 1000 persons");
+  lineChart.drawTitle("Russia Fertility & Mortality per 1000 Persons");
 
   if (direction === "up") {
     barChart.hideAllElements();
