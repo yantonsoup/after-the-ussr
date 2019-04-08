@@ -220,6 +220,10 @@ li {
   /* border-bottom: 1px solid lightgoldenrodyellow; */
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .about-button {
   /* margin-left: 19px; */
 }
