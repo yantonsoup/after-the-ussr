@@ -218,6 +218,7 @@ li {
 }
 
 .about-buttons-container {
+  min-height: 70px;
   display: flex;
   justify-content: space-between;
 }
@@ -241,6 +242,7 @@ li {
   max-width: 40rem;
   text-align: center;
   margin: 0 2rem;
+  /* margin-bottom: 24px; */
 }
 
 .splash-title {
@@ -272,11 +274,15 @@ li {
 }
 
 .intro-container {
-  margin: 5rem auto;
+  margin: 2rem auto;
   opacity: 0.9;
   width: calc(100% - 64px);
   max-width: 30rem;
   background-color: lightgoldenrodyellow;
+}
+
+.intro-spacer {
+  height: 100px;
 }
 
 .name-container {
@@ -302,6 +308,10 @@ li {
 .published {
   font-size: 12px;
 }
+
+.splash-bottom {
+}
+
 
 /* *********************************** */
 /* scrollama */
