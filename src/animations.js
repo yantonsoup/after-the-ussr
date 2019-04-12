@@ -252,10 +252,6 @@ function fifthAnimation(worldMap, barChart, lineChart, direction) {
     }
   });
 
-  // sovietCountryIsoCodes.forEach(countryId => {
-  //   worldMap.animateArrowFromTo(countryId, "RUS");
-  // });
-
   worldMap.animateMapZoom({
     scale: 4,
     duration: 500,

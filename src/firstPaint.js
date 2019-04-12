@@ -1,10 +1,9 @@
 import d3 from "d3";
 
+// Setup sizes for the graphic and steps
 export default function firstPaint() {
-  // Setup sizes for the graphic and steps
   const fullPageHeight = Math.floor(window.innerHeight);
   const halfPageHeight = Math.floor(window.innerHeight / 2);
-  const halfPageWidth = Math.floor(window.innerWidth / 2);
 
   const storyContDims = d3
     .select(".story-container")
@@ -67,10 +66,8 @@ export default function firstPaint() {
         opacity: 1
       });
 
-    // console.warn("about button click", window.scrollY);
     d3.selectAll(".about-section").style("top", window.scrollY + "px");
 
-    //preventBodySCroll
     d3.select("body").style("overflow", "hidden");
   });
 
@@ -109,4 +106,4 @@ export default function firstPaint() {
     // ren enable body scroll
     d3.select("body").style("overflow", "scroll");
   });
-
+}
