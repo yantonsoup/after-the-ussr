@@ -14,7 +14,7 @@ window.onbeforeunload = function() {
 };
 
 async function initializeGraphics () {
-  const worldTopo = await d3Fetch.json("./json/110topoworld.json")
+  const worldTopo = await d3Fetch.json("./data/world-topo-110m.json")
   const countries = topojson.feature(worldTopo, worldTopo.objects.subunits)
   const features = countries.features;
 
@@ -29,8 +29,7 @@ async function initializeGraphics () {
     data: populationsIn1989millions
   })
 
-  const russiaPopulationOverTime = await d3Fetch.tsv("./soviet-immigration-over-time.tsv")
-  const internationalEmigrationOverTime = await d3Fetch.tsv("./international.tsv")
+  const russiaPopulationOverTime = await d3Fetch.tsv("./data/soviet-immigration-over-time.tsv")
 
   // console.warn({russiaPopulationOverTime})
 

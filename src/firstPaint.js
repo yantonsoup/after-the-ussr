@@ -3,7 +3,6 @@ import d3 from "d3";
 export default function firstPaint() {
   // Setup sizes for the graphic and steps
   const fullPageHeight = Math.floor(window.innerHeight);
-  // console.warn("fullPageHeight", fullPageHeight);
   const halfPageHeight = Math.floor(window.innerHeight / 2);
   const halfPageWidth = Math.floor(window.innerWidth / 2);
 
@@ -11,7 +10,7 @@ export default function firstPaint() {
     .select(".story-container")
     .node()
     .getBoundingClientRect();
-  // console.warn("storyContainerDimentions", storyContDims);
+
   const width = storyContDims.width;
 
   const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
@@ -35,9 +34,9 @@ export default function firstPaint() {
     .style("width", width + "px")
     .style("height", halfPageHeight + "px");
 
-  // // Desktop Layout
   if (window.innerWidth > 400) {
     d3.select(".map-graphic-container")
+      .style("top", quarterPageHeight + "px")
       .style("width", halfPageHeight + "px")
       .style("height", halfPageHeight + "px");
 
@@ -53,7 +52,6 @@ export default function firstPaint() {
 
     d3.select(".story-container").style("max-width", halfPageHeight + "px");
     d3.selectAll(".overlay-section").style("max-width", halfPageHeight + "px");
-    
     d3.selectAll(".step").style("max-width", halfPageHeight + "px");
   }
 
@@ -89,7 +87,6 @@ export default function firstPaint() {
 
       d3.selectAll(".sources-section").style("top", window.scrollY + "px");
 
-    //preventBodySCroll
     d3.select("body").style("overflow", "hidden");
   });
 
@@ -113,40 +110,3 @@ export default function firstPaint() {
     d3.select("body").style("overflow", "scroll");
   });
 
-  var scrollable = d3.select(".scroll");
-
-  d3.select(".section-one-scroller").on("click", function() {
-    // window.scrollTo(0, 10187)
-    // var scrollheight = scrollable.property("scrollHeight");
-
-    // console.warn("sction one scroller fired", scrollheight);
-    
-    // d3.select(".scroll")
-    //   .transition()
-    //   .duration(3000)
-    //   .tween("uniquetweenname", scrollTopTween(scrollheight));
-
-    // function scrollTopTween(scrollTop) {
-    //   return function() {
-    //     var i = d3.interpolateNumber(this.scrollTop, scrollTop);
-    //     return function(t) {
-    //       console.warn('i(t', i(t))
-    //       this.scrollTop = i(t);
-    //     };
-    //   };
-    // }
-    // window.scrollTo(0, 10182) 
-    
-  });
-
-  // click handlers
-  // d3.select("body").on('click', () => {
-
-  //   d3.select(".about-section").style({
-  //     display: "none",
-  //   })
-  //   // d3.select(".about-section").transition().duration(500).style({
-  //   //   opacity: 1,
-  //   // })
-  // })
-}

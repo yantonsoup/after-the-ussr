@@ -1,10 +1,8 @@
 import {
   netMigrantsToRussia1989to2002,
   percentMigrantsToRussia1989to2002,
-  migrationAbroadEthnicity1995to2002,
   russianPopulationsIn198millions,
   migrationAbroadDestination1995to2002,
-  populationRussia1989to2002,
   sovietLabels,
   populationsIn1989millions
 } from "./constants";
@@ -115,7 +113,6 @@ function secondAnimation(worldMap, barChart, lineChart, direction) {
   barChart.bindDataToBars(populationsIn1989millions);
   barChart.paintHiddenBars(populationsIn1989millions);
 
-  // barChart.redrawBars(populationsIn1989millions);
   barChart.drawTitle("1898 Soviet State Populations");
   barChart.repaintChart(populationsIn1989millions, "m");
 
@@ -156,7 +153,6 @@ function thirdAnimation(worldMap, barChart) {
   barChart.drawTitle(title, "m");
   barChart.repaintChart(russianPopulationsIn198millions, "m");
 
-  // barChart.revealBarChart();
 
   // hide curves and dot on way up
   worldMap.createPopulationChoropleth(
@@ -165,15 +161,6 @@ function thirdAnimation(worldMap, barChart) {
     undefined,
     'black'
   );
-
-  // worldMap.animateSectionStyles({
-  //   duration: 500,
-  //   section: ".fsu-state",
-  //   styles: {
-  //     stroke: "black",
-  //     "stroke-width": "0.1px"
-  //   }
-  // });
 
   worldMap.animateSectionStyles({
     duration: 500,
@@ -288,8 +275,6 @@ function sixthAnimation(worldMap, barChart, lineChart, direction) {
   if (direction === "up") {
     lineChart.clearPreviousLineAndAxis("fertility");
     lineChart.clearPreviousLineAndAxis("mortality");
-
-    
   }
 
   barChart.hideAllElements();
