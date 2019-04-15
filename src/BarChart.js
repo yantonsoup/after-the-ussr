@@ -1,11 +1,9 @@
 import d3 from "d3";
-import chroma from "chroma-js";
 
 import { sovietCountryIsoCodes } from "./constants";
 import { createChromaData } from "./utils";
 export default class BarChart {
   constructor(opts) {
-    // load in arguments from config object
     this.data = opts.data;
     this.sovietDataPoints = opts.data.filter(country =>
       sovietCountryIsoCodes.includes(country.id)
@@ -58,12 +56,9 @@ export default class BarChart {
       .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
   }
 
-  drawTitle(text, units) {
+  drawTitle(text) {
     this.textHeader = d3.select(".bar-graphic-header-text");
     this.textHeader.text(text);
-
-    // this.textHeaderUnits = d3.select(".bar-graphic-header-units");
-    // this.textHeaderUnits.text(units);
   }
 
   redrawYAxes() {
@@ -113,18 +108,6 @@ export default class BarChart {
     this.redrawYAxes(data);
   }
 
-  // paintPercentageChart(data) {
-  //   this.xScale = d3.scale
-  //     .linear()
-  //     .range([0, this.width])
-  //     .domain([0, 100]);
-
-  //   this.setYScale(data);
-  //   this.bindDataToBars(data);
-  //   this.redrawBars(data);
-  //   this.redrawPercentLabels(data);
-  //   this.redrawYAxes(data);
-  // }
   revealBarChart() {
     this.plot
       .transition()

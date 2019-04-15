@@ -111,7 +111,7 @@ function secondAnimation(worldMap, barChart, lineChart, direction) {
 
   barChart.clearBars();
   barChart.bindDataToBars(populationsIn1989millions);
-  barChart.paintHiddenBars(populationsIn1989millions);
+  barChart.redrawBarsFromScratch(populationsIn1989millions);
 
   barChart.drawTitle("1898 Soviet State Populations");
   barChart.repaintChart(populationsIn1989millions, "m");
@@ -147,10 +147,7 @@ function thirdAnimation(worldMap, barChart) {
   barChart.clearBars();
   barChart.bindDataToBars(russianPopulationsIn1989millions);
   barChart.paintHiddenBars(russianPopulationsIn1989millions);
-
-  const title = "1989 Russian Population per State";
-
-  barChart.drawTitle(title, "m");
+  barChart.drawTitle("1989 Russian Population per State");
   barChart.repaintChart(russianPopulationsIn1989millions, "m");
 
   // hide curves and dot on way up
@@ -455,8 +452,6 @@ function tenthAnimation(worldMap, barChart, lineChart, direction) {
 
   lineChart.drawLine("germanFsuToGermany", [0, 220], { x: 160, y: 70 });
   lineChart.drawTitle("Soviet Migration To Germany 000's");
-
-  // worldMap.highlightInternationalLines();
 }
 // /////////////////////////////////////////////////////////
 

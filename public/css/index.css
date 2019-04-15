@@ -34,7 +34,6 @@ a {
 a:visited,
 a:hover {
   text-decoration: underline;
-  /* border-bottom: 1px solid currentColor; */
 }
 
 .ussr-svg {
