@@ -1,5 +1,3 @@
-/* default / demo page */
-
 * {
   box-sizing: border-box;
 }
@@ -16,10 +14,6 @@ body {
   min-height: 1280px;
   font-weight: 300;
   background-color: rgb(40, 45, 52);
-  /* background-color: #951C13; */
-  /* -moz-box-shadow:    inset 0 0 10px #000000;
-  -webkit-box-shadow: inset 0 0 10px #000000;
-  box-shadow:         inset 0 0 10px #000000; */
 }
 
 p,
@@ -84,12 +78,11 @@ a:hover {
   top: 0;
 }
 
-
 .star-header-link {
   color: lightgoldenrodyellow;
   cursor: pointer;
   margin-top: auto;
-  background-color: #951C13;
+  background-color: #951c13;
   padding: 4px 8px 6px;
   border-radius: 3px;
   border-bottom: 1px solid transparent;
@@ -148,7 +141,7 @@ a:hover {
   flex-direction: column;
   max-width: 40rem;
   margin: 0 auto;
-  background-color: #951C13;
+  background-color: #951c13;
   z-index: 100;
   padding: 2rem;
   overflow: scroll;
@@ -214,8 +207,6 @@ li {
   vertical-align: middle;
 }
 
-
-
 .close-overlay-button:hover {
   /* border-bottom: 1px solid lightgoldenrodyellow; */
 }
@@ -238,7 +229,7 @@ li {
 /* footer  */
 /* *********************************** */
 .outro {
-  background-color: #951C13; 
+  background-color: #951c13;
   height: 50vh;
   padding: 2rem;
   color: lightgoldenrodyellow;
@@ -323,7 +314,6 @@ li {
 .splash-bottom {
 }
 
-
 /* *********************************** */
 /* scrollama */
 /* *********************************** */
@@ -370,10 +360,8 @@ li {
 }
 
 .last-step {
-  background-color: #3F3F3F
+  background-color: #3f3f3f;
 }
-
-
 
 /* *********************************** */
 /* map graphic */
@@ -457,13 +445,13 @@ li {
   color: lightgoldenrodyellow;
   font: 16px sans-serif;
 }
- 
+
 .axis path {
   stroke: #000;
   stroke-width: 2.5px;
   shape-rendering: crispEdges;
 }
- .axis line {
+.axis line {
   stroke: #000;
   stroke-width: 1.6px;
 }

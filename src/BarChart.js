@@ -58,8 +58,6 @@ export default class BarChart {
       .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
   }
 
-
-
   drawTitle(text, units) {
     this.textHeader = d3.select(".bar-graphic-header-text");
     this.textHeader.text(text);
@@ -77,7 +75,6 @@ export default class BarChart {
 
     this.plot.select(".y-axis").call(yAxisStuff);
   }
-
 
   setYScale(data) {
     this.yScale = d3.scale
@@ -141,39 +138,39 @@ export default class BarChart {
       .style("color", "black");
   }
 
-    paintHiddenBars(data) {
-      const colorRangeOverride = ['white', 'orange'];
+  paintHiddenBars(data) {
+    const colorRangeOverride = ["white", "orange"];
 
-      const chromaDataCodes = createChromaData(data, colorRangeOverride);
+    const chromaDataCodes = createChromaData(data, colorRangeOverride);
 
-      this.bars
-        .append("rect")
-        .attr("class", "bar")
-        .attr("y", d => {
-          return this.yScale(d.name);
-        })
-        .attr("height", () => this.yScale.rangeBand())
-        .attr("fill", (d, i) => chromaDataCodes[d.name]);
-    }
+    this.bars
+      .append("rect")
+      .attr("class", "bar")
+      .attr("y", d => {
+        return this.yScale(d.name);
+      })
+      .attr("height", () => this.yScale.rangeBand())
+      .attr("fill", (d, i) => chromaDataCodes[d.name]);
+  }
 
-    redrawBars(data) {
-      const chromaDataCodes = createChromaData(data);
+  redrawBars(data) {
+    const chromaDataCodes = createChromaData(data);
 
-      d3.selectAll("rect")
-        .data(data)
-        .transition()
-        .delay(function(d, i) {
-          return i * 40;
-        })
-        .attr("y", d => {
-          return this.yScale(d.name);
-        })
-        .attr("width", d => {
-          return this.xScale(d.population);
-        })
-        .attr("height", () => this.yScale.rangeBand())
-        .attr("fill", (d, i) => chromaDataCodes[d.name]);
-    }
+    d3.selectAll("rect")
+      .data(data)
+      .transition()
+      .delay(function(d, i) {
+        return i * 40;
+      })
+      .attr("y", d => {
+        return this.yScale(d.name);
+      })
+      .attr("width", d => {
+        return this.xScale(d.population);
+      })
+      .attr("height", () => this.yScale.rangeBand())
+      .attr("fill", (d, i) => chromaDataCodes[d.name]);
+  }
 
   setXScale(data) {
     this.xScale = d3.scale
@@ -188,14 +185,11 @@ export default class BarChart {
   }
 
   clearBars() {
-    this.plot
-      .selectAll("rect")
-      .remove()
+    this.plot.selectAll("rect").remove();
   }
 
-
   redrawBarsFromScratch(data) {
-    this.clearBars()
+    this.clearBars();
 
     this.bindDataToBars(data);
 
@@ -206,14 +200,18 @@ export default class BarChart {
 
     this.yScale = d3.scale
       .ordinal()
-      .rangeRoundBands([this.height/4, 0], 0.1)
+      .rangeRoundBands([this.height / 4, 0], 0.1)
       .domain(
         data.map(function(d) {
           return d.name;
         })
       );
 
-    const chromaDataCodes = createChromaData(data, ['#ffffb2', '#a1dab4', '#41b6c4']);
+    const chromaDataCodes = createChromaData(data, [
+      "#ffffb2",
+      "#a1dab4",
+      "#41b6c4"
+    ]);
 
     this.bars
       .append("rect")
@@ -226,10 +224,10 @@ export default class BarChart {
         return this.xScale(d.population);
       })
       .attr("fill", (d, i) => chromaDataCodes[d.name]);
-    
+
     this.redrawYAxes(data);
 
-    this.redrawLabels(data, '%');
+    this.redrawLabels(data, "%");
   }
 
   bindDataToBars(data) {
@@ -267,28 +265,13 @@ export default class BarChart {
 
   hideAllElements() {
     this.plot
-    .transition()
-    .delay(500)
-    .style("opacity", "0");
+      .transition()
+      .delay(500)
+      .style("opacity", "0");
 
     d3.select(".bar-graphic-header")
       .transition()
       .delay(500)
-      .style("opacity", "0")
+      .style("opacity", "0");
   }
-
-
-}
-
-function parseMillionsPopulationText(datum) {
-  const populationText = datum.population;
-
-  return `${populationText}`;
-}
-
-function parsePopulationText(datum) {
-  const { population, name } = datum;
-  const populationText = (population / 1000000).toFixed(2);
-
-  return populationText;
 }
