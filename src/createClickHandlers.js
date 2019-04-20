@@ -1,3 +1,4 @@
+import d3 from "d3";
   // click handlers
 export default function createClickHandlers() {
   d3.selectAll(".about-button").on("click", () => {
