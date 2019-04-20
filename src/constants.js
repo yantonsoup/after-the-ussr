@@ -109,62 +109,8 @@ export const percentMigrantsToRussia1989to2002 = [
   { name: "UZB", population: 30 }
 ];
 
-// Step 6
-// in thousands
-export const populationRussia1989to2002 = [
-  { name: "1989", population: 147386000 },
-  { name: "1990", population: 148040700 },
-  { name: "1991", population: 148689000 },
-  { name: "1992", population: 148704300	 },
-  { name: "1993", population: 148673000 },
-  { name: "1994", population: 148366000	 },
-  { name: "1995", population: 148249000	 },
-  { name: "1996", population: 147739000 },
-  { name: "1997", population: 147307000 },
-  { name: "1998", population: 146909000 },
-  { name: "1999", population: 146200000	 },
-  { name: "2000", population: 146001200 },
-  { name: "2001", population: 145470000 },
-  { name: "2002", population: 145166731 }
-];
-
-// Step 9
-export const migrationAbroadEthnicity1995to2002 = [
-  { name: 'a', population: 0},
-  { name: 'b', population: 0},
-  { name: 'c', population: 0},
-  { name: 'd', population: 0},
-  { name: 'e', population: 0},
-  { name: 'f', population: 0},
-  { name: 'g', population: 0},
-  { name: 'h', population: 0},
-  { name: 'i', population: 0},
-  { name: 'j', population: 0},
-  { name: 'k', population: 0},
-  { name: "Germans", population: 43 },
-  { name: "Russians", population: 38 },
-  { name: "Jews", population: 10 },
-];
-
 export const migrationAbroadDestination1995to2002 = [
   { name: "DEU", population: 59 },
   { name: "ISR", population: 25 },
   { name: "USA", population: 11 },
-];
-
-export const populationsIn1991 = [
-  { name: "ARM", population: 3500000 },
-  { name: "AZE", population: 7271000 },
-  { name: "BLR", population: 10190000 },
-  { name: "EST", population: 1568000 },
-  { name: "GEO", population: 6653000 },
-  { name: "KAZ", population: 16450000 },
-  { name: "KGZ", population: 4464000 },
-  { name: "LVA", population: 2658000 },
-  { name: "LTU", population: 3700000 },
-  { name: "MDA", population: 3700000 },
-  { name: "TJK", population: 5400000 },
-  { name: "TKM", population: 3772000 },
-  { name: "UKR", population: 52000000 },
-  { name: "UZB", population: 20950000 }
 ];
