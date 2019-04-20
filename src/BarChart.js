@@ -60,12 +60,9 @@ export default class BarChart {
 
 
 
-  drawTitle(text, units) {
+  drawTitle(text) {
     this.textHeader = d3.select(".bar-graphic-header-text");
     this.textHeader.text(text);
-
-    // this.textHeaderUnits = d3.select(".bar-graphic-header-units");
-    // this.textHeaderUnits.text(units);
   }
 
   redrawYAxes() {

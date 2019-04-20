@@ -1,6 +1,6 @@
 import * as d3Fetch from 'd3-fetch'
 import setupScrollama from './setupScrollama.js';
-import firstPaint from './firstPaint';
+import applyContainerStyles from './applyContainerStyles';
 import createClickHandlers from './createClickHandlers';
 import topojson from 'topojson';
 import WorldMap from './WorldMap.js'
@@ -19,7 +19,6 @@ async function initializeGraphics () {
   const countries = topojson.feature(worldTopo, worldTopo.objects.subunits)
   const features = countries.features;
 
-  // console.warn({worldTopo})
   const worldMap = new WorldMap({
     data: features,
     element: '.map-graphic-container'
@@ -32,20 +31,16 @@ async function initializeGraphics () {
 
   const russiaPopulationOverTime = await d3Fetch.tsv("./data/soviet-immigration-over-time.tsv")
 
-  // console.warn({russiaPopulationOverTime})
-
   const lineChart = new LineChart({
     data: russiaPopulationOverTime,
     element: '.line-graphic',
     headerElement: '.line-graphic-header'
   })
 
-  // console.warn('features', features);
-
   setupScrollama(worldMap, barChart, lineChart);
 }
 
 
-firstPaint();
+applyContainerStyles();
 createClickHandlers();
 initializeGraphics();

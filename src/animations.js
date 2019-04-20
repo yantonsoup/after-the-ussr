@@ -95,7 +95,7 @@ function firstAnimation(worldMap, barChart, lineChart, direction) {
 
 // /////////////////////////////////////////////////////////
 function secondAnimation(worldMap, barChart, lineChart, direction) {
-  if (direction === "up"){
+  if (direction === "up") {
     worldMap.createPopulationChoropleth(
       populationsIn1989millions,
       ".soviet-country"
@@ -148,18 +148,15 @@ function thirdAnimation(worldMap, barChart) {
   barChart.bindDataToBars(russianPopulationsIn198millions);
   barChart.paintHiddenBars(russianPopulationsIn198millions);
 
-  const title = "1989 Russian Population per State";
-
-  barChart.drawTitle(title, "m");
+  barChart.drawTitle("1989 Russian Population per State");
   barChart.repaintChart(russianPopulationsIn198millions, "m");
-
 
   // hide curves and dot on way up
   worldMap.createPopulationChoropleth(
     russianPopulationsIn198millions,
     ".fsu-state",
     undefined,
-    'black'
+    "black"
   );
 
   worldMap.animateSectionStyles({
@@ -189,12 +186,11 @@ function fourthAnimation(worldMap, barChart) {
     translateY: -Math.floor(worldMap.height * 0.22)
   });
 
-
   worldMap.createPopulationChoropleth(
     netMigrantsToRussia1989to2002,
     ".fsu-state",
     undefined,
-    'black'
+    "black"
   );
 
   sovietCountryIsoCodes.forEach(country => {
@@ -209,12 +205,10 @@ function fifthAnimation(worldMap, barChart, lineChart, direction) {
     percentMigrantsToRussia1989to2002,
     ".fsu-state",
     undefined,
-    'black'
+    "black"
   );
 
-
-  if (direction === 'up') {
-    
+  if (direction === "up") {
     sovietCountryIsoCodes.forEach(country => {
       worldMap.animateArrowFromTo(country, "RUS");
     });
@@ -234,7 +228,6 @@ function fifthAnimation(worldMap, barChart, lineChart, direction) {
       }
     });
   }
-
 
   lineChart.hideIt();
   worldMap.removeLabels();
@@ -262,7 +255,7 @@ function fifthAnimation(worldMap, barChart, lineChart, direction) {
   barChart.bindDataToBars(percentMigrantsToRussia1989to2002);
   barChart.repaintChart(percentMigrantsToRussia1989to2002, "%");
   barChart.revealBarChart();
-  barChart.drawTitle("Russian Diaspora Percent Return per State", "%");
+  barChart.drawTitle("Russian Diaspora Percent Return per State");
 }
 // /////////////////////////////////////////////////////////
 
@@ -361,7 +354,6 @@ function eightAnimation(worldMap, barChart, lineChart, direction) {
     translateY: 0
   });
 
-  
   worldMap.animateSectionStyles({
     duration: 500,
     section: ".soviet-country",
@@ -377,13 +369,10 @@ function eightAnimation(worldMap, barChart, lineChart, direction) {
     migrationAbroadDestination1995to2002,
     ".intl-country",
     ["#ffffb2", "#a1dab4", "#41b6c4"],
-    'none'
+    "none"
   );
 
-  barChart.drawTitle(
-    "Top Destinations For Soviet Immigrants '95 - '02",
-    "1995-2002"
-  );
+  barChart.drawTitle("Top Destinations For Soviet Immigrants '95 - '02");
   barChart.redrawBarsFromScratch(migrationAbroadDestination1995to2002);
   barChart.revealBarChart();
 }
@@ -391,8 +380,6 @@ function eightAnimation(worldMap, barChart, lineChart, direction) {
 
 // ////////////////////////////////x/////////////////////////
 function ninthAnimation(worldMap, barChart, lineChart, direction) {
-
-
   if (direction === "up") {
     lineChart.hideIt();
     lineChart.clearPreviousLineAndAxis("germanFsuToGermany");
@@ -411,7 +398,7 @@ function ninthAnimation(worldMap, barChart, lineChart, direction) {
       styles: {
         stroke: "#d0d0d0",
         "stroke-width": "1px",
-        "fill": "#d0d0d0"
+        fill: "#d0d0d0"
       }
     });
   }
@@ -462,7 +449,7 @@ function tenthAnimation(worldMap, barChart, lineChart, direction) {
   lineChart.revealIt();
 
   lineChart.drawLine("germanFsuToGermany", [0, 220], { x: 160, y: 70 });
-  lineChart.drawTitle("Soviet Migration To Germany 000's");
+  lineChart.drawTitle("Soviet Migration To Germany (thou)");
 
   // worldMap.highlightInternationalLines();
 }
@@ -521,7 +508,7 @@ function twelfthAnimation(worldMap, barChart, lineChart, direction) {
     });
   }
   // lineChart.clearPreviousLineAndAxis("germanFsuToGermany");
-  lineChart.drawTitle("Soviet Migration To Israel 000's");
+  lineChart.drawTitle("Soviet Migration To Israel (thou)");
   lineChart.drawLine("jewishFsuToIsrael", [0, 220], { x: 130, y: 185 });
 }
 // /////////////////////////////////////////////////////////
@@ -565,7 +552,7 @@ function fourteenthAnimation(worldMap, barChart, lineChart, direction) {
   // lineChart.clearPreviousLineAndAxis("jewishFsuToIsrael");
   // worldMap.clearArrows();
 
-  lineChart.drawTitle("Soviet Migration To America 000's");
+  lineChart.drawTitle("Soviet Migration To USA (thou)");
   lineChart.drawLine("americanFsuToUsa", [0, 220], { x: 130, y: 240 });
 
   worldMap.animateMapZoom({
@@ -606,7 +593,7 @@ function sixteeteenthAnimation(worldMap, barChart, lineChart, direction) {
       migrationAbroadDestination1995to2002,
       ".intl-country",
       ["#ffffb2", "#a1dab4", "#41b6c4"],
-      'none'
+      "none"
     );
   }
 }

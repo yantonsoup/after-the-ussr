@@ -110,7 +110,6 @@ a:hover {
 
 .story-container {
   background-color: #a62116;
-  max-width: 40rem;
   margin: 0 auto;
 }
 
@@ -225,6 +224,7 @@ li {
 }
 
 .about-button {
+  cursor: pointer;
   /* margin-left: 19px; */
 }
 
@@ -253,6 +253,7 @@ li {
   max-width: 40rem;
   text-align: center;
   margin: 0 2rem;
+  height: 100vh;
   /* margin-bottom: 24px; */
 }
 
@@ -476,6 +477,11 @@ li {
 /* *********************************** */
 /* desktop swaps */
 /* *********************************** */
+/* @media screen and (min-width: 400px) { */
+  .story-container,.overlay-section,.step {
+    max-width: 50vh;
+  }
+/* } */
 @media screen and (min-width: 1024px) {
   /* .step-text {
     font-size: 18px;
@@ -488,14 +494,19 @@ li {
     margin-left: 400px;
     color: lightgoldenrodyellow;
   } */
-  .intro-container {
-    background-color: transparent;
+  .scroll-text {
+    margin-left: 50vh;
     color: lightgoldenrodyellow;
   }
-  .step-text {
+  .intro-container {
+    margin-left: 50vh;
+    color: lightgoldenrodyellow;
+  }
+  .step-text,.intro-container {
     background-color: transparent;
     font-size: 18px;
-
+    /* margin-left: 50vh; */
+    color: lightgoldenrodyellow;
     /* margin: 0 auto;
     padding: 1rem;
     vertical-align: middle;
