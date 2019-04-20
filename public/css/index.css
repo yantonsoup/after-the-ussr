@@ -405,7 +405,7 @@ li {
 }
 
 .bar-graphic-header {
-  margin: 0 20px;
+  /* margin: 0 20px; */
   font-size: 20px;
   font-weight: 500;
   /* border-bottom: 2px solid lightgoldenrodyellow; */
@@ -424,7 +424,7 @@ li {
 }
 
 /* *********************************** */
-/* bar graphic */
+/* line graphic */
 /* *********************************** */
 .line-graphic-container {
   position: -webkit-sticky;
@@ -436,7 +436,6 @@ li {
 }
 
 .line-graphic-header {
-  margin: 0 20px;
   font-size: 20px;
   font-weight: 500;
   /* border-bottom: 2px solid lightgoldenrodyellow; */

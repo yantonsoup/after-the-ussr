@@ -14,6 +14,10 @@ window.onbeforeunload = function() {
   window.scrollTo(0, 0);
 };
 
+applyContainerStyles();
+createClickHandlers();
+initializeGraphics();
+
 async function initializeGraphics () {
   const worldTopo = await d3Fetch.json("./data/world-topo-110m.json")
   const countries = topojson.feature(worldTopo, worldTopo.objects.subunits)
@@ -39,8 +43,3 @@ async function initializeGraphics () {
 
   setupScrollama(worldMap, barChart, lineChart);
 }
-
-
-applyContainerStyles();
-createClickHandlers();
-initializeGraphics();
