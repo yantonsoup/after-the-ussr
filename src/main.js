@@ -1,6 +1,7 @@
 import * as d3Fetch from 'd3-fetch'
 import setupScrollama from './setupScrollama.js';
 import firstPaint from './firstPaint';
+import createClickHandlers from './createClickHandlers';
 import topojson from 'topojson';
 import WorldMap from './WorldMap.js'
 import BarChart from './BarChart.js'
@@ -46,5 +47,5 @@ async function initializeGraphics () {
 
 
 firstPaint();
-
+createClickHandlers();
 initializeGraphics();
