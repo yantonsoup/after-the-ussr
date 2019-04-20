@@ -476,18 +476,33 @@ li {
 /* *********************************** */
 /* desktop swaps */
 /* *********************************** */
-/* @media screen and (min-width: 768px) {
-  .step-text {
+@media screen and (min-width: 1024px) {
+  /* .step-text {
     font-size: 18px;
   }
   .story-container {
     max-width: 800px;
     margin: 0 auto;
+  } */
+  /* .scroll-text {
+    margin-left: 400px;
+    color: lightgoldenrodyellow;
+  } */
+  .intro-container {
+    background-color: transparent;
+    color: lightgoldenrodyellow;
   }
-  .scroll-text {
-    margin: 50% auto 0;
+  .step-text {
+    background-color: transparent;
+    font-size: 18px;
+
+    /* margin: 0 auto;
+    padding: 1rem;
+    vertical-align: middle;
+    text-align: left;
+    font-weight: 400; */
   }
-  .splash-container {
+  /* .splash-container {
     margin: 0 auto;
-  }
-} */
+  } */
+}

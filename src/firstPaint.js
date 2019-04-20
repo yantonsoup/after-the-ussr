@@ -54,6 +54,14 @@ export default function firstPaint() {
     d3.selectAll(".step").style("max-width", halfPageHeight + "px");
   }
 
+  if (window.innerWidth >= 1024) {
+    d3.selectAll(".scroll-text,.intro-container ")
+      .style({
+        "margin-left": halfPageHeight + "px",
+        "color": "lightgoldenrodyellow",
+      })
+  }
+
   // click handlers
   d3.selectAll(".about-button").on("click", () => {
     d3.select(".about-section").style({
