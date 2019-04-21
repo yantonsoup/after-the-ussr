@@ -329,11 +329,13 @@ function seventhAnimation(worldMap, barChart, lineChart, direction) {
     });
 
     worldMap.animateSectionStyles({
-      duration: 1000,
+      duration: 500,
       section: "#RUS",
       styles: {
         fill: "rgb(255, 165, 0)",
-        opacity: "1"
+        opacity: "1",
+        stroke: "rgb(255, 165, 0)",
+        "stroke-opacity": 0.5
       }
     });
     worldMap.createCountryLabel("RUS", [-8, 8], 12);
@@ -401,6 +403,14 @@ function ninthAnimation(worldMap, barChart, lineChart, direction) {
         fill: "#d0d0d0"
       }
     });
+
+    worldMap.animateSectionStyles({
+      duration: 500,
+      section: ".non-soviet-country",
+      styles: {
+        "fill-opacity": "1"
+      }
+    });
   }
 }
 // /////////////////////////////////////////////////////////
@@ -410,12 +420,22 @@ function tenthAnimation(worldMap, barChart, lineChart, direction) {
   if (direction === "down") {
     worldMap.animateSectionStyles({
       duration: 500,
-      section: ".non-soviet-country,.soviet-country",
+      section: ".soviet-country",
       styles: {
         "stroke-width": "0.15px",
-        stroke: "none"
+        stroke: "#d0d0d0"
       }
     });
+
+    worldMap.animateSectionStyles({
+      duration: 500,
+      section: ".non-soviet-country",
+      styles: {
+        "stroke-width": "0.15px",
+        "fill-opacity": "0.4"
+      }
+    });
+
 
     worldMap.animateMapZoom({
       scale: 7,
@@ -480,6 +500,14 @@ function eleventhAnimation(worldMap, barChart, lineChart, direction) {
       translateX: -Math.floor(worldMap.width * 0.4),
       translateY: -Math.floor(worldMap.height * 0.27)
     });
+
+    worldMap.animateSectionStyles({
+      duration: 500,
+      section: ".non-soviet-country",
+      styles: {
+        "stroke-width": "0.15px",
+      }
+    });d
   }
 }
 // /////////////////////////////////////////////////////////
@@ -505,6 +533,14 @@ function twelfthAnimation(worldMap, barChart, lineChart, direction) {
       duration: 750,
       translateX: -Math.floor(worldMap.width * 0.51),
       translateY: -Math.floor(worldMap.height * 0.382)
+    });
+
+    worldMap.animateSectionStyles({
+      duration: 500,
+      section: ".non-soviet-country",
+      styles: {
+        "stroke-width": "0.05px",
+      }
     });
   }
   // lineChart.clearPreviousLineAndAxis("germanFsuToGermany");

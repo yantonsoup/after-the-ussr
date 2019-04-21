@@ -176,7 +176,7 @@ ol li {
 
 li::before {
   color: #fcd116;
-  content: counter(my-awesome-counter) ". ";
+  content: "[" counter(my-awesome-counter) "] ";
   letter-spacing: 1.5px;
 }
 
@@ -223,7 +223,7 @@ li {
   margin-left: auto;
 }
 
-.about-button {
+.about-button, .sources-button {
   cursor: pointer;
   /* margin-left: 19px; */
 }
