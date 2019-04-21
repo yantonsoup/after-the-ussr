@@ -436,6 +436,7 @@ li {
 }
 
 .line-graphic-header {
+  padding: 10px 0;
   font-size: 20px;
   font-weight: 500;
   /* border-bottom: 2px solid lightgoldenrodyellow; */
