@@ -329,6 +329,7 @@ li {
 /* scrollama */
 /* *********************************** */
 .scroll {
+  z-index: 1010;
   position: relative;
   border-top: 2px solid #a62116;
   border-bottom: 2px solid #a62116;
@@ -337,6 +338,7 @@ li {
 .scroll-text {
   position: relative;
   margin: 135% auto 0;
+  z-index: 1000;
   max-width: 30rem;
   width: calc(100% - 64px);
 }
@@ -353,8 +355,6 @@ li {
   background-color: lightgoldenrodyellow;
   margin: 0 auto;
   padding: 1rem;
-  position: relative;
-  z-index: 1000;
   vertical-align: middle;
   font-size: 1rem;
   text-align: left;
