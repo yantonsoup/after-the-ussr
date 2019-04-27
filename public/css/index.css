@@ -344,7 +344,7 @@ li {
 .step {
   position: relative;
   z-index: 1000;
-  opacity: 0.9;
+  opacity: 1;
   margin: 0 auto;
   text-align: center;
 }
@@ -353,6 +353,8 @@ li {
   background-color: lightgoldenrodyellow;
   margin: 0 auto;
   padding: 1rem;
+  position: relative;
+  z-index: 1000;
   vertical-align: middle;
   font-size: 1rem;
   text-align: left;

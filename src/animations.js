@@ -45,7 +45,7 @@ function zeroAnimation(worldMap, barChart, lineChart, direction) {
 
   worldMap.animateMapZoom({
     scale: 1,
-    duration: 750,
+    duration: 500,
     translateX: 0,
     translateY: 0
   });
@@ -507,7 +507,7 @@ function eleventhAnimation(worldMap, barChart, lineChart, direction) {
       styles: {
         "stroke-width": "0.15px",
       }
-    });d
+    });
   }
 }
 // /////////////////////////////////////////////////////////
