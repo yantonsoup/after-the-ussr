@@ -1,3 +1,1 @@
-# After The Ussr 
-
-** in development **
+# Voila! www.aftertheussr.com
