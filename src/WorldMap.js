@@ -207,7 +207,7 @@ export default class WorldMap {
     arrowColor = "#000",
     arrowWidth = 0.3,
     arrowHeadSize = 3,
-    curveoffset = 15,
+    curveoffset = 15
   ) {
     const originDataPoint = this.data.find(country => country.id === originId);
     const destinationDataPoint = this.data.find(
@@ -355,7 +355,7 @@ export default class WorldMap {
     var angl = Math.atan2(pe.y - ps.y, pe.x - ps.x) * (180 / Math.PI) - 90;
     var rot_tran = "rotate(" + angl + ")";
     return function(d, i, a) {
-      console.log(d);
+      // console.log(d);
 
       return function(t) {
         var p = path.getPointAtLength(t * l);

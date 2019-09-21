@@ -1,18 +1,17 @@
-import 'intersection-observer';
-import scrollama from 'scrollama';
+import "intersection-observer";
+import scrollama from "scrollama";
 import animations from "./animations";
 
 export default function setupScrollama(worldMap, barChart, lineChart) {
   function handleStepEnter(response) {
     // console.warn('response', response)
-    console.warn('SCROLLAMA animation[index]:: ', response.index)
+    // console.warn('SCROLLAMA animation[index]:: ', response.index)
 
     const animationIndex = response.index;
     const animationHandler = animations[animationIndex];
 
-
     const direction = response.direction;
-    animationHandler(worldMap, barChart, lineChart, direction)
+    animationHandler(worldMap, barChart, lineChart, direction);
   }
 
   scrollama()
@@ -25,14 +24,13 @@ export default function setupScrollama(worldMap, barChart, lineChart) {
       offset: 0.9
     })
     .onStepEnter(handleStepEnter)
-    .onContainerEnter((response) => {
-      console.warn('onContainerEnter', response)
-
+    .onContainerEnter(response => {
+      // console.warn("onContainerEnter", response);
       // animations[0](worldMap, barChart, lineChart, response.direction)
     })
-    .onContainerExit((response) => {
-      console.warn('onContainerExit', response)
-    
+    .onContainerExit(response => {
+      // console.warn("onContainerExit", response);
+
       worldMap.animateSectionStyles({
         duration: 500,
         section: ".non-soviet-country,.intl-country",
@@ -49,8 +47,8 @@ export default function setupScrollama(worldMap, barChart, lineChart) {
         styles: {
           opacity: "1",
           fill: "#d0d0d0",
-          stroke: "#d0d0d0",
+          stroke: "#d0d0d0"
         }
       });
-    })
+    });
 }
