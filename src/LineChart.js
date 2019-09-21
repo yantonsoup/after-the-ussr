@@ -133,7 +133,7 @@ export default class LineChart {
     const color = d3.scale.category10();
     const parseDate = d3.time.format("%Y").parse;
 
-    console.warn("this.data", this.data);
+    // console.warn("this.data", this.data);
 
     this.data.forEach(function(d) {
       d.date = parseDate(d.date);
@@ -159,7 +159,7 @@ export default class LineChart {
       };
     });
 
-    console.warn("propertyLines", this.propertyLines);
+    // console.warn("propertyLines", this.propertyLines);
 
     // set scales according to data
     this.xScale.domain(
@@ -186,10 +186,10 @@ export default class LineChart {
   clearPreviousLineAndAxis(property) {
     const yAx = this.svg.select(".y-axis");
     const propertylines = this.svg.selectAll(".property-line");
-    const lineLabels = this.svg.selectAll(".line-label");
-    console.warn({ yAx });
-    console.warn({ propertylines });
-    console.warn({ lineLabels });
+    // const lineLabels = this.svg.selectAll(".line-label");
+    // console.warn({ yAx });
+    // console.warn({ propertylines });
+    // console.warn({ lineLabels });
 
     this.svg.select(".y-axis").remove();
     this.svg.selectAll(`.${property}-line`).remove();
@@ -259,8 +259,8 @@ export default class LineChart {
   }
 
   labelLine(property, labelShift = { x: 160, y: 70 }) {
-    console.warn("line property:", property);
-    console.warn("line labelShift", labelShift);
+    // console.warn("line property:", property);
+    // console.warn("line labelShift", labelShift);
     const { x, y } = labelShift;
     // console.warn("property", property);
     // console.warn("prohis.data[0][property]", this.data[0][property]);
@@ -273,8 +273,6 @@ export default class LineChart {
 
     // console.warn("translateX", translateX);
     // console.warn("translateY", translateY);
-
-    
 
     const { fill, label } = getLineStylesFromProperty(property);
 
@@ -294,42 +292,42 @@ function getLineStylesFromProperty(property) {
     case "population":
       return {
         fill: "orange",
-        label: 'population'
+        label: "population"
       };
     case "fertility":
       return {
         fill: "white",
-        label: 'fertility'
+        label: "fertility"
       };
     case "mortality":
       return {
         fill: "black",
-        label: 'mortality'
+        label: "mortality"
       };
     case "germanFsuToGermany":
       return {
         fill: "#41b6c4",
-        label: 'To Germany'
+        label: "To Germany"
       };
     case "jewishFsuToGermany":
       return {
         fill: "#41b6c4",
-        label: 'To Germany'
+        label: "To Germany"
       };
     case "jewishFsuToIsrael":
       return {
         fill: "#a1dab4",
-        label: 'To Israel'
+        label: "To Israel"
       };
     case "jewishFsuToUsa":
       return {
         fill: "#ffffb2",
-        label: 'to usa'
+        label: "to usa"
       };
     case "americanFsuToUsa":
       return {
         fill: "#ffffb2",
-        label: 'To USA'
+        label: "To USA"
       };
     default:
       return {
