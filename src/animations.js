@@ -1,3 +1,4 @@
+import isDesktop from "./utils/isDesktop";
 import {
   netMigrantsToRussia1989to2002,
   percentMigrantsToRussia1989to2002,
@@ -56,10 +57,12 @@ function zeroAnimation(worldMap, barChart, lineChart, direction) {
 function firstAnimation(worldMap, barChart, lineChart, direction) {
   const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
 
-  worldMap.moveMapContainer({
-    duration: 750,
-    top: quarterPageHeight
-  });
+  if (!isDesktop()) {
+    worldMap.moveMapContainer({
+      duration: 750,
+      top: quarterPageHeight
+    });
+  }
 
   worldMap.animateMapZoom({
     scale: 4,
@@ -102,10 +105,12 @@ function secondAnimation(worldMap, barChart, lineChart, direction) {
     );
   }
 
-  worldMap.moveMapContainer({
-    duration: 500,
-    top: 0
-  });
+  if (!isDesktop()) {
+    worldMap.moveMapContainer({
+      duration: 500,
+      top: 0
+    });
+  }
 
   barChart.revealBarChart();
 
@@ -436,7 +441,6 @@ function tenthAnimation(worldMap, barChart, lineChart, direction) {
       }
     });
 
-
     worldMap.animateMapZoom({
       scale: 7,
       duration: 750,
@@ -505,7 +509,7 @@ function eleventhAnimation(worldMap, barChart, lineChart, direction) {
       duration: 500,
       section: ".non-soviet-country",
       styles: {
-        "stroke-width": "0.15px",
+        "stroke-width": "0.15px"
       }
     });
   }
@@ -539,7 +543,7 @@ function twelfthAnimation(worldMap, barChart, lineChart, direction) {
       duration: 500,
       section: ".non-soviet-country",
       styles: {
-        "stroke-width": "0.05px",
+        "stroke-width": "0.05px"
       }
     });
   }

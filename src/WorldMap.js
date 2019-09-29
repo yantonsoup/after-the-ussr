@@ -1,5 +1,5 @@
 import d3 from "d3";
-import { createChromaData } from "./utils";
+import createChromaColorSet from "./utils/createChromaColorSet";
 
 import { sovietCountryIsoCodes } from "./constants";
 
@@ -77,12 +77,12 @@ export default class WorldMap {
           return "soviet-country fsu-state country";
         }
         return "non-soviet-country country";
-      })
-      .style("display", function(datum) {
-        if (datum.id === "ATA") {
-          return "none";
-        }
       });
+    // .style("display", function(datum) {
+    //   if (datum.id === "ATA") {
+    //     return "none";
+    //   }
+    // });
 
     this.animateSectionStyles({
       duration: 500,
@@ -169,7 +169,7 @@ export default class WorldMap {
     colorRangeOverride,
     strokeOverride
   ) {
-    const chromaDataCodes = createChromaData(
+    const chromaDataCodes = createChromaColorSet(
       populationData,
       colorRangeOverride
     );

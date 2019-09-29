@@ -1,44 +1,52 @@
 import d3 from "d3";
+import isDesktop from "./utils/isDesktop";
 
-const toPixel = num => `${num}px`
+const toPixel = num => `${num}px`;
 
 // Setup sizes for the graphic and steps
 export default function applyContainerStyles() {
   const fullPageHeight = Math.floor(window.innerHeight);
   const halfPageHeight = Math.floor(window.innerHeight / 2);
+  const halfPageWidth = Math.floor(window.innerWidth / 2);
   const quarterPageHeight = Math.floor(window.innerHeight / 4);
 
   const storyContainer = d3
     .select(".story-container")
     .node()
     .getBoundingClientRect();
+  console.warn({ storyContainer });
 
   const containerWidth = storyContainer.width;
 
   const mapStyles = {
     top: toPixel(quarterPageHeight),
     width: toPixel(containerWidth),
-    height: toPixel(containerWidth),
-  }
+    height: toPixel(containerWidth)
+  };
 
   const chartStyles = {
     top: toPixel(containerWidth),
     width: toPixel(containerWidth),
-    height: toPixel(halfPageHeight),
-  }
+    height: toPixel(halfPageHeight)
+  };
 
-  if (window.innerWidth > 400) {
-    chartStyles.top = toPixel(halfPageHeight);
-    chartStyles.width = toPixel(halfPageHeight);
+  if (isDesktop()) {
+    const topForCentered = Math.floor((fullPageHeight - halfPageWidth) / 2);
 
-    mapStyles.width =  toPixel(halfPageHeight);
-    mapStyles.height =  toPixel(halfPageHeight);
+    chartStyles.top = toPixel(topForCentered);
+    chartStyles.width = toPixel(halfPageWidth);
+    chartStyles.height = toPixel(halfPageWidth);
+    chartStyles["margin-left"] = "auto";
+
+    mapStyles.top = toPixel(topForCentered);
+    mapStyles.width = toPixel(halfPageWidth);
+    mapStyles.height = toPixel(halfPageWidth);
   }
 
   // don't use vh for step height
   d3.selectAll(".step").style("height", fullPageHeight + "px");
 
-  d3.select(".map-graphic-container").style(mapStyles)
-  d3.select(".bar-graphic-container").style(chartStyles)
-  d3.select(".line-graphic-container").style(chartStyles)
+  d3.select(".map-graphic-container").style(mapStyles);
+  d3.select(".bar-graphic-container").style(chartStyles);
+  d3.select(".line-graphic-container").style(chartStyles);
 }

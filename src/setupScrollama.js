@@ -5,7 +5,7 @@ import animations from "./animations";
 export default function setupScrollama(worldMap, barChart, lineChart) {
   function handleStepEnter(response) {
     // console.warn('response', response)
-    // console.warn('SCROLLAMA animation[index]:: ', response.index)
+    console.warn("SCROLLAMA step animation[index]:: ", response.index);
 
     const animationIndex = response.index;
     const animationHandler = animations[animationIndex];

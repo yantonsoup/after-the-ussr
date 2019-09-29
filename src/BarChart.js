@@ -1,8 +1,7 @@
 import d3 from "d3";
-import chroma from "chroma-js";
 
 import { sovietCountryIsoCodes } from "./constants";
-import { createChromaData } from "./utils";
+import createChromaColorSet from "./utils/createChromaColorSet";
 export default class BarChart {
   constructor(opts) {
     // load in arguments from config object
@@ -52,13 +51,11 @@ export default class BarChart {
     this.plot = d3
       .select(".bar-graphic")
       .append("svg")
-      .attr("width", width + margins.left + margins.right)
-      .attr("height", height + margins.top + margins.bottom)
+      .attr("width", this.width + margins.left + margins.right)
+      .attr("height", this.height + margins.top + margins.bottom)
       .append("g")
       .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
   }
-
-
 
   drawTitle(text) {
     this.textHeader = d3.select(".bar-graphic-header-text");
@@ -74,7 +71,6 @@ export default class BarChart {
 
     this.plot.select(".y-axis").call(yAxisStuff);
   }
-
 
   setYScale(data) {
     this.yScale = d3.scale
@@ -138,39 +134,37 @@ export default class BarChart {
       .style("color", "black");
   }
 
-    paintHiddenBars(data) {
-      const colorRangeOverride = ['white', 'orange'];
+  paintHiddenBars(data) {
+    const chromaDataCodes = createChromaColorSet(data);
 
-      const chromaDataCodes = createChromaData(data, colorRangeOverride);
+    this.bars
+      .append("rect")
+      .attr("class", "bar")
+      .attr("y", d => {
+        return this.yScale(d.name);
+      })
+      .attr("height", () => this.yScale.rangeBand())
+      .attr("fill", (d, i) => chromaDataCodes[d.name]);
+  }
 
-      this.bars
-        .append("rect")
-        .attr("class", "bar")
-        .attr("y", d => {
-          return this.yScale(d.name);
-        })
-        .attr("height", () => this.yScale.rangeBand())
-        .attr("fill", (d, i) => chromaDataCodes[d.name]);
-    }
+  redrawBars(data) {
+    const chromaDataCodes = createChromaColorSet(data);
 
-    redrawBars(data) {
-      const chromaDataCodes = createChromaData(data);
-
-      d3.selectAll("rect")
-        .data(data)
-        .transition()
-        .delay(function(d, i) {
-          return i * 40;
-        })
-        .attr("y", d => {
-          return this.yScale(d.name);
-        })
-        .attr("width", d => {
-          return this.xScale(d.population);
-        })
-        .attr("height", () => this.yScale.rangeBand())
-        .attr("fill", (d, i) => chromaDataCodes[d.name]);
-    }
+    d3.selectAll("rect")
+      .data(data)
+      .transition()
+      .delay(function(d, i) {
+        return i * 40;
+      })
+      .attr("y", d => {
+        return this.yScale(d.name);
+      })
+      .attr("width", d => {
+        return this.xScale(d.population);
+      })
+      .attr("height", () => this.yScale.rangeBand())
+      .attr("fill", (d, i) => chromaDataCodes[d.name]);
+  }
 
   setXScale(data) {
     this.xScale = d3.scale
@@ -185,14 +179,11 @@ export default class BarChart {
   }
 
   clearBars() {
-    this.plot
-      .selectAll("rect")
-      .remove()
+    this.plot.selectAll("rect").remove();
   }
 
-
   redrawBarsFromScratch(data) {
-    this.clearBars()
+    this.clearBars();
 
     this.bindDataToBars(data);
 
@@ -203,14 +194,18 @@ export default class BarChart {
 
     this.yScale = d3.scale
       .ordinal()
-      .rangeRoundBands([this.height/4, 0], 0.1)
+      .rangeRoundBands([this.height / 4, 0], 0.1)
       .domain(
         data.map(function(d) {
           return d.name;
         })
       );
 
-    const chromaDataCodes = createChromaData(data, ['#ffffb2', '#a1dab4', '#41b6c4']);
+    const chromaDataCodes = createChromaColorSet(data, [
+      "#ffffb2",
+      "#a1dab4",
+      "#41b6c4"
+    ]);
 
     this.bars
       .append("rect")
@@ -223,10 +218,10 @@ export default class BarChart {
         return this.xScale(d.population);
       })
       .attr("fill", (d, i) => chromaDataCodes[d.name]);
-    
+
     this.redrawYAxes(data);
 
-    this.redrawLabels(data, '%');
+    this.redrawLabels(data, "%");
   }
 
   bindDataToBars(data) {
@@ -264,17 +259,15 @@ export default class BarChart {
 
   hideAllElements() {
     this.plot
-    .transition()
-    .delay(500)
-    .style("opacity", "0");
+      .transition()
+      .delay(500)
+      .style("opacity", "0");
 
     d3.select(".bar-graphic-header")
       .transition()
       .delay(500)
-      .style("opacity", "0")
+      .style("opacity", "0");
   }
-
-
 }
 
 function parseMillionsPopulationText(datum) {
