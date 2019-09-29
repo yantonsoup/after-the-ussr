@@ -22,10 +22,11 @@ export default class LineChart {
       .select(this.element)
       .node()
       .getBoundingClientRect();
+
     const { width } = boundingBox;
 
     this.width = width - this.margins.left - this.margins.right;
-    this.height = halfPageHeight - this.margins.top - this.margins.bottom;
+    this.height = width - this.margins.top - this.margins.bottom;
 
     this.setXScale();
     this.setYScale();

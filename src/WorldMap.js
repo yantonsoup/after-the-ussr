@@ -32,6 +32,8 @@ export default class WorldMap {
       .node()
       .getBoundingClientRect();
 
+    console.warn("worldmap", { boundingBox });
+
     this.width = boundingBox.width;
     this.height = boundingBox.height;
 
@@ -189,6 +191,7 @@ export default class WorldMap {
   }
 
   moveMapContainer({ duration, ...positionStyles }) {
+    console.warn("moveMapContainer", { positionStyles });
     d3.select(this.element)
       .transition()
       .duration(duration)

@@ -616,10 +616,12 @@ function fifteenthAnimation(worldMap, barChart, lineChart) {}
 // /////////////////////////////////////////////////////////
 function sixteeteenthAnimation(worldMap, barChart, lineChart, direction) {
   if (direction === "up") {
-    worldMap.moveMapContainer({
-      duration: 500,
-      top: 0
-    });
+    if (!isDesktop()) {
+      worldMap.moveMapContainer({
+        duration: 500,
+        top: 0
+      });
+    }
 
     worldMap.animateMapZoom({
       scale: 5,
@@ -648,13 +650,16 @@ function sixteeteenthAnimation(worldMap, barChart, lineChart, direction) {
 function seventeenthAnimation(worldMap, barChart, lineChart) {
   worldMap.clearArrows();
   worldMap.removeLabels();
-  lineChart.hideIt();
   const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
 
-  worldMap.moveMapContainer({
-    duration: 750,
-    top: quarterPageHeight
-  });
+  if (!isDesktop()) {
+    lineChart.hideIt();
+
+    worldMap.moveMapContainer({
+      duration: 750,
+      top: quarterPageHeight
+    });
+  }
 
   worldMap.animateMapZoom({
     scale: 1,

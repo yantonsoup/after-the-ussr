@@ -17,7 +17,6 @@ export default class BarChart {
       left: 64
     };
 
-    // create the chart
     this.draw();
   }
 
@@ -29,14 +28,13 @@ export default class BarChart {
 
     const { width } = boundingBox;
     console.warn("BarChart", { boundingBox });
-    const halfPageHeight = Math.floor(window.innerHeight) / 2;
 
     this.width = width - this.barMargin.left - this.barMargin.right;
-    this.height = halfPageHeight - this.barMargin.top - this.barMargin.bottom;
+    this.height = width - this.barMargin.top - this.barMargin.bottom;
     console.warn("BarChart width", this.width);
     console.warn("BarChart height", this.height);
 
-    this.paintPlot(this.width, this.height, this.barMargin);
+    this.paintPlot(this.barMargin);
 
     // create the other stuff
     this.setXScale(this.data);
@@ -49,12 +47,12 @@ export default class BarChart {
     this.hideAllElements();
   }
 
-  paintPlot(width, height, margins) {
+  paintPlot(margins) {
     this.plot = d3
       .select(".bar-graphic")
       .append("svg")
-      .attr("width", this.width + margins.left + margins.right)
-      .attr("height", this.height + margins.top + margins.bottom)
+      .attr("width", this.width + this.barMargin.left + this.barMargin.right)
+      .attr("height", this.height + this.barMargin.top + this.barMargin.bottom)
       .append("g")
       .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
   }

@@ -223,7 +223,6 @@ li {
 .about-button,
 .sources-button {
   cursor: pointer;
-  /* margin-left: 19px; */
 }
 
 .about-buttons-container {
@@ -248,11 +247,9 @@ li {
 .splash-container {
   position: relative;
   z-index: 99;
-  /* max-width: 40rem; */
   text-align: center;
   margin: 0 2rem;
   height: 100vh;
-  /* margin-bottom: 24px; */
 }
 
 .splash-title {
@@ -360,13 +357,6 @@ li {
 
 .step-text-spacer {
   padding-top: 1rem;
-  /* background-color: lightgoldenrodyellow;
-  font-weight: 400;
-  margin: 0 auto;
-  padding: 1rem;
-  vertical-align: middle;
-  font-size: 1rem;
-  text-align: left; */
 }
 
 .last-step {
@@ -396,16 +386,12 @@ li {
   opacity: 1;
   position: sticky;
   z-index: 15;
-  background-color: transparent;
-  height: 300px;
 }
 
 .bar-graphic-header {
   margin: 5px auto;
   font-size: 20px;
   font-weight: 500;
-  /* border-bottom: 2px solid lightgoldenrodyellow; */
-  /* padding: 4px 0; */
   text-align: center;
   color: lightgoldenrodyellow;
 }
@@ -427,7 +413,6 @@ li {
   opacity: 1;
   position: sticky;
   z-index: 15;
-  height: 300px;
   background-color: transparent;
 }
 
