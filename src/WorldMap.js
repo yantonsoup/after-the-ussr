@@ -188,11 +188,11 @@ export default class WorldMap {
       .style("stroke-width", 0.1 + "px");
   }
 
-  moveMapContainer({ top, duration }) {
+  moveMapContainer({ duration, ...positionStyles }) {
     d3.select(this.element)
       .transition()
       .duration(duration)
-      .style("top", top + "px");
+      .style(positionStyles);
   }
 
   clearArrows() {

@@ -28,11 +28,13 @@ export default class BarChart {
       .getBoundingClientRect();
 
     const { width } = boundingBox;
-
+    console.warn("BarChart", { boundingBox });
     const halfPageHeight = Math.floor(window.innerHeight) / 2;
 
     this.width = width - this.barMargin.left - this.barMargin.right;
     this.height = halfPageHeight - this.barMargin.top - this.barMargin.bottom;
+    console.warn("BarChart width", this.width);
+    console.warn("BarChart height", this.height);
 
     this.paintPlot(this.width, this.height, this.barMargin);
 

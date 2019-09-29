@@ -6,6 +6,7 @@ const toPixel = num => `${num}px`;
 // Setup sizes for the graphic and steps
 export default function applyContainerStyles() {
   const fullPageHeight = Math.floor(window.innerHeight);
+  const fullPageWidth = Math.floor(window.innerWidth);
   const halfPageHeight = Math.floor(window.innerHeight / 2);
   const halfPageWidth = Math.floor(window.innerWidth / 2);
   const quarterPageHeight = Math.floor(window.innerHeight / 4);
@@ -32,6 +33,7 @@ export default function applyContainerStyles() {
 
   if (isDesktop()) {
     const topForCentered = Math.floor((fullPageHeight - halfPageWidth) / 2);
+    const leftForCentered = Math.floor((fullPageWidth - halfPageWidth) / 2);
 
     chartStyles.top = toPixel(topForCentered);
     chartStyles.width = toPixel(halfPageWidth);
@@ -39,6 +41,7 @@ export default function applyContainerStyles() {
     chartStyles["margin-left"] = "auto";
 
     mapStyles.top = toPixel(topForCentered);
+    mapStyles.left = toPixel(leftForCentered);
     mapStyles.width = toPixel(halfPageWidth);
     mapStyles.height = toPixel(halfPageWidth);
   }

@@ -110,6 +110,11 @@ function secondAnimation(worldMap, barChart, lineChart, direction) {
       duration: 500,
       top: 0
     });
+  } else {
+    worldMap.moveMapContainer({
+      duration: 500,
+      left: 0
+    });
   }
 
   barChart.revealBarChart();
