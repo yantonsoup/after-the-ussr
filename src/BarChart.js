@@ -1,8 +1,7 @@
 import d3 from "d3";
-import chroma from "chroma-js";
 
 import { sovietCountryIsoCodes } from "./constants";
-import { createChromaData } from "./utils";
+import createChromaColorSet from "./utils/createChromaColorSet";
 export default class BarChart {
   constructor(opts) {
     // load in arguments from config object
@@ -18,7 +17,6 @@ export default class BarChart {
       left: 64
     };
 
-    // create the chart
     this.draw();
   }
 
@@ -28,16 +26,14 @@ export default class BarChart {
       .node()
       .getBoundingClientRect();
 
-    const { width } = boundingBox;
+    console.warn("BarChart", { boundingBox });
 
-    const halfPageHeight = Math.floor(window.innerHeight) / 2;
+    this.width = boundingBox.width - this.barMargin.left - this.barMargin.right;
+    this.height =
+      boundingBox.width - this.barMargin.top - this.barMargin.bottom;
 
-    this.width = width - this.barMargin.left - this.barMargin.right;
-    this.height = halfPageHeight - this.barMargin.top - this.barMargin.bottom;
+    this.paintPlot(this.barMargin);
 
-    this.paintPlot(this.width, this.height, this.barMargin);
-
-    // create the other stuff
     this.setXScale(this.data);
     this.setYScale(this.data);
 
@@ -48,17 +44,15 @@ export default class BarChart {
     this.hideAllElements();
   }
 
-  paintPlot(width, height, margins) {
+  paintPlot(margins) {
     this.plot = d3
       .select(".bar-graphic")
       .append("svg")
-      .attr("width", width + margins.left + margins.right)
-      .attr("height", height + margins.top + margins.bottom)
+      .attr("width", this.width + this.barMargin.left + this.barMargin.right)
+      .attr("height", this.height + this.barMargin.top + this.barMargin.bottom)
       .append("g")
       .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
   }
-
-
 
   drawTitle(text) {
     this.textHeader = d3.select(".bar-graphic-header-text");
@@ -74,7 +68,6 @@ export default class BarChart {
 
     this.plot.select(".y-axis").call(yAxisStuff);
   }
-
 
   setYScale(data) {
     this.yScale = d3.scale
@@ -99,7 +92,7 @@ export default class BarChart {
       .append("g")
       .attr("class", "y-axis")
       .call(yAxisStuff)
-      .style("fill", "black")
+      .style("fill", "lightgoldenrodyellow")
       .style("letter-spacing", "1px")
       .style("font-weight", "400");
   }
@@ -113,18 +106,6 @@ export default class BarChart {
     this.redrawYAxes(data);
   }
 
-  // paintPercentageChart(data) {
-  //   this.xScale = d3.scale
-  //     .linear()
-  //     .range([0, this.width])
-  //     .domain([0, 100]);
-
-  //   this.setYScale(data);
-  //   this.bindDataToBars(data);
-  //   this.redrawBars(data);
-  //   this.redrawPercentLabels(data);
-  //   this.redrawYAxes(data);
-  // }
   revealBarChart() {
     this.plot
       .transition()
@@ -138,39 +119,37 @@ export default class BarChart {
       .style("color", "black");
   }
 
-    paintHiddenBars(data) {
-      const colorRangeOverride = ['white', 'orange'];
+  paintHiddenBars(data) {
+    const chromaDataCodes = createChromaColorSet(data);
 
-      const chromaDataCodes = createChromaData(data, colorRangeOverride);
+    this.bars
+      .append("rect")
+      .attr("class", "bar")
+      .attr("y", d => {
+        return this.yScale(d.name);
+      })
+      .attr("height", () => this.yScale.rangeBand())
+      .attr("fill", (d, i) => chromaDataCodes[d.name]);
+  }
 
-      this.bars
-        .append("rect")
-        .attr("class", "bar")
-        .attr("y", d => {
-          return this.yScale(d.name);
-        })
-        .attr("height", () => this.yScale.rangeBand())
-        .attr("fill", (d, i) => chromaDataCodes[d.name]);
-    }
+  redrawBars(data) {
+    const chromaDataCodes = createChromaColorSet(data);
 
-    redrawBars(data) {
-      const chromaDataCodes = createChromaData(data);
-
-      d3.selectAll("rect")
-        .data(data)
-        .transition()
-        .delay(function(d, i) {
-          return i * 40;
-        })
-        .attr("y", d => {
-          return this.yScale(d.name);
-        })
-        .attr("width", d => {
-          return this.xScale(d.population);
-        })
-        .attr("height", () => this.yScale.rangeBand())
-        .attr("fill", (d, i) => chromaDataCodes[d.name]);
-    }
+    d3.selectAll("rect")
+      .data(data)
+      .transition()
+      .delay(function(d, i) {
+        return i * 40;
+      })
+      .attr("y", d => {
+        return this.yScale(d.name);
+      })
+      .attr("width", d => {
+        return this.xScale(d.population);
+      })
+      .attr("height", () => this.yScale.rangeBand())
+      .attr("fill", (d, i) => chromaDataCodes[d.name]);
+  }
 
   setXScale(data) {
     this.xScale = d3.scale
@@ -185,14 +164,11 @@ export default class BarChart {
   }
 
   clearBars() {
-    this.plot
-      .selectAll("rect")
-      .remove()
+    this.plot.selectAll("rect").remove();
   }
 
-
   redrawBarsFromScratch(data) {
-    this.clearBars()
+    this.clearBars();
 
     this.bindDataToBars(data);
 
@@ -203,14 +179,18 @@ export default class BarChart {
 
     this.yScale = d3.scale
       .ordinal()
-      .rangeRoundBands([this.height/4, 0], 0.1)
+      .rangeRoundBands([this.height / 4, 0], 0.1)
       .domain(
         data.map(function(d) {
           return d.name;
         })
       );
 
-    const chromaDataCodes = createChromaData(data, ['#ffffb2', '#a1dab4', '#41b6c4']);
+    const chromaDataCodes = createChromaColorSet(data, [
+      "#ffffb2",
+      "#a1dab4",
+      "#41b6c4"
+    ]);
 
     this.bars
       .append("rect")
@@ -223,10 +203,10 @@ export default class BarChart {
         return this.xScale(d.population);
       })
       .attr("fill", (d, i) => chromaDataCodes[d.name]);
-    
+
     this.redrawYAxes(data);
 
-    this.redrawLabels(data, '%');
+    this.redrawLabels(data, "%");
   }
 
   bindDataToBars(data) {
@@ -254,6 +234,11 @@ export default class BarChart {
         return this.xScale(d.population);
       })
       .attr("dx", ".75em")
+      .attr("dy", () => {
+        console.warn("his.yScale.rangeBand();", this.yScale.rangeBand());
+        const textYOffsetForCentered = (this.yScale.rangeBand() - 18) / 2;
+        return textYOffsetForCentered;
+      })
       .text(function(datum) {
         return `${datum.population}${units}`;
       })
@@ -264,28 +249,13 @@ export default class BarChart {
 
   hideAllElements() {
     this.plot
-    .transition()
-    .delay(500)
-    .style("opacity", "0");
+      .transition()
+      .delay(500)
+      .style("opacity", "0");
 
     d3.select(".bar-graphic-header")
       .transition()
       .delay(500)
-      .style("opacity", "0")
+      .style("opacity", "0");
   }
-
-
-}
-
-function parseMillionsPopulationText(datum) {
-  const populationText = datum.population;
-
-  return `${populationText}`;
-}
-
-function parsePopulationText(datum) {
-  const { population, name } = datum;
-  const populationText = (population / 1000000).toFixed(2);
-
-  return populationText;
 }

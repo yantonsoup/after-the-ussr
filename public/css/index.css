@@ -15,8 +15,8 @@ body {
 body {
   min-height: 1280px;
   font-weight: 300;
-  background-color: rgb(40, 45, 52);
-  /* background-color: #951C13; */
+  /* background-color: rgb(40, 45, 52); */
+  background-color: #a62116;
   /* -moz-box-shadow:    inset 0 0 10px #000000;
   -webkit-box-shadow: inset 0 0 10px #000000;
   box-shadow:         inset 0 0 10px #000000; */
@@ -74,22 +74,19 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  background: transparent;
   padding: 20px 0 10px;
   margin: 0;
-  z-index: -10;
   font-size: 1.4rem;
-  position: -webkit-sticky;
-  position: sticky;
+  /* position: -webkit-sticky; */
+  /* position: sticky; */
   top: 0;
 }
-
 
 .star-header-link {
   color: lightgoldenrodyellow;
   cursor: pointer;
   margin-top: auto;
-  background-color: #951C13;
+  background-color: #951c13;
   padding: 4px 8px 6px;
   border-radius: 3px;
   border-bottom: 1px solid transparent;
@@ -138,17 +135,15 @@ a:hover {
 /* *********************************** */
 .overlay-section {
   display: none;
-  opacity: 0;
   position: absolute;
   top: 0;
   bottom: 0;
   height: 100%;
   width: 100%;
   flex-direction: column;
-  max-width: 40rem;
   margin: 0 auto;
-  background-color: #951C13;
-  z-index: 100;
+  background-color: #951c13;
+  z-index: 10000;
   padding: 2rem;
   overflow: scroll;
 }
@@ -213,8 +208,6 @@ li {
   vertical-align: middle;
 }
 
-
-
 .close-overlay-button:hover {
   /* border-bottom: 1px solid lightgoldenrodyellow; */
 }
@@ -223,9 +216,9 @@ li {
   margin-left: auto;
 }
 
-.about-button, .sources-button {
+.about-button,
+.sources-button {
   cursor: pointer;
-  /* margin-left: 19px; */
 }
 
 .about-buttons-container {
@@ -238,7 +231,7 @@ li {
 /* footer  */
 /* *********************************** */
 .outro {
-  background-color: #951C13; 
+  background-color: #951c13;
   height: 50vh;
   padding: 2rem;
   color: lightgoldenrodyellow;
@@ -250,11 +243,9 @@ li {
 .splash-container {
   position: relative;
   z-index: 99;
-  max-width: 40rem;
   text-align: center;
   margin: 0 2rem;
   height: 100vh;
-  /* margin-bottom: 24px; */
 }
 
 .splash-title {
@@ -324,7 +315,6 @@ li {
 .splash-bottom {
 }
 
-
 /* *********************************** */
 /* scrollama */
 /* *********************************** */
@@ -363,20 +353,11 @@ li {
 
 .step-text-spacer {
   padding-top: 1rem;
-  /* background-color: lightgoldenrodyellow;
-  font-weight: 400;
-  margin: 0 auto;
-  padding: 1rem;
-  vertical-align: middle;
-  font-size: 1rem;
-  text-align: left; */
 }
 
 .last-step {
-  background-color: #3F3F3F
+  background-color: #3f3f3f;
 }
-
-
 
 /* *********************************** */
 /* map graphic */
@@ -384,7 +365,6 @@ li {
 .map-graphic-container {
   position: -webkit-sticky;
   position: sticky;
-  margin: 0 auto;
 }
 
 .country,
@@ -402,16 +382,12 @@ li {
   opacity: 1;
   position: sticky;
   z-index: 15;
-  height: 300px;
-  background-color: transparent;
 }
 
 .bar-graphic-header {
   margin: 5px auto;
   font-size: 20px;
   font-weight: 500;
-  /* border-bottom: 2px solid lightgoldenrodyellow; */
-  /* padding: 4px 0; */
   text-align: center;
   color: lightgoldenrodyellow;
 }
@@ -433,7 +409,6 @@ li {
   opacity: 1;
   position: sticky;
   z-index: 15;
-  height: 300px;
   background-color: transparent;
 }
 
@@ -460,13 +435,13 @@ li {
   color: lightgoldenrodyellow;
   font: 16px sans-serif;
 }
- 
+
 .axis path {
   stroke: #000;
   stroke-width: 2.5px;
   shape-rendering: crispEdges;
 }
- .axis line {
+.axis line {
   stroke: #000;
   stroke-width: 1.6px;
 }
@@ -479,43 +454,9 @@ li {
 /* *********************************** */
 /* desktop swaps */
 /* *********************************** */
-/* @media screen and (min-width: 400px) { */
-  .story-container,.overlay-section,.step {
-    max-width: 50vh;
-  }
-/* } */
-@media screen and (min-width: 1024px) {
-  /* .step-text {
-    font-size: 18px;
-  }
-  .story-container {
-    max-width: 800px;
-    margin: 0 auto;
-  } */
-  /* .scroll-text {
-    margin-left: 400px;
-    color: lightgoldenrodyellow;
-  } */
-  .scroll-text {
-    margin-left: 50vh;
-    color: lightgoldenrodyellow;
-  }
+@media screen and (min-width: 768px) {
+  .step-text,
   .intro-container {
-    margin-left: 50vh;
-    color: lightgoldenrodyellow;
-  }
-  .step-text,.intro-container {
-    background-color: transparent;
     font-size: 18px;
-    /* margin-left: 50vh; */
-    color: lightgoldenrodyellow;
-    /* margin: 0 auto;
-    padding: 1rem;
-    vertical-align: middle;
-    text-align: left;
-    font-weight: 400; */
   }
-  /* .splash-container {
-    margin: 0 auto;
-  } */
 }

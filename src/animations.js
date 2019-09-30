@@ -1,3 +1,4 @@
+import isDesktop from "./utils/isDesktop";
 import {
   netMigrantsToRussia1989to2002,
   percentMigrantsToRussia1989to2002,
@@ -56,10 +57,12 @@ function zeroAnimation(worldMap, barChart, lineChart, direction) {
 function firstAnimation(worldMap, barChart, lineChart, direction) {
   const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
 
-  worldMap.moveMapContainer({
-    duration: 750,
-    top: quarterPageHeight
-  });
+  if (!isDesktop()) {
+    worldMap.moveMapContainer({
+      duration: 750,
+      top: quarterPageHeight
+    });
+  }
 
   worldMap.animateMapZoom({
     scale: 4,
@@ -102,10 +105,17 @@ function secondAnimation(worldMap, barChart, lineChart, direction) {
     );
   }
 
-  worldMap.moveMapContainer({
-    duration: 500,
-    top: 0
-  });
+  if (!isDesktop()) {
+    worldMap.moveMapContainer({
+      duration: 500,
+      top: 0
+    });
+  } else {
+    worldMap.moveMapContainer({
+      duration: 500,
+      left: 0
+    });
+  }
 
   barChart.revealBarChart();
 
@@ -436,7 +446,6 @@ function tenthAnimation(worldMap, barChart, lineChart, direction) {
       }
     });
 
-
     worldMap.animateMapZoom({
       scale: 7,
       duration: 750,
@@ -505,7 +514,7 @@ function eleventhAnimation(worldMap, barChart, lineChart, direction) {
       duration: 500,
       section: ".non-soviet-country",
       styles: {
-        "stroke-width": "0.15px",
+        "stroke-width": "0.15px"
       }
     });
   }
@@ -539,7 +548,7 @@ function twelfthAnimation(worldMap, barChart, lineChart, direction) {
       duration: 500,
       section: ".non-soviet-country",
       styles: {
-        "stroke-width": "0.05px",
+        "stroke-width": "0.05px"
       }
     });
   }
@@ -585,8 +594,6 @@ function fourteenthAnimation(worldMap, barChart, lineChart, direction) {
 
     worldMap.createCountryLabel("USA", [-22, 18], 3);
   }
-  // lineChart.clearPreviousLineAndAxis("jewishFsuToIsrael");
-  // worldMap.clearArrows();
 
   lineChart.drawTitle("Soviet Migration To USA (thou)");
   lineChart.drawLine("americanFsuToUsa", [0, 220], { x: 130, y: 240 });
@@ -607,10 +614,12 @@ function fifteenthAnimation(worldMap, barChart, lineChart) {}
 // /////////////////////////////////////////////////////////
 function sixteeteenthAnimation(worldMap, barChart, lineChart, direction) {
   if (direction === "up") {
-    worldMap.moveMapContainer({
-      duration: 500,
-      top: 0
-    });
+    if (!isDesktop()) {
+      worldMap.moveMapContainer({
+        duration: 500,
+        top: 0
+      });
+    }
 
     worldMap.animateMapZoom({
       scale: 5,
@@ -639,13 +648,16 @@ function sixteeteenthAnimation(worldMap, barChart, lineChart, direction) {
 function seventeenthAnimation(worldMap, barChart, lineChart) {
   worldMap.clearArrows();
   worldMap.removeLabels();
-  lineChart.hideIt();
   const quarterPageHeight = Math.floor(window.innerHeight * 0.25);
 
-  worldMap.moveMapContainer({
-    duration: 750,
-    top: quarterPageHeight
-  });
+  if (!isDesktop()) {
+    lineChart.hideIt();
+
+    worldMap.moveMapContainer({
+      duration: 750,
+      top: quarterPageHeight
+    });
+  }
 
   worldMap.animateMapZoom({
     scale: 1,

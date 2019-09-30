@@ -1,7 +1,8 @@
 import d3 from "d3";
-import { createChromaData } from "./utils";
+import createChromaColorSet from "./utils/createChromaColorSet";
 
-import { sovietCountryIsoCodes } from "./constants";
+import isDesktop from "./utils/isDesktop";
+import { sovietCountryIsoCodes, mapGraphicBorderWidth } from "./constants";
 
 const rotate = -20;
 const maxlat = 83;
@@ -32,7 +33,15 @@ export default class WorldMap {
       .node()
       .getBoundingClientRect();
 
+    console.warn("worldmap", { boundingBox });
+
     this.width = boundingBox.width;
+
+    // for some reason the map graphic overflows the border otherwise
+    if (isDesktop()) {
+      this.width -= mapGraphicBorderWidth * 2;
+    }
+
     this.height = boundingBox.height;
 
     // define width, height and margin
@@ -79,7 +88,7 @@ export default class WorldMap {
         return "non-soviet-country country";
       })
       .style("display", function(datum) {
-        if (datum.id === "ATA") {
+        if (datum.id === "ATA" && !isDesktop()) {
           return "none";
         }
       });
@@ -139,10 +148,9 @@ export default class WorldMap {
   createCountryLabel(countryId, labelShift = [0, 0], fontSize = 3.5) {
     const countryData = this.data.filter(country => country.id === countryId);
 
-    // console.warn("///creating country label///");
-    // console.warn({ countryId });
-    // console.warn({ countryData });
-    // console.warn("///----------------------///");
+    if (isDesktop()) {
+      fontSize += 1.2;
+    }
 
     this.mapGraphic
       .selectAll(`${countryId}-place-label`)
@@ -151,7 +159,6 @@ export default class WorldMap {
       .append("text")
       .attr("class", `place-label ${countryId}-place-label`)
       .attr("transform", d => {
-        // console.warn("transform", d);
         const [x, y] = this.path.centroid(d);
         return `translate(${x},${y})`;
       })
@@ -169,7 +176,7 @@ export default class WorldMap {
     colorRangeOverride,
     strokeOverride
   ) {
-    const chromaDataCodes = createChromaData(
+    const chromaDataCodes = createChromaColorSet(
       populationData,
       colorRangeOverride
     );
@@ -188,11 +195,11 @@ export default class WorldMap {
       .style("stroke-width", 0.1 + "px");
   }
 
-  moveMapContainer({ top, duration }) {
+  moveMapContainer({ duration, ...positionStyles }) {
     d3.select(this.element)
       .transition()
       .duration(duration)
-      .style("top", top + "px");
+      .style(positionStyles);
   }
 
   clearArrows() {
@@ -345,7 +352,6 @@ export default class WorldMap {
       .duration(1000)
       .ease("linear")
       .attrTween("transform", this.translateAlong(path.node()));
-    //.each("end", transition);
   }
 
   translateAlong(path) {
@@ -354,9 +360,7 @@ export default class WorldMap {
     var pe = path.getPointAtLength(l);
     var angl = Math.atan2(pe.y - ps.y, pe.x - ps.x) * (180 / Math.PI) - 90;
     var rot_tran = "rotate(" + angl + ")";
-    return function(d, i, a) {
-      // console.log(d);
-
+    return function() {
       return function(t) {
         var p = path.getPointAtLength(t * l);
         return "translate(" + p.x + "," + p.y + ") " + rot_tran;

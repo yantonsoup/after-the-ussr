@@ -1,11 +1,11 @@
 import d3 from "d3";
-  // click handlers
+// click handlers
 export default function createClickHandlers() {
   d3.selectAll(".about-button").on("click", () => {
     d3.select(".about-section").style({
       display: "flex"
     });
-  
+
     d3.select(".about-section")
       .transition()
       .duration(250)
@@ -29,7 +29,7 @@ export default function createClickHandlers() {
         opacity: 1
       });
 
-      d3.selectAll(".sources-section").style("top", window.scrollY + "px");
+    d3.selectAll(".sources-section").style("top", window.scrollY + "px");
 
     d3.select("body").style("overflow", "hidden");
   });
