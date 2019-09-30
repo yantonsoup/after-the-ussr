@@ -234,6 +234,11 @@ export default class BarChart {
         return this.xScale(d.population);
       })
       .attr("dx", ".75em")
+      .attr("dy", () => {
+        console.warn("his.yScale.rangeBand();", this.yScale.rangeBand());
+        const textYOffsetForCentered = (this.yScale.rangeBand() - 18) / 2;
+        return textYOffsetForCentered;
+      })
       .text(function(datum) {
         return `${datum.population}${units}`;
       })

@@ -149,7 +149,7 @@ export default class WorldMap {
     const countryData = this.data.filter(country => country.id === countryId);
 
     if (isDesktop()) {
-      fontSize += 1.5;
+      fontSize += 1.2;
     }
 
     this.mapGraphic

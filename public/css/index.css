@@ -207,6 +207,7 @@ li {
 }
 
 .close-overlay-button {
+  /* background-color: #a62116; */
   padding: 22px;
   vertical-align: middle;
 }
@@ -419,6 +420,8 @@ li {
   padding: 10px 0;
   font-size: 20px;
   font-weight: 500;
+  /* border-bottom: 2px solid lightgoldenrodyellow; */
+  /* padding: 4px 0; */
   text-align: center;
   color: lightgoldenrodyellow;
 }
@@ -450,4 +453,14 @@ li {
 .axis .minor {
   stroke: red;
   stroke-width: 0.4px;
+}
+
+/* *********************************** */
+/* desktop swaps */
+/* *********************************** */
+@media screen and (min-width: 768px) {
+  .step-text,
+  .intro-container {
+    font-size: 18px;
+  }
 }
