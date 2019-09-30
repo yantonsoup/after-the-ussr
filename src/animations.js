@@ -594,8 +594,6 @@ function fourteenthAnimation(worldMap, barChart, lineChart, direction) {
 
     worldMap.createCountryLabel("USA", [-22, 18], 3);
   }
-  // lineChart.clearPreviousLineAndAxis("jewishFsuToIsrael");
-  // worldMap.clearArrows();
 
   lineChart.drawTitle("Soviet Migration To USA (thou)");
   lineChart.drawLine("americanFsuToUsa", [0, 220], { x: 130, y: 240 });

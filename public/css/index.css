@@ -207,7 +207,6 @@ li {
 }
 
 .close-overlay-button {
-  /* background-color: #a62116; */
   padding: 22px;
   vertical-align: middle;
 }
@@ -420,8 +419,6 @@ li {
   padding: 10px 0;
   font-size: 20px;
   font-weight: 500;
-  /* border-bottom: 2px solid lightgoldenrodyellow; */
-  /* padding: 4px 0; */
   text-align: center;
   color: lightgoldenrodyellow;
 }
@@ -453,55 +450,4 @@ li {
 .axis .minor {
   stroke: red;
   stroke-width: 0.4px;
-}
-
-/* *********************************** */
-/* desktop swaps */
-/* *********************************** */
-/* @media screen and (min-width: 400px) { */
-/* .story-container,
-.overlay-section,
-.step {
-  max-width: 50vh;
-} */
-/* } */
-@media screen and (min-width: 768px) {
-  /* .step-text {
-    font-size: 18px;
-  } */
-  /* .story-container,
-  .overlay-section,
-  .step {
-    max-width: 100vw;
-  }
-  .map-graphic-container {
-    margin: 0;
-  } */
-  /* .scroll-text {
-    margin-left: 400px;
-    color: lightgoldenrodyellow;
-  } */
-  /* .scroll-text {
-    margin-left: 50vh;
-    color: lightgoldenrodyellow;
-  }
-  .intro-container {
-    margin-left: 50vh;
-    color: lightgoldenrodyellow;
-  } */
-  .step-text,
-  .intro-container {
-    /* background-color: transparent; */
-    /* font-size: 18px; */
-    /* margin-left: 50vh; */
-    /* color: lightgoldenrodyellow; */
-    /* margin: 0 auto;
-    padding: 1rem;
-    vertical-align: middle;
-    text-align: left;
-    font-weight: 400; */
-  }
-  /* .splash-container {
-    margin: 0 auto;
-  } */
 }
