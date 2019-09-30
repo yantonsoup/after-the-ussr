@@ -148,6 +148,10 @@ export default class WorldMap {
   createCountryLabel(countryId, labelShift = [0, 0], fontSize = 3.5) {
     const countryData = this.data.filter(country => country.id === countryId);
 
+    if (isDesktop()) {
+      fontSize += 1.5;
+    }
+
     this.mapGraphic
       .selectAll(`${countryId}-place-label`)
       .data(countryData)
