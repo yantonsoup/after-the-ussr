@@ -1,3 +1,5 @@
+export const mapGraphicBorderWidth = 3;
+
 export const sovietCountryIsoCodes = [
   "ARM",
   "AZE",
@@ -17,30 +19,29 @@ export const sovietCountryIsoCodes = [
 ];
 
 export const sovietLabels = {
-  ARM: [-16,  3 ],
-  AZE: [-14,  7 ],
-  BLR: [ -20, 2 ],
-  EST: [ -13, -3 ],
-  GEO: [ -18, 1 ],
-  KAZ: [ -3, 0 ],
-  KGZ: [ 1, 4 ],
-  LVA: [ -15, -2 ],
-  LTU: [ -18, 0 ],
-  MDA: [ -18, 2 ],
-  RUS: [ -40, 10 ],
-  TJK: [ 2, 6 ],
-  TKM: [ -8, 10 ],
-  UKR: [ -23, 0 ],
-  UZB: [-6, -1 ]
+  ARM: [-16, 3],
+  AZE: [-14, 7],
+  BLR: [-20, 2],
+  EST: [-13, -3],
+  GEO: [-18, 1],
+  KAZ: [-3, 0],
+  KGZ: [1, 4],
+  LVA: [-15, -2],
+  LTU: [-18, 0],
+  MDA: [-18, 2],
+  RUS: [-40, 10],
+  TJK: [2, 6],
+  TKM: [-8, 10],
+  UKR: [-23, 0],
+  UZB: [-6, -1]
 };
-
 
 // Step 2
 export const populationsIn1989millions = [
-  { name: "ARM", population: 3	 },
+  { name: "ARM", population: 3 },
   { name: "AZE", population: 6 },
   { name: "BLR", population: 9.6 },
-  { name: "EST", population: 14.7	 },
+  { name: "EST", population: 14.7 },
   { name: "GEO", population: 5 },
   { name: "KAZ", population: 16.5 },
   { name: "KGZ", population: 3.5 },
@@ -55,10 +56,10 @@ export const populationsIn1989millions = [
 ];
 
 export const russianPopulationsIn198millions = [
-  { name: "ARM", population: 0.05	 },
+  { name: "ARM", population: 0.05 },
   { name: "AZE", population: 0.4 },
   { name: "BLR", population: 1.3 },
-  { name: "EST", population: 0.5	 },
+  { name: "EST", population: 0.5 },
   { name: "GEO", population: 0.3 },
   { name: "KAZ", population: 6.2 },
   { name: "KGZ", population: 0.9 },
@@ -73,21 +74,21 @@ export const russianPopulationsIn198millions = [
 
 // Step 3
 // in thousands
-export  const netMigrantsToRussia1989to2002 = [
-  { name: "ARM", population: .03 },
-  { name: "AZE", population: .20 },
-  { name: "BLR", population: .01 },
-  { name: "EST", population: .06 },
-  { name: "GEO", population: .16 },
+export const netMigrantsToRussia1989to2002 = [
+  { name: "ARM", population: 0.03 },
+  { name: "AZE", population: 0.2 },
+  { name: "BLR", population: 0.01 },
+  { name: "EST", population: 0.06 },
+  { name: "GEO", population: 0.16 },
   { name: "KAZ", population: 1.3 },
-  { name: "KGZ", population: .24 },
-  { name: "LVA", population: .10 },
-  { name: "LTU", population: .05 },
-  { name: "MDA", population: .07 },
-  { name: "TJK", population: .23 },
-  { name: "TKM", population: .10 },
-  { name: "UKR", population: .35 },
-  { name: "UZB", population: .50 }
+  { name: "KGZ", population: 0.24 },
+  { name: "LVA", population: 0.1 },
+  { name: "LTU", population: 0.05 },
+  { name: "MDA", population: 0.07 },
+  { name: "TJK", population: 0.23 },
+  { name: "TKM", population: 0.1 },
+  { name: "UKR", population: 0.35 },
+  { name: "UZB", population: 0.5 }
 ];
 
 // Step 4
@@ -112,5 +113,5 @@ export const percentMigrantsToRussia1989to2002 = [
 export const migrationAbroadDestination1995to2002 = [
   { name: "DEU", population: 59 },
   { name: "ISR", population: 25 },
-  { name: "USA", population: 11 },
+  { name: "USA", population: 11 }
 ];

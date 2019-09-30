@@ -1,7 +1,8 @@
 import d3 from "d3";
 import createChromaColorSet from "./utils/createChromaColorSet";
 
-import { sovietCountryIsoCodes } from "./constants";
+import isDesktop from "./utils/isDesktop";
+import { sovietCountryIsoCodes, mapGraphicBorderWidth } from "./constants";
 
 const rotate = -20;
 const maxlat = 83;
@@ -35,6 +36,12 @@ export default class WorldMap {
     console.warn("worldmap", { boundingBox });
 
     this.width = boundingBox.width;
+
+    // for some reason the map graphic overflows the border otherwise
+    if (isDesktop()) {
+      this.width -= mapGraphicBorderWidth * 2;
+    }
+
     this.height = boundingBox.height;
 
     // define width, height and margin
@@ -79,12 +86,12 @@ export default class WorldMap {
           return "soviet-country fsu-state country";
         }
         return "non-soviet-country country";
+      })
+      .style("display", function(datum) {
+        if (datum.id === "ATA" && !isDesktop()) {
+          return "none";
+        }
       });
-    // .style("display", function(datum) {
-    //   if (datum.id === "ATA") {
-    //     return "none";
-    //   }
-    // });
 
     this.animateSectionStyles({
       duration: 500,
@@ -141,11 +148,6 @@ export default class WorldMap {
   createCountryLabel(countryId, labelShift = [0, 0], fontSize = 3.5) {
     const countryData = this.data.filter(country => country.id === countryId);
 
-    // console.warn("///creating country label///");
-    // console.warn({ countryId });
-    // console.warn({ countryData });
-    // console.warn("///----------------------///");
-
     this.mapGraphic
       .selectAll(`${countryId}-place-label`)
       .data(countryData)
@@ -153,7 +155,6 @@ export default class WorldMap {
       .append("text")
       .attr("class", `place-label ${countryId}-place-label`)
       .attr("transform", d => {
-        // console.warn("transform", d);
         const [x, y] = this.path.centroid(d);
         return `translate(${x},${y})`;
       })
@@ -191,7 +192,6 @@ export default class WorldMap {
   }
 
   moveMapContainer({ duration, ...positionStyles }) {
-    console.warn("moveMapContainer", { positionStyles });
     d3.select(this.element)
       .transition()
       .duration(duration)
@@ -348,7 +348,6 @@ export default class WorldMap {
       .duration(1000)
       .ease("linear")
       .attrTween("transform", this.translateAlong(path.node()));
-    //.each("end", transition);
   }
 
   translateAlong(path) {
@@ -357,9 +356,7 @@ export default class WorldMap {
     var pe = path.getPointAtLength(l);
     var angl = Math.atan2(pe.y - ps.y, pe.x - ps.x) * (180 / Math.PI) - 90;
     var rot_tran = "rotate(" + angl + ")";
-    return function(d, i, a) {
-      // console.log(d);
-
+    return function() {
       return function(t) {
         var p = path.getPointAtLength(t * l);
         return "translate(" + p.x + "," + p.y + ") " + rot_tran;

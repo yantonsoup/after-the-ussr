@@ -44,6 +44,7 @@ export default function applyContainerStyles() {
     mapStyles.left = toPixel(leftForCentered);
     mapStyles.width = toPixel(halfPageWidth);
     mapStyles.height = toPixel(halfPageWidth);
+    mapStyles["border"] = "3px solid lightgoldenrodyellow";
   }
 
   // don't use vh for step height

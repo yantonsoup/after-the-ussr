@@ -26,17 +26,14 @@ export default class BarChart {
       .node()
       .getBoundingClientRect();
 
-    const { width } = boundingBox;
     console.warn("BarChart", { boundingBox });
 
-    this.width = width - this.barMargin.left - this.barMargin.right;
-    this.height = width - this.barMargin.top - this.barMargin.bottom;
-    console.warn("BarChart width", this.width);
-    console.warn("BarChart height", this.height);
+    this.width = boundingBox.width - this.barMargin.left - this.barMargin.right;
+    this.height =
+      boundingBox.width - this.barMargin.top - this.barMargin.bottom;
 
     this.paintPlot(this.barMargin);
 
-    // create the other stuff
     this.setXScale(this.data);
     this.setYScale(this.data);
 
@@ -95,7 +92,7 @@ export default class BarChart {
       .append("g")
       .attr("class", "y-axis")
       .call(yAxisStuff)
-      .style("fill", "black")
+      .style("fill", "lightgoldenrodyellow")
       .style("letter-spacing", "1px")
       .style("font-weight", "400");
   }
@@ -109,18 +106,6 @@ export default class BarChart {
     this.redrawYAxes(data);
   }
 
-  // paintPercentageChart(data) {
-  //   this.xScale = d3.scale
-  //     .linear()
-  //     .range([0, this.width])
-  //     .domain([0, 100]);
-
-  //   this.setYScale(data);
-  //   this.bindDataToBars(data);
-  //   this.redrawBars(data);
-  //   this.redrawPercentLabels(data);
-  //   this.redrawYAxes(data);
-  // }
   revealBarChart() {
     this.plot
       .transition()
@@ -268,17 +253,4 @@ export default class BarChart {
       .delay(500)
       .style("opacity", "0");
   }
-}
-
-function parseMillionsPopulationText(datum) {
-  const populationText = datum.population;
-
-  return `${populationText}`;
-}
-
-function parsePopulationText(datum) {
-  const { population, name } = datum;
-  const populationText = (population / 1000000).toFixed(2);
-
-  return populationText;
 }

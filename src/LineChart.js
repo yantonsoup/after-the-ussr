@@ -3,7 +3,6 @@ import d3 from "d3";
 export default class LineChart {
   constructor(opts) {
     this.data = opts.data;
-    // this.internationalData = opts.internationalData
     this.element = opts.element;
     this.headerElement = opts.headerElement;
     this.margins = {
@@ -17,11 +16,11 @@ export default class LineChart {
   }
 
   draw() {
-    const halfPageHeight = Math.floor(window.innerHeight) / 2;
     const boundingBox = d3
       .select(this.element)
       .node()
       .getBoundingClientRect();
+    console.warn("linechart bounding box", { boundingBox });
 
     const { width } = boundingBox;
 
