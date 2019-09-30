@@ -74,13 +74,11 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  background: transparent;
   padding: 20px 0 10px;
   margin: 0;
-  z-index: -10;
   font-size: 1.4rem;
-  position: -webkit-sticky;
-  position: sticky;
+  /* position: -webkit-sticky; */
+  /* position: sticky; */
   top: 0;
 }
 
@@ -137,17 +135,15 @@ a:hover {
 /* *********************************** */
 .overlay-section {
   display: none;
-  opacity: 0;
   position: absolute;
   top: 0;
   bottom: 0;
   height: 100%;
   width: 100%;
   flex-direction: column;
-  max-width: 40rem;
   margin: 0 auto;
   background-color: #951c13;
-  z-index: 100;
+  z-index: 10000;
   padding: 2rem;
   overflow: scroll;
 }
