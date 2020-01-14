@@ -327,7 +327,7 @@ li {
 
 .scroll-text {
   position: relative;
-  margin: 135% auto 0;
+  margin: 50% auto 0;
   z-index: 1000;
   max-width: 30rem;
   width: calc(100% - 64px);
