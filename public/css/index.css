@@ -148,12 +148,22 @@ a:hover {
   overflow: scroll;
 }
 
+.overlay-content-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .overlay-text-container {
-  margin: 2rem 0;
+  max-width: 600px;
+  margin: 100px auto 0 auto;
   padding: 0 1rem;
   font-size: 16px;
   color: lightgoldenrodyellow;
   line-height: 24px;
+}
+
+.overlay-link-yellow {
+  color: #fcd116;
 }
 
 ol {
@@ -458,5 +468,8 @@ li {
   .step-text,
   .intro-container {
     font-size: 18px;
+  }
+  .overlay-text-container {
+    margin: 50px auto 0 auto;
   }
 }
