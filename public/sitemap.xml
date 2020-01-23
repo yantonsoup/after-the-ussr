@@ -4,14 +4,5 @@
       <loc>https://www.aftertheussr.com/</loc>
       <changefreq>yearly</changefreq>
       <priority>0.8</priority>
-       <image:image>
-        <image:loc>https://www.aftertheussr.com/red-star.png</image:loc>
-      </image:image>
-       <image:image>
-        <image:loc>https://www.aftertheussr.com/topsquare.png</image:loc>
-      </image:image>
-       <image:image>
-        <image:loc>https://www.aftertheussr.com/twitter-card.png</image:loc>
-      </image:image>
    </url>
 </urlset> 
