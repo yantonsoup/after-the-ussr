@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
-
+Disallow: /wp-admin/
+Disallow: /wp-content/
 Sitemap: https://www.aftertheussr.com/sitemap.xml
 
