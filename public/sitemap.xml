@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
-      <loc>http://aftertheussr.com/</loc>
+      <loc>https://www.aftertheussr.com/</loc>
       <changefreq>yearly</changefreq>
       <priority>0.8</priority>
        <image:image>
-        <image:loc>http://aftertheussr.com/red-square.png</image:loc>
+        <image:loc>https://www.aftertheussr.com/red-star.png</image:loc>
       </image:image>
        <image:image>
-        <image:loc>http://aftertheussr.com/topsquare.png</image:loc>
+        <image:loc>https://www.aftertheussr.com/topsquare.png</image:loc>
       </image:image>
        <image:image>
-        <image:loc>http://aftertheussr.com/twitter-card.png</image:loc>
+        <image:loc>https://www.aftertheussr.com/twitter-card.png</image:loc>
       </image:image>
    </url>
 </urlset> 
